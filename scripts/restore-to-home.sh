@@ -28,7 +28,13 @@ if [[ "$apply" == true ]]; then
     "$HOME/.codex/rules"
 fi
 
-rsync "${rsync_args[@]}" "$root/skills/" "$HOME/.agents/skills/"
+skills_args=("${rsync_args[@]}")
+if [[ -L "$HOME/.agents/skills/checkup" ]]; then
+  skills_args+=(--exclude='checkup/')
+  echo "preserving existing checkup symlink: $HOME/.agents/skills/checkup"
+fi
+
+rsync "${skills_args[@]}" "$root/skills/" "$HOME/.agents/skills/"
 rsync "${rsync_args[@]}" "$root/global/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 rsync "${rsync_args[@]}" "$root/global/claude/settings.json" "$HOME/.claude/settings.json"
 rsync "${rsync_args[@]}" "$root/global/claude/agents/" "$HOME/.claude/agents/"
