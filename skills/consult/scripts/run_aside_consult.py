@@ -418,11 +418,12 @@ async function verifyAccountOnce() {{
   async function accountSnapshot() {{
     const base = await snap(false);
     if (base.tree.includes('개인 계정')) return base;
-    const profileRef = refFromLine(
+    const profileLine = lineFor(
       base.tree,
       line => line.includes('button "프로필 메뉴 열기"') || line.includes('button "Open profile menu"')
     );
-    if (!profileRef) return base;
+    if (!profileLine) return base;
+    const profileRef = refFromLine(base.tree, line => line === profileLine);
     await consultPage.locator(profileRef).click();
     const menu = await snap(false);
     await consultPage.keyboard.press('Escape');

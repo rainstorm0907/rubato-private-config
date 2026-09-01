@@ -84,6 +84,7 @@ const fixtureState = {
   events: [],
   closedOwned: false,
   performanceIndex: 5,
+  baseSnapshots: 0,
 };
 const performanceLabels = ['즉시', '중간', '높음', '매우 높음', 'Pro'];
 const fixtureConsoleLog = console.log.bind(console);
@@ -113,11 +114,13 @@ async function openTab() { fixtureState.open = true; fixtureState.everOpened = t
 async function attachBrowserTab() { fixtureState.open = true; fixtureState.everOpened = true; return fakePage; }
 async function closeTab() { fixtureState.open = false; fixtureState.closedOwned = true; }
 function baseTree() {
+  const missingProfileSnapshots = Number(process.env.FIXTURE_PROFILE_MISSING_SNAPSHOTS || '0');
+  const profileVisible = fixtureState.baseSnapshots > missingProfileSnapshots;
   return [
     fixtureSurface === 'free'
       ? 'text "개인 계정 Free 님"'
       : fixtureSurface === 'new-pro'
-        ? `button "프로필 메뉴 열기" [ref=profile]\nbutton "${performanceLabels[fixtureState.performanceIndex-1]}" [ref=perf]`
+        ? `${profileVisible ? 'button "프로필 메뉴 열기" [ref=profile]' : ''}\nbutton "${performanceLabels[fixtureState.performanceIndex-1]}" [ref=perf]`
         : 'text "개인 계정 ChatGPT  Pro"',
     fixtureSurface === 'work' ? 'radio "Work" [checked]' : 'radio "Chat" [checked]',
     'button "매우 높음" [ref=perf]',
@@ -140,6 +143,7 @@ async function snapshot() {
     ? 'menuitem "모델 GPT-5.6 Sol" [ref=model]\nmenuitem "추론 수준 매우 높음" [ref=reason]'
     : 'menuitem "모델 다른 모델" [ref=model]\nmenuitem "추론 수준 매우 높음" [ref=reason]', diff:''};
   if (fixtureState.view === 'levels') return {tree:'menuitemradio "매우 높음" [checked] [ref=level]', diff:''};
+  fixtureState.baseSnapshots += 1;
   return {tree:baseTree(), diff:''};
 }
 function locator(selector) {
@@ -202,6 +206,7 @@ const fakePage = {
         phase="submit", slow_url=False, navigate=None, baseline_churn=False,
         baseline_growth=False, response=False, resume_existing=False,
         stop_visible=False, timeout_seconds=1, mode="quick",
+        profile_missing_snapshots=0,
     ):
         if not shutil.which("node"):
             raise unittest.SkipTest("node is required for the fake Aside fixture")
@@ -237,6 +242,7 @@ const fakePage = {
             "FIXTURE_RESPONSE": "1" if response else "0",
             "FIXTURE_RESUME_EXISTING": "1" if resume_existing else "0",
             "FIXTURE_STOP_VISIBLE": "1" if stop_visible else "0",
+            "FIXTURE_PROFILE_MISSING_SNAPSHOTS": str(profile_missing_snapshots),
         }
         proc = subprocess.run(
             ["node", "--input-type=module", "--eval", program],
@@ -359,6 +365,17 @@ class BrowserAcceptanceFixtureTest(unittest.TestCase):
         )
         self.assertEqual(fixture["sends"], 1)
         self.assertEqual(result["accountEvidence"], 'menuitem [ref=account]: text "WY 개인 계정"')
+        self.assertIsNotNone(submitted)
+
+    def test_temporarily_missing_profile_control_retries_before_send(self):
+        fixture, result, submitted = FakeBrowserFixture.run(
+            live_url=PROJECT_URL,
+            surface="new-pro",
+            profile_missing_snapshots=1,
+        )
+        self.assertGreaterEqual(fixture["baseSnapshots"], 2)
+        self.assertEqual(fixture["sends"], 1)
+        self.assertTrue(result["ok"])
         self.assertIsNotNone(submitted)
 
     def test_send_only_does_not_wait_for_an_answer(self):
