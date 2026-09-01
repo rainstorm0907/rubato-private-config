@@ -1,0 +1,4 @@
+interface:
+  display_name: "PR Wrap"
+  short_description: "Create/update PR with wrap docs automatically"
+  default_prompt: "Use pr-wrap to decide if current branch has a PR, then run wrapping-sessions or update-docs, commit, push, and create/update the PR."

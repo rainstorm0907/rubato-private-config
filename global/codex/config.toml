@@ -1,0 +1,376 @@
+approval_policy = "never"
+model = "gpt-5.6-luna"
+personality = "friendly"
+plan_mode_reasoning_effort = "max"
+sandbox_mode = "danger-full-access"
+
+approvals_reviewer = "user"
+model_reasoning_effort = "high"
+
+notify = ["/Users/wooojin/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient", "turn-ended"]
+model_catalog_json = "/Users/wooojin/.codex/opencodex-catalog.json"
+service_tier = "fast"
+# Auto-injected by opencodex
+openai_base_url = "http://127.0.0.1:10100/v1"
+[agents]
+max_depth = 1
+max_threads = 6
+
+[agents.explorer]
+config_file = "agents/explorer.toml"
+description = "Read-only codebase explorer (fast evidence gathering)."
+
+[agents.general-balanced]
+config_file = "agents/general-balanced.toml"
+description = "General-purpose agent with balanced reasoning for bounded work."
+
+[agents.general-deep]
+config_file = "agents/general-deep.toml"
+description = "Frontier general-purpose agent for complex analysis and high-risk debugging."
+
+[agents.general-fast]
+config_file = "agents/general-fast.toml"
+description = "General-purpose agent with low reasoning effort for fast side tasks."
+
+[agents.researcher]
+config_file = "agents/researcher.toml"
+description = "Read-only research agent for external docs, prior art, and decision evidence."
+
+[agents.reviewer]
+config_file = "agents/reviewer.toml"
+description = "Code review and risk/edge-case finder role."
+
+[agents.worker]
+config_file = "agents/worker.toml"
+description = "Main code executor role, used for implementation tasks."
+
+[features]
+apps = true
+memories = true
+shell_snapshot = true
+steer = true
+unified_exec = true
+
+hooks = true
+js_repl = false
+
+[marketplaces.openai-bundled]
+source_type = "local"
+source = "/Users/wooojin/.codex/.tmp/bundled-marketplaces/openai-bundled"
+
+[marketplaces.openai-primary-runtime]
+source_type = "local"
+source = "/Users/wooojin/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
+
+[memories]
+no_memories_if_mcp_or_web_search = true
+
+[notice]
+fast_default_opt_out = true
+"hide_gpt-5.1-codex-max_migration_prompt" = true
+hide_gpt5_1_migration_prompt = true
+hide_rate_limit_model_nudge = true
+
+[notice.model_migrations]
+"gpt-5.1-codex-max" = "gpt-5.2-codex"
+"gpt-5.2" = "gpt-5.3-codex"
+
+[plugins."build-macos-apps@openai-curated"]
+enabled = true
+
+[plugins."documents@openai-primary-runtime"]
+enabled = true
+
+[plugins."github@openai-curated"]
+enabled = true
+
+[plugins."presentations@openai-primary-runtime"]
+enabled = true
+
+[plugins."spreadsheets@openai-primary-runtime"]
+enabled = true
+
+[plugins."computer-use@openai-bundled"]
+enabled = true
+
+[plugins."pdf@openai-primary-runtime"]
+enabled = true
+
+[plugins."chrome@openai-bundled"]
+enabled = true
+
+[plugins."template-creator@openai-primary-runtime"]
+enabled = true
+
+[plugins."sites@openai-bundled"]
+enabled = true
+
+[plugins."visualize@openai-bundled"]
+enabled = true
+
+[plugins."browser@openai-bundled"]
+enabled = true
+
+[plugins."codex-app-tools@openai-bundled"]
+enabled = true
+
+[projects."/Users/wooojin/Documents/Codex/2026-04-27/codex-mac"]
+trust_level = "trusted"
+
+[projects."/Users/wooojin/Documents/Codex/2026-04-27/files-mentioned-by-the-user-zip"]
+trust_level = "trusted"
+
+[projects."/Users/wooojin/Documents/Codex/2026-04-27/files-mentioned-by-the-user-zip-2"]
+trust_level = "trusted"
+
+[projects."/Users/wooojin/Documents/Codex/2026-04-27/mood-users-wooojin-codex-skills-mood"]
+trust_level = "trusted"
+
+[projects."/Users/wooojin/Documents/Codex/2026-04-28/1-8"]
+trust_level = "trusted"
+
+[projects."/Users/wooojin/Documents/Codex/2026-04-28/files-mentioned-by-the-user-pdf"]
+trust_level = "trusted"
+
+[projects."/Users/wooojin/Documents/Codex/2026-04-29/howmuch"]
+trust_level = "trusted"
+
+[projects."/Users/wooojin/Documents/Codex/2026-04-30/comfyui-wan-5b-image-to-video"]
+trust_level = "trusted"
+
+[projects."/Users/wooojin/Documents/Codex/2026-04-30/rainstorm0907-mcp"]
+trust_level = "trusted"
+
+[projects."/Users/wooojin/Documents/Codex/2026-05-03/mac-cmux-codexbar"]
+trust_level = "trusted"
+
+[projects."/Users/wooojin"]
+trust_level = "trusted"
+
+[projects."/Users/wooojin/Documents/Codex/2026-05-14/40-60"]
+trust_level = "trusted"
+
+[projects."/Users/wooojin/Documents/Codex/2026-05-18/plugin-computer-use-openai-bundled-codex"]
+trust_level = "trusted"
+
+[projects."/Users/wooojin/Documents/Codex/2026-05-19/https-i-namu-wiki-i-nmeyc"]
+trust_level = "trusted"
+
+[projects."/Users/wooojin/.codex/memories"]
+trust_level = "trusted"
+
+[projects."/Users/wooojin/Documents/Codex/2026-05-21/new-chat"]
+trust_level = "trusted"
+
+[projects."/Users/wooojin/HamaMain"]
+trust_level = "trusted"
+
+[projects."/Users/wooojin/Documents/Codex/2026-05-26/wooojin-mood-food-2"]
+trust_level = "trusted"
+
+[projects."/"]
+trust_level = "trusted"
+
+[projects."/Users/wooojin/Documents/Codex/2026-06-07/maplog-side-qa"]
+trust_level = "trusted"
+
+[projects."/Users/wooojin/App/maplog"]
+trust_level = "trusted"
+
+[projects."/private/tmp/hama_diafix"]
+trust_level = "trusted"
+
+[projects."/Users/wooojin/Downloads"]
+trust_level = "trusted"
+
+[projects."/Users/wooojin/Documents/Codex/2026-06-21/applications-mentioned-by-the-user-appshot"]
+trust_level = "trusted"
+
+[projects."/Users/wooojin/dev/maple"]
+trust_level = "trusted"
+
+[projects."/Users/wooojin/Documents/Codex/2026-07-23/new-chat"]
+trust_level = "trusted"
+
+[projects."/Users/wooojin/Documents/Codex/2026-07-23/d"]
+trust_level = "trusted"
+
+[projects."/Users/wooojin/Documents/Codex/2026-07-25/r"]
+trust_level = "trusted"
+
+[projects."/Users/wooojin/Documents/Codex/2026-07-25/dksgf"]
+trust_level = "trusted"
+
+[projects."/Users/wooojin/Downloads/Cofathon-Full-Mock-02"]
+trust_level = "trusted"
+
+[projects."/Users/wooojin/Downloads/Cofathon-Full-Mock-03"]
+trust_level = "trusted"
+
+[projects."/Users/wooojin/Documents/Codex/2026-07-29/new-chat"]
+trust_level = "trusted"
+
+[projects."/Users/wooojin/Documents/Codex/2026-07-30/new-chat"]
+trust_level = "trusted"
+
+[projects."/Users/wooojin/Documents/Codex/2026-08-03/new-chat"]
+trust_level = "trusted"
+
+[projects."/Users/wooojin/woojin/kb_AI/repo"]
+trust_level = "trusted"
+
+[projects."/Users/wooojin/Documents/Codex/2026-08-08/new-chat"]
+trust_level = "trusted"
+
+[projects."/Users/wooojin/Downloads/finance-ai-challenge-consults"]
+trust_level = "trusted"
+
+[projects."/Users/wooojin/dev/claude-ops"]
+trust_level = "trusted"
+
+[projects."/Users/wooojin/Documents/Codex/2026-08-14/new-chat"]
+trust_level = "trusted"
+
+[projects."/Users/wooojin/App/openaigame"]
+trust_level = "trusted"
+
+[projects."/Users/wooojin/Documents/Codex/2026-08-20/new-chat"]
+trust_level = "trusted"
+
+[projects."/Users/wooojin/Documents/Codex/2026-08-21/users-wooojin-dev-maple-consult-grok"]
+trust_level = "trusted"
+
+[projects."/Users/wooojin/mood"]
+trust_level = "trusted"
+
+[projects."/Users/wooojin/.codex/.chatgpt-projects/g-p-694fe6d680f08191975e034b52dde66e"]
+trust_level = "trusted"
+
+[projects."/private/tmp"]
+trust_level = "trusted"
+
+[projects."/Users/wooojin/Documents/Codex/2026-08-24/new-chat"]
+trust_level = "trusted"
+
+[tui]
+status_line = [
+    "model-with-reasoning",
+    "current-dir",
+    "git-branch",
+    "context-remaining",
+    "five-hour-limit",
+]
+
+[tui.model_availability_nux]
+"gpt-5.5" = 4
+
+[hooks.state]
+
+[hooks.state."/Users/wooojin/.codex/hooks.json:post_tool_use:0:0"]
+trusted_hash = "sha256:5307d435c80e382bde113c32df9c5e3e8ab320470ea02ffc238381532acbc1d8"
+
+[hooks.state."/Users/wooojin/.codex/hooks.json:pre_tool_use:0:0"]
+trusted_hash = "sha256:a455e240c31527723a5b38eba01af1a4ef9c2160b3093ecd6d32108551323954"
+
+[hooks.state."/Users/wooojin/.codex/hooks.json:session_start:0:0"]
+trusted_hash = "sha256:227cfe4e820ee2a9e90f9fc04f26c2411086eb2f55d66a2c2ccb3a6aeaa82dec"
+
+[hooks.state."/Users/wooojin/.codex/hooks.json:session_start:1:0"]
+trusted_hash = "sha256:e5e27480d44cd75f71548e8b8c387b4d4e34ac795898ab8e2538fb3cd6125e2e"
+
+[hooks.state."/Users/wooojin/.codex/hooks.json:stop:0:0"]
+trusted_hash = "sha256:7c5c3e7f0718ef6d5afbe4d5cc2ef408a99c772fe157c043df6d80b24619fcf1"
+
+[hooks.state."/Users/wooojin/.codex/hooks.json:stop:1:0"]
+trusted_hash = "sha256:1f424ba0b979c666a253c5c8ef67e9be7e287ee394ca64c943ab38f80453c0c7"
+
+[hooks.state."/Users/wooojin/.codex/hooks.json:user_prompt_submit:0:0"]
+trusted_hash = "sha256:00a4e50b8d3d657caa09b33c1b04832b60138a674c388421fd1ccb30024052b8"
+
+[hooks.state."/Users/wooojin/.codex/hooks.json:user_prompt_submit:1:0"]
+trusted_hash = "sha256:456f69de4d733b065344a340b8fe287bb65adaf46f9d73316bc7d5325429915f"
+
+[hooks.state."/Users/wooojin/.codex/config.toml:pre_tool_use:0:0"]
+trusted_hash = "sha256:5fde6c96272eca20858a3278448fb7c16a9ced3b81c1e084e71ea37124e78a38"
+
+[hooks.state."/Users/wooojin/.codex/config.toml:post_tool_use:0:0"]
+trusted_hash = "sha256:870665f1baa8c544c88a9f36885e711a1ec05fbf03d9aec9c51a76826a68f4c7"
+
+[hooks.state."/Users/wooojin/.codex/hooks.json:post_tool_use:1:0"]
+trusted_hash = "sha256:2ae40d0b6f42ecddd14505a73b90ea5ae7f23133981d8397afb9c58461535e22"
+
+[desktop]
+ambient-suggestions-enabled = true
+followUpQueueMode = "steer"
+reviewDelivery = "inline"
+preventSleepWhileRunning = true
+keepRemoteControlAwakeWhilePluggedIn = true
+conversationDetailMode = "STEPS_COMMANDS"
+dock-icon-preference = "codex-system"
+sansFontSize = 15
+notifications-turn-mode = "always"
+
+[desktop.open-in-target-preferences]
+global = "xcode"
+
+[desktop.open-in-target-preferences.perPath]
+"/Users/wooojin" = "xcode"
+
+[marketplaces.oh-my-codex-local]
+source_type = "local"
+source = "/Users/wooojin/.npm-global/lib/node_modules/oh-my-codex"
+
+[mcp_servers.context7]
+command = "npx"
+args = ["-y", "@upstash/context7-mcp"]
+startup_timeout_sec = 60.0
+
+[mcp_servers.node_repl]
+args = []
+command = "/Applications/ChatGPT.app/Contents/Resources/cua_node/bin/node_repl"
+startup_timeout_sec = 120
+
+[mcp_servers.node_repl.env]
+NODE_REPL_NATIVE_PIPE_CONNECT_TIMEOUT_MS = "1000"
+NODE_REPL_NODE_MODULE_DIRS = "/Applications/ChatGPT.app/Contents/Resources/cua_node/lib/node_modules"
+NODE_REPL_NODE_PATH = "/Applications/ChatGPT.app/Contents/Resources/cua_node/bin/node"
+NODE_REPL_TRUSTED_CODE_PATHS = "/Users/wooojin/.codex:/Applications/ChatGPT.app/Contents/Resources/cua_node/lib/node_modules"
+CODEX_HOME = "/Users/wooojin/.codex"
+BROWSER_USE_AVAILABLE_BACKENDS = "chrome,iab"
+BROWSER_USE_TINYSKY_ENABLED = "0"
+NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = "Control the in-app browser in conjunction with the Browser Plugin."
+NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = "Control the Chrome browser in conjunction with the Chrome Plugin. Prefer this method of controlling Chrome over alternatives (such as Computer Use) unless the user explicitly mentions an alternative."
+NODE_REPL_INSTRUCTIONS_USE_CASE_COMPUTER_USE = "Control desktop apps on macOS through Computer Use."
+BROWSER_USE_CODEX_APP_BUILD_FLAVOR = "prod"
+BROWSER_USE_CODEX_APP_VERSION = "26.820.60940"
+NODE_REPL_TRUSTED_SERVICES = '{"browser":"/Users/wooojin/.codex/plugins/cache/openai-bundled/browser/26.820.60940/scripts/browser-service.mjs","sky":"@oai/sky/service"}'
+SKY_CUA_SERVICE_PATH = "/Users/wooojin/.codex/computer-use/Codex Computer Use.app"
+CODEX_CLI_PATH = "/Applications/ChatGPT.app/Contents/Resources/codex"
+
+[mcp_servers.computer-use]
+command = "./Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient"
+args = ["mcp"]
+cwd = "."
+enabled = false
+
+[mcp_servers.openaiDeveloperDocs]
+url = "https://developers.openai.com/mcp"
+
+[shell_environment_policy.set]
+NODE_REPL_TRUSTED_BROWSER_CLIENT_SHA256S = "9230e2bd8b24b7ac7a0ba6774c64bf0d78ecdabbdd91d0ed627b02a587bae2df"
+
+# >>> eclam-hook v3
+[[hooks.PreToolUse]]
+matcher = ".*"
+
+[[hooks.PreToolUse.hooks]]
+type = "command"
+command = "test -x '/Applications/ElectronicClam.app/Contents/MacOS/eclam-hook' && exec '/Applications/ElectronicClam.app/Contents/MacOS/eclam-hook' codex.pre || true"
+
+[[hooks.PostToolUse]]
+matcher = ".*"
+
+[[hooks.PostToolUse.hooks]]
+type = "command"
+command = "test -x '/Applications/ElectronicClam.app/Contents/MacOS/eclam-hook' && exec '/Applications/ElectronicClam.app/Contents/MacOS/eclam-hook' codex.post || true"
+# <<< eclam-hook
