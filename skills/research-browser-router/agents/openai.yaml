@@ -1,0 +1,6 @@
+interface:
+  display_name: "Research Browser Router"
+  short_description: "Route public analysis, broad research, and browser work."
+  default_prompt: "Use $research-browser-router to choose the smallest effective research or browser surface and clean up every owned tab and session."
+policy:
+  allow_implicit_invocation: true

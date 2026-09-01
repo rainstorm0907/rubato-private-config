@@ -1,0 +1,4 @@
+interface:
+  display_name: "Codex Reviewer"
+  short_description: "Help with Codex Reviewer tasks"
+  default_prompt: "Use codex-reviewer to handle this task."

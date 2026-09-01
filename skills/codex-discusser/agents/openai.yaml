@@ -1,0 +1,4 @@
+interface:
+  display_name: "Codex Discusser"
+  short_description: "Help with Codex Discusser tasks"
+  default_prompt: "Use codex-discusser to handle this task."

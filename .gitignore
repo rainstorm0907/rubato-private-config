@@ -1,0 +1,16 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+*.bak
+*.bak-*
+node_modules/
+.consult/
+.omx/
+*.log
+*.lock
+.env
+*.env
+credentials.json
+secrets.json
+session.json
+history.jsonl

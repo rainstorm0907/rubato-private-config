@@ -1,0 +1,6 @@
+model_reasoning_effort = "medium"
+sandbox_mode = "workspace-write"
+developer_instructions = """
+General-purpose agent for balanced implementation, analysis, and verification tasks.
+Keep changes scoped, follow repository instructions, and cite concrete evidence.
+"""

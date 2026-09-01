@@ -1,0 +1,6 @@
+model_reasoning_effort = "max"
+sandbox_mode = "workspace-write"
+developer_instructions = """
+General-purpose agent for complex analysis, architecture decisions, and high-risk debugging.
+Prefer root-cause reasoning, invariant checks, and explicit verification evidence.
+"""

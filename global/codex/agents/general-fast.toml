@@ -1,0 +1,6 @@
+model_reasoning_effort = "low"
+sandbox_mode = "workspace-write"
+developer_instructions = """
+General-purpose agent for fast, bounded tasks.
+Keep scope tight, report evidence clearly, and avoid speculative changes.
+"""

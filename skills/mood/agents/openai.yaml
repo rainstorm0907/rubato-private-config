@@ -1,0 +1,7 @@
+interface:
+  display_name: "Mood"
+  short_description: "상담 요청 시 mood 아카이브 기반으로 분석"
+  default_prompt: "Use $mood to help me reflect on what I am feeling and what I should do next."
+
+policy:
+  allow_implicit_invocation: true
