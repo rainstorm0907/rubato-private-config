@@ -1,0 +1,79 @@
+#!/bin/zsh
+# isearch — try one bounded non-browser public-content extraction.
+#
+# The wrapper intentionally suppresses insane-search's exhaustive-failure guidance:
+# a miss is a routing result, not permission to keep widening the transport search.
+#
+#   isearch "https://x.com/jack/status/20"
+#   isearch -m 8000 "https://example.com/article" --selector article
+#
+# exit 0  bounded result on stdout
+# exit 3  insane-search runtime dependencies are missing
+# exit 5  output exceeded the cap — nothing printed; use gbrowse instead
+# exit 6  insane-search engine errored — inspect the trace
+# exit 7  bounded protocol probe missed — use gbrowse instead
+# exit 8  terminal wall such as 404/auth/paywall — do not escalate
+
+set -u
+cap=4000
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    -m) cap="$2"; shift 2 ;;
+    -h|--help) sed -n '2,14p' "$0"; exit 0 ;;
+    *) break ;;
+  esac
+done
+[[ $# -ge 1 ]] || { echo "isearch: URL required" >&2; exit 64; }
+url="$1"; shift
+
+python="${ISEARCH_PYTHON:-python3}"
+engine_dir="${INSANE_SEARCH_HOME:-$HOME/.agents/skills/insane-search}"
+[[ -d "$engine_dir/engine" ]] || {
+  echo "isearch: insane-search engine not found at $engine_dir" >&2
+  exit 3
+}
+
+"$python" -c 'import curl_cffi,bs4,yaml,pypdf,markdownify; v=curl_cffi.__version__.split("."); assert (int(v[0]),int(v[1])) >= (0,15)' 2>/dev/null || {
+  echo "isearch: insane-search dependencies are missing; run its dependency guard once" >&2
+  exit 3
+}
+
+if [[ -n "${ISEARCH_LAST:-}" ]]; then
+  trace="$ISEARCH_LAST"
+else
+  trace=$(mktemp "${TMPDIR:-/tmp}/isearch.XXXXXX")
+  rm -f "$trace"
+fi
+out="${trace}.out"
+err="${trace}.err"
+
+(
+  cd "$engine_dir"
+  "$python" -m engine "$url" "$@" --no-playwright --max-attempts 3
+) >"$out" 2>"$err"
+probe_status=$?
+
+if [[ "$probe_status" -ne 0 ]]; then
+  : >"$out"
+  if grep -q 'NOT EXHAUSTED\|must_invoke_playwright_mcp' "$err"; then
+    echo "isearch: bounded protocol probe missed — use gbrowse instead. trace: $err" >&2
+    exit 7
+  fi
+  if grep -q '^engine fatal:' "$err"; then
+    echo "isearch: engine errored — inspect trace: $err" >&2
+    exit 6
+  fi
+  echo "isearch: terminal public-content wall — do not escalate to a browser. trace: $err" >&2
+  exit 8
+fi
+
+bytes=$(wc -c <"$out" | tr -d ' ')
+if [[ "$bytes" -gt "$cap" ]]; then
+  : >"$out"
+  echo "isearch: output ${bytes}B exceeds cap ${cap}B — use gbrowse instead. trace: $err" >&2
+  exit 5
+fi
+
+echo "isearch: success ${bytes}B" >&2
+cat "$out"
+rm -f "$out" "$err"
