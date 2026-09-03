@@ -53,7 +53,13 @@ git diff
 별도 오버레이에서 다시 설치한다.
 
 ```bash
-./scripts/update-rubato.sh --yes
+rubato update --yes
+```
+
+에이전트나 비대화형 셸에서는 alias에 기대지 않고 아래 절대경로를 쓴다.
+
+```bash
+/Users/wooojin/App/rubato-private-config/scripts/update-rubato.sh --yes
 ```
 
 업데이트가 개인 오버레이와 같은 스킬을 바꿨다면 명령이 경고한다. 업데이트 자체는
