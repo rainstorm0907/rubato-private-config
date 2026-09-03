@@ -1,5 +1,5 @@
 # Personal launch overlay until the public setup-token fix is merged.
-unalias rubato rubato-pi 2>/dev/null
+unalias rubato rubato-pi rubato-soul dispatch 2>/dev/null
 
 rubato() {
   "$HOME/.local/bin/rubato-personal" "$@"
