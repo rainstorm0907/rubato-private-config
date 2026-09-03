@@ -5,6 +5,8 @@
 ## 포함 범위
 
 - `skills/`: `~/.agents/skills/`
+- `overlays/skills/`: 공개 Rubato 업데이트 뒤에도 유지할 개인 스킬 덮어쓰기
+- `shell/rubato.zsh`: setup-token을 Rubato에만 넘기지 않는 개인 실행 진입점
 - `global/claude/CLAUDE.md`: `~/.claude/CLAUDE.md`
 - `global/claude/settings.json`: `~/.claude/settings.json`
 - `global/claude/agents/`: `~/.claude/agents/`
@@ -44,6 +46,25 @@ git diff
 커밋한다. 동기화는 저장소 쪽에서 사라진 원본 파일과 제외 대상을 삭제하지만,
 목적지가 이 저장소 내부가 아니면 실행을 거부한다. 홈 디렉터리 원본은
 삭제하지 않는다.
+
+## Rubato 업데이트
+
+공개 저장소의 `rubato/base`는 `origin/rubato/base`와 같게 유지한다. 개인 스킬은
+별도 오버레이에서 다시 설치한다.
+
+```bash
+./scripts/update-rubato.sh --yes
+```
+
+업데이트가 개인 오버레이와 같은 스킬을 바꿨다면 명령이 경고한다. 업데이트 자체는
+충돌 없이 끝나고 기존 개인 동작도 유지되지만, 경고된 스킬은 새 공식판의 변경을
+오버레이에 반영할지 별도로 검토해야 한다.
+
+`apply-rubato-overlays.sh --apply`는 브라우저 스킬 링크와
+`~/.local/bin/rubato-personal`도 복구하고, `~/.zshrc`에 `shell/rubato.zsh`를
+한 번만 연결한다. Claude Code에 필요한 setup-token은 셸에 그대로 두되 Rubato를
+실행하는 자식 프로세스에서만 제거한다. 공개 인증 수정이 합쳐지면 이 실행 래퍼는
+제거할 수 있다.
 
 ## 새 Mac에 복원
 

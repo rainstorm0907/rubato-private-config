@@ -16,6 +16,10 @@ established along with what you did not.
   false, stop that branch; never polish code downstream of a broken premise.
 - If the same hypothesis has survived two materially different attempts,
   change the approach or return the decision — not the attempt.
+- Design how the work will discover, decide, build, and learn, not only its
+  output; keep routine work routine. Repeated handoffs, copy-paste, bypasses,
+  shadow scripts, or retry dances are a tripwire for a missing supported path.
+  Separate the outcome from the accidental means before improving the workaround.
 
 ## Shared Working Tree
 
