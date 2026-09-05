@@ -7,6 +7,7 @@
 - `skills/`: `~/.agents/skills/`
 - `overlays/skills/`: 공개 Rubato 업데이트 뒤에도 유지할 개인 스킬 덮어쓰기
 - `shell/rubato.zsh`: setup-token을 Rubato에만 넘기지 않는 개인 실행 진입점
+- `runtime/`: 공개 수정이 합쳐지기 전 적용하는 검증된 임시 런타임 변환
 - `global/claude/CLAUDE.md`: `~/.claude/CLAUDE.md`
 - `global/claude/settings.json`: `~/.claude/settings.json`
 - `global/claude/agents/`: `~/.claude/agents/`
@@ -71,6 +72,11 @@ rubato update --yes
 한 번만 연결한다. Claude Code에 필요한 setup-token은 셸에 그대로 두되 Rubato를
 실행하는 자식 프로세스에서만 제거한다. 공개 인증 수정이 합쳐지면 이 실행 래퍼는
 제거할 수 있다.
+
+큰 기존 세션이 모델 예산 검사를 넘지 못해 `/compact` 화면에도 들어가지 못하는
+경우에는 `runtime/resume-recovery-register.mjs`가 빈 대화에서도 모델이 성립하는지만
+검사하고 복구 모드로 연다. 세션이 열리면 메시지를 보내기 전에 `/compact`를 실행한다.
+공개 수정이 합쳐지면 이 임시 변환을 제거한다.
 
 ## 새 Mac에 복원
 
