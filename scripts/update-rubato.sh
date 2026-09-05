@@ -40,6 +40,15 @@ if [[ "$before" != "$after" ]]; then
   fi
 fi
 
+# `bun install` can refresh workspace resolution rows even when the fetched commit
+# already carries its intended lockfile. The wrapper started from a clean tree, so
+# an unstaged bun.lock-only delta here is updater-owned output, not user work.
+dirty="$(git -C "$repo" status --porcelain)"
+if [[ "$dirty" == " M bun.lock" ]]; then
+  git -C "$repo" restore --worktree -- bun.lock
+  echo "cleaned updater-generated bun.lock drift"
+fi
+
 [[ -z "$(git -C "$repo" status --porcelain)" ]] || {
   echo "Rubato update left a dirty worktree" >&2
   exit 1
