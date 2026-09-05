@@ -11,20 +11,14 @@ rubato-pi() {
 
 rubato-soul() {
   (
-    case "${ANTHROPIC_AUTH_TOKEN-}" in
-      sk-ant-oat*) unset ANTHROPIC_AUTH_TOKEN ;;
-    esac
-    export RUBATO_NO_VAULT=1
+    source "/Users/wooojin/App/rubato-private-config/scripts/prepare-rubato-env.sh"
     exec "$RUBATO_HARNESS/scripts/rubato-soul.sh" "$@"
   )
 }
 
 dispatch() {
   (
-    case "${ANTHROPIC_AUTH_TOKEN-}" in
-      sk-ant-oat*) unset ANTHROPIC_AUTH_TOKEN ;;
-    esac
-    export RUBATO_NO_VAULT=1
+    source "/Users/wooojin/App/rubato-private-config/scripts/prepare-rubato-env.sh"
     exec "$RUBATO_HARNESS/scripts/rubato-dispatch.sh" "$@"
   )
 }
