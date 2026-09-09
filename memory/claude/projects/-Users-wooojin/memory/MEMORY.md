@@ -1,0 +1,51 @@
+- [Hama 배포 구조](hama-deploy-topology.md) — EC2(IP가변)+Vercel, 챗봇은 FastAPI 이식, SSH 복구키
+- [우진님 프로필](user-profile.md) — 소프트웨어학과 학부생(20224178), 천안 자취, 보고서는 hwpx·평서문체
+- [우진 몰입·이탈 패턴](woojin-engagement-pattern.md) — 결과 충분하면 끝냄, 만질 대상 없으면 흥미 급락, 도구수리가 경험 앞서면 옆길
+- [브라우저 자동화 방침](browser-automation-policy.md) — 기본 Chrome 확장, 폴백 Computer Use(사전 고지·방해 금지)
+- [사용자 조작 페이지=본인 크롬](agent-browser-headed-when-user-facing.md) — open -a Chrome으로 띄우기, 자동화 브라우저는 로그인·가입 차단됨(OAuth·ERR-837)
+- [자동화 브라우저 로그인 프로필](automation-browser-auth-profile.md) — agent-browser woojin-auth 영속 세션, 프로필 클릭 자동로그인 OK·암호 입력 금지
+- [유튜브 자막 추출](youtube-transcript-extraction.md) — WebFetch 불가, uvx yt-dlp로 자막·검색, 서브에이전트에 읽힘
+- [퀴즈는 정답만](quiz-answers-no-explanation.md) — 객관식/퀴즈는 이유 없이 정답만 한 줄
+- [Hama 포폴 PDF 파이프라인](hama-portfolio-pdf-pipeline.md) — md→HTML→Chrome PDF, 자산은 Downloads, 코덱스는 Chrome 불가
+- [자소서·무신사 컨텍스트](jasoseo-musinsa-context.md) — 무신사 루키 타겟, 경험정리 엑셀, 23-1 천식 사유·복학 반등 프레임
+- [NAVER 커스텀 스타일 ID 함정](naver-custom-style-myid.md) — SDK엔 styleId 아니라 "My Style ID"를 넣어야 함(아니면 400)
+- [성찰지 작성 방식](reflection-essay-writing-style.md) — mood 소재+전문용어 제거+기존 문체 codex 모방, 과목간 소재 중복 회피, hwpx 셀 편집
+- [Fable 토큰 라우팅](fable-token-routing-policy.md) — 잔바리·확실 작업은 GPT-5.6, Terra ExtraHigh 기본·Sol은 고위험만, 강도는 Claude가 결정
+- [코덱스 meight 전역세팅](codex-meight-global-setup.md) — 무조건 claude-codex-meight 방식, --mode 필수·launchd 데몬·새 리뷰 독트린(7/3 갱신), auth revoke·OMX 루프 함정(7/4)
+- [코덱스→클로드 전역 동기화](codex-claude-global-sync.md) — 코덱스가 업스트림, 스킬 rsync·에이전트 변환 규칙·백업 위치
+- [홈 정리 규칙](home-reorg-plan.md) — 새 프로젝트=~/App/, 홈 루트 생성 금지(8/13), voice 샘플 경로 ~/App/woojin/voice로 이동됨
+- [PSD 독립레이어 편집](psd-edit-independent-layers.md) — 디자인 PSD는 레이어 단위 비파괴 편집, 원본 구성·흐름 유지
+- [클로드 폰 연동=텔레그램 고정매핑](claude-phone-remote-control.md) — claude-cmux가 surface ID로 핀(클롱이=상담·maplog_bot=maplog), pane 재생성 시 ID 갱신 필요
+- [consult 스킬=ChatGPT 웹 리서치](consult-chatgpt-research.md) — 클로드+코덱스 설치, 전용 크롬 숨김·백그라운드, npm 업데이트 시 패치 유실 주의
+- [메이플 장비 세션](maple-gear-session.md) — ~/dev/maple 워크스페이스·티어 프로토콜, Nexon API 키 발급 대기, agbrowse 요령
+- [Maplog 이름 쇼트리스트](maplog-naming-shortlist.md) — 메이플 무관, 10~20대 장소기록·모임 앱, 유력 약도·별표·좌표, 다음 실험=워터마크 목업
+- [CodexBar 키체인 팝업 해결](codexbar-keychain-popup-fix.md) — promptMode=never로 영구 차단, 키체인 파티션 수정은 Claude 갱신에 리셋됨, config.json은 앱이 실행 시 1회만 읽어서 토큰 회전 때 앱 재시작 필요(8/6)
+- [피부 모공 프로젝트](skincare-pore-project.md) — 피지필라멘트·BHA 도입 설계, 홈케어만·예산 올영 2~3만, 선크림 공백
+- [AWS 뱃지 진행](aws-badge-credly.md) — AI-DLC 뱃지 등록 완료(8/14), 평가는 본인 몫, CDP 크롬 9222로 조작
+- [Cofathon 우승](cofathon-application.md) — TOP 6 확정, 원티드 뱃지 미반영 추적 중(8/13), 정본 ~/포트폴리오/Cofathon-2026
+- [우진님 글 말투](woojin-writing-voice.md) — 자소서·지원서 등 본인 명의 글: 담백 평서문·수치근거·가운뎃점(·)금지·격언조 완화, 기준=Cofathon Q1
+- [Paseo 폰 원격 세팅](paseo-mobile-setup.md) — launchd 데몬 소유로 앱 종료해도 터미널 생존, claude alias 함정, cmux=자리/Paseo=외출
+- [agent-taskforce 세팅](agent-taskforce-setup.md) — 정본=~/.claude, 레포=~/dev/agent-taskforce(private), swap 프로필은 skills/agents 심볼릭 공유
+- [claude-ops 툴킷](claude-ops-toolkit.md) — ~/dev/claude-ops 훅 5종(완료게이트 VERIFY.md·교훈 inbox·drift doctor·compact 핸드오프·스킬 실적) + /checkup 스킬(공개판 rainstorm0907/claude-checkup), 8/12 구축
+- [세션 분석 파이프라인](session-analysis-pipeline.md) — digest.py 로컬압축→luna 후보추출→Claude만 승격판단, 원본 직독 금지
+- [설명은 쉬운 말+구체 예시](explain-plain-register.md) — 밀도 높은 요약 2회 교정당함, 본인 겪은 사건으로 풀어쓸 것
+- [콘텐츠 분석 보고 순서](content-analysis-report-order.md) — 요약 먼저→적용점, 기각한 항목도 명시
+- [위임 작업 선제 상태 보고](delegated-work-status-reporting.md) — "아직도 안됨?" 나오기 전에 상태·다음 확인 시점 알리기
+- [자동화 채택 기준](automation-adoption-criteria.md) — 리소스 최소·유지성 우선, 데몬·상시 LLM 금지, 한 줄로 끌 수 있어야
+- [사람이 먼저 결정](human-decision-first.md) — 방향·게시·구현 착수는 우진 승인 후, "계획만"=계획만, 넘겨짚지 말고 질문 (10+세션 반복)
+- [완료 전 실증](verify-before-done.md) — 워커 PASS는 주장, 런타임·스크린샷·실데이터로 확인 후 완료 선언
+- [강도는 stakes 비례](proportional-rigor.md) — "검증 그만, 하면 범위가 줄어", 깊은 조사는 중요할 때만, 리뷰 2라운드 상한
+- [작동하던 것 보존](preserve-working-environment.md) — 다른 기기 로그인 절대 금지, 재설치 전 기존 경로 복구, 외부 산출물 닫기 전 백업
+- [앱 번들 쓰기=권한 팝업](app-bundle-write-tcc-prompt.md) — asar 추출은 스크래치패드에서, 클로드 버전별 TCC 항목은 통합 불가
+- [AI 냄새 세팅 정본](ai-smell-setup.md) — CLAUDE.md/AGENTS.md 커뮤니케이션 규칙·frontend-design 게이트·voice 샘플 경로 (8/12), Stance Triggers 9종 양쪽 중복(8/14)
+- [파일 경로는 절대 경로로](absolute-file-paths-output.md) — cmux ⌘클릭 열림, 파일명만 쓰면 클릭 불가
+- [코덱스 메모리 브리지](codex-memory-bridge.md) — ~/.codex/memories/memory_summary.md 읽기 가능(쓰기 금지), 코덱스 AGENTS.md도 내 인덱스 참조
+- [OpenAI 게임 대회 탐색](openai-game-exploration.md) — 간보기 단계, 산출물 ~/outputs, 다음=제작자 우진 분석, 저세상개발자 채널 광맥
+- [해커톤 예선 교훈](hackathon-prelim-lessons.md) — KB 8회 탈락(8/20), 예선=분류 게임, 첫 줄에 부서·결정·금융결과, 주최측 심사조직 조사 우선
+- [리뷰어 서브에이전트 무응답](reviewer-subagent-idle-failure.md) — 스폰만 되고 대기로 뜸(8/20 4회), 2회 반복이면 접고 직접 실행·문서 직독으로 우회
+- [자리비움 매크로(윈도우)](afk-macro-windows.md) — 게임에 먹히려면 관리자 터미널 필수(UIPI), 입력방식 6종 --backend/--probe
+- [문라이트 원격조작 한계](moonlight-remote-control-limits.md) — 스트림 안 타이핑 불가, 파일은 LAN HTTP, absmouse 원복법
+- [Rubato 기억 저장소 세팅](rubato-memory-store-setup.md) — wooojin 하나로 통합, decisions/reference는 msearch로만 읽힘, redis-stack 6380·API키 미설정
+- [Rubato 직결 전환](rubato-direct-provider-cutover.md) — 8/29 bridge·:8788·plist 전부 폐기, 토큰은 broker sentinel이라 /login 재실행 필요
+- [rubato update는 tty 게이트](rubato-update-tty-gated.md) — 자동 업데이트는 알림만 함, 실행 비트 빠지면 알림조차 죽음(8/29 28커밋 밀림), 가끔 --yes 직접
+- [공유 rubato 클론 주의](shared-rubato-clone-hazard.md) — 다른 세션이 동시에 씀, 조작 전 reflog 확인·작업은 별도 워크트리에서

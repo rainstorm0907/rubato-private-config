@@ -25,7 +25,10 @@ if [[ "$apply" == true ]]; then
     "$HOME/.claude/agents" \
     "$HOME/.claude/hooks" \
     "$HOME/.codex/agents" \
-    "$HOME/.codex/rules"
+    "$HOME/.codex/rules" \
+    "$HOME/.codex/memories" \
+    "$HOME/.claude/projects" \
+    "$HOME/.rubato/memory/agents"
 fi
 
 skills_args=("${rsync_args[@]}")
@@ -43,6 +46,9 @@ rsync "${rsync_args[@]}" "$root/global/codex/AGENTS.md" "$HOME/.codex/AGENTS.md"
 rsync "${rsync_args[@]}" "$root/global/codex/config.toml" "$HOME/.codex/config.toml"
 rsync "${rsync_args[@]}" "$root/global/codex/agents/" "$HOME/.codex/agents/"
 rsync "${rsync_args[@]}" "$root/global/codex/rules/" "$HOME/.codex/rules/"
+rsync "${rsync_args[@]}" "$root/memory/codex/" "$HOME/.codex/memories/"
+rsync "${rsync_args[@]}" "$root/memory/claude/projects/" "$HOME/.claude/projects/"
+rsync "${rsync_args[@]}" "$root/memory/rubato/agents/" "$HOME/.rubato/memory/agents/"
 
 if [[ "$apply" == true ]]; then
   echo "restored global config from $root"

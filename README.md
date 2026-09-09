@@ -16,6 +16,9 @@
 - `global/codex/config.toml`: `~/.codex/config.toml`
 - `global/codex/agents/`: `~/.codex/agents/`
 - `global/codex/rules/`: `~/.codex/rules/`
+- `memory/codex/`: `~/.codex/memories/`
+- `memory/claude/projects/`: `~/.claude/projects/*/memory/`
+- `memory/rubato/agents/`: `~/.rubato/memory/agents/*/repo/`
 
 `skills/checkup`은 원래 심볼릭 링크지만, 다른 Mac에서도 복원할 수 있도록
 현재 대상 파일을 일반 디렉터리로 보관한다. 새 Mac에서는 일반 디렉터리로
@@ -29,12 +32,14 @@
 - API 키, 토큰, 쿠키, 로그인 정보, `.env`
 - `~/.claude/anthropic.env`
 - `~/.config/consult/consult.env`와 Consult 세션·응답
-- Codex·Claude 대화 기록, 세션 DB, 메모리 저장소
+- Codex·Claude 대화 기록과 세션 DB
+- Rubato 런타임 transcript·reflection·facts queue와 `msearch` 가상환경·검색 상태
 - 캐시, 로그, `__pycache__`, `.consult`, `.omx`, 백업 사본
 - 설치된 앱, 모델 카탈로그, 브라우저 프로필
 
 GitHub 비공개 저장소도 비밀 저장소는 아니다. 인증값은 macOS Keychain이나
-로컬 환경 파일에서 따로 관리한다.
+로컬 환경 파일에서 따로 관리한다. 메모리 문서에 섞인 인증값도 동기화할 때
+저장소 사본에서 제거한다.
 
 ## 현재 Mac에서 갱신
 
