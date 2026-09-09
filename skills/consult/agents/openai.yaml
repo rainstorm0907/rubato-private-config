@@ -1,6 +1,0 @@
-interface:
-  display_name: "Consult"
-  short_description: "Run a one-command verified consult in Woojin's ChatGPT project."
-  default_prompt: "Use $consult's direct command in a background terminal and end the turn while it waits. Do not poll. Default to GPT-5.6 Sol at 매우 높음, use Pro only for precise source research, require the configured Woojin project, save the response and evidence, and verify the advice locally after the completion notification."
-policy:
-  allow_implicit_invocation: true

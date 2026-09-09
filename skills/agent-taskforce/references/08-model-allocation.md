@@ -1,6 +1,6 @@
 # Model allocation for the lead
 
-*Lead.* Read before proposing the roster. This guide is deliberately soft: choose by the work's dominant bottleneck, not by permanent job titles.
+*Lead.* **Canonical routing guidance lives in Skill(model-guide)** (`~/.agents/skills/model-guide/SKILL.md`) — cognitive profiles, bottleneck routing, verifier pairings, and the current catalog mapping. Session continuity (continue an existing session or start fresh) lives in Skill(dispatching). Read it there; this file keeps only what is team-specific.
 
 The human operator chooses whether framing is used and which model is lead. You choose the smallest execution roster, explain it briefly, and wait for approval before spawning.
 
