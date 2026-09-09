@@ -1,0 +1,1 @@
+{"ts": 1788344350, "url": "https://youtu.be/M66ZU2PCIcM?si=9lh684vpMJ_Oc718", "domain": "youtu.be", "ok": true, "verdict": "strong_ok", "profile_used": "phase0:youtube", "attempts": 1, "planned_attempts": 0, "stop_reason": "success", "winner": {"phase": "phase0", "executor": "yt-dlp", "transform": "-", "impersonate": null, "referer": "", "status": 200, "body_size": 580749}}
