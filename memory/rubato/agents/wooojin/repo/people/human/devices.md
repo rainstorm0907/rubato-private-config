@@ -1,0 +1,11 @@
+---
+description: 우진이 현재 쓰는 키보드·USB 허브와 입력 전환 관련 설정.
+---
+- 키보드: MCHOSE Ace68-I 유선 키보드.
+- 2026-09-01 사용자 요청으로 Ace68-I의 왼쪽 Alt가 macOS 왼쪽 Option으로 동작하도록 Karabiner의 `left_option → keyboard_fn` 변환을 제거했다.
+- USB 허브: 베이직기어 VH710 USB 3.2 C타입 7포트 버티컬 10Gbps 허브. `PC IN`은 단일 호스트 데이터 연결이고 `5V IN`은 보조전원 전용이라 허브 단독으로 Mac과 Windows에 동시 연결할 수 없다.
+- 2026-09-01 자취방 네트워크: Windows PC는 `olleh tv` 셋톱박스의 `LAN(PC)` 통과 포트에서 KT 공인 IPv4를 직접 받고, Mac은 건물 공용 Wi‑Fi `404`의 `192.168.0.0/24` 사설망에 연결된다. 두 장치는 같은 방에 있어도 같은 LAN이 아니다.
+- 이 구조에서 Tailscale 직결 Sunshine/Moonlight 스트리밍은 왕복 지연이 실측 `20.7–143.6ms`(10회 평균 `56.4ms`)로 변동했다. H.264 전용과 10Mbps 제한으로 인코더 오류를 없애도 심한 조작 지연이 남았다.
+- 2026-09-01 Windows→Mac 원격 제어는 RustDesk의 Tailscale 직접 IP 연결이 실사용에서 원활했다. Mac에는 RustDesk 시스템 서비스와 고정 비밀번호(Keychain 보관)가 설정됐다. `RustDesk --password`는 관리자 권한이 없으면 실패 문구를 내면서도 종료코드 `0`을 반환하므로 성공으로 판정하면 안 된다. 2026-09-02 `sudo` 실행에서 `Done!`과 종료코드 `0`을 확인해 실제 호스트 비밀번호와 Keychain 항목을 일치시켰다. Windows 클라이언트는 `Legacy` 키보드 모드와 Ctrl/Command 교환 끔을 써야 보조키 고착을 피하며, 화질은 Balanced·30fps·Adaptive bitrate·Auto codec이 기준이다. Windows RustDesk는 진짜 전체화면 상태를 대상 기기별로 기억한다.
+- 2026-09-02 Mac→Windows RustDesk에서 `Legacy`는 일반 문자·채팅은 되지만 MapleStory 스킬 조작 키가 먹지 않았다. 그 직전 `Map`에서는 게임 조작이 됐으므로 `/Users/wooojin/Library/Preferences/com.carriez.RustDesk/peers/424637723.toml`은 `keyboard_mode = 'map'`으로 복구했다. 앞서 마우스만 되고 키보드가 잠시 끊긴 현상은 캡처가 풀린 일시 문제였으며 `Map` 자체가 원인이라는 판정은 폐기했다.
+- 2026-09-02 Windows→Mac RustDesk에서는 Windows 1.4.9/1.4.5 모두 한/영키 전달이 불안정했고, Karabiner는 RustDesk의 합성 키를 보지 못했다. Hammerspoon 1.1.1을 설치하고 `/Users/wooojin/.hammerspoon/init.lua`에서 왼쪽 Ctrl+왼쪽 Shift+Caps Lock을 `ABC ↔ 2-Set Korean` 직접 토글로 구성했다. Hammerspoon 접근성 권한 `true`와 합성 키 2회 입력으로 `Korean → ABC → Korean` 양방향 전환을 검증했다. Windows→Mac에서는 Windows 키가 로컬 OS에 잡히므로 RustDesk의 `Swap Ctrl/Command`를 켜고 물리 Ctrl을 Mac Command로 쓴다. 한/영 토글은 이 교환 전후 모두 작동하도록 왼쪽 Control(59)과 왼쪽 Command(55) 경로를 함께 받으며 두 경로를 각각 검증했다.
