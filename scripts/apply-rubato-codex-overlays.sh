@@ -67,6 +67,24 @@ else
   grep -q "^- Open variables:" "$dispatch" && echo "dispatching: up to date" || echo "dispatching: would add Open variables"
 fi
 
+# 루트 지침(model_instructions_file)의 존댓말 문장을 voice.md 정본으로 돌린다. 재설치 뒤 다시 적용.
+mi="$codex_home/rubato-codex/model-instructions.md"
+if [[ -f "$mi" ]]; then
+  if [[ "${1-}" == "--apply" ]]; then
+    python3 - "$mi" <<'EOF2'
+import sys, pathlib
+p=pathlib.Path(sys.argv[1]); t=p.read_text(encoding="utf-8")
+old="Follow the user's language and\ntone; for Korean, use warm, concise 존댓말 and minimal formatting."
+new="Follow the user's language. For Korean, speak in 반말 (`-어` `-야` `-지`) exactly as the\n말투 section of ~/.codex/AGENTS.md prescribes; that section is the canonical voice."
+if old in t: p.write_text(t.replace(old,new),encoding="utf-8"); print("model-instructions: voice patched")
+elif new in t: print("model-instructions: voice already patched")
+else: print("model-instructions: voice sentence not found (upstream changed?) — check manually")
+EOF2
+  else
+    grep -q "canonical voice" "$mi" && echo "model-instructions: voice patched" || echo "model-instructions: would patch voice"
+  fi
+fi
+
 # AGENTS.md: 기존 담당 연결·스탠스 줄의 스킬 이름을 Codex 이름(metaframe)으로 맞추고, 관리 표식 밖에 개인 블록을 한 번만 둔다.
 agents="$codex_home/AGENTS.md"; block="$root/global/codex/rubato-codex-personal-block.md"
 start="<!-- >>> rubato-private-config personal block >>> -->"; end="<!-- <<< rubato-private-config personal block <<< -->"
