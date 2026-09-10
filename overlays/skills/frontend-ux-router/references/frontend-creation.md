@@ -50,6 +50,14 @@ Inspect existing routes, components, content, design tokens, data contracts, rea
 
 When the actor, required evidence, primary action, action consequence, success signal, or consequential branch remains materially unclear after inspection, pause composition and ask the user one focused question as the complete response for that turn.
 
+For an explicitly authorized exploratory slice, fill the path card with the intended
+experience, safe prototype behavior, preserved decisions, the source-backed Open variables list from the brief (or the lead's existing path card when working directly), and what the
+user will be able to compare. Mark an unknown product-quality criterion as still being
+formed, not as a fabricated success threshold. Do not demand a final taste judgment before
+creating the very experience that will inform it. This exception does not authorize real
+sending, deletion, charging, data collection, or changes outside the approved experiment.
+An isolated route does not require inventing a new visual language or substitute chat UI.
+
 ## 2. Hard budgets
 
 These are verifiable limits, not style advice. Check them mechanically; do not self-grade them as judgment calls.
@@ -121,7 +129,11 @@ When the product already has a visual language (tokens, approved screens, a desi
 ```
 
 - Reuse the local design system when it carries product authority; extend through existing tokens and patterns.
-- Compose from established layout conventions (list, card grid, master-detail, header + content + action bar). Do not invent a novel layout structure — novelty is a cost in task UI, not a value.
+- Prefer established layout conventions when implementing a confirmed task. If layout or
+  interaction is named in the brief's Open variables list (or the lead's source-backed path
+  card when working directly), an unfamiliar alternative may be compared inside that extent.
+  Novelty is neither a reason to reject it before trying nor evidence that it is better.
+  Preserve accessibility, data safety, Frozen items, and agreed scope.
 - Keep task hierarchy legible at every viewport.
 
 ## 6. Model interaction and reachable states

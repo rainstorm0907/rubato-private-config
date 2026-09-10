@@ -1,14 +1,19 @@
 # REOPEN_REQUEST 양식
 
-동결 해제 정당 사유는 `references/04-lock-and-reopen.md`의 신호 목록에 있는 것만. "구현이 귀찮다", "새 UI가 더 멋져 보인다"는 사유가 아니다.
+동결 해제 사유는 `references/04-lock-and-reopen.md`를 따른다. 새 관찰 또는 결정권자의 명시적인 목표 변경을 구별해 적는다.
+"구현이 귀찮다", 에이전트가 다른 UI를 선호한다는 사실만으로는 바꾸지 않는다.
+승인자·승인 기록·기존 외부 약속 검토를 생략하지 않는다.
+결정권자의 요청은 실제 발화나 승인 기록으로 확인한다. "우진이 좋아할 것"이라는 에이전트의 추측이나 부분 호감은 그 요청이나 승인으로 사용하지 않는다.
 
 ```markdown
 REOPEN_REQUEST
 current_frame: <frame_id + version>
-observed_evidence: <관측된 증거 — 원문·데이터 인용>
-which_invariant_failed: <어느 불변식이 무너졌는가>
+change_reason: <새 관찰 또는 결정권자의 명시적인 목표 변경>
+observed_evidence: <관측 자료 또는 변경 요청 원문. 선호 변경을 시장 사실로 쓰지 않는다>
+which_invariant_failed: <충돌하거나 바꾸려는 불변 조건>
+impact_on_existing_commitments: <이미 한 약속·안전·개인정보·운영 책임에 미치는 영향>
 why_solution_iteration_is_insufficient: <구현 변경(가변 요소)으로는 왜 해결이 안 되는가>
-candidate_new_frames: <새 후보 프레임, 3개 이하>
+candidate_new_frames: <선택을 바꿀 만큼 다른 구상과 기존 방향 유지. 후보 수를 채우지 않는다>
 decision_owner: <사람>
 
 --- 결정 기록 (REOPEN_REQUESTED 이후의 종결 전이는 이 블록만이 일으킨다) ---

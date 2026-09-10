@@ -8,7 +8,7 @@
 - **가장 위험한 가정은 불변식이 아니다.** 실험을 통과할 때마다 다음 위험으로 바뀌는 것이 정상이므로, 하단 EXPERIMENT_CONTRACT에서 실험 회차로 관리한다. 가정 교체는 동결 해제가 아니다 — 프레임 불변식이 바뀔 때만 동결 해제다.
 - 저장소당 `FRAME_LOCK: ACTIVE`는 **하나만** 둔다. 새 동결은 이전 프레임이 `SUPERSEDED` 상태일 때만 발행한다.
 - EXPIRES_AT 경과 시: 새 위임 금지, 의무 리뷰로 재판정하기 전까지 만료 상태.
-- 연습은 이 양식을 생략할 수 있다. 점검표 §6 실험 계약과 §7 상한이 대신하며, 코드 프로토타입은 최소한 가설·스코프 두 줄을 동결한다.
+- 연습은 이 양식을 생략할 수 있다. 점검표 §6 실험 계약과 §7 상한이 대신하며, 코드 프로토타입은 확인할 주장 또는 탐색 질문, 관찰 방법, 스코프·보호·중단 조건을 승인 범위에 포함한다.
 
 ```text
 FRAME_LOCK: ACTIVE | SUPERSEDED
@@ -35,7 +35,7 @@ VARIABLES:
 - 프로토타입 구현 방식
 
 REOPEN_SIGNALS:
-- (불변식 6개 중 하나를 무너뜨리는 증거만 — 실험 FAIL 자체는 동결 해제가 아니라 점검표 §6 기록 + 다음 실험 회차)
+- (불변식과 충돌하는 새 관찰 또는 결정권자의 명시적인 목표 변경 요청. 실험 FAIL이나 새 UI에 대한 호감만으로 동결을 해제하지 않는다. 승인 전이는 기존 reopen-request를 따른다.)
 
 REJECTED_FRAMES:
 - <frame-id>: <탈락 이유 한 줄>
@@ -60,7 +60,7 @@ learning_cycle: <점검표 §6과 동일한 번호>
 ```text
 task:
 frame_id:
-supported_hypothesis:
+supported_hypothesis_or_discovery_question:
 user_outcome_link:
-acceptance_test:
+acceptance_test_or_observation_plan:
 ```

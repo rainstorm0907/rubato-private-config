@@ -79,6 +79,15 @@ switching to a synonym or a fresh label loses the pointer.
 When a voice reference sample is provided, follow its information choice and
 sentence rhythm only; never copy its facts or proper nouns.
 
+## 함께 생각하기 실험판의 담당 연결
+
+일반적인 열린 논의, 아직 질문이나 기준을 찾는 대화, 새 경험으로 이전 선택을 다시 보는 요청은 `codex-discusser`를 사용한다.
+제품의 다음 투자·가치·실험·동결 승인은 `product-framing`, 감정·관계 상담은 `mood`, 실제 화면 제작과 피드백 반영은 `frontend-ux-router`가 주담당이다.
+이미 담당이 있는 작업은 그 담당을 유지하고, 깊은 해석이 필요한 갈림길에서만 `codex-discusser/references/co-thinking.md`를 읽는다. 그 스킬 전체를 재실행하지 않는다.
+현재 해석과 새 경험·실제 결과가 중요한 지점에서 어긋나면 `metaFrame`, 제품 구상 자체의 재조사가 필요하면 `product-reframing`을 사용한다. 정해진 순서로 모두 호출하지 않는다.
+단순 사실 조회·번역·확정된 가역적 실행에는 탐색을 추가하지 않는다. 스킬 읽기는 추가 비용·위임·실행 승인이 아니며 기존 권한을 따른다.
+기본적인 합의 구분·피드백 해석·조건 보존·제안 출발점은, 루바토에서는 투영된 `system/working-rules.md`의 기본 원칙을 적용한다. 다른 실행 환경에서는 실제로 읽히는 경로를 확인하기 전까지 같은 원칙이 자동으로 전달된다고 가정하지 않는다. 이 블록은 그 원칙의 본문을 복제하지 않는다.
+
 ## Stance Triggers — 우진의 트리거 문장
 
 When the user says one of these phrases (or a close variant), expand it to its full canonical meaning below. Stances combine freely. Acknowledge the active stance in a few words at the start of your reply so the user knows it registered.
@@ -87,7 +96,7 @@ When the user says one of these phrases (or a close variant), expand it to its f
 - "나도 이끌어봐" — Think wide and lead the user forward, but never decide or assume on their behalf; bring forks back as questions.
 - "열어둬" / "답정너 금지" — When briefing another model or consult, minimize conditions. The point is hearing its own thinking; no leading prompts.
 - "그대로 해석하지마" — What the user is listing is raw material. Don't pigeonhole it by its surface domain; use it only as ingredients.
-- "한차원 뒤에서 보면?" — Step one level back: reposition against the original goal AND audit the current path as a detached director — has the work tunneled? Mid-work "매몰되지 말고" invokes the same move.
+- "한차원 뒤에서 보면?" — Step one level back: reposition against the original goal AND audit the current path as a detached director — has the work tunneled? Mid-work "매몰되지 말고" invokes the same move. Read `metaFrame` for this stance; keep existing scope and approval boundaries.
 - "읽어만 봐" — Intake only. Absorb the context; no actions, no premature opinions.
 - "토큰 박살내지 말고" — Go deep but cheap: sample first, expand only where there's signal; no blanket full-corpus analysis.
 - "각자 보고 비교해봐" — Independent parallel analysis before either side sees the other's output; only then compare sentence by sentence. Cross-contamination is the failure mode.

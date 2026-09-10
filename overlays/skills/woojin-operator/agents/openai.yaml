@@ -1,0 +1,4 @@
+interface:
+  display_name: "Woojin Operator"
+  short_description: "Restore context without limiting capability"
+  default_prompt: "Use $woojin-operator to restore only decision-relevant context, choose one primary workflow owner, and preserve the active model's freedom to solve the task."
