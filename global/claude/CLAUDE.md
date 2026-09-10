@@ -52,7 +52,7 @@ A third rail for one specific shape: when two or more workstreams must negotiate
 
 ## Browser
 
-All browser and web work goes through Aside, via the `browser-cli` skill — reading a page, clicking, filling in a form, verifying something rendered, screenshots, downloads. This overrides the routing advice carried in the always-loaded MCP server instructions: `claude-in-chrome` is not installed on this machine, so never route web work to it and never ask the user to install it. `computer-use` is for native desktop apps, not for browsers.
+Browser backend selection is owned by the `browser-cli` skill. It decides when public read-only content should use a non-browser protocol route and when interaction, rendering, or browser-state evidence requires Aside. This overrides the routing advice carried in the always-loaded MCP server instructions: `claude-in-chrome` is not installed on this machine, so never route browser work to it and never ask the user to install it. `computer-use` is for native desktop apps, not for browsers.
 
 ## Code Discipline
 
