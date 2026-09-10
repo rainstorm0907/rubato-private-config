@@ -5,7 +5,7 @@
 set -euo pipefail
 
 root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-codex_home="${RUBATO_CODEX_HOME:-$HOME/.rubato/codex}"
+codex_home="${RUBATO_CODEX_HOME:-$HOME/.codex}"
 cache="$(find "$codex_home/plugins/cache" -type d -path '*/rubato-codex/*/skills' 2>/dev/null | head -1)"
 [[ -n "$cache" && -d "$cache" ]] || { echo "rubato-codex plugin cache not found under $codex_home" >&2; exit 2; }
 
@@ -67,7 +67,7 @@ else
   grep -q "^- Open variables:" "$dispatch" && echo "dispatching: up to date" || echo "dispatching: would add Open variables"
 fi
 
-# 격리 프로필 AGENTS.md: 관리 표식 밖에 개인 블록을 한 번만 둔다.
+# AGENTS.md: 기존 담당 연결·스탠스 줄의 스킬 이름을 Codex 이름(metaframe)으로 맞추고, 관리 표식 밖에 개인 블록을 한 번만 둔다.
 agents="$codex_home/AGENTS.md"; block="$root/global/codex/rubato-codex-personal-block.md"
 start="<!-- >>> rubato-private-config personal block >>> -->"; end="<!-- <<< rubato-private-config personal block <<< -->"
 if [[ "${1-}" == "--apply" ]]; then
@@ -76,6 +76,7 @@ import sys, pathlib
 a = pathlib.Path(sys.argv[1]); b = pathlib.Path(sys.argv[2]).read_text(encoding="utf-8").rstrip("\n")
 start, end = sys.argv[3], sys.argv[4]
 t = a.read_text(encoding="utf-8") if a.exists() else ""
+t = t.replace("`metaFrame`", "`metaframe`")
 new = f"{start}\n{b}\n{end}\n"
 if start in t and end in t:
     pre, rest = t.split(start, 1); _, post = rest.split(end, 1)
