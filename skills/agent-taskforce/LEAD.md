@@ -2,7 +2,7 @@
 
 Run the team like a small company. Protect the goal and cross-workstream decisions; let each owner keep a bounded outcome through investigation, implementation, local debugging, and local verification. Add structure only when it buys clearer ownership or better evidence.
 
-This skill states only what running a *team* adds. General prompting, effort selection, and context design belong to `claude-prompting-lab`; product-value framing belongs to `framing`; runtime commands belong to the runtime guides. (`references/07-source-map.md` is for revising the skill, not ordinary runs.)
+This skill states only what running a *team* adds. General prompting, effort selection, and context design belong to `claude-prompting-lab`; product-value framing belongs to `product-framing`; runtime commands belong to the runtime guides. (`references/07-source-map.md` is for revising the skill, not ordinary runs.)
 
 ## 1. First decide whether a team is needed
 
@@ -20,7 +20,7 @@ If the work is small, tightly sequential, concentrated on one evolving state, or
 
 Two upstream choices belong to the human operator.
 
-1. Whether this run uses `/framing`, an existing active frame, or no framing step.
+1. Whether this run uses `/product-framing`, an existing active frame, or no framing step.
 2. Which model leads.
 
 If the operator already chose them, preserve those choices. If either is missing and materially affects the run, make one concise recommendation and ask before staffing. Do not silently invoke framing or replace the lead model.
@@ -31,9 +31,9 @@ If the operator already chose them, preserve those choices. If either is missing
 
 `references/04-framing-bridge.md` covers active-frame authority and conflicts. It offers recommendation signals, not permission to override the operator's choice.
 
-## 3. Propose the roster, then wait for approval
+## 3. Report the roster, then form the team
 
-Before spawning any teammate, read `references/08-model-allocation.md` and design the smallest useful roster. Report the proposal in the user's language:
+Before spawning any teammate, read the active runtime adapter and design the smallest useful roster. Use Skill(model-guide) (`~/.agents/skills/model-guide/SKILL.md`). Report the proposal in the user's language:
 
 - framing: used, linked, or skipped
 - lead model
@@ -41,9 +41,9 @@ Before spawning any teammate, read `references/08-model-allocation.md` and desig
 - verifier model or `none`, with the reason to include or skip it
 - any planned parallel boundary that matters
 
-Inspect only enough context to make a sound proposal, then ask for confirmation and wait. Do not spawn teammates or begin their execution before explicit approval. After approval, record the actual roster and approval in the mission when a durable mission is warranted.
+Inspect only enough context to make a sound proposal, report it in one message, and form the team in the same turn. The report is a notice the user can veto, not a gate you wait behind: the user sees the roster before any teammate has produced work and can cut or restaff it at any point. Wait for explicit confirmation only when the roster commits something hard to take back (paid external runs, a model the user has restricted, a budget beyond the request's scale) or when the user has asked to approve teams in this project. Record the actual roster in the mission when a durable mission is warranted.
 
-The user approves the roster. Any later spawn that adds a new teammate or materially changes model, cost, independence, or responsibility gets the same brief report and confirmation before it starts. Recreating the same approved teammate after a crashed session does not need a new design decision; report the recovery in status and preserve the approved boundary.
+Any later spawn that adds a new teammate or materially changes model, cost, independence, or responsibility gets the same brief report before it starts. Recreating the same teammate after a crashed session does not need a new design decision; report the recovery in status and preserve the reported boundary.
 
 ## 4. Build the smallest valid team
 
@@ -54,7 +54,7 @@ Start from one `workstream-owner`, not from a standing org chart.
 - Two owners plus one verifier is a useful shape for complex cross-layer delivery, not a default for every task.
 - Retire roles when the phase or workstream ends.
 
-Roles are responsibility contracts, not permanent model identities. Each owner keeps its bounded outcome end to end; whether a later leg continues an existing session or starts fresh follows Skill(dispatching), and model choice follows Skill(model-guide). `references/08-model-allocation.md` keeps only the team-specific proposal format.
+Roles are responsibility contracts, not permanent model identities. Each owner keeps its bounded outcome end to end within the authorized task type; whether a follow-up task continues an existing session or starts fresh follows Skill(dispatching), and model choice follows the active runtime's policy above. `references/08-model-allocation.md` keeps only the team-specific proposal format.
 
 Spawn teammates so the role contract in `teammate/` is present from their first token; `runtimes/` says how the active harness does that. Give the actual outcome, boundary, authority, context, and evidence fresh in the spawn prompt. Do not paste this skill wholesale into a teammate.
 
@@ -101,9 +101,9 @@ Add hooks or permanent rules only for deterministic failures observed repeatedly
 
 ## What to report to the user
 
-Before spawn, report the roster proposal and wait for approval. During and after the run, translate internal jargon into the user's language and show only:
+Before spawn, report the roster in one message. During and after the run, translate internal jargon into the user's language and show only:
 
 - results that changed or facts that were confirmed
 - verification evidence and failed checks
 - significant decisions or remaining gaps
-- any material restaffing from the approved roster
+- any material restaffing from the reported roster

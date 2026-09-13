@@ -21,7 +21,7 @@ Before adopting any revision, check the candidate against `references/09-regress
 
 - Upstream: https://github.com/vercel-labs/fx — persistent subagents with per-child model, effort, permission mode, and state.
 - Team Overlay: our fork `keepitmello/fx`, branch `feat/team-overlay`. Membership is derived from the canonical child tree rather than stored; peers message through `team.message` on the same queue the subagent path uses; a peer message aimed at the lead raises the existing attention notification instead of resuming the lead.
-- Design record, rejected alternatives, and what remains unverified: the `agent-taskforce` repo under `harness/docs/`.
+- Design records, rejected alternatives, and unverified findings: the private `Rubato-lab` repo under `case-studies/harness/`.
 
 ## Anthropic engineering
 
@@ -42,7 +42,7 @@ Before adopting any revision, check the candidate against `references/09-regress
 
 ## Local roster policy
 
-`references/08-model-allocation.md` records the operator's current soft mapping of Fable, Opus, Sol, and Grok to capability profiles. It is a local operating hypothesis based on repeated use, not an official benchmark claim. Revise the mapping without changing the owner-continuity principle when model behavior changes.
+Model routing (cognitive profiles, bottleneck routing, catalog mapping) moved to the standalone Skill(model-guide) at `~/.agents/skills/model-guide/SKILL.md`, because it applies to every child spawn, not only teams. `references/08-model-allocation.md` now keeps only the team-specific roster proposal format. Revise the active mapping without changing the owner-continuity principle when model behavior changes.
 
 
 ## Local prompt-design basis
