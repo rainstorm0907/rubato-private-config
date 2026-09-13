@@ -51,5 +51,8 @@ rsync "${rsync_args[@]}" "$root/memory/claude/projects/" "$HOME/.claude/projects
 rsync "${rsync_args[@]}" "$root/memory/rubato/agents/" "$HOME/.rubato/memory/agents/"
 
 if [[ "$apply" == true ]]; then
+  "$root/scripts/apply-rubato-overlays.sh" --apply
   echo "restored global config from $root"
+else
+  "$root/scripts/apply-rubato-overlays.sh"
 fi

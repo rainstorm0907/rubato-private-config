@@ -1,0 +1,88 @@
+#!/bin/zsh
+# gbrowse — run one browser mission in grok (which drives the Aside browser) and return
+# ONLY the terminal answer. Bulk page text stays in grok's context, not the caller's.
+#
+#   gbrowse "maplescouter.com 상단 네비 라벨 전부"
+#   gbrowse -t 20 "..."     # turn budget (default 14)
+#   gbrowse -v "..."        # also print the tool-call trace to stderr
+#
+# exit 0  answer on stdout, one-line stats on stderr
+# exit 2  no terminal answer (stopReason != end_turn)
+# exit 3  aside account signed out
+# exit 4  finished without ever calling a tool — answer is unverified, discard it
+# Raw stream stays at $GBROWSE_LAST for post-mortem.
+
+set -u
+script_dir=${0:A:h}
+turns=14; verbose=0
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    -t) turns="$2"; shift 2 ;;
+    -v) verbose=1; shift ;;
+    -h|--help) sed -n '2,13p' "$0"; exit 0 ;;
+    *) break ;;
+  esac
+done
+[[ $# -ge 1 ]] || { echo "gbrowse: mission required" >&2; exit 64; }
+mission="$*"
+
+# a signed-out Aside is the most common silent failure, and costs 0.1s to rule out
+aside account status 2>/dev/null | grep -q 'signed in' || {
+  echo "gbrowse: aside account is signed out — run 'aside account login'" >&2; exit 3; }
+
+: ${GBROWSE_LAST:=${TMPDIR:-/tmp}/gbrowse-last.ndjson}
+workdir="${TMPDIR:-/tmp}/gbrowse-cwd"; mkdir -p "$workdir"
+
+# grok's own tool names, not Claude's. Everything is denied except search_tool/use_tool,
+# which are how the deferred aside MCP tool is reached, so the browser is all it can touch.
+deny="run_terminal_command,read_file,write,search_replace,list_dir,grep,todo_write,scheduler_create,scheduler_delete,scheduler_list,monitor,workflow,enter_plan_mode,exit_plan_mode,ask_user_question,image_gen,image_edit,image_to_video,reference_to_video"
+
+sys='You are a browser worker. The Aside browser is your only instrument: find the aside repl tool with search_tool on your first action, then drive it with use_tool. You have no other tools and must not ask for any. repl(title, code) evaluates JavaScript in one live Aside REPL session with globals page, tabs, openTab(url), closeTab(tab), listBrowserTabs(), attachBrowserTab(targetId), snapshot(page, options) returning {tree, diff}, page.screenshot(), fetch(url); console.log() is the only way a value comes back to you. Read pages with snapshot(page, {interactive: true}) and narrow with its ref or selector options before reading anything wider. Never report a fact you did not print with console.log in this session, even for sites you believe you already know. After openTab, confirm the page is real with await page.evaluate(() => location.href); about:blank or a chrome-error URL means the page did not load and you must report that instead of answering. You have a hard budget of BUDGET tool calls and cannot exceed it, so spend them like money: stop investigating the moment you can answer the question that was asked, and prefer an answer that is mostly complete now over a perfect one you never get to deliver. Do not chase tooltips, hover states, or prettier labels once you already have the values. If the same step fails twice, do not attempt it a third time: work around it, or report that part as unavailable. If a modal or popup blocks you, press Escape or click outside once, and if it still blocks you, answer from what is visible. Your final message is the entire deliverable and is read by another agent, not a human: give the extracted values plainly, with no preamble and no raw snapshot tree, HTML, or ref IDs. If you cannot finish, say in one line what blocked you and what you did observe.'
+
+sys="${sys//BUDGET/$turns}"
+start=$(date +%s)
+grok -p "$mission" --output-format streaming-json --cwd "$workdir" \
+  --permission-mode bypassPermissions --max-turns "$turns" \
+  --no-subagents --no-plan --disable-web-search \
+  --disallowed-tools "$deny" --system-prompt-override "$sys" \
+  > "$GBROWSE_LAST" 2>"${GBROWSE_LAST}.err"
+elapsed=$(( $(date +%s) - start ))
+
+end=$(jq -c 'select(.type=="end")' "$GBROWSE_LAST" 2>/dev/null | tail -1)
+stop=$(print -r -- "$end" | jq -r '.stopReason // "none"')
+audit=$(python3 "$script_dir/audit.py" "$GBROWSE_LAST" 2>/dev/null)
+calls=${audit[(w)1]:-0}; errs=${audit[(w)2]:-0}; forbidden=${audit[(w)3]:-0}; observed=${audit[(w)4]:--}
+
+printf 'gbrowse: %s  %ss  %s turns  %s browser calls (%s errored)  last url %s  $%s\n' \
+  "$stop" "$elapsed" "$(print -r -- "$end" | jq -r '.num_turns // "?"')" \
+  "$calls" "$errs" "$observed" \
+  "$(print -r -- "$end" | jq -r '.total_cost_usd // 0 | .*1000|round/1000')" >&2
+[[ "$forbidden" -gt 0 ]] && echo "gbrowse: WARNING $forbidden forbidden tool call(s) got through — the block list is stale" >&2
+[[ "$verbose" == 1 ]] && jq -r 'select(.type=="tool_call")|"  \(.toolName)  \(.title // "")"' "$GBROWSE_LAST" >&2
+
+if [[ "$stop" == "cancelled" ]]; then
+  sid=$(print -r -- "$end" | jq -r '.sessionId // empty')
+  if [[ -n "$sid" ]]; then
+    echo "gbrowse: budget exhausted — asking it to answer from what it already saw" >&2
+    grok -p "Stop investigating. Using only what you already observed in this session, give the final answer now in the format you were told. Mark anything you never confirmed as unknown." \
+      --resume "$sid" --output-format streaming-json --cwd "$workdir" \
+      --permission-mode bypassPermissions --max-turns 1 --no-subagents --no-plan \
+      --disable-web-search --disallowed-tools "$deny,search_tool,use_tool" \
+      > "${GBROWSE_LAST}.wrap" 2>/dev/null
+    if [[ "$(jq -c 'select(.type=="end")' "${GBROWSE_LAST}.wrap" 2>/dev/null | tail -1 | jq -r '.stopReason // ""')" == "end_turn" ]]; then
+      echo "gbrowse: PARTIAL (budget exhausted, wrapped up)" >&2
+      GBROWSE_LAST="${GBROWSE_LAST}.wrap"
+      stop=end_turn
+    fi
+  fi
+fi
+if [[ "$stop" != "end_turn" ]]; then
+  echo "gbrowse: no terminal answer. stream: $GBROWSE_LAST" >&2
+  head -c 400 "${GBROWSE_LAST}.err" >&2; exit 2
+fi
+if [[ "$calls" -eq 0 ]]; then
+  echo "gbrowse: answered without ever driving the browser — unverified, discard. stream: $GBROWSE_LAST" >&2
+  exit 4
+fi
+
+python3 "$script_dir/answer.py" "$GBROWSE_LAST"

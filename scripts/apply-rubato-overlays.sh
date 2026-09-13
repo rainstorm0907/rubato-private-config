@@ -28,11 +28,13 @@ for client in claude codex; do
   rm -rf "$link"
   ln -s "$destination/browser-cli" "$link"
 done
-ln -sf "$destination/browser-cli/scripts/isearch" "$HOME/.local/bin/isearch"
+for command in abrowse gbrowse isearch; do
+  ln -sf "$destination/browser-cli/scripts/$command" "$HOME/.local/bin/$command"
+done
 ln -sf "$root/scripts/rubato-clean-env.sh" "$HOME/.local/bin/rubato-personal"
 
 shell_hook="[ -f \"$root/shell/rubato.zsh\" ] && source \"$root/shell/rubato.zsh\""
-if ! grep -Fqx "$shell_hook" "$HOME/.zshrc"; then
+if [[ ! -f "$HOME/.zshrc" ]] || ! grep -Fqx "$shell_hook" "$HOME/.zshrc"; then
   printf '\n%s\n' "$shell_hook" >> "$HOME/.zshrc"
 fi
 
