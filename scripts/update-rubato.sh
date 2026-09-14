@@ -13,12 +13,10 @@ updater="$repo/harness/scripts/rubato-update.sh"
   echo "Rubato must be on rubato/base before updating" >&2
   exit 2
 }
-[[ -z "$(git -C "$repo" status --porcelain)" ]] || {
-  echo "Rubato worktree is not clean; refusing to update" >&2
-  exit 2
-}
 
 before="$(git -C "$repo" rev-parse HEAD)"
+bun_was_clean=false
+[[ -z "$(git -C "$repo" status --porcelain -- bun.lock)" ]] && bun_was_clean=true
 "$updater" "$@"
 after="$(git -C "$repo" rev-parse HEAD)"
 
@@ -41,17 +39,12 @@ if [[ "$before" != "$after" ]]; then
 fi
 
 # `bun install` can refresh workspace resolution rows even when the fetched commit
-# already carries its intended lockfile. The wrapper started from a clean tree, so
-# an unstaged bun.lock-only delta here is updater-owned output, not user work.
-dirty="$(git -C "$repo" status --porcelain)"
-if [[ "$dirty" == " M bun.lock" ]]; then
+# already carries its intended lockfile. Only clean a new unstaged drift; preserve a
+# bun.lock change that belonged to the user before the official updater ran.
+bun_after="$(git -C "$repo" status --porcelain -- bun.lock)"
+if [[ "$bun_was_clean" == true && "$bun_after" == " M bun.lock" ]]; then
   git -C "$repo" restore --worktree -- bun.lock
   echo "cleaned updater-generated bun.lock drift"
 fi
-
-[[ -z "$(git -C "$repo" status --porcelain)" ]] || {
-  echo "Rubato update left a dirty worktree" >&2
-  exit 1
-}
 
 echo "Rubato updated; personal overlays remain active"
