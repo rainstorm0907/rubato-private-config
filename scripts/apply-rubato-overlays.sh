@@ -34,8 +34,17 @@ done
 ln -sf "$root/scripts/rubato-clean-env.sh" "$HOME/.local/bin/rubato-personal"
 
 shell_hook="[ -f \"$root/shell/rubato.zsh\" ] && source \"$root/shell/rubato.zsh\""
-if [[ ! -f "$HOME/.zshrc" ]] || ! grep -Fqx "$shell_hook" "$HOME/.zshrc"; then
-  printf '\n%s\n' "$shell_hook" >> "$HOME/.zshrc"
+# The official installer owns an alias block. Keep the personal hook after it so
+# these functions, especially the setup-token sanitizer, are the live commands.
+touch "$HOME/.zshrc"
+shell_tmp="$(mktemp "${TMPDIR:-/tmp}/rubato-zshrc.XXXXXX")"
+trap 'rm -f "$shell_tmp"' EXIT
+grep -Fvx "$shell_hook" "$HOME/.zshrc" > "$shell_tmp" || true
+printf '%s\n' "$shell_hook" >> "$shell_tmp"
+if ! cmp -s "$shell_tmp" "$HOME/.zshrc"; then
+  cat "$shell_tmp" > "$HOME/.zshrc"
 fi
+rm -f "$shell_tmp"
+trap - EXIT
 
 echo "applied Rubato personal overlays from $source_root"

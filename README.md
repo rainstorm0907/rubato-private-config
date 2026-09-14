@@ -73,10 +73,11 @@ rubato update --yes
 오버레이에 반영할지 별도로 검토해야 한다.
 
 `apply-rubato-overlays.sh --apply`는 브라우저 스킬 링크와
-`~/.local/bin/rubato-personal`도 복구하고, `~/.zshrc`에 `shell/rubato.zsh`를
-한 번만 연결한다. Claude Code에 필요한 setup-token은 셸에 그대로 두되 Rubato를
-실행하는 자식 프로세스에서만 제거한다. 공개 인증 수정이 합쳐지면 이 실행 래퍼는
-제거할 수 있다.
+`~/.local/bin/rubato-personal`도 복구하고, `~/.zshrc`의 공식 alias 블록 뒤에
+`shell/rubato.zsh`를 연결한다. Claude Code에 필요한 setup-token은 셸에 그대로
+두되 Rubato를 실행하는 자식 프로세스에서만 제거한다. 공식 업데이터가 작업 중
+파일과 cmux 등록을 맡고, 개인 래퍼는 오버레이 재적용과 새 `bun.lock` drift 정리만
+덧댄다. 공개 인증 수정이 합쳐지면 실행 래퍼를 제거할 수 있다.
 
 ## 새 Mac에 복원
 
