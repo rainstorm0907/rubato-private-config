@@ -26,58 +26,53 @@ For a concrete recorded failure (seven patch attempts that never fixed the task 
 
 ## 1. Frame the path
 
-Before composing any UI, complete a path card:
+Start from the current request, existing product and real examples. Identify the actor,
+intended experience/result, evidence needed and consequential actions. Use the answers
+already available; do not make the user restate them or fill an intake form.
 
-```md
-- Actor:                          (who, in product terms — not "the user")
-- Situation and entry:
-- Goal in the actor's own words:  (MANDATORY in completion report)
-- Evidence required to decide:
-- Current state:
-- Primary action and consequence: (MANDATORY in completion report)
-- Visible result and success signal: (MANDATORY in completion report)
-- Uncertainty action:
-- Mistake recovery:
-- Interruption and resume:
-- Completion and next step:
-- Route and starting fixture:
-- Viewports to inspect:
-```
+For work that needs a durable plan or delegation, keep this in existing work notes or a
+brief: goal, meaningful action or viewing experience, required evidence, preserved behavior,
+open choices and relevant recovery/resume. It is not a required report template. A passive
+recap has an experience to sustain, not an action to invent.
 
-The three MANDATORY fields must appear verbatim in the completion report. If the goal, primary action, or success signal cannot be written **without internal terminology**, the task is not framed yet — do not proceed to components.
+Inspect the routes, components, design language, contracts and tests that can change the
+plan. Keep the user's constraints separate from your method. Existing code is a reusable
+asset, not proof that its current parameters define the only possible experience.
 
-Inspect existing routes, components, content, design tokens, data contracts, reachable states, screenshots, tests, and explicit constraints. Preserve established product decisions and record the reason for each intentional change.
+An authorized exploration may use provisional visual choices to help form a criterion.
+Record the source-backed extent of exploration in the existing brief/path notes; do not
+infer permission to change Frozen items, send data, delete, charge, publish or expand the
+product. Ask only about consequential unresolved choices, with a recommendation. An
+isolated route does not require a substitute design language or replacement chat UI.
 
-When the actor, required evidence, primary action, action consequence, success signal, or consequential branch remains materially unclear after inspection, pause composition and ask the user one focused question as the complete response for that turn.
-
-For an explicitly authorized exploratory slice, fill the path card with the intended
-experience, safe prototype behavior, preserved decisions, the source-backed Open variables list from the brief (or the lead's existing path card when working directly), and what the
-user will be able to compare. Mark an unknown product-quality criterion as still being
-formed, not as a fabricated success threshold. Do not demand a final taste judgment before
-creating the very experience that will inform it. This exception does not authorize real
-sending, deletion, charging, data collection, or changes outside the approved experiment.
-An isolated route does not require inventing a new visual language or substitute chat UI.
+Translate a proposed experience into behavior before splitting work: what must the person
+actually be able to see or do, and what must work together to make that possible? Check
+those relationships against the current code and real material. If a claimed scene cannot
+arise from the plan, change the plan inside scope before presenting it as ready to build.
+There is no mandatory architecture diagram, state schema or extra planning stage.
 
 ## 2. Hard budgets
 
-These are verifiable limits, not style advice. Check them mechanically; do not self-grade them as judgment calls.
+Only budgets from the user, product contract, platform or accepted work boundary are hard
+limits. Preserve and check them. Do not invent a universal count of visible controls or
+require a primary button for a viewing experience.
 
-1. **Exactly one primary action per view.** One visually dominant control. Every other control is secondary or tertiary (outline, ghost, text, menu). Two "important" buttons means the path card is unresolved.
-2. **Initial view interactive-element cap: 5** (buttons, links, inputs, toggles visible without scrolling), excluding global navigation. Dense professional tools may exceed this only with a recorded reason in work notes.
-3. **Zero invented encodings.** No color, icon, tone, or abbreviation whose meaning must be learned from a legend before the primary action makes sense. One neutral emphasis ("this is the moment/object to judge") is allowed. A distinct encoding is allowed only when the distinction itself is what the user must decide on.
-4. **Zero internal identifiers in visible copy.** See [Copy rules](#4-copy-rules) for the ban list.
-5. **Evidence, question, and action co-located.** Whatever the user must look at to decide and the control that records the decision stay in one working view at both target and narrow viewports.
+Keep a clear hierarchy; place evidence and relevant controls together; avoid unfamiliar
+encodings and internal identifiers that make the user learn the implementation. Follow
+accessibility and actual platform constraints. Dense tools may legitimately need several
+controls. If a real constraint conflicts with the proposed experience, resolve that conflict
+rather than weakening the test or deleting approved content to produce a green result.
 
 ## 3. Compose content and hierarchy
 
 - Use realistic domain content to shape the page before choosing components.
-- Arrange the initial view in task order: purpose → current state → evidence → primary action → expected result → recovery.
+- Arrange content in the order the actual task or viewing experience needs. Orientation, evidence, action and recovery are useful roles, not a mandatory sequence of visible sections.
 - Show decision evidence in its native medium: real chart for chart judgment, real audio for music judgment, synchronized playback for timing judgment, both states together for comparison, the actual editable object for editing. Counts, ticks, and summaries are secondary orientation, never the evidence.
-- Keep the default path minimal: only prerequisites for the primary action in the initial view. Diagnostics, raw data, alternative modes, and research detail go behind a deliberate secondary entry.
-- First make **one item** self-explanatory; only then design batch size, pagination, progress, and shortcuts. Reducing item count is workload design, not comprehension design — six incomprehensible tasks are still incomprehensible.
+- Keep the main path focused on the intended activity or viewing experience. Put unrelated diagnostics and research detail behind an appropriate secondary entry.
+- Make the unit of judgment understandable. It can be an item, transition or connected sequence; do not cut away the before/after context needed for the question. Reducing item count does not repair an incomprehensible task.
 - Ground prices, counts, timelines, policies, and impact claims in supplied evidence; label sample values in fixtures.
 
-An unfamiliar reviewer must be able to answer from the rendered initial view alone:
+For action-oriented interfaces, useful first-view questions include (adapt them for viewing or exploration):
 
 1. What product or task is this?
 2. What must I look at, listen to, or compare?
@@ -118,23 +113,28 @@ Transformation examples (adapt to the product's domain language; do not apply me
 
 ## 5. Visual concept
 
-When the product already has a visual language (tokens, approved screens, a design document), extend it and skip exploration. When it does not, and the open question is look (mood, scale, whitespace), do not explore in code: agree it with the user on generated images first (three images, one variable changed per image, user picks). When the open question is behavior rather than look, a runnable slice comes first and images are not a prerequisite. Then commit to one concept grounded in the product:
+Read the current product and relevant reference examples before choosing candidates. Take
+relationships that serve the goal, not just a color name or isolated effect. Identify what
+will become easier to follow, read, compare or feel, and where the analogy stops. Keep the
+existing product language unless the task opens it; neither novelty nor fidelity to a
+reference is evidence of quality by itself.
 
-```md
-- Context anchors: domain object, ritual, environment, audience, or brand trait
-- Concept sentence: one sentence connecting the anchors to the experience
-- Expression: typography, composition, color or material, imagery, motion
-- Signature: one memorable detail that belongs to this product
-- Restraint: conventions that keep the primary task familiar
-```
+When the question is an overall composition, make its necessary parts work together.
+Preserve a good baseline separately without locking every alternative to its values.
+When the question is one known variable, keep other relevant conditions stable. A quick
+concept comparison need not prove which component caused every reaction. Report coupled
+changes honestly instead of removing a necessary relationship for experimental tidiness.
 
-- Reuse the local design system when it carries product authority; extend through existing tokens and patterns.
-- Prefer established layout conventions when implementing a confirmed task. If layout or
-  interaction is named in the brief's Open variables list (or the lead's source-backed path
-  card when working directly), an unfamiliar alternative may be compared inside that extent.
-  Novelty is neither a reason to reject it before trying nor evidence that it is better.
-  Preserve accessibility, data safety, Frozen items, and agreed scope.
-- Keep task hierarchy legible at every viewport.
+Use the cheapest medium that can actually expose the uncertainty: existing artifacts,
+sketches, generated images, working UI or clips. A fixed number of generated images, a
+pre-code image gate and one-variable-only variants are not universal requirements. Prepare
+credible candidates and a recommendation, not an intentionally weak opponent for a favorite.
+Parts may be combined after checking their fit; the baseline may remain the best result.
+
+Do not ask the user to imagine a missing core scene. If timing or an interactive relation
+matters, prepare that behavior in the allowed prototype. Verify what can be observed and
+state the limits of the medium. The designer owns the preparation; the user need not invent
+the concept or repair the fixture just to have an opinion.
 
 ## 6. Model interaction and reachable states
 
@@ -156,14 +156,11 @@ Choose among default, in-progress, success, first-use empty, no-results, error, 
 
 ## 8. Deletion pass
 
-Run this as a separate step after implementation, before verification.
-
-1. List every visible element of the rendered initial view (text, control, badge, icon, divider, metric).
-2. Map each element to exactly one purpose: orientation / current state / evidence / primary action / expected result / recovery-resume / prerequisite input.
-3. Any element with no mapping: **delete it**, or move it behind a deliberate secondary entry if a named actor genuinely needs it. An element the user explicitly approved (a signature detail, a locked composition) is not deleted by this pass; list it in the report as approved-and-kept.
-4. Record the deleted/demoted list in the completion report.
-
-The report lists every element reviewed with the reason it stays, and the elements deleted or demoted. An empty deletion list is a valid result when every element maps; what is not valid is a missing review list. Do not remove a needed element to make the list non-empty.
+Use the rendered view to remove or demote clutter that does not serve the experience,
+evidence or action. Keep intentionally approved content and meaningful expressive details.
+Do not require an element-by-element ledger, deletion quota or a separate report. Explain
+only material changes. Do not strip away what makes the product distinctive merely because
+it is not a control or a prerequisite input.
 
 ## 9. Render and walk the path
 
@@ -177,32 +174,30 @@ Use the real rendered interface as the completion gate:
 6. Inspect the target viewport and a materially narrower viewport; confirm evidence and action remain co-located.
 7. Read every visible string as a first-time user; re-check the copy ban list.
 8. Check browser errors, overflow, clipping, contrast, and state transitions.
-9. Confirm the hard budgets still hold after all changes.
+9. Confirm actual source-backed constraints still hold after all changes.
 
-Record the command, route, starting state, viewports, path walked, feedback observed, recovery path, keyboard result, browser errors, and screenshot locations.
+Keep enough commands, input/state, observations and artifact references to reproduce decisive checks in the existing evidence location. Exercise only affected paths and relevant platforms. Do not claim motion or interaction from stills alone. Repair missing promised behavior within authority; do not return only a warning when you can complete the assigned preparation.
 
 ## 10. Fresh-eyes gate
 
-The implementer must not be the one who certifies comprehension — the builder always answers "would a stranger understand this?" with yes. Comprehension is certified by a reviewer with **no implementation context**.
+Use an independent comprehension review when required by the user/release contract, or
+when new navigation, unclear evidence/action relationships or repeated confusion makes it
+worthwhile. It is not required for every layout or color adjustment. Do not invent a review
+team without the applicable staffing/model permission.
 
-Prepare a fresh-eyes packet (see `fresh-eyes-review.md` for the exact reviewer protocol):
+When used, `fresh-eyes-review.md` governs the comprehension-only packet: intended actor,
+rendered view and relevant live path, without the builder's explanation. This tests what is
+understandable without coaching. It does not determine whether the artifact satisfies the
+whole project; a goal/quality review needs the real goal, constraints and relevant examples.
+Do not blind a goal reviewer to the very requirements they must check.
 
-```md
-- Persona: one line — who the actor is, in product terms only
-- Screenshots: rendered initial view at target and narrow viewports
-  (plus the post-primary-action view when feedback matters)
-- Route or URL if the reviewer can render it live
-```
-
-The packet must NOT contain the brief, the path card, design rationale, or any explanation of the interface.
-
-- When the environment has a dispatcher or orchestrator: report status `IMPLEMENTED, FRESH-EYES PENDING` with the packet location, and let the dispatcher run an independent reviewer.
-- A fresh-eyes FAIL is a comprehension failure: return to the path card and recompose (see stop triggers below). Do not patch it with copy, tooltips, or legends.
-- Use `VERIFIED` only after both the rendered walkthrough and the fresh-eyes review pass. Use `IMPLEMENTED, RENDER VERIFICATION PENDING` while render access remains blocked, and include the blocker and remaining checks.
+Use the finding to make an in-scope repair or revise the task model when warranted. A
+required pending review stays pending. Otherwise report the checks actually performed;
+`VERIFIED` is never shorthand for the user's taste or a requirement to add another reviewer.
 
 ## Stop-and-redesign triggers
 
-Stop local patching and return to the path card when any of these occurs:
+These observations can indicate that local polishing is missing the problem; inspect their cause:
 
 - the user (or fresh-eyes reviewer) asks what they are supposed to do;
 - the primary action makes sense only after reading a legend or learning an internal category;
@@ -213,7 +208,7 @@ Stop local patching and return to the path card when any of these occurs:
 - reducing batch size is being used as the fix for confusion;
 - a successful build or static screenshot is being offered as proof of interactive behavior.
 
-Response procedure: acknowledge the structural failure, stop adding tooltips and paragraphs, restate the actor's goal in one sentence, identify the native evidence, remove internal concepts from the default path, recompose evidence-action-result, walk the rendered path again, and re-run the fresh-eyes gate.
+Response: locate the actual cause in the request, artifact and evidence. Repair it within the assigned boundary and check the affected behavior. Rework the task model when that is the cause, not because a fixed number of attempts passed. Ask for the missing consequential decision if necessary; do not add a new interview, whole-project audit or unapproved redesign. Repeat an independent review only when required or likely to change the decision.
 
 ## Research basis
 

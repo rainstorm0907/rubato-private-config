@@ -11,7 +11,7 @@ cache="$(find "$codex_home/plugins/cache" -type d -path '*/rubato-codex/*/skills
 
 [[ "${1-}" == "--apply" ]] || { echo "dry run; pass --apply to write. target: $cache"; }
 
-# 통째로 덮는 스킬: 원본 폴더 → 플러그인 이름. 본문의 metaFrame 참조는 Codex 스킬 이름 metaframe으로.
+# 통째로 덮는 스킬: 원본 폴더 → 플러그인 이름.
 whole=(
   "codex-discusser:codex-discusser"
   "metaFrame:metaframe"
@@ -20,7 +20,7 @@ whole=(
   "frontend-ux-router:frontend-ux-router"
 )
 
-rewrite() {  # $1 파일: 이름 필드와 백틱 참조만 바꾼다
+rewrite() {  # $1 파일: 이전 camelCase 등록명만 정규화한다
   local f="$1"
   python3 - "$f" <<'EOF'
 import re, sys, pathlib
