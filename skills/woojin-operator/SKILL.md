@@ -26,7 +26,7 @@ If a specific skill clearly matches, invoke it directly and stop using this skil
 - UI, UX, visual feel, or product feel -> `frontend-ux-router`
 - Open inquiry, meaningful choices, strategy, or rethinking after new experience -> `codex-discusser`
 - Product investment, value, experiment scope, or frame approval -> `product-framing`
-- A material mismatch between the current interpretation and the evidence -> `metaFrame` as a supporting lens
+- A material mismatch between the current interpretation and the evidence -> `metaframe` as a supporting lens
 - Product-level reframing requiring independent evidence -> `product-reframing`
 - Session wrap or durable documentation -> `wrapping-sessions` or `update-docs`
 - External second opinion or deep research -> `consult` when useful
@@ -52,7 +52,7 @@ When the current request is already owned by a specific workflow, keep that owne
 A screen-feedback turn does not automatically switch to a new discussion pipeline; the
 screen owner can read `../codex-discusser/references/co-thinking.md` to handle an open
 interpretation. Product approval stays with `product-framing`, and counseling stays with
-`mood`. `metaFrame` offers a different view, not another source of approval.
+`mood`. `metaframe` offers a different view, not another source of approval.
 
 Restore prior context as evidence with its scope and source. A remembered preference is
 not a fixed profile that overrides the user's current account. Repeated mention may mean

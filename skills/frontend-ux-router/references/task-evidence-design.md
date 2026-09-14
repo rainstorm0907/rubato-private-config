@@ -16,7 +16,7 @@ Use this reference when a user must inspect, compare, classify, approve, correct
 
 ## Frame the decision
 
-Complete the path card in `frontend-creation.md` before composing the interface. Give special attention to:
+Use the path already established under `frontend-creation.md`; keep notes only when needed. For this evidence-driven task, pay attention to:
 
 - the actor's goal in familiar language;
 - the evidence required for a valid decision;
@@ -24,7 +24,7 @@ Complete the path card in `frontend-creation.md` before composing the interface.
 - a legitimate uncertainty action;
 - mistake recovery, interruption, resume, and completion.
 
-When the required evidence, action consequence, or decision remains materially unclear, pause composition, ask the user one focused question, and wait for confirmation. Treat sending, publishing, charging, deleting, approving, reserving, committing, and undoing as explicit action consequences. Use the focused question as the complete response for that clarification turn.
+Resolve available facts yourself and make reversible choices within authority. Ask with a recommendation when an unresolved user choice changes the outcome or consequential action. Sending, publishing, charging, deleting, approving, reserving, committing and undoing retain their actual permissions. Pause only work that depends on the missing authority; an uncertain preference can be explored in an authorized prototype rather than blocking all preparation.
 
 Start from the user's verb: inspect, compare, choose, correct, approve, listen, retry, or continue. Map internal categories to the concrete judgment the actor can make.
 
@@ -41,7 +41,7 @@ Start from the user's verb: inspect, compare, choose, correct, approve, listen, 
 
 ## Keep the decision loop together
 
-Arrange the working view around:
+Keep the following together where relevant; they are not a mandatory screen order:
 
 1. task orientation;
 2. current state;
@@ -67,10 +67,10 @@ Arrange the working view around:
 
 ## Prototype one complete unit
 
-- Render one realistic item, case, comparison, form, or decision before expanding the queue or batch.
-- Perform the primary action and show its resulting state transition.
-- Confirm that an unfamiliar reviewer understands the task and evidence from the initial view.
-- Expand pagination, batch actions, progress, and shortcuts after the first unit works end to end.
+- Choose a representative judgment unit: an item, comparison or connected sequence. Include the before/after relationship the question needs.
+- Exercise the relevant action or viewing experience and its resulting state. Repair known omissions within scope before asking the user to judge it.
+- Use an independent comprehension check when required or materially useful, under `frontend-creation.md` §10; not every comparison needs another agent.
+- Expand unrelated batch mechanics only when the assigned outcome needs them.
 
 ## Verify dynamic relationships
 
@@ -86,7 +86,7 @@ Verify product verbs as observed state transitions:
 | source media -> visualization | playback, seeking, and end state remain synchronized |
 | item change -> context | evidence and actions move to the same current item |
 
-For temporal interfaces, exercise play, pause, seeking, end or loop reset, item changes, interruptions, resume, stale events, and duplicate media behavior. Measure synchronization when timing quality affects the decision.
+For temporal interfaces, exercise the supported transitions affected by the change, such as play, seeking, end/reset or resume. Do not invent controls just to complete this list. Measure relevant synchronization and distinguish sampled frames from full-speed observation.
 
 ## Preserve the loop across viewports
 
@@ -98,7 +98,7 @@ For temporal interfaces, exercise play, pause, seeking, end or loop reset, item 
 
 ## Return to the task model
 
-Return to the path card when:
+Revisit the task or implementation cause when the following evidence warrants it:
 
 - the user asks what they are supposed to do;
 - the task needs repeated verbal coaching;
@@ -111,11 +111,11 @@ Return to the path card when:
 - queue size or visual polish becomes the main response to a comprehension failure;
 - the user identifies an obvious missing interaction step.
 
-Restate the actor's goal, identify the native evidence, recompose the evidence-action-result loop, prototype one complete unit, and walk the rendered path again.
+Use the specific failure to decide whether a local repair or a different task structure is needed. Repair inside scope and walk the affected relationship again; do not add an explanation layer to disguise a wrong model or restart the whole design for every local defect.
 
 ## Completion evidence
 
-Record:
+Keep decisive evidence in the existing result record as relevant to the assignment:
 
 - route, fixture, target viewport, and narrow viewport;
 - evidence presented and primary action performed;
@@ -124,4 +124,4 @@ Record:
 - observed dynamic relationships and synchronization measurements;
 - keyboard, focus, browser errors, overflow, screenshots, and traces.
 
-Use the completion status defined in `frontend-creation.md`.
+Use the scoped completion reporting in `frontend-creation.md`; a new report or status ladder is not required.

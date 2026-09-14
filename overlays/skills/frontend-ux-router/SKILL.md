@@ -12,26 +12,29 @@ Start from the affected user path.
 > arranging real evidence, a comprehensible action, visible feedback, and recovery so
 > a user completes a goal without learning the implementation first.
 
-For frontend creation, redesign, or implementation, read `references/frontend-creation.md` first. Add one specialist reference when it changes a material decision. Add a second for a separate material risk.
+For frontend creation, redesign, or implementation, use `references/frontend-creation.md`. Read a relevant specialist reference when it can change a material decision; reuse content already in context. Specialist checklists do not reinstate universal gates removed here. Product authority, explicit review requirements and safety constraints remain binding.
 
-## Non-negotiables
+## Responsibilities and boundaries
 
-These hold even when no reference is loaded. They are checks, not aspirations.
+These apply to the requested path, not to every possible screen or task. Explicit user,
+product, accessibility, data and release constraints still bind. A planning request does
+not authorize product edits. The developer owns a worthwhile, working candidate; the user
+owns personal experience and final adoption. Neither replaces the other.
 
-1. **Path card before components.** Write the actor, goal in the actor's own words, primary action, and success signal before composing UI. If any of these needs internal terminology, stop and reframe.
-2. **One primary action per view**, visually dominant. Everything else is secondary.
-3. **Initial view answers, without coaching:** what is this task, what do I look at, what is happening now, what do I do next, what will happen after.
-4. **No internal language in visible copy**: no snake_case/camelCase identifiers, raw enum values, ids, raw timestamps, schema or pipeline nouns, or headings like `Data`/`Info`. If a string reads like a code comment, rewrite or delete it.
-5. **Native evidence, co-located with the action.** Show the thing being judged (real chart, real audio, both comparison states, the actual editable object) next to the question and its controls. Summaries and counts are not evidence. No invented color/tone/icon codes that need a legend.
-6. **Deletion pass after implementation**: map every visible element to a purpose; delete or demote unmapped elements; report the deleted list.
-7. **Walk the rendered path** (entry, primary action, feedback, recovery, resume) at target and narrow viewports. A build or a static screenshot is not proof of interactive behavior.
-8. **Fresh-eyes gate certifies comprehension only.** A reviewer with zero implementation context (`references/fresh-eyes-review.md`) answers "does a stranger understand what to do"; never the implementer. `VERIFIED` requires a recorded PASS. It does not certify look, feel, comfort, or taste; see rule 10.
-9. **Comprehension failure → redesign, not patching.** When a user or reviewer asks what to do, return to the path card. Do not add tooltips, legends, or explanatory paragraphs to a wrong task model.
-10. **The user is the only sensor for look and feel.** Beauty, naturalness, comfort, and "does this feel like the product" are judged by the user on the rendered screen and by nothing else: not by tests, not by the implementer, not by any reviewer, not by a fresh-eyes PASS. Put the user in the loop, not at the end of it: one implementation turn ends at the *smallest runnable result the current judgment needs*. For layout or mood that is a correctly rendered screen; for a transition or camera it is a running clip; for control feel it is a short segment the user can operate. Getting there includes fixing your own build errors, missing states, and half-drawn layout, as many edits as it takes. After that, continue only on the user's feedback or inside a scope the user opened beforehand ("do the rest the same way"); delivering the result, silence, and an automatic continue prompt are not approval. If you have no channel to the user, this is a return, not a wait: end the turn with the result, the two or three points to judge, and what you did not build yet; resumption arrives as a new task. If your brief asks for several visual surfaces in one uninterrupted run, return after the first one and say the rest is waiting on a verdict.
-11. **Work inside the approved composition or explicitly listed open variables.** Every element traces to the requested path, an approved composition, a reachable state, or a variable named in the brief's Open variables list. When the lead implements directly, put that same source-backed list in the existing path card or work notes; do not create a new document or infer it from "be creative". Reachable loading, empty, error, permission, and offline states remain part of the path; see `references/frontend-creation.md` §6. In an implementation task, do not add a new picker, disclaimer, explanation, or invented state because it seems helpful. In an authorized exploration, propose and render alternatives inside the named dimensions; ordinary choices within them do not require pixel-by-pixel approval. An open variable cannot override Frozen items or authorize expanding the product, connecting real data, or publishing. Missing scope is a question for the lead, not permission. Routine implementation discretion within the assigned task is unchanged. Report a missing capability or out-of-scope surface instead of silently building it. When an approved composition breaks a hard budget, demote rather than delete approved content and report the change.
-12. **A frozen value is a check, not a sentence.** When the user locks a number, a feel, a layout, or a composition ("keep this", "freeze this", "do not touch"), protect it at the strongest level available: a number or token → an assertion that fails when it changes; a layout or composition → a snapshot or contract check; a feel that no check can express → one named definition site with the marker, plus a line in your return. Mark the source at the point of definition ("frozen, user, 2026-08-14"). If you cannot write the check (no test surface, or the file is outside your write scope), return the frozen item as an unprotected gap with the reason; do not report it as protected. Prose in a document does not protect anything: a later worker will not read it, or will read it and let the task win. Leaving the old value in a comment while replacing the mechanism that uses it is a violation, not compliance.
-13. **Machine PASS is regression protection, not product judgment.** Contract checks, automated walkthroughs, hashes, and snapshot tests say "nothing regressed on what they measure". Report them with that scope written next to them ("PASS: world contract, auto-flight; product verdict: not yet judged by user"). Never let a green check, a one-word `Ready`, or a reviewer's approval stand in the product verdict column.
-14. **Same surface rejected twice on feel → suspect the layer, not the pixels.** When the user rejects the same surface a second time with a feel word ("cluttered", "messy", "feels like a feature, not the product", "looks copied"), do not make a third pass of the same kind. Re-judge the cause first, and name which one it is: the surface's role sentence (what it is for, in the user's words), the implementation approach (the composition or rendering method), or the tool or engine underneath. Fix at that layer. When the cause is the role, rewrite the sentence and get it past the user before touching a pixel; without a user channel, the cause judgment and the proposed fix, not a tuned screen, are the deliverable of that turn. The count is per cause fix: once the user accepts the fix at the named layer, the count resets to zero.
+1. **Understand the path before composing.** Use the actor's goal, evidence and intended result already in context. Keep a short path card only when coordination or continuity needs it. Passive viewing and exploration need no invented primary action.
+2. **Make the next action clear when action is needed.** Use a hierarchy appropriate to the task; do not impose one-button or control-count quotas on every screen.
+3. **The first view should orient without coaching.** Make the current state, useful evidence, available actions and consequences understandable. Show what matters to this user rather than every implementation field.
+4. **Use product language in visible copy.** Do not expose raw identifiers, pipeline labels or internal judgments unless they are themselves legitimate user content. Preserve the product's voice and speakers.
+5. **Use native evidence near the decision.** Show real pictures, editable objects, rendered states or time-based media when those are what is being judged. Counts and summaries cannot replace them. Do not invent visual encodings whose meaning must be taught merely to use the path.
+6. **Remove purposeless UI, not approved content.** Review clutter while composing and after rendering. A separate inventory and a nonempty deletion list are not required. Keep a deliberate expressive element when it serves the experience.
+7. **Walk the relevant rendered path.** Check action, feedback, coupled behavior, recovery and resume where affected, on the primary platform and relevant alternate viewports. A build or a static screenshot is not evidence of interactive behavior.
+8. **Use independent review where it can change a material decision.** Follow explicit review/release requirements. Otherwise use fresh eyes for new or ambiguous navigation and repeated comprehension trouble, not every visual edit. A reviewer checks a stated question; no reviewer certifies the user's taste.
+9. **Repair the cause of confusion.** Check evidence and the task model before adding explanations. Correct a local defect locally; redesign the path when the path is actually wrong. A clarifying question is not automatically proof that the entire design failed.
+10. **Bring a judgment-ready result, not merely a first render.** Inside accepted scope, finish the preparation, execution and corrections needed for the question the user is to judge. Select and critique your own candidates using the actual reference and result; do not outsource all design judgment to the user. If the promised scene is absent, repair it or report a real capability/scope blocker rather than asking whether that direction feels good. Stop at an explicit preview checkpoint, a consequential unresolved user choice, a scope/budget boundary or the requested result. Once meaningful taste feedback is needed, show it promptly rather than polishing unseen. Routine completion and corrections already delegated need no new permission. User-requested stops and approval boundaries remain binding.
+11. **Preserve authority without freezing your method.** Work from the accepted outcome, actual composition constraints and source-backed Frozen items/Open variables in the brief; clarify material missing authority. Within an opened dimension, ordinary coupled design choices remain delegated. A baseline kept for comparison does not freeze all alternative values. Do not quietly add product functions, live data, publishing or irreversible effects. New ideas can be proposed without being adopted. Do not delete approved content just to meet a self-imposed layout budget.
+12. **Protect what can be checked.** Use assertions, contract checks, snapshots and named definitions for explicit frozen items at the strongest meaningful level available. Preserve source and date. Report a protection gap honestly. A snapshot proves only its measured property, not an unmeasurable feeling; an unchanged old value in a comment does not preserve a replaced mechanism.
+13. **Separate evidence and adoption.** Report what checks and observations actually cover. Neither green tests nor confidence certify product quality. A preference among submitted candidates does not prove the candidate set was sufficient. User feedback may favor the baseline; do not manufacture more work to secure novelty or a winner.
+14. **Do not repeat an approach that evidence refutes.** Revisit the task, expression or implementation layer when local adjustments keep missing the goal. Change an owner-chosen method inside authority; ask only when goals, commitments or protected decisions must change. A fixed rejection count is not a diagnosis.
 
 ## Route
 
@@ -58,23 +61,40 @@ These hold even when no reference is loaded. They are checks, not aspirations.
 - Inspect the current product and supplied evidence before selecting additional research.
 - Load state patterns when asynchronous behavior, recovery, permissions, onboarding, or offline behavior affects the path.
 - Read the failure case study when building review/labeling surfaces, exposing model output or generated evidence, or after any report that the page is confusing.
-- Use the full heuristic guide for audits and launch reviews; use the creation workflow's gates for implementation work.
+- Use the full heuristic guide for audits and launch reviews when relevant; use the creation guidance for implementation work.
 - Express qualities such as premium, trustworthy, calm, playful, or fast through a context-specific visual and interaction system.
 - Let `references/frontend-creation.md` control user-flow clarification, budgets, copy rules, reachable states, visual-concept exploration, and completion evidence when specialist guidance differs.
-- Comparison variants (A/B/C mockups, parallel implementations) are a method for choosing parts, not a vote for a winner. Expect the user to take the body of one, the spacing of another, and the copy of a third. Present variants so parts can be pointed at; do not build one variant to completion expecting whole adoption.
-- Mood, scale, and whitespace are agreed on a generated image before code when the product has no visual language yet. Vary one variable per image (three images, one variable), let the user pick, then implement. Code is not the place to discover mood.
+- Choose the comparison unit from the user's question. For an overall experience, prepare coherent alternatives whose necessary elements work together. Isolate a variable when its effect is the question. Do not require a fixed candidate count, whole-winner vote or automatic mixture of favorite parts.
+- For open visual direction, choose useful references, generated images, sketches, existing UI or executable previews. Use motion for timing and operation for control feel. No medium or three-image/one-variable sequence is mandatory. Known product language is a starting point; an authorized redesign may reconsider it.
 
-## Clarification gate
+## Clarification
 
-- Pause before composing when the actor, required evidence, primary action, action consequence, success signal, or consequential branch remains materially unclear.
-- Treat ambiguity about sending, publishing, charging, deleting, approving, reserving, committing, or undoing as a blocking flow choice.
-- Ask the user one focused question and wait; return the question as the complete response for that turn. When the dispatch brief explicitly grants assumption authority, record `[Assumption]` in work notes and proceed instead.
-- Use working assumptions for reversible visual details that preserve the confirmed task flow.
+Resolve discoverable facts from available code, records and artifacts. Make reversible
+implementation choices already delegated by the request. Bring a recommendation and only
+the material user choice that remains; do not require a complete taste specification first.
+Ambiguity about sending, publishing, charging, deleting, approving, reserving or product
+scope blocks the affected action, not unrelated authorized preparation. Discussion-only
+requests stay discussion-only. A question in an otherwise authorized task does not require
+halting all work in that turn.
 
 ## Completion
 
-- Claim completion only after walking the affected path in the rendered interface from entry through action, feedback, relevant recovery, and completion, at the target viewport and a materially narrower one, including keyboard and focus. The primary viewport for judgment and screenshots is the product's primary platform: desktop for web products unless the task or the product is mobile-first; narrow viewports are then the secondary check.
-- Two reports, two readers. The dispatcher report carries: the three mandatory path-card fields (goal, primary action, success signal), the deletion-pass list, hard-budget confirmation, walkthrough evidence, frozen items touched (`none`, or which and why), and the fresh-eyes packet location or verdict. The user report carries only what the user will judge: absolute paths to rendered screenshots (or a live URL) and the two or three points to look at. Do not paste command logs, test counts, or file lists into the user report. When you have one output channel, emit both under two headings in one return (`## For the dispatcher`, `## For the user`); the dispatcher forwards the user block verbatim and keeps the rest.
-- Status ladder. These are labels for what is on record, not a required order: `IMPLEMENTED, RENDER VERIFICATION PENDING` (render blocked; include blocker) → `IMPLEMENTED, FRESH-EYES PENDING` (walkthrough done, packet ready) → `VERIFIED` (walkthrough + fresh-eyes PASS on record) → `USER-JUDGED` (the user has seen the rendered surface and said it is right). On a visual surface the user's first look happens at the first rendered state, before `VERIFIED`, not after it. Only `USER-JUDGED` is a product verdict, and only the session that talks to the user can record it; a dispatched worker's ceiling is `VERIFIED`.
+Before returning or accepting a result, use the current request and actual artifact, not
+only the implementer's report. Check that the candidate supports the intended decision
+and that known basic omissions were repaired within scope. Reuse decisive evidence; do
+not repeat all passing tests or add an evaluator merely to obtain another approval.
 
-For an audit or design decision, report the user goal, observed friction, recommended change, material state or heuristic risks, and remaining evidence gaps.
+Workers return the artifact, observed behavior, important remaining gaps and required
+Frozen items/Open variables/intent references to the dispatcher. Keep detailed commands
+and evidence at existing artifact locations. The dispatcher can request in-scope repairs;
+a first screenshot is not automatic user handoff. A judgment-ready preview is a valid
+completion when that is the assignment, even before final product adoption.
+
+Tell the user the result, a reasoned recommendation and the remaining meaningful choice,
+with an accessible artifact. Do not require two report headings or fixed numbers of points.
+Distinguish implemented, checked (name the scope), review pending if required, and user
+judgment pending/received. Unknown is not failed; unperformed is not passed. Frames show
+sampled visual states, not necessarily the feel of full-speed motion.
+
+For an audit or design decision, report the goal, consequential friction, recommendation
+and evidence that could still change it. Do not turn a narrow audit into unsolicited redesign.
