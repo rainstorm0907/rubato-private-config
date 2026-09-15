@@ -6,17 +6,21 @@
 
 The lead owns:
 
-- the execution mission and completion criteria
+- evidence-first intent resolution, the execution mission and completion criteria
 - the roster proposal, workstream boundaries, and resource allocation
 - cross-workstream contracts and teammate replacement
 - routing conflicts between an active frame and execution
 - integration and completion decisions
 
-The human operator owns the framing choice, lead-model choice, and the veto over the roster. Report a new or materially changed teammate before it starts; wait for explicit confirmation only when the spawn commits something hard to take back or the operator has asked to approve teams. Recreating the same teammate after session loss is recovery, not a new staffing decision.
+The human operator owns the framing choice, lead-model choice and approval of the
+combined intent/roster proposal. Before forming a team, the lead gathers available
+evidence, recommends the result and minimal team in the user's language, and waits for
+explicit confirmation of both intent and roster. Follow the sibling work-intent alignment
+contract for missing information, partial approvals and accepted corrections. Same-owner
+follow-ups and like-for-like recovery retain approval; material outcome, roster, cost or
+commitment changes require only a delta confirmation before affected work.
 
 The lead does not absorb every debugging detail. Look at task state, verified facts, and decision-grade evidence. When an owner is stuck, attach a relevant peer, redesign the boundary, or replace the owner rather than choosing commands one at a time.
-
-Small integration edits may be done directly after convergence. If an edit becomes a new outcome or long debugging loop, assign an owner.
 
 ## Owners and verifiers from the lead's side
 
@@ -36,6 +40,38 @@ Give only the mission, authoritative artifacts, acceptance criteria, current res
 This is always a separate new session, never the resident verifier reused: a context cannot audit its own contamination, and asking it whether it is still clean asks exactly the question it cannot answer.
 
 Findings return to the lead; frame-invariant conflicts return as `FRAME_CONFLICT` evidence.
+
+## Seats and subagents
+
+A taskforce has three seats: lead, owner, verifier. They are peers. The lead holds the
+goal and cross-workstream decisions; an owner holds one outcome; a verifier holds one
+judgment. None of them is another's worker. The runtime usually spawns owners and
+verifiers as children of the lead's session — that is how the harness builds a tree,
+not a statement about who decides. A teammate decides everything inside its seat.
+
+Below a seat sit subagents. Any teammate, the lead included, may spawn them; they take
+maps, bounded investigation, and settled execution, and they return evidence to the
+session that spawned them. They are not on the roster, do not hold an outcome, and do
+not appear on the board unless shared work is explicitly assigned. A subagent spawned by
+the lead in a session with no team is the same kind of thing: a result to take back.
+A subagent is a session that remembers, not a disposable call: the next related slice
+goes to the same subagent as a follow-up, for the reason the lead keeps an owner through
+corrections — it already holds the files and the refuted premises. A new subagent is
+for a different problem, a cold review, or one stuck on a wrong idea.
+
+A teammate delegates by cost, not by count: a slice goes out when running it in the
+teammate's own context would cost more than its brief and integration; slices that pass go
+out together, the rest stay. Diagnosis, integration, and anything with interpretation room
+stay with the teammate. Two reasons. A teammate's context is the only
+place its outcome is understood end to end, so transcript-heavy work goes out and
+judgment stays in. And the lead must not become the relay for a teammate's local
+delegation: if an owner had to route every slice through the lead, the seat that sees
+all workstreams would be spent transcribing one.
+
+Where these sentences live: the runtime prompt for each seat is the single source for
+seats, parentage and spawn surface (Pi: `core-lead` / `core-teammate` / `core-agent`;
+Codex: the base instructions' Role selection). Role contracts and this skill describe
+behavior inside a seat and defer to that prompt on conflict.
 
 ## Intervention ladder
 
@@ -61,8 +97,8 @@ Watch the lead's own outbound tone: **evaluative sentences** — "this is the be
 | whether to use framing | human operator |
 | lead model | human operator |
 | initial roster proposal | lead |
-| initial teammate spawn | lead, after reporting the roster; human veto |
-| material restaffing or new teammate | lead reports before spawn; human veto |
+| initial teammate spawn | lead, after combined intent/roster confirmation |
+| material restaffing or new teammate | lead, after delta confirmation |
 | implementation and debugging inside a workstream | owner |
 | interface between two streams | affected owners; lead if unresolved |
 | architecture, public contract, or high-blast-radius change | lead; human approval when needed |

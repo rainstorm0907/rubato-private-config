@@ -2,81 +2,6 @@
 
 Merged stage-1 raw memories (stable ascending thread-id order):
 
-## Thread `019eafc8-af7f-7533-b407-1d31e1f0baa8`
-updated_at: 2026-06-10T04:45:11+00:00
-cwd: /Users/wooojin
-rollout_path: /Users/wooojin/.codex/sessions/2026/06/10/rollout-2026-06-10T13-27-05-019eafc8-af7f-7533-b407-1d31e1f0baa8.jsonl
-rollout_summary_file: 2026-06-10T04-27-05-xbew-claude_auth_fix_and_codex_skill_sync.md
-
----
-description: Removed Claude Code auth conflict by disabling local ANTHROPIC_API_KEY injection and clearing API-key approval state, then synced Codex global agent guidance and user skills into Claude-specific files/folders.
-task: fix Claude Code auth conflict; apply Codex skills/global settings to Claude
-task_group: local cli configuration / prompt-and-skill sync
-task_outcome: success
-cwd: /Users/wooojin
-keywords: Claude Code, ANTHROPIC_API_KEY, claude.ai, Google login, customApiKeyResponses, /Users/wooojin/.claude/anthropic.env, /Users/wooojin/.claude.json, /Users/wooojin/.claude/CLAUDE.md, /Users/wooojin/.codex/AGENTS.md, /Users/wooojin/.claude/skills, skill sync, global settings
----
-
-### Task 1: Remove Claude auth conflict and keep Google/claude.ai login only
-
-task: eliminate Claude Code auth conflict by removing local API key injection and API-key approval state
-task_group: local CLI auth / environment cleanup
-task_outcome: success
-
-Preference signals:
-- when the user said "API_KEY 입력된거 빼주고, 그냥 1번 구글 로그인으로만 작동하게 로컬 로그인 빼줘" -> they want the API-key path removed, not merely tolerated, and prefer Google/claude.ai login only.
-- when the user said "로컬 로그인 빼줘" -> remove local auth state/hints too, not just the env var.
-
-Reusable knowledge:
-- `/Users/wooojin/.claude/anthropic.env` was the actual source of `ANTHROPIC_API_KEY` injection; it contained `export ANTHROPIC_API_KEY=...`.
-- `/Users/wooojin/.claude.json` had `customApiKeyResponses.approved`, which can preserve API-key approval behavior and should be removed when switching fully to claude.ai/OAuth.
-- Backing up before removal is useful, but backups must not retain secrets if the user asked to remove them; scrub or delete the secret-bearing backup.
-- Active shells may keep stale env vars; verify both `env` and `launchctl getenv` and restart the session if needed.
-
-Failures and how to do differently:
-- The first backup of `anthropic.env` still contained the original API key; it had to be redacted/removed afterward to satisfy the user's request.
-- A search over `.claude/backups/.claude.json.backup.*` showed the same `customApiKeyResponses` state, so the cleanup needed to include backup JSONs, not just the live config.
-
-References:
-- `/Users/wooojin/.claude/anthropic.env`
-- `/Users/wooojin/.claude/backups/anthropic.env.disabled-20260610-132919`
-- `/Users/wooojin/.claude.json`
-- `ANTHROPIC_API_KEY_UNSET`
-- `jq 'has("customApiKeyResponses")' /Users/wooojin/.claude.json  # false`
-- `launchctl getenv ANTHROPIC_API_KEY`
-
-### Task 2: Sync Codex skills and global guidance into Claude
-
-task: copy Codex user skills and global agent guide into Claude-specific locations, preserving environment-specific paths
-task_group: local CLI configuration / skill sync
-task_outcome: success
-
-Preference signals:
-- when the user said "우리 지금 사용중인 코덱스 skill이랑 전역세팅 클로드에 적용시켜줘" -> they want the Codex operating model replicated in Claude, not just described.
-- the user asked to "적용시켜줘" -> perform the file changes directly.
-
-Reusable knowledge:
-- Claude's global agent guidance file was `/Users/wooojin/.claude/CLAUDE.md`.
-- Codex's equivalent global guidance file was `/Users/wooojin/.codex/AGENTS.md`.
-- The Claude copy of the guidance needs Claude-specific skill paths (for example `/Users/wooojin/.claude/skills/laws/SKILL.md`), while the Codex original should retain `.codex` paths.
-- Codex user skills synced cleanly into `/Users/wooojin/.claude/skills`; the only diff left after sync was `.DS_Store` and `.system` metadata.
-- Claude settings already matched the user's preferences: Korean language, `korean-community` output style, high effort, prompt suggestions off, dangerous-mode prompt skipped, auto compact off, model `claude-fable-5[1m]`.
-- Backup of the previous Claude skills directory was created at `/Users/wooojin/.claude/backups/skills-before-codex-sync-20260610-134439`.
-
-Failures and how to do differently:
-- A broad path-rewrite briefly touched the Codex source `AGENTS.md`; restore the source before finalizing so only the Claude copy contains Claude paths.
-- When mirroring settings between CLIs, verify the target file actually used by the app (`CLAUDE.md` for Claude Code) rather than assuming a generic global file name.
-
-References:
-- `/Users/wooojin/.codex/AGENTS.md`
-- `/Users/wooojin/.claude/CLAUDE.md`
-- `/Users/wooojin/.codex/skills`
-- `/Users/wooojin/.claude/skills`
-- `/Users/wooojin/.claude/settings.json`
-- `Skill path: /Users/wooojin/.claude/skills/laws/SKILL.md`
-- `Skill path: /Users/wooojin/.codex/skills/laws/SKILL.md`
-- `diff -qr /Users/wooojin/.codex/skills /Users/wooojin/.claude/skills`
-
 ## Thread `019fa306-06b3-71f3-a29a-649ca3a279a1`
 updated_at: 2026-08-13T14:05:16+00:00
 cwd: /Users/wooojin/dev/maple
@@ -607,4 +532,368 @@ References:
 - `xattr -l <path>`
 - `/usr/sbin/spctl --assess --type execute --verbose=4 <path>`
 - `log show --predicate '(process == "syspolicyd" OR process == "CoreServicesUIAgent") ...'`
+
+## Thread `01a022f5-a89b-7671-978c-f79906f9abdd`
+updated_at: 2026-08-21T06:22:00+00:00
+cwd: /Users/wooojin
+rollout_path: /Users/wooojin/.codex/sessions/2026/08/21/rollout-2026-08-21T15-15-19-01a022f5-a89b-7671-978c-f79906f9abdd.jsonl
+rollout_summary_file: 2026-08-21T06-15-19-V1Kd-karabiner_rollback_fixes_varmilo_shortcuts.md
+
+description: Karabiner의 최근 Varmilo 키 변환 규칙 때문에 한영, Rectangle, ⌘⇧3 캡처가 모두 깨졌으나 8월 16일 백업으로 롤백해 해결함
+ task: karabiner-varmilo-shortcut-rollback
+ task_group: macos-keyboard-configuration
+ task_outcome: success
+ cwd: /Users/wooojin
+ keywords: Karabiner, Varmilo, Rectangle, 한영, keyboard_fn, apple_vendor_top_case_key_code, ⌘⇧3, automatic_backups, rollback
+
+### Task 1: Karabiner 설정 롤백
+
+task: 최근 Varmilo 규칙 변경으로 망가진 macOS 단축키 복구
+task_group: macos-keyboard-configuration
+task_outcome: success
+
+Preference signals:
+- 사용자가 “며칠 전으로 돌릴 수 없나?”라고 요청함 -> 새 규칙을 즉시 추가하기보다 가장 가까운 정상 백업으로 복구하는 접근을 우선할 것.
+- 사용자는 복구 후 한영 전환, `⌘⇧3`, Rectangle 단축키를 직접 확인했고 “다 된다”고 확인함 -> 유사한 키보드 복구에서는 이 세 가지를 최소 검증 목록으로 사용할 것.
+- 사용자는 EventViewer의 실제 Varmilo 키값을 기준으로 최소 수정하는 후속 작업을 수용할 수 있음 -> 물리 입력을 추정하지 말고 이벤트 확인 후 장치별 규칙을 추가할 것.
+
+Reusable knowledge:
+- 설정 파일은 `/Users/wooojin/.config/karabiner/karabiner.json`, 백업은 `/Users/wooojin/.config/karabiner/automatic_backups/`에 있음.
+- 현재 문제가 생긴 설정에는 Varmilo 장치(`vendor_id: 1241`, `product_id: 41169`)에 대해 Ctrl, left_command, Caps를 서로 여러 방향으로 변환하는 규칙이 겹쳐 있었다. 이 규칙들이 Command 조합과 한영/Rectangle을 연쇄적으로 깨뜨린 원인으로 추정됨.
+- 복구에 사용한 백업은 `karabiner_20260820-161923-before-moonlight-except.json`이며, 내용상 최근 Varmilo 수정 전의 8월 16일 상태다.
+- 롤백 전 현재 설정은 `karabiner_20260821-152022-before-rollback-to-20260816.json`으로 별도 보존됨.
+- 복구 후 SHA-256은 소스 백업과 현재 파일이 동일했고, `jq` JSON 검사, `Default profile`, Karabiner 프로세스 및 CLI 상태가 정상이었다.
+
+Failures and how to do differently:
+- 최근 Varmilo 전용 규칙은 같은 물리 키를 여러 변환 규칙이 다시 매핑하는 구조였음. 향후에는 먼저 현재 설정을 백업하고, EventViewer의 실제 키 이벤트와 장치 식별자를 확인한 뒤 최소한의 단일 변환만 추가할 것.
+- `⌘⇧3` 문제는 macOS 캡처 symbolic hotkey 비활성화보다 Command 변환 이상과 관련된 것으로 확인됨. 캡처 설정을 먼저 변경하지 말고 Karabiner의 Command/Fn 변환부터 점검할 것.
+
+References:
+- `/Users/wooojin/.config/karabiner/karabiner.json`
+- `/Users/wooojin/.config/karabiner/automatic_backups/karabiner_20260820-161923-before-moonlight-except.json`
+- `/Users/wooojin/.config/karabiner/automatic_backups/karabiner_20260821-152022-before-rollback-to-20260816.json`
+- 관련 이벤트 키 문자열: `apple_vendor_top_case_key_code`, `keyboard_fn`
+- 최종 검증: 사용자가 “다 된다”라고 확인함.
+
+## Thread `01a024a9-c89d-7ef3-84eb-d0ecf22a31ca`
+updated_at: 2026-08-21T16:55:15+00:00
+cwd: /
+rollout_path: /Users/wooojin/.codex/sessions/2026/08/21/rollout-2026-08-21T23-11-41-01a024a9-c89d-7ef3-84eb-d0ecf22a31ca.jsonl
+rollout_summary_file: 2026-08-21T14-11-41-Xjho-aerial_world_lab_comparison_build.md
+
+---
+description: Built an isolated three-preset aerial-world comparison lab from an approved brief; static checks and headless browser interaction passed, while user first-impression flight and final world selection remain unverified.
+task: implement-approved-aerial-world-comparison-lab
+task_group: openaigame-aerial-world-implementation
+ task_outcome: partial
+cwd: /Users/wooojin/App/openaigame
+keywords: aerial-world-lab, WORLD_PRESETS, world-presets.js, presetId, sceneId, world_first_impression, flightTime, collisionShapes, V-key, headless-Chrome, CDP, node-check
+---
+
+### Task 1: Implement and verify isolated aerial-world comparison lab
+
+task: implement-approved-aerial-world-comparison-lab
+task_group: /Users/wooojin/App/openaigame
+ task_outcome: partial
+
+Preference signals:
+- The user explicitly required writes only under `experiments/aerial-world-lab/**` and said not to modify the baseline, docs, or use commit/reset/clean/revert -> keep future implementation strictly scoped and report conflicts rather than broadening.
+- The user required actual browser interaction and a report separating changed files, checks, browser-confirmed items, and unverified items -> preserve this verification/reporting structure.
+
+Reusable knowledge:
+- Approved brief hash: `2a8a82fc1454213f54bd88a881a6974dc1e1a133f2dd81ef61488c02624cb0cf`.
+- Lab files: `experiments/aerial-world-lab/{README.md,game.js,index.html,telemetry.js,world-presets.js}`.
+- `WORLD_PRESETS` owns world placement. Rendering and collision generation consume the same form parts; forms include `layer`, `collide`, material, `assetKey`, and optional deterministic motion.
+- Presets are A/Grok, B/Fable, C/Sol. `V` cycles only while on the bench; `R` resets the current world/equipment. Telemetry uses `aerial-world-lab-flight-telemetry-v1` and records `presetId`, `sceneId`, per-flight environment, and `world_first_impression`.
+- Static checks passed: `node --check` for all three JS files. Baseline `speed-feedback-v1` hashes and approved `docs/31` hash remained unchanged.
+- Headless Chrome confirmed `J` inspection blocks `V`, bench cycling `A→B→C→A`, equipment preservation across switching, state reset, telemetry tagging, and collision counts matching form parts: A 12, B 10, C 14.
+- B’s moving collision form is derived from `flightTime`: offset zero at `flightTime=0`, approximately `{x:560,y:49.497}` at `2.125` seconds.
+
+Failures and how to do differently:
+- Large inline patches repeatedly failed from nested backticks/template strings. Use small file-based scripts or correctly formatted patches and run syntax checks incrementally.
+- CDP/browser runs encountered stale cache and short-lived processes. Start a fresh target, cache-bust script URLs, and assert `typeof window.game.getPreset === 'function'` before interaction.
+- Screenshot verification initially captured stale/start-like frames; force an exposed lab-only render after camera mutation.
+- Existing old telemetry storage was observed in the browser, so report “new key is isolated” rather than claiming the old key is absent.
+- User first-impression flights, A→B→C and reverse comparison, and final world selection were not performed; do not mark the comparison decision complete.
+
+References:
+- Brief: `/Users/wooojin/App/openaigame/docs/31-aerial-world-playable-comparison-implementation-brief.md`
+- Run: `cd /Users/wooojin/App/openaigame/experiments/aerial-world-lab && python3 -m http.server 8654`
+- Verification handles: `WORLD_PRESETS`, `window.game.getPreset()`, `window.game.collisionShapes()`, localStorage key `aerial-world-lab-flight-telemetry-v1`.
+- Hook note: local `codex-native-hook.js` Stop invocation returned exit code 0 and stdout `{}`; repeated hook prompts were infrastructure behavior, not implementation blockers.
+
+## Thread `01a024a9-cb4b-7851-bf7d-6b80ef0f140b`
+updated_at: 2026-08-21T14:15:36+00:00
+cwd: /Users/wooojin/App/openaigame
+rollout_path: /Users/wooojin/.codex/sessions/2026/08/21/rollout-2026-08-21T23-11-42-01a024a9-cb4b-7851-bf7d-6b80ef0f140b.jsonl
+rollout_summary_file: 2026-08-21T14-11-42-qFpV-independent_aerial_world_sol_medium_structure_exploration.md
+
+---
+description: A안의 단일 공중 월드 비전을 지정 문서에 작성하고 검증함; 강한 하나의 세계에 베팅하며 코드·기존 문서는 건드리지 않는 작업 방식이 확인됨
+task: write-independent-aerial-world-structure-proposal
+task_group: openaigame-world-design
+task_outcome: success
+cwd: /Users/wooojin/App/openaigame
+keywords: aerial-world, world-structure, aerial-world-sol-medium, docs-29, speed-wing, glide-wing, open-air, blockout, collision-outline
+---
+
+### Task 1: A안 공중 월드 구조 제안
+
+task: write-independent-aerial-world-structure-proposal
+task_group: openaigame-world-design
+task_outcome: success
+
+Preference signals:
+- 사용자가 “구조 유형을 미리 분류하지 말고”, “안전한 평균안 대신 하나의 응집된 월드 비전에 베팅하세요”라고 요청함 -> 유사한 창작 설계에서는 대안 목록보다 하나의 강한 비전, 트레이드오프, 폐기 기준을 제시한다.
+- 사용자가 “지정된 산출물 파일 하나만 작성”하고 완료 후 “그 파일 경로만 짧게 보고”라고 요청함 -> 명시된 산출물 범위를 넘지 않고 최종 보고도 최소화한다.
+- 브리프가 `압도적이지만 자유로운 거대한 놀이방 70 / 근접 비행 긴장 30`을 고정함 -> 거대한 형태 사이의 열린 공중을 중심으로 설계하고 연속 코스·촘촘한 장애물로 변질시키지 않는다.
+
+Reusable knowledge:
+- 작성된 세계는 “창가로 항해하는 미완성 하늘배”: 아이 방 전체의 선체·갈비뼈·돛·추·선수가 하나의 거대한 천장 배를 이루지만, 플레이어는 표면이 아니라 부품 사이 열린 공중을 자기 궤적으로 연결한다.
+- 속도날개는 선체 안쪽의 낮고 깊은 진입 뒤 늦은 상승을 택하고, 활공날개는 전진 속도를 남긴 긴 바깥 상승과 높은 활공을 택한다. 두 경로는 주돛 앞에서 갈라지고 넓은 공간에서 다시 합류한다.
+- 블록아웃 데이터는 공간 기준점, 비행층, 충돌 외곽, 교체 자산, 움직임 역할, 소리 역할, 랜드마크 가림/노출을 분리해야 최종 아트 교체 때 구조를 재작성하지 않는다.
+- 폐기 기준: 두 날개가 같은 선을 택함, 활공 윗길이 대가 없는 안전선이 됨, 플레이어가 먼 목표보다 작은 틈 암기에 집중함, 속도 II에서 보기 전에 충돌함.
+
+Failures and how to do differently:
+- `git status --short`는 `fatal: not a git repository`를 반환했다. 저장소 여부를 전제하지 말고 대상 파일 존재와 내용 검증을 직접 수행한다.
+
+References:
+- 브리프: `docs/29-aerial-world-structure-exploration-brief.md`
+- 결과 파일: `/Users/wooojin/App/openaigame/docs/reviews/aerial-world-sol-medium.md`
+- 검증 결과: 148줄; 필수 `##` 섹션, 실제 충돌 외곽, 코드 없이 검증할 가설이 확인됨.
+
+## Thread `01a02546-d269-77a2-b0f7-2e3d866d61cc`
+updated_at: 2026-08-21T17:50:14+00:00
+cwd: /Users/wooojin/App/openaigame
+rollout_path: /Users/wooojin/.codex/sessions/2026/08/22/rollout-2026-08-22T02-03-13-01a02546-d269-77a2-b0f7-2e3d866d61cc.jsonl
+rollout_summary_file: 2026-08-21T17-03-13-D4yU-aerial_world_lab_implementation_verification.md
+
+description: 승인된 세 월드 비교용 플레이 빌드를 제한된 경로에서 보강하고 브라우저 QA까지 수행했으나 일부 공정성·첫인상 검증은 사용자 몫으로 남은 작업
+ task: complete-and-verify-aerial-world-playable-comparison-build
+ task_group: openaigame-aerial-world-lab
+ task_outcome: partial
+ cwd: /Users/wooojin/App/openaigame
+ keywords: aerial-world-lab, WORLD_PRESETS, speed-feedback-v1, telemetry, world_first_impression, presetId, sceneId, node-check, agent-browser, V, R, J, F1
+
+### Task 1: 세 월드 비교 빌드 완성 및 검증
+
+task: 승인된 docs/31 구현 브리프에 맞춰 `experiments/aerial-world-lab/**`만 수정하고 실제 브라우저에서 비교 흐름을 검증
+ task_group: openaigame-aerial-world-lab
+ task_outcome: partial
+
+Preference signals:
+- 사용자는 “단독 쓰기 범위는 experiments/aerial-world-lab/** 뿐”이라고 명시했다 -> 유사 작업에서 기준본, docs, START_HERE, 훅/로그를 수정하지 말고 변경 파일을 엄격히 제한해야 한다.
+- 사용자는 기존 구현을 믿지 말고 “실제 코드·실행 결과만 기준”으로 직접 점검하라고 했다 -> 자기보고나 이전 세션 로그보다 현재 파일과 실행 증거를 우선한다.
+- 사용자는 계획만 보고 멈추지 말고 “실제 브라우저 조작 증거”와 미확인 항목을 구분하라고 했다 -> 렌더·키 입력·콘솔·가독성 검증을 완료 보고에 포함한다.
+
+Reusable knowledge:
+- `WORLD_PRESETS`가 월드 배치·구역·형태·레이어·충돌·자산 키를 소유한다. 렌더와 `collisionShapes()`는 동일한 `forms` 배열을 순회한다.
+- 충돌 이동은 B의 `rocking-horse` 하나이며 `flightTime`에서 파생된다. 검증 시 `flightTime=2.125`에서 렌더 변환과 collision shape의 x/y가 동일했다.
+- 기준본과 lab의 `P` 파라미터 67개가 텍스트·값 모두 동일했고, `WORLD={floor:4200, ceil:-1400, left:20, right:48000}`, `R=13`, 시작점 `(190,886)`도 확인했다. 증거는 `experiments/aerial-world-lab/verify/params-identity.json`.
+- 프리셋 전환은 `state.mode === 'bench'`에서만 허용된다. 전환 시 날개·추진기는 보존하고 bestX, attempts, flightLog, 궤적, 파티클, 카메라, barrier 상태, flightTime 등을 초기화한다.
+- 텔레메트리 저장 키는 `aerial-world-lab-flight-telemetry-v1`이며 기본 테스트는 `world_first_impression`; configuration/environment와 샘플에 `presetId`, `sceneId`가 포함된다.
+- 서버는 `python3 -m http.server 8654`로 `experiments/aerial-world-lab`을 서빙했고 브라우저 URL은 `http://127.0.0.1:8654/`였다.
+
+Failures and how to do differently:
+- `apply_patch`가 환경에서 형식 오류로 실패해 Python 치환 스크립트로 전환했다. 이 환경에서는 패치 도구 실패 시 작은 검증 가능한 Python 치환을 사용한다.
+- 최초 J 검사 위치가 구역 시작점이라 대표 형태를 비껴갔다. 각 zone에 `inspectX`를 추가하고 `jumpToZone()`이 이를 사용하도록 고쳤다.
+- `node --check`는 모두 PASS했고 브라우저 페이지도 로드됐지만, 기준본과 lab의 동일한 짧은 입력에 대한 위치·속도 텔레메트리 재현은 실행하지 않았다. 파라미터 동일성만 확인했으므로 이 항목은 미검증으로 유지한다.
+- A→B→C 및 C→B→A를 속도날개 I/활공날개 I로 모두 날리는 첫인상 판정과 속도 II 충돌 전 노출 시간은 수행하지 않았고 사용자 직접 플레이 몫으로 남겼다.
+- 작업 중 docs/31과 START_HERE가 다른 세션에서 갱신되어 초기 승인 해시 `2a8a82fc1454213f54bd88a881a6974dc1e1a133f2dd81ef61488c02624cb0cf`와 최종 확인 해시 `7ec1034df70a41143e6afe59994bca3895da3b63a486d483f53a781ea3991996`가 달라졌다. 해당 문서들은 수정하지 않았으며 향후 보고 시 해시 변화를 명시해야 한다.
+
+References:
+- `experiments/aerial-world-lab/game.js`
+- `experiments/aerial-world-lab/world-presets.js`
+- `experiments/aerial-world-lab/telemetry.js`
+- `experiments/aerial-world-lab/index.html`
+- `experiments/aerial-world-lab/README.md`
+- `experiments/aerial-world-lab/verify/params-identity.json`
+- Screenshots: `verify/12-A-bones.png`, `verify/14-A-moon.png`, `verify/15-B-horse.png`, `verify/16-C-sail.png`, `verify/13-A-bones-F1.png`, `verify/17-C-sail-F1.png`, `verify/18-B-horse-F1.png`
+- Commands: `node --check experiments/aerial-world-lab/game.js && node --check experiments/aerial-world-lab/world-presets.js && node --check experiments/aerial-world-lab/telemetry.js`; `shasum -a 256 docs/31-aerial-world-playable-comparison-implementation-brief.md`
+- Browser evidence: title `장난감 세계 로켓 — 세 월드 비교용`; no output from `agent-browser errors` or `console`; actual key checks for `3`, `V`, `R`, `J`, `F1`; browser URL `http://127.0.0.1:8654/`
+
+## Thread `01a089f9-1c16-7771-b0ff-44d3883daafd`
+updated_at: 2026-09-10T07:19:04+00:00
+cwd: /Users/wooojin/dev/maple
+rollout_path: /Users/wooojin/.codex/sessions/2026/09/10/rollout-2026-09-10T15-19-59-01a089f9-1c16-7771-b0ff-44d3883daafd.jsonl
+rollout_summary_file: 2026-09-10T06-19-59-GK85-maplestory_challenger_rewards_bellona_difficulty.md
+
+---
+description: MapleStory 챌린저스 시즌4 보상 반입 조사와 레공레 이지 벨로나 난이도 판단. 보스 배율만으로 체감 난이도를 낙관하지 말고 패턴·딜로스·커뮤니티 사례를 함께 반영해야 함.
+task: maple-challengers-rewards-and-bellona-difficulty
+task_group: /Users/wooojin/dev/maple
+task_outcome: partial
+cwd: /Users/wooojin/dev/maple
+keywords: MapleStory, 챌린저스 시즌4, 월드 리프, 코인샵, 200레벨 달성의 비약, 벨로나, 이지 벨로나, 레테, 레공레, Maplescouter, 인세인, 핀볼
+---
+
+### Task 1: 챌린저스 보상·월드 리프 분류
+
+task: 챌린저스 시즌4 이벤트·코인샵 보상의 본섭 직접 수령/리프 반입/리프 불가 분류
+task_group: MapleStory challenger rewards and transfer
+ task_outcome: partial
+
+Preference signals:
+- 사용자가 “모든 보상들”을 “이벤트 별 코인샵별”로 분류해 달라고 요청함 -> 향후에는 직접 수령, 캐릭터 인벤토리로 리프, 리프 불가를 별도 열로 나눈 압축표를 먼저 제시한다.
+
+Reusable knowledge:
+- 챌린저스·챌린저스2·챌린저스3의 리프 가능 월드는 스카니아, 베라, 루나, 제니스, 크로아, 유니온, 엘리시움, 이노시스, 레드, 오로라, 아케인, 노바. 챌린저스4는 에오스·핼리오스.
+- 사전 리프와 종료 리프 합산 최대 5캐릭터이며, 최초 선택한 도착 월드는 변경 불가.
+- 챌린저스 샵의 메멘토 골드/실버 큐브, 카르마 브론즈 에디셔널 큐브, 160제 카르마 스타포스 17성권, 챌린저스 3·4레벨 특수 스킬링 선택권과 해당 링, 메이린 에테르넬 조각은 챌린저스 전용으로 소지한 채 리프할 수 없다.
+- 200레벨 달성의 비약과 250레벨 달성의 비약은 챌린저스 월드에서 사용할 수 없으므로 본섭에서 사용해야 한다.
+
+Failures and how to do differently:
+- 이벤트 본문이 긴 PNG라 전체 OCR과 브라우저 탐색이 비효율적이었다. 다음에는 공식 HTML에서 `lwi.nexon.com` 이미지 URL을 추출하고, PNG를 1,600~2,000px 단위로 crop/OCR한 뒤 이벤트별 보상·교환 속성·기한을 구조화한다.
+
+References:
+- `https://maplestory.nexon.com/News/Update/805`
+- `https://maplestory.nexon.com/news/update/811`
+- `config/events.json`
+
+### Task 2: 이지 벨로나 난이도 판단
+
+task: 레공레의 이지 벨로나 130.8% 클리어 가능성과 실제 체감 난이도 조사
+task_group: MapleStory Bellona boss research
+ task_outcome: success
+
+Preference signals:
+- 사용자가 “근데 꽤 어렵더라고”라고 교정함 -> 보스 배율만 보고 낙관적인 클리어 시간이나 난이도를 단정하지 말고, 패턴 숙련도·직업별 딜로스·실제 커뮤니티 후기를 함께 반영한다.
+
+Reusable knowledge:
+- 2026-09-10 Maplescouter 기준 레공레: Lv.286, 전투력 1억 2,525만, 보스380 헥사환산 49,283, 이지 벨로나 130.8% 솔플 가능.
+- 벨로나는 인세인 모드에서 최종 데미지 증가가 있지만, 피격 시 보스 회복과 데스카운트 손실이 발생하므로 생존 실패가 큰 딜로스로 이어진다.
+- 반복적으로 어려운 구간으로 언급된 것은 2페이즈 50% 이하 핀볼·중앙 아래 돌진·광폭화 양날도끼다.
+- 패턴 중 평딜보다 회피를 우선하고, 숙련 후 평딜을 추가하는 접근이 안전하다.
+- 레공레는 하드 메이린 110.5%를 19분 46초에 실제 클리어한 기록이 있으므로 딜 부족보다는 벨로나 패턴 숙련이 주된 병목으로 해석된다.
+
+Failures and how to do differently:
+- 초기 답변은 130.8% 배율만 보고 16~17분 클리어를 예상했다. 이후에는 “스펙상 가능”과 “첫 도전 체감 난이도”를 분리하고, 패턴 숙련 전에는 실패·장시간 트라이가 정상일 수 있다고 설명한다.
+
+References:
+- `https://maplescouter.com/ko/result?name=%EB%A0%88%EA%B3%B5%EB%A0%88&preset=00000`
+- `https://www.inven.co.kr/board/maple/5974/7072345`
+- `https://m.blog.naver.com/seotbeo/224386196348`
+- `https://arca.live/b/maplestory/180713208`
+- `https://m.inven.co.kr/board/maple/2295/302404?category=%EB%A0%88%ED%85%8C&p=3`
+- `kb/branchpoints/2026-08-31-legongre-challenger-boss-clears.md`
+
+## Thread `01a089fb-c639-75e1-90a3-ed805c65ee7b`
+updated_at: 2026-09-10T08:22:52+00:00
+cwd: /Users/wooojin/App/maplog
+rollout_path: /Users/wooojin/.codex/sessions/2026/09/10/rollout-2026-09-10T15-22-54-01a089fb-c639-75e1-90a3-ed805c65ee7b.jsonl
+rollout_summary_file: 2026-09-10T06-22-54-UpGH-maplog_document_reset_overreach_place_visit_ux.md
+
+---
+description: Maplog 문서 재정비는 승인됐지만 Place·Visit browse UI 구현으로 범위를 넓힌 뒤 사용자가 과잉 실행을 교정함. 앞으로 방향 탐색과 구현 승인을 엄격히 분리하고, 중요한 감상·선택 UX는 여러 방향을 먼저 비교해야 함.
+task: Maplog 문서 재정비 및 Place·Visit browse UX 범위 판단
+task_group: /Users/wooojin/App/maplog
+task_outcome: partial
+cwd: /Users/wooojin/App/maplog
+keywords: Maplog, Place, Visit, document-reset, toyrocket, scope-creep, UX-exploration, simulator, BUILD-SUCCEEDED, Recap
+---
+
+### Task 1: 문서 구조 재정비
+
+task: 최신 제품 정의·현재 상태·과거 기록의 역할을 재분리
+ task_group: Maplog documentation and product framing
+task_outcome: success
+
+Preference signals:
+- 사용자가 “구문서는 아카이브로서 전부 읽을 필요없고 분기점 이후 문서 기준”이라고 요청함 -> 최신 입구와 분기점 이후 자료를 우선하고 과거 문서는 필요한 근거로만 확인한다.
+- 사용자가 “기존 코드 재활용 및 강화할 가능성이 높기때문에 아예 버리는건 아니라고” 말함 -> 제품 방향 변경을 코드 폐기와 동일시하지 말고 실제 의존성을 확인해 선별 재사용한다.
+- 사용자가 “새로운 관점에서 전부 재검토하고 문서도 갈아엎고서 깨끗한 마음으로 시작”을 승인함 -> 기존 단계표를 자동 실행 순서로 취급하지 않고 정의·상태·열린 결정·권고안을 분리한다.
+
+Reusable knowledge:
+- 현재 입구는 `record/CURRENT.md`와 `record/PRODUCT.md`; `record/README.md`가 필요 문서로의 경로를 제공한다.
+- 9/3 Recap A안은 사용자 실기기 판정으로 마음에 든 출발 자산이나, 제품 통합·출시 품질 완료는 아니다.
+- Place-first/day-second, Visit 선택 단위, 사용자 교정 승계·undo, 기존 코드의 선택적 재사용은 보존해야 한다.
+
+Failures and how to do differently:
+- 문서 재정비 이후 구현을 시작할 준비가 된 것으로 추론하지 않는다. 구현은 별도 사용자 승인과 명확한 범위가 필요하다.
+
+References:
+- `record/PRODUCT.md`
+- `record/CURRENT.md`
+- `record/README.md`
+- `AGENTS.md`
+- `record/worklogs/2026-09-10_document_reset.md`
+
+### Task 2: Place·Visit browse 연결 및 UX 검증
+
+task: 기존 사진 기반 Place 지도와 Visit browse/selection 연결
+ task_group: Maplog V2 Place·Visit runtime UX
+task_outcome: partial
+
+Preference signals:
+- 사용자는 처음에 “읽어만 봐. 아직 작업 아니야”라고 했음 -> 읽기/탐색 요청에서 코드·구현으로 넘어가지 않는다.
+- 사용자는 “몇번 만져보면 되는 검증은 ... 낑낑댈 필요없고 ... 과하거나 기존대로라면 잘 유지되는 부분은 검증하지 말아줘”라고 함 -> 사용자가 직접 판단할 수 있는 단순 체험은 장시간 검증하지 말고 새 연결·데이터 손상 위험만 확인한다.
+- 사용자는 “상하스크롤인지 아님 스와이프 앨범 식인지 ... 다양한 방향성이 많잖아”라고 함 -> 날짜·사진 탐색과 선택 UX는 하나를 빨리 구현해 확정하지 말고 대안을 비교·논의한다.
+
+Reusable knowledge:
+- 테스트 보관함 기준 시뮬레이터에서 장소 7곳 표시, 장소 열기, 날짜별 사진, 사진 확대·복귀, Visit 선택·해제·0개·재선택·취소 흐름은 동작했다.
+- 빌드 로그 `/tmp/maplog-place-build.log`에 `BUILD SUCCEEDED`가 남아 있다.
+- 화면 증거는 `/Users/wooojin/Downloads/maplog-qa/2026-09-10-place-visit-browse/`에 있다.
+- 독립 정지화면 검토는 선택·제거는 읽히지만 닫기 의미와 선택 이후 다음 행동이 불명확하다고 판정했다.
+
+Failures and how to do differently:
+- 문서 재정비 승인과 제품 구현 승인을 혼동했고, “가보자”를 구체 UX 구현 승인으로 넓게 해석했다.
+- 임시 날짜 선택 UI를 기준안처럼 놓고 사용자에게 평가를 요청했다. 다음에는 장소를 연 뒤 감상에서 “이날을 이어 보고 싶다”로 넘어가는 경험을 먼저 탐색하고, 스크롤·스와이프 앨범·선택 위치·선택 시점 등 대안을 비교한다.
+- “이어보기 버튼 너무 크다”는 시각 피드백보다 근본적으로 선택 UX를 너무 일찍 고정한 것이 핵심 문제였다. 세부 수정 전에 방향을 다시 논의한다.
+
+References:
+- `code/MaplogV2/App/MapFeatureRootView.swift`
+- `code/MaplogV2/Photos/PhotoLibraryService.swift`
+- `code/MaplogV2/Domain/SceneCatalogSync.swift`
+- `code/MaplogV2/Domain/PlaceVisit.swift`
+- `/Users/wooojin/Downloads/maplog-qa/2026-09-10-place-visit-browse/01-place-map.png`
+- `/Users/wooojin/Downloads/maplog-qa/2026-09-10-place-visit-browse/02-two-visits-selected.png`
+- `/Users/wooojin/Downloads/maplog-qa/2026-09-10-place-visit-browse/03-map-visit-selection.png`
+
+## Thread `01a0958b-f918-7ac2-abff-3059bed017d3`
+updated_at: 2026-09-12T12:26:34+00:00
+cwd: /Users/wooojin
+rollout_path: /Users/wooojin/.codex/sessions/2026/09/12/rollout-2026-09-12T21-16-13-01a0958b-f918-7ac2-abff-3059bed017d3.jsonl
+rollout_summary_file: 2026-09-12T12-16-13-EmC7-codex_rubato_separation_cwd_config_injection.md
+
+---
+description: CODEX_HOME만 바꾸면 충분하다고 잘못 안내했으나, 홈 디렉터리 cwd에서 프로젝트 .codex 설정이 Rubato를 재주입하는 문제를 확인하고 중립 cwd 실행으로 순정 Codex를 검증함
+task: isolate plain Codex from Rubato configuration
+ task_group: local Codex/Rubato CLI configuration
+ task_outcome: partial
+cwd: /Users/wooojin
+keywords: Codex, Rubato, CODEX_HOME, project config, AGENTS.md, config.toml, plugin list, codex doctor, cwd, openai_base_url
+---
+
+### Task 1: 순정 Codex 실행 경로 분리
+
+task: isolate plain Codex from Rubato configuration
+task_group: local CLI configuration
+task_outcome: partial
+
+Preference signals:
+- 사용자가 “일반 codex만 사용해보려면 어떻게 할까?”와 “확인좀해줘”라고 요청함 -> 실행 파일과 유효 설정을 실제로 검사하고, 분리 여부를 새 세션에서 검증하는 방식을 기본으로 해야 함.
+- 사용자가 직접 실행 후 Rubato 지침이 여전히 나온다고 피드백함 -> 설정 분리 안내는 명령 제시만으로 완료하지 말고 실제 `plugin list`/세션 지침/doctor 결과를 확인해야 함.
+
+Reusable knowledge:
+- `/opt/homebrew/bin/codex`는 `codex-cli 0.154.0`이고, `rubato`는 별도 실행 파일이 아니라 zsh 함수로 `~/.local/bin/rubato-personal`을 호출함.
+- 기본 `/Users/wooojin/.codex/config.toml`에는 Rubato `model_instructions_file`, `openai_base_url=http://127.0.0.1:10100/v1`, `rubato-codex@rubato` 플러그인과 marketplace가 있음.
+- `CODEX_HOME="$HOME/App/codex-plain-home"`만 지정하고 cwd를 `/Users/wooojin`으로 유지하면 홈 설정은 분리되어도 cwd의 프로젝트 `.codex` 설정이 발견되어 Rubato가 역주입될 수 있음.
+- 검증된 순정 실행 형태는 다음과 같음:
+  `cd /tmp`
+  `CODEX_HOME="$HOME/App/codex-plain-home" /opt/homebrew/bin/codex`
+- `/tmp`에서 같은 plain home을 사용해 검사했을 때 `No Rubato paths found`, `MCP servers=0`, provider `openai`, Rubato 플러그인 없음이 확인됨.
+- 실제 프로젝트 작업에서는 홈 디렉터리 자체가 아니라 해당 프로젝트 디렉터리에서 plain Codex를 실행해야 함. 필요하면 프로젝트 내부의 `.codex` 설정도 점검해야 함.
+
+Failures and how to do differently:
+- `CODEX_HOME`만 바꾸면 완전 분리된다고 단정한 것은 잘못이었다. 다음에는 반드시 cwd를 `/tmp` 같은 중립 위치로 바꾼 뒤 `codex plugin list`와 `codex doctor --json`으로 유효 설정을 확인한다.
+- 사용자가 실행한 세션의 첫 시스템 지침이 Rubato였으므로, 실행 표면을 추정하지 말고 세션 기록의 `base_instructions`와 프로세스 환경을 확인한다.
+- `~/.zshrc`에 장기 Anthropic 인증 토큰이 평문으로 존재하는 사실이 발견되었으므로 이를 출력하거나 저장하지 말고, 향후 보안 점검에서는 즉시 토큰 폐기·교체를 권고한다.
+
+References:
+- `/Users/wooojin/.codex/config.toml`
+- `/Users/wooojin/.codex/rubato-codex/install-state.json`
+- `/Users/wooojin/App/codex-plain-home/config.toml`
+- `CODEX_HOME="$HOME/App/codex-plain-home" /opt/homebrew/bin/codex plugin list`
+- `CODEX_HOME="$HOME/App/codex-plain-home" /opt/homebrew/bin/codex doctor --json`
+- 공식 AGENTS.md 문서: `https://learn.chatgpt.com/docs/agent-configuration/agents-md`
 

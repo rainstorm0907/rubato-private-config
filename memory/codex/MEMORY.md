@@ -1,3 +1,119 @@
+# Task Group: local Codex/Rubato CLI configuration and plain-Codex isolation
+scope: `/Users/wooojin` macOS zsh 환경에서 Rubato가 결합된 기본 Codex와 순정 Codex를 분리해 실행·진단할 때의 cwd/config 탐색 경계와 검증 절차다. 실제 프로젝트의 `.codex`는 별도 점검 대상이며, 이 메모는 설정을 변경하거나 secret을 출력할 근거가 아니다.
+applies_to: cwd=/Users/wooojin; reuse_rule=이 설치 상태와 `CODEX_HOME=$HOME/App/codex-plain-home`에는 재사용 가능하다. Codex 버전·프로젝트 `.codex`·native hook은 바뀔 수 있으므로 새 세션과 대상 cwd에서 다시 진단한다.
+
+## Task 1: 일반 Codex와 Rubato Codex 분리 실행 경로 조사, partial
+
+### rollout_summary_files
+
+- rollout_summaries/2026-09-12T12-16-13-EmC7-codex_rubato_separation_cwd_config_injection.md (cwd=/Users/wooojin, rollout_path=/Users/wooojin/.codex/sessions/2026/09/12/rollout-2026-09-12T21-16-13-01a0958b-f918-7ac2-abff-3059bed017d3.jsonl, updated_at=2026-09-12T12:26:34+00:00, thread_id=01a0958b-f918-7ac2-abff-3059bed017d3, neutral-cwd plain-Codex verification; project-cwd behavior remains a per-project check)
+
+### keywords
+
+- Codex, Rubato, CODEX_HOME, codex plugin list, codex doctor --json, cwd, project .codex, AGENTS.md, config.toml, openai_base_url, model_instructions_file, No Rubato paths found, MCP servers=0
+
+## User preferences
+
+- when the user asked “일반 codex만 사용해보려면 어떻게 할까?”, “확인좀해줘”, then reported Rubato instructions still appeared -> do not finish configuration-separation guidance with a command alone; inspect the actual executable/effective config and verify a new session's plugin list, instructions, and doctor result. [Task 1]
+
+## Reusable knowledge
+
+- At the 2026-09-12 check, `/opt/homebrew/bin/codex` was `codex-cli 0.154.0`; `rubato` was a zsh function calling `~/.local/bin/rubato-personal`, not a separate binary. The default `~/.codex/config.toml` contained Rubato `model_instructions_file`, local `openai_base_url`, Rubato plugin/marketplace configuration, so the plain home must not be conflated with the default home. [Task 1]
+- The verified neutral-environment invocation was `cd /tmp` then `CODEX_HOME="$HOME/App/codex-plain-home" /opt/homebrew/bin/codex`. In that cwd, `codex plugin list` and `codex doctor --json` showed no Rubato paths or plugin, provider `openai`, and `MCP servers=0`. [Task 1]
+- `CODEX_HOME` changes the user-config/global-`AGENTS.md` base, but Codex can still discover configuration from the current project cwd. For real work, start plain Codex in the target project directory and inspect that project's `.codex`; do not use `/Users/wooojin` itself as the neutral test cwd. [Task 1]
+
+## Failures and how to do differently
+
+- Symptom: a fresh `CODEX_HOME` still shows Rubato instructions or plugins. Cause: starting in `/Users/wooojin` allowed its project-scope `.codex` configuration to be discovered. Fix: move first to `/tmp` (or a controlled target project cwd), then run `codex plugin list` and `codex doctor --json`; confirm the effective provider, MCP count, config paths, and absence of Rubato paths before calling it separated. [Task 1]
+- Do not state that an empty or alternate `CODEX_HOME` is complete isolation without testing cwd/project config discovery and the new session's `base_instructions`. [Task 1]
+- Secret-bearing shell/config output can expose credentials. Never store or repeat values; redact as `[REDACTED_SECRET]` and recommend revocation/rotation when a long-lived token is observed. [Task 1]
+
+# Task Group: Maplog document reset, Place·Visit product direction, and approval boundary
+scope: `/Users/wooojin/App/maplog`에서 최신 제품 정의를 다시 세우고 Place·Visit 감상·선택 경험을 검토할 때, 문서 정비·방향 탐색·기술 연결·제품 UX 구현의 승인 범위를 분리하는 기준이다. 임시 테스트 UI를 제품 기준안으로 굳히지 않는다.
+applies_to: cwd=/Users/wooojin/App/maplog; reuse_rule=Maplog의 새 세션·제품 방향·UX 탐색에 재사용한다. 현재 입구 문서와 실제 코드 의존성은 매번 다시 확인하며, 이 메모는 구체 화면 구현의 승인 자체가 아니다.
+
+## Task 1: 최신 제품 정의와 문서 구조 재정비, success
+
+### rollout_summary_files
+
+- rollout_summaries/2026-09-10T06-22-54-UpGH-maplog_document_reset_overreach_place_visit_ux.md (cwd=/Users/wooojin/App/maplog, rollout_path=/Users/wooojin/.codex/sessions/2026/09/10/rollout-2026-09-10T15-22-54-01a089fb-c639-75e1-90a3-ed805c65ee7b.jsonl, updated_at=2026-09-10T08:22:52+00:00, thread_id=01a089fb-c639-75e1-90a3-ed805c65ee7b, current entrypoints and product framing reset)
+
+### keywords
+
+- Maplog, record/PRODUCT.md, record/CURRENT.md, record/README.md, document-reset, Place-first, Visit, Journey, DisplayCluster, Recap A안, private-first memory map
+
+## Task 2: Place·Visit browse 연결과 UX 범위 과잉 교정, partial
+
+### rollout_summary_files
+
+- rollout_summaries/2026-09-10T06-22-54-UpGH-maplog_document_reset_overreach_place_visit_ux.md (cwd=/Users/wooojin/App/maplog, rollout_path=/Users/wooojin/.codex/sessions/2026/09/10/rollout-2026-09-10T15-22-54-01a089fb-c639-75e1-90a3-ed805c65ee7b.jsonl, updated_at=2026-09-10T08:22:52+00:00, thread_id=01a089fb-c639-75e1-90a3-ed805c65ee7b, runtime connection verified but UX implementation exceeded approval)
+
+### keywords
+
+- Place·Visit, MapFeatureRootView.swift, PhotoLibraryService.swift, SceneCatalogSync.swift, PlaceVisit.swift, simulator, BUILD SUCCEEDED, date browse, scroll, swipe album, 이어보기 버튼, scope-creep
+
+## User preferences
+
+- when the user said “구문서는 아카이브로서 전부 읽을 필요없고 분기점 이후 문서 기준” -> 최신 입구와 분기점 이후 기록을 먼저 읽고, 과거 plans/ops는 필요한 근거로만 확인한다. [Task 1]
+- when the user said “기존 코드 재활용 및 강화할 가능성이 높기때문에 아예 버리는건 아니라고” -> 방향 전환을 코드 폐기로 등치하지 말고 실제 의존성을 확인해 선별 재사용한다. [Task 1]
+- when the user said “읽어만 봐. 아직 작업 아니야”, later corrected “내가 바로 구현해보라고 하지 않았는데” -> 읽기·문서 정비·방향 탐색은 구현 승인이 아니다; 대상·범위·완료 조건을 짧게 확인한 뒤에만 구현한다. [Task 2]
+- when the user said “상하스크롤인지 아님 스와이프 앨범 식인지 ... 다양한 방향성이 많잖아” -> 감상·선택 UX는 임시안 하나를 기준안처럼 구현하지 말고, 핵심 변수와 비교 가능한 대안을 먼저 제시한다. [Task 2]
+- when the user said “몇번 만져보면 되는 검증은 ... 낑낑댈 필요없고 ... 과하거나 기존대로라면 잘 유지되는 부분은 검증하지 말아줘” -> 단순 체험을 장시간 QA로 키우지 말고 새 연결·데이터 보존 위험만 좁게 확인한다. [Task 2]
+
+## Reusable knowledge
+
+- 현재 제품은 기존 사진에서 Place를 발견하고, 그 장소의 capture-local day별 `Visit = Place + capture-local day`를 감상·선택해 Journey로 다시 보는 private-first 기억 지도다. Place가 지도 1순위이고 Journey는 사용자가 고른 Visit 순서이며 DisplayCluster는 정체성·저장 상태를 바꾸지 않는다. [Task 1]
+- 현재 입구는 `record/CURRENT.md`, `record/PRODUCT.md`, `record/README.md`다. `record/v2/*`, plans, branchpoint, ops는 원문·근거로 보존하지만 자동 실행 지시가 아니다. 9/3 Recap A안은 iPhone 14에서 사용자가 마음에 들어 한 출발 자산일 뿐 제품 통합·출시 품질 완료 증거가 아니다. [Task 1]
+- 테스트 보관함에서는 7개 Place와 장소 열기 → 날짜별 사진 → 확대·복귀 → Visit 선택/해제/0개/재선택/취소 흐름이 동작했고 `/tmp/maplog-place-build.log`에 `BUILD SUCCEEDED`가 남았다. 이는 기술 연결 증거이지 실사진 감상 품질·Recap 가치를 검증한 것은 아니다. [Task 2]
+
+## Failures and how to do differently
+
+- 증상: 문서 재정비 뒤 Place·Visit 화면 구현까지 진행한다. 원인: 문서 재정비 승인과 제품 구현 승인을 혼동했다. 수정: 문서 재정비 → 방향 탐색 → 최소 기술 연결 → 제품 UX 구현을 각각 별도 승인으로 둔다. [Task 1][Task 2]
+- 증상: 날짜 선택 UI 하나를 만든 후 그 안을 평가해 달라고 한다. 원인: 탐색해야 할 UX 공간을 임시 구현으로 닫았다. 수정: 장소를 연 뒤 “이날을 이어 보고 싶다”로 넘어가는 경험에서 스크롤·앨범/스와이프·선택 시점/위치를 먼저 비교하거나 질문한다. [Task 2]
+- 증상: 테스트 데이터에서 동작하고 build가 성공했으니 제품 경험도 검증됐다고 여긴다. 원인: 조작성과 감상 품질을 분리하지 못했다. 수정: runtime은 새 연결과 데이터 보존만 확인하고, 실제 사진 경험과 다음 행동의 명료성은 별도 사용자 판단으로 남긴다. [Task 2]
+
+# Task Group: MapleStory 챌린저스 시즌4 보상 반입과 레공레 이지 벨로나 판단
+scope: `/Users/wooojin/dev/maple`에서 챌린저스 보상·월드 리프와 레공레 보스 도전을 조사·조언할 때 쓴다. 시즌 공지와 현재 캐릭터/실전 기록을 함께 보며, 보상 전체표의 미완결 상태와 보스 배율의 한계를 명시한다.
+applies_to: cwd=/Users/wooojin/dev/maple; reuse_rule=챌린저스 시즌4와 `레공레` 관련 후속 질문에 재사용한다. 이벤트 보상·리프 규정·Maplescouter 수치는 시점 의존적이므로 답변 전 최신 공식 공지와 snapshot을 다시 확인한다.
+
+## Task 1: 200레벨 비약과 챌린저스 보상·코인샵 반입 분류, partial
+
+### rollout_summary_files
+
+- rollout_summaries/2026-09-10T06-19-59-GK85-maplestory_challenger_rewards_bellona_difficulty.md (cwd=/Users/wooojin/dev/maple, rollout_path=/Users/wooojin/.codex/sessions/2026/09/10/rollout-2026-09-10T15-19-59-01a089f9-1c16-7771-b0ff-44d3883daafd.jsonl, updated_at=2026-09-10T07:19:04+00:00, thread_id=01a089f9-1c16-7771-b0ff-44d3883daafd, official transfer restrictions confirmed; full event-by-event table incomplete)
+
+### keywords
+
+- MapleStory, 챌린저스 시즌4, 200레벨 달성의 비약, 250레벨 달성의 비약, 월드 리프, 코인샵, 메멘토 골드 큐브, 카르마 브론즈 에디셔널 큐브, 160제 카르마 17성권, 에오스, 핼리오스, lwi.nexon.com
+
+## Task 2: 레공레 이지 벨로나 난이도와 패턴 병목 판단, success
+
+### rollout_summary_files
+
+- rollout_summaries/2026-09-10T06-19-59-GK85-maplestory_challenger_rewards_bellona_difficulty.md (cwd=/Users/wooojin/dev/maple, rollout_path=/Users/wooojin/.codex/sessions/2026/09/10/rollout-2026-09-10T15-19-59-01a089f9-1c16-7771-b0ff-44d3883daafd.jsonl, updated_at=2026-09-10T07:19:04+00:00, thread_id=01a089f9-1c16-7771-b0ff-44d3883daafd, Maplescouter feasibility separated from first-clear difficulty)
+
+### keywords
+
+- 레공레, 이지 벨로나, Maplescouter, 130.8%, 인세인, 핀볼, 중앙 아래 돌진, 광폭화 양날도끼, 데스카운트, 하드 메이린, 19분 46초
+
+## User preferences
+
+- when the user asked for “모든 보상들”, “이벤트별 코인샵별” -> 보상을 직접 수령, 캐릭터 인벤토리로 리프, 리프 불가 열로 나눈 압축표부터 제시한다. [Task 1]
+- when the user said “꽤 어렵더라고” -> 보스 배율만으로 클리어 시간·체감 난이도를 낙관하지 말고 패턴 숙련도, 직업별 딜로스, 실제 커뮤니티 사례를 함께 반영한다. [Task 2]
+
+## Reusable knowledge
+
+- 200레벨/250레벨 달성의 비약은 챌린저스 월드에서 쓸 수 없고 본섭에서 사용한다. 유니온용 캐릭터가 이미 대부분 200 이상이면 신규 육성 일반론보다 200대 저레벨 캐릭터에 분산하는 계정 상태별 최적화를 우선한다. [Task 1]
+- 사전 리프와 종료 리프는 합산 최대 5캐릭터이며 최초 도착 월드는 변경 불가다. 챌린저스1~3의 대상은 스카니아·베라·루나·제니스·크로아·유니온·엘리시움·이노시스·레드·오로라·아케인·노바, 챌린저스4는 에오스·핼리오스다. 메멘토 큐브류, 카르마 브론즈 에디셔널 큐브, 160제 카르마 17성권, 챌린저스 3·4레벨 특수 스킬링/획득 링, 메이린 에테르넬 조각은 리프 전에 사용해야 한다. [Task 1]
+- 2026-09-10 Maplescouter의 레공레는 Lv.286, 전투력 1억 2,525만, 보스380, 헥사환산 49,283, 이지 벨로나 130.8% 솔플 가능이었다. 이는 딜 부족이 아니라 패턴 숙련이 병목일 가능성을 뜻한다. 하드 메이린 110.5%를 19분 46초에 실제 클리어한 기록도 있다. [Task 2]
+- 벨로나는 인세인에서 피격하면 보스 회복과 데스카운트 손실이 생겨 생존 실패가 딜로스로 이어진다. 2페이즈 50% 이하 핀볼, 중앙 아래 돌진, 광폭화 양날도끼에서는 평딜보다 회피를 우선하고, 숙련 뒤 평딜을 더한다. 연습 목표는 해당 구간 진입 때 데스카운트 4개 이상이다. [Task 2]
+
+## Failures and how to do differently
+
+- 증상: 아이템 종류·사용 제한을 확인하기 전에 비약 활용을 추정한다. 원인: 공식 아이템 설명과 시즌 공지를 뒤늦게 봤다. 수정: 사용처·리프 가능성은 공식 설명/시즌 공지부터 고정한다. [Task 1]
+- 증상: 긴 PNG 이벤트 본문을 통째로 OCR해 탐색이 길어진다. 원인: 이미지 구조를 활용하지 않았다. 수정: HTML에서 `lwi.nexon.com` 이미지 URL을 뽑고 1,600~2,000px 단위 crop/OCR 후 이벤트별 보상·교환 속성·기한을 구조화한다. 아직 완결된 전체표는 없음을 명시한다. [Task 1]
+- 증상: 130.8%만 보고 16~17분 클리어를 예상한다. 원인: ratio가 패턴·직업별 딜로스·숙련을 반영하지 않는다. 수정: “스펙상 가능”과 “첫 클리어 체감 난이도”를 분리하고, 첫 트라이 실패·장시간 연습은 정상 범위로 설명한다. [Task 2]
+
 # Task Group: OpenAI Game aerial-world comparison-lab implementation and verification
 scope: `/Users/wooojin/App/openaigame`의 승인된 공중 월드 비교 브리프를 baseline·문서에 손대지 않는 격리 lab으로 구현하고, preset 전환·공유 충돌 데이터·telemetry를 실제 브라우저 상호작용까지 검증할 때 쓴다. 이는 최종 월드 선택이나 사용자 체험 판정이 아니다.
 applies_to: cwd=/Users/wooojin/App/openaigame (rollout executed from cwd=/); reuse_rule=동일한 `experiments/aerial-world-lab/**` 범위와 docs/31 승인 브리프에만 직접 재사용한다. baseline/brief hash, browser state, and final user comparison are time-specific and must be rechecked.
@@ -437,123 +553,6 @@ applies_to: cwd=/Users/wooojin; reuse_rule=다음 Cofathon·KB AI Challenge 등 
 - Symptom: the working repository passes but the submitted artifact cannot substantiate the claims. Cause: final submission archive was not revalidated. Fix: re-extract the exact ZIP into a clean directory and run the complete release checklist before calling it PASS. [Task 1] [ad-hoc note]
 - Symptom: a GitHub search finds only personal repositories and misses the submitted archive. Cause: collaborator/organization repositories were excluded. Fix: query the GitHub API with `affiliation=owner,collaborator,organization_member`, then inspect the named archive and its commit/tree. [Task 2]
 
-# Task Group: Keyboard buying research: 80Retros GB65, switch choice, and long-term modding
-scope: 30만 원대 키보드 구매에서 공식 사양과 실제 커뮤니티 사용 사례를 함께 확인하고, 독거미 대비 가치·통울림·핫스왑 기판·스위치 선택을 짧게 판단할 때 쓴다.
-applies_to: cwd=/Users/wooojin; reuse_rule=GB65의 가격·사양·후기 결론은 2026-07-29 조사 시점의 근거다. 다른 키보드 구매에는 조사 순서와 판단 기준만 재사용하고, 현재 가격·재고·후기는 다시 확인한다.
-
-## Task 1: Judge GB65 against 독거미 for price, build quality, resonance, and switch swapping, success
-
-### rollout_summary_files
-
-- rollout_summaries/2026-07-29T08-42-53-ff0V-gb65_80retros.md (cwd=/Users/wooojin, rollout_path=/Users/wooojin/.codex/sessions/2026/07/29/rollout-2026-07-29T17-42-53-019fad0a-7db3-78d1-b1ad-f53f87d9a79d.jsonl, updated_at=2026-07-29T08:42:53+00:00, thread_id=019fad0a-7db3-78d1-b1ad-f53f87d9a79d, official specifications plus limited community-use evidence)
-
-### keywords
-
-- 80Retros GB65, GAME1989, 독거미, 67키, CNC 풀알루미늄, hot-swap, VIA, 통울림, gasket, 1.6mm 논플렉스컷 PCB, MX 3핀 5핀
-
-## Task 2: Explain HMX V0-T versus XMAS for a non-specialist, success
-
-### rollout_summary_files
-
-- rollout_summaries/2026-07-29T08-42-53-ff0V-gb65_80retros.md (cwd=/Users/wooojin, rollout_path=/Users/wooojin/.codex/sessions/2026/07/29/rollout-2026-07-29T17-42-53-019fad0a-7db3-78d1-b1ad-f53f87d9a79d.jsonl, updated_at=2026-07-29T08:42:53+00:00, thread_id=019fad0a-7db3-78d1-b1ad-f53f87d9a79d, practical switch-selection comparison)
-
-### keywords
-
-- HMX V0-T, HMX XMAS, 저소음 택타일, 리니어, 40gf, 2.0mm, 3.8mm, 5핀, 스템 흔들림, 오타
-
-## User preferences
-
-- when assessing a purchase, the user asked “독거미 이런거보다 확실히 좋은거 맞나?”, “키보드갤러리나 그런거 검색해봐”, then “짧게 얘기해봐” -> check both official specifications and real community use, then lead with a short, decisive conclusion rather than a spec dump. [Task 1]
-- when choosing hardware for continued use, the user asked “통울림같은 문제는 없나?”, “앞으로 스위치 바꿔가며 사용할 기판으로 퀄 좋은 편이야?” -> answer long-term upgradeability and likely defects before price comparisons; state limited evidence briefly instead of claiming certainty. [Task 1]
-- when the user said “둘다 hmx 키알못이야” -> explain switches through linear/tactile feel, noise, weight, and accidental-press risk rather than material jargon. [Task 2]
-
-## Reusable knowledge
-
-- At the 2026-07-29 check, Korean GB65 was a wired 67-key 65% keyboard with CNC full-aluminum case, about 1.8 kg, hot swap, VIA, dampening, one-year warranty, and about ₩298,000. Its 1.6 mm non-flex-cut hot-swap PCB plus aluminum/POM plate options make it a good platform for ordinary MX 3/5-pin switch swaps, but not for Hall-effect or optical-switch expansion. [Task 1]
-- GB65 is not objectively better than 독거미 in every dimension: it charges for a heavy aluminum build, Game Boy-retro design, and custom-build enjoyment, while 독거미 remains stronger on wireless convenience and value. The decisive question is whether the user will value the wired 65% layout/design long-term. [Task 1]
-- No repeating GB65 통울림 defect was found, but the community sample was limited. The heavy case and dampening make severe resonance less likely; actual sound still depends heavily on foam, plate, and switch combination. [Task 1]
-- HMX V0-T is a quiet tactile with an early, clear bump: quieter than typical tactile switches but not silent, with some reported ping/residual noise. HMX XMAS is a light 40 gf linear (2.0 mm actuation, about 3.8 mm travel, 5-pin): smooth and fast but more prone to accidental presses. Choose V0-T for tactile feedback/quieter use and XMAS for a light linear feel. [Task 2]
-
-## Failures and how to do differently
-
-- Symptom: a search for `GB65` returns unrelated products such as DrunkDeer G65. Cause: the model string is ambiguous. Fix: start with `80Retros GAME1989 GB65` and a focused community query such as `site:gall.dcinside.com/mgallery/board`. [Task 1]
-- Symptom: sparse 통울림 posts become “there is no issue.” Cause: absence of many reports was treated as proof. Fix: say the recurring-defect signal was not found, name the limited sample, and explain build-dependent variables. [Task 1]
-
-# Task Group: Morrow deterministic skin-compatibility judgment calibration
-scope: `/Users/wooojin/Downloads/Cofathon-Full-Mock-02`에서 내부 검증용 피부 프로필·성분·리뷰 판정 엔진을 보정하고, 사용자 승인 전 임계값 비교 산출물을 만들 때 쓴다. 실제 소비자 추천 UX나 임계값 최종 확정은 범위 밖이다.
-applies_to: cwd=/Users/wooojin/Downloads/Cofathon-Full-Mock-02; reuse_rule=같은 Morrow data/work checkout의 deterministic judgment와 calibration에 재사용 가능하다. 데이터 분포·사용자 승인·현재 임계값은 실행마다 확인하며, 최종 55/60점 선택을 추정하지 않는다.
-
-## Task 1: Calibrate the review-aware judgment engine and regression-test it, success
-
-### rollout_summary_files
-
-- rollout_summaries/2026-07-28T07-58-18-g2iZ-morrow_skin_judgment_calibration_and_threshold_comparison.md (cwd=/Users/wooojin/Downloads/Cofathon-Full-Mock-02, rollout_path=/Users/wooojin/.codex/sessions/2026/07/28/rollout-2026-07-28T16-58-18-019fa7bb-50b4-72f0-a119-1af5f89893c1.jsonl, updated_at=2026-07-28T09:36:02+00:00, thread_id=019fa7bb-50b4-72f0-a119-1af5f89893c1, deterministic engine correction; 16 tests passed)
-
-### keywords
-
-- Morrow, START_HERE.md, work/judgment.py, test_judgment.py, HELPFUL_CAP, DECISION_THRESHOLD, NEGATIVE_EVIDENCE_THRESHOLD, material_conflict, rating_weight_total, 리뷰 함정, 민감성, 인용문, 262ab43
-
-## Task 2: Generate 55-vs-60 temporary match comparison without changing code, success
-
-### rollout_summary_files
-
-- rollout_summaries/2026-07-28T07-58-18-g2iZ-morrow_skin_judgment_calibration_and_threshold_comparison.md (cwd=/Users/wooojin/Downloads/Cofathon-Full-Mock-02, rollout_path=/Users/wooojin/.codex/sessions/2026/07/28/rollout-2026-07-28T16-58-18-019fa7bb-50b4-72f0-a119-1af5f89893c1.jsonl, updated_at=2026-07-28T09:36:02+00:00, thread_id=019fa7bb-50b4-72f0-a119-1af5f89893c1, comparison artifact only; final threshold pending user scan)
-
-### keywords
-
-- match-comparison-55-vs-60.html, matches-threshold-55.csv, matches-threshold-60.csv, 55점, 60점, MRW-Q007, MRW-P002, MRW-P052, 14건, 9건, final threshold pending
-
-## User preferences
-
-- when implementing a judgment system, the user said “내가 짚지 않았는데 너가 임의로 추가하지마”, “오버엔지니어링 금지” -> start from the personal memo and observed data; keep rules minimal and ask before making a value judgment such as a final threshold. [Task 1]
-- when defining the surface, the user said “실제 유저가 사용하는 웹 페이지가 아니라 내부에서 사용할 로직을 검증하는 웹사이트” -> prioritize evidence, score breakdown, and comparable `맞음/안맞음/판단보류` results over consumer-recommendation polish. [Task 1]
-- when explaining `안맞음`, the user wanted “상품이 나쁘다”가 아니라 “맞는 성분도 있지만 이 프로필과 어긋나는 점” -> show positive grounds separately from conflict/caution grounds. [Task 1]
-- when threshold choice was still open, the user said “코드는 수정하지 말고 … 임시로 생성해봐” -> preserve code and current results; create a comparison artifact for direct scanning before changing the threshold. [Task 2]
-
-## Reusable knowledge
-
-- Read `START_HERE.md` before implementation; it makes `user_profiles` and `ingredient_tags` primary, reviews auxiliary evidence, and keeps recommendation criteria separate from validation criteria. Leave `.sealed/` and source `data/` untouched. [Task 1]
-- In this data, `reviews.csv.author_id` is not the same ID system as `user_profiles.csv.user_id`. Filter contact/address/external-promotion reviews, but retain ordinary delivery/purchase context. Review traps also include rating/body polarity mismatch, repeated boilerplate, quoted third-party opinions, sparse-review products, an unregistered profile, and sensitivity-concentrated negative experiences. [Task 1]
-- `HELPFUL_CAP = 8` followed the approximate 90th percentile and, together with purchase-verification weighting, prevents one review from dominating. The validated revision uses reviewer skin-type matching, severity and generic-negative terms, quote removal, duplicate attenuation, and stronger negative weight when the reviewer profile matches. [Task 1]
-- Keep `DECISION_THRESHOLD = 50` and `NEGATIVE_EVIDENCE_THRESHOLD = 0.12` as the then-current temporary implementation values, not an approved final 55/60 match threshold. Reserve `판단보류` for unregistered profile or insufficient ingredient/review evidence; score positive/negative conflicts as match or mismatch and show a warning. [Task 1][Task 2]
-- Regression evidence: P033×민감성 became `mismatch 49`, P041×건성 remained `match 72` after quote correction, P009×지성 was `mismatch 42`; across 1,740 combinations hold rate fell from 69% to 4%, with 16 tests, Python compile, CSV generation, and JS syntax checks passing. [Task 1]
-- `work/output/match-comparison-55-vs-60.html` shows common matches and 55-only additions with grounds/warnings. For 21 requests, 55 had 14 matches and 60 had 9 (a subset); inspect the five 55-only cases before any final code, README, or result-CSV update. [Task 2]
-
-## Failures and how to do differently
-
-- Symptom: review evidence rarely changes a verdict (69% holds; zero review-only mismatches). Cause: `base 50`, `coverage × sample_support` double dilution, and a ±10 cap. Fix: model review negatives as an independent calibrated axis rather than merely increasing a small score cap. [Task 1]
-- Symptom: `material_conflict` yields `판단보류` even when evidence exists. Cause: conflict was treated as absence of evidence, against the user’s final criterion. Fix: decide match/mismatch by score and expose the conflict as a warning; use hold only for missing core evidence. [Task 1]
-- Symptom: empty-review product tests fail. Cause: `rating_weight_total` was uninitialized. Fix: on the empty path explicitly set `weighted_rating=None` and weight total `0.0`. [Task 1]
-- Symptom: a threshold comparison is mistaken for final configuration. Cause: the temporary artifacts were generated without user approval of 55 or 60; README also lagged the temporary implementation. Fix: scan the five 55-only rows with the user, obtain the decision, then synchronize code, README, and result CSV; visual browser inspection of the HTML remains a separate optional check. [Task 2]
-
-# Task Group: Short Korean participation-selection replies
-scope: 선정·합격·행사 참석처럼 기쁜 소식에 대한 짧고 바로 보낼 수 있는 한국어 회신을 만들고, 전송 직전 자연스러움만 확인할 때 쓴다.
-applies_to: cwd=/Users/wooojin/App/maplog; reuse_rule=개인 communication workflow에 재사용 가능하며, event date/name/recipient formality는 새 메시지마다 확인한다.
-
-## Task 1: Draft and confirm a short Cofathon selection acceptance reply, success
-
-### rollout_summary_files
-
-- rollout_summaries/2026-07-24T02-13-15-qxJK-cofathon_selection_reply_short_korean_message.md (cwd=/Users/wooojin/App/maplog, rollout_path=/Users/wooojin/.codex/sessions/2026/07/24/rollout-2026-07-24T11-13-15-019f91e5-f75b-7720-974a-b11c1d7101d8.jsonl, updated_at=2026-07-24T02:17:29+00:00, thread_id=019f91e5-f75b-7720-974a-b11c1d7101d8, user approved concise send-ready wording)
-
-### keywords
-
-- Cofathon, 참가자 선정, 회신, 한국어, 짧은 메시지, 참석 의사, “길게 말고 짧게”, “그냥 이렇게 해????”
-
-## User preferences
-
-- when a selection/celebration reply is needed, the user said “길게 말고 짧게 말해여할거같은데” -> offer a short, send-ready message before optional variants or explanations. [Task 1]
-- when the user asks “그냥 이렇게 해????” before sending -> avoid rewriting the approved message; check spacing/naturalness and give warm, immediate reassurance. [Task 1]
-- when the user is excited or nervous in casual Korean -> respond warmly and casually, but make the outbound message politely formal. [Task 1]
-
-## Reusable knowledge
-
-- A participation-selection reply only needs thanks, attendance intent, and a short day-of greeting. Proven example: “안녕하세요. Cofathon 신청자 정우진입니다. 참가자 선정 감사드립니다! 7월 30일 행사에 참석하겠습니다. 당일 뵙겠습니다!” [Task 1]
-
-## Failures and how to do differently
-
-- Symptom: the first reply grows into a signature or extra formality. Cause: the default was more ceremonial than the user's requested short reply. Fix: remove signature/unneeded formality first and keep only the essential sentences. [Task 1]
-
 # Task Group: Maplog structure-first implementation and design-stage boundary
 scope: `/Users/wooojin/App/maplog`에서 기능·권한·데이터 흐름을 연결하는 구현 단계와 별도 감성/시각 디자인 단계를 혼동하지 않고, native interaction과 필수 UX를 먼저 안정시킬 때 쓴다.
 applies_to: cwd=/Users/wooojin/App/maplog; reuse_rule=Maplog의 제품·개발 작업에는 재사용 가능하다. 다만 구체 UI/구현 우선순위는 메인 SSOT와 현재 task boundary를 다시 확인한다.
@@ -953,31 +952,11 @@ applies_to: cwd=/Users/wooojin/App/maplog; reuse_rule=동일한 cover-selection 
 
 - 증상: rear/layer photo까지 user-editable slot으로 노출하거나 full cover order를 보존한다. 원인: superseded된 cover-selection contract를 계속 적용했다. 수정: manual state는 representative 한 장만 보관하고 rear layer는 deterministic automatic selection으로 재생성하며, legacy migration은 첫 cover만 대표로 읽는다. [Task 1] [ad-hoc note]
 
-# Task Group: local Claude / Codex CLI configuration and cmux troubleshooting
-scope: Claude Code 인증 충돌 정리, Codex-to-Claude 전역 지침/skill 동기화, Claude hook과 cmux socket mismatch 진단처럼 로컬 CLI 동작을 바로잡는 작업에 쓴다. 원격 API 일반론보다 이 Mac의 실제 파일/프로세스 상태 확인에 초점을 둔다.
-applies_to: cwd=/Users/wooojin; reuse_rule=같은 사용자 홈의 `.claude`, `.codex`, `.local/state/cmux`를 다루는 로컬 CLI 설정/장애 대응에는 재사용 가능하지만, live env var와 socket path는 시점 의존적이므로 매번 다시 확인해야 한다.
+# Task Group: Claude Code selective skill port and discovery verification
+scope: Codex에서 쓰던 특정 skill을 Claude Code용으로 이식하고 실제 discovery까지 검증하는 로컬 설정 작업이다. 삭제된 인증 정리와 전체 skill 동기화의 과거 근거는 포함하지 않는다.
+applies_to: cwd=/Users/wooojin/App/maplog; reuse_rule=Claude용 selective skill port에만 재사용한다. target tool names, `CLAUDE.md`, skill layout은 설치 시점마다 다시 확인한다.
 
-## Task 1: Remove Claude auth conflict by disabling local API-key injection and approval state, success
-
-### rollout_summary_files
-
-- rollout_summaries/2026-06-10T04-27-05-xbew-claude_auth_fix_and_codex_skill_sync.md (cwd=/Users/wooojin, rollout_path=/Users/wooojin/.codex/sessions/2026/06/10/rollout-2026-06-10T13-27-05-019eafc8-af7f-7533-b407-1d31e1f0baa8.jsonl, updated_at=2026-06-10T04:45:11+00:00, thread_id=019eafc8-af7f-7533-b407-1d31e1f0baa8, auth conflict was fixed by removing local API-key path rather than tolerating it)
-
-### keywords
-
-- Claude Code, ANTHROPIC_API_KEY, anthropic.env, customApiKeyResponses, claude.ai login, Google login, ~/.claude.json, launchctl getenv
-
-## Task 2: Sync Codex global guidance and user skills into Claude-specific locations, success
-
-### rollout_summary_files
-
-- rollout_summaries/2026-06-10T04-27-05-xbew-claude_auth_fix_and_codex_skill_sync.md (cwd=/Users/wooojin, rollout_path=/Users/wooojin/.codex/sessions/2026/06/10/rollout-2026-06-10T13-27-05-019eafc8-af7f-7533-b407-1d31e1f0baa8.jsonl, updated_at=2026-06-10T04:45:11+00:00, thread_id=019eafc8-af7f-7533-b407-1d31e1f0baa8, Codex skills and AGENTS guidance were copied into Claude paths with environment-specific path fixes)
-
-### keywords
-
-- ~/.claude/CLAUDE.md, ~/.codex/AGENTS.md, ~/.claude/skills, ~/.codex/skills, settings.json, skill sync, path rewrite, .DS_Store
-
-## Task 3: Port framing/reframing to Claude Code and verify discovery, success
+## Task 1: Port framing/reframing to Claude Code and verify discovery, success
 
 ### rollout_summary_files
 
@@ -989,26 +968,18 @@ applies_to: cwd=/Users/wooojin; reuse_rule=같은 사용자 홈의 `.claude`, `.
 
 ## User preferences
 
-- when the user said `API_KEY 입력된거 빼주고, 그냥 1번 구글 로그인으로만 작동하게 로컬 로그인 빼줘` -> Claude auth 충돌은 경고 무시 대신 local API-key path와 승인 흔적까지 제거하는 쪽을 기본값으로 둡니다. [Task 1]
-- when the user said `우리 지금 사용중인 코덱스 skill이랑 전역세팅 클로드에 적용시켜줘` -> Codex에서 쓰는 운영 모델을 Claude에도 실제 파일 변경으로 복제하는 쪽을 기대합니다. [Task 2]
-- when the user said “매번 사용이 아니라 특이 사항 설계 간에서 사용하는 것” -> `framing`/`reframing`을 일반 작업의 상시 게이트로 만들지 않고 명시적·선택적 호출 도구로 유지한다. [Task 3]
-- when the user asked to have it “Claude한테 맞는 방식으로 수정해서 설치” -> do not copy Codex skill files verbatim; inspect the target `CLAUDE.md`, tool names, skill conventions, and actual discovery before calling the port complete. [Task 3]
+- when the user said “매번 사용이 아니라 특이 사항 설계 간에서 사용하는 것” -> `framing`/`reframing`을 일반 작업의 상시 게이트로 만들지 않고 명시적·선택적 호출 도구로 유지한다. [Task 1]
+- when the user asked to have it “Claude한테 맞는 방식으로 수정해서 설치” -> do not copy Codex skill files verbatim; inspect the target `CLAUDE.md`, tool names, skill conventions, and actual discovery before calling the port complete. [Task 1]
 
 ## Reusable knowledge
 
-- Claude auth conflict의 실제 주입점은 `/Users/wooojin/.claude/anthropic.env`였고, approval state는 `/Users/wooojin/.claude.json`의 `customApiKeyResponses`였다. 둘 다 정리해야 `Google/claude.ai login only` 상태가 깔끔해진다. [Task 1]
-- 환경 변수 cleanup 뒤에는 `env`뿐 아니라 `launchctl getenv ANTHROPIC_API_KEY`까지 보고, 실행 중인 셸/세션 stale state를 감안해야 한다. [Task 1]
-- Claude 전역 지침 파일은 `/Users/wooojin/.claude/CLAUDE.md`, Codex 전역 지침은 `/Users/wooojin/.codex/AGENTS.md`다. 내용을 복제할 때는 source는 그대로 두고 Claude 사본의 skill path만 `.claude/skills/...`로 바꾼다. [Task 2]
-- Simple Codex user skills were nearly 1:1 syncable to `/Users/wooojin/.claude/skills`, with `.DS_Store` and `.system` metadata differences; agent-environment-dependent skills require an adapted port and validation instead of a blind copy. [Task 2][Task 3]
-- At the 2026-08-04 check, Claude used `Agent`; `meight` routed Codex worker/mate work and `consult` the external high-quality review route. The installed targets were `/Users/wooojin/.claude/skills/framing` and `/Users/wooojin/.claude/skills/reframing`; recheck these environment-dependent names and paths before a later port. [Task 3]
-- For a Claude skill port, verify in this order: file tree, frontmatter, internal relative links, JSON validity (for example `trigger-evals.json`), grep for Codex-only remnants, then a fresh Claude-session `/framing` and `/reframing` discovery smoke test. `framing` is for unusual design forks; `reframing` is manual after user approval when the team is stuck or options converge. [Task 3]
+- At the 2026-08-04 check, Claude used `Agent`; `meight` routed Codex worker/mate work and `consult` the external high-quality review route. The installed targets were `/Users/wooojin/.claude/skills/framing` and `/Users/wooojin/.claude/skills/reframing`; recheck these environment-dependent names and paths before a later port. [Task 1]
+- For a Claude skill port, verify in this order: file tree, frontmatter, internal relative links, JSON validity (for example `trigger-evals.json`), grep for Codex-only remnants, then a fresh Claude-session `/framing` and `/reframing` discovery smoke test. `framing` is for unusual design forks; `reframing` is manual after user approval when the team is stuck or options converge. [Task 1]
 
 ## Failures and how to do differently
 
-- 증상: API key backup을 만들었는데 secret이 그대로 남았다. 원인: backup 정책이 사용자 요청 취지보다 앞섰다. 수정: secret-bearing backup도 scrub/delete 대상으로 포함한다. [Task 1]
-- 증상: broad path rewrite가 Codex 원본 `AGENTS.md`까지 건드릴 뻔했다. 원인: source와 target 경로를 분리하지 않고 치환했다. 수정: copy본만 rewrite하고 원본 diff를 즉시 재검토한다. [Task 2]
-- Symptom: a helper cannot write directly under `~/.claude/skills` and reports a `sensitive file` boundary. Cause: the target path is protected in that execution environment. Fix: create the port first in an allowed staging directory such as `/Users/wooojin/Downloads/claude-framing-skills-staging`, then have the authorized outer process perform the final move. [Task 3]
-- Symptom: a staged port retains `Task(Agent)`, a nonexistent `roo-channel` reference, or root-relative `references/...` links. Cause: Codex-specific wording and paths were copied without checking the target layout. Fix: compare against actual `CLAUDE.md`/existing skills and validate links from each file's directory before installation. [Task 3]
+- Symptom: a helper cannot write directly under `~/.claude/skills` and reports a `sensitive file` boundary. Cause: the target path is protected in that execution environment. Fix: create the port first in an allowed staging directory such as `/Users/wooojin/Downloads/claude-framing-skills-staging`, then have the authorized outer process perform the final move. [Task 1]
+- Symptom: a staged port retains `Task(Agent)`, a nonexistent `roo-channel` reference, or root-relative `references/...` links. Cause: Codex-specific wording and paths were copied without checking the target layout. Fix: compare against actual `CLAUDE.md`/existing skills and validate links from each file's directory before installation. [Task 1]
 
 # Task Group: Maplog live-map QA native-quality escalation
 scope: Maplog live map QA처럼 지도/실시간 UI에서 체감 품질이 부족할 때, 현재 구현 계층 튜닝을 계속할지 native/정석 계층으로 피벗할지 판단하는 작업에 쓴다. 성능 수치 자체보다 marker sync 같은 핵심 품질 기준 충족 여부를 본다.

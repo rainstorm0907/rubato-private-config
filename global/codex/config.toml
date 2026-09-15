@@ -1,20 +1,72 @@
 approval_policy = "never"
-model = "gpt-5.6-luna"
+model = "gpt-5.6-sol"
 personality = "friendly"
 plan_mode_reasoning_effort = "max"
 sandbox_mode = "danger-full-access"
 
 approvals_reviewer = "user"
-model_reasoning_effort = "high"
+model_reasoning_effort = "medium"
 
 notify = ["/Users/wooojin/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient", "turn-ended"]
 model_catalog_json = "/Users/wooojin/.codex/opencodex-catalog.json"
-service_tier = "fast"
+service_tier = "default"
+
+# >>> rubato-codex managed bootstrap >>>
+model_instructions_file = "/Users/wooojin/.codex/rubato-codex/model-instructions.md"
 # Auto-injected by opencodex
 openai_base_url = "http://127.0.0.1:10100/v1"
+# Auto-injected by opencodex
+experimental_realtime_ws_base_url = "http://127.0.0.1:10100/v1"
+
+[agents.taskforce_owner]
+description = "Continuing owner of a bounded outcome through investigation, authorized implementation and local verification."
+config_file = "/Users/wooojin/.codex/agents/taskforce_owner.toml"
+
+[agents.taskforce_verifier]
+description = "Independent verifier of artifacts and acceptance evidence in a fresh context."
+config_file = "/Users/wooojin/.codex/agents/taskforce_verifier.toml"
+
+[agents.taskforce_helper]
+description = "Focused map, check or settled subtask; return evidence without taking over the wider outcome."
+config_file = "/Users/wooojin/.codex/agents/taskforce_helper.toml"
+
+[[skills.config]]
+path = "/Users/wooojin/.codex/skills/aside-browser/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/Users/wooojin/.codex/skills/browser-cli/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/Users/wooojin/.codex/skills/codex-discusser/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/Users/wooojin/.codex/skills/codex-reviewer/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/Users/wooojin/.codex/skills/frontend-ux-router/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/Users/wooojin/.codex/skills/laws/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/Users/wooojin/.codex/skills/vercel-react-best-practices/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/Users/wooojin/.codex/skills/wrapping-sessions/SKILL.md"
+enabled = false
+
+# <<< rubato-codex managed bootstrap <<<
+
 [agents]
-max_depth = 1
 max_threads = 6
+max_depth = 1
 
 [agents.explorer]
 config_file = "agents/explorer.toml"
@@ -63,7 +115,7 @@ source_type = "local"
 source = "/Users/wooojin/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
 
 [memories]
-no_memories_if_mcp_or_web_search = true
+disable_on_external_context = false
 
 [notice]
 fast_default_opt_out = true
@@ -112,6 +164,12 @@ enabled = true
 enabled = true
 
 [plugins."codex-app-tools@openai-bundled"]
+enabled = true
+
+[plugins."unified-computer-use@openai-bundled"]
+enabled = true
+
+[plugins."rubato-codex@rubato"]
 enabled = true
 
 [projects."/Users/wooojin/Documents/Codex/2026-04-27/codex-mac"]
@@ -252,6 +310,9 @@ trust_level = "trusted"
 [projects."/Users/wooojin/Documents/Codex/2026-08-24/new-chat"]
 trust_level = "trusted"
 
+[projects."/Users/wooojin/App/daker-hackaton"]
+trust_level = "trusted"
+
 [tui]
 status_line = [
     "model-with-reasoning",
@@ -263,6 +324,7 @@ status_line = [
 
 [tui.model_availability_nux]
 "gpt-5.5" = 4
+"gpt-5.6-sol" = 2
 
 [hooks.state]
 
@@ -305,10 +367,11 @@ followUpQueueMode = "steer"
 reviewDelivery = "inline"
 preventSleepWhileRunning = true
 keepRemoteControlAwakeWhilePluggedIn = true
-conversationDetailMode = "STEPS_COMMANDS"
+conversationDetailMode = "STEPS_PROSE"
 dock-icon-preference = "codex-system"
 sansFontSize = 15
 notifications-turn-mode = "always"
+enabled-reasoning-efforts = ["low", "medium", "high", "xhigh", "persistent"]
 
 [desktop.open-in-target-preferences]
 global = "xcode"
@@ -319,6 +382,10 @@ global = "xcode"
 [marketplaces.oh-my-codex-local]
 source_type = "local"
 source = "/Users/wooojin/.npm-global/lib/node_modules/oh-my-codex"
+
+[marketplaces.rubato]
+source_type = "local"
+source = "/Users/wooojin/.codex/rubato-codex/marketplace-source"
 
 [mcp_servers.context7]
 command = "npx"
@@ -337,13 +404,13 @@ NODE_REPL_NODE_PATH = "/Applications/ChatGPT.app/Contents/Resources/cua_node/bin
 NODE_REPL_TRUSTED_CODE_PATHS = "/Users/wooojin/.codex:/Applications/ChatGPT.app/Contents/Resources/cua_node/lib/node_modules"
 CODEX_HOME = "/Users/wooojin/.codex"
 BROWSER_USE_AVAILABLE_BACKENDS = "chrome,iab"
-BROWSER_USE_TINYSKY_ENABLED = "0"
-NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = "Control the in-app browser in conjunction with the Browser Plugin."
-NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = "Control the Chrome browser in conjunction with the Chrome Plugin. Prefer this method of controlling Chrome over alternatives (such as Computer Use) unless the user explicitly mentions an alternative."
-NODE_REPL_INSTRUCTIONS_USE_CASE_COMPUTER_USE = "Control desktop apps on macOS through Computer Use."
+BROWSER_USE_TINYSKY_ENABLED = "1"
+NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = ""
+NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = ""
+NODE_REPL_INSTRUCTIONS_USE_CASE_COMPUTER_USE = ""
 BROWSER_USE_CODEX_APP_BUILD_FLAVOR = "prod"
-BROWSER_USE_CODEX_APP_VERSION = "26.820.60940"
-NODE_REPL_TRUSTED_SERVICES = '{"browser":"/Users/wooojin/.codex/plugins/cache/openai-bundled/browser/26.820.60940/scripts/browser-service.mjs","sky":"@oai/sky/service"}'
+BROWSER_USE_CODEX_APP_VERSION = "26.908.40834"
+NODE_REPL_TRUSTED_SERVICES = '{"browser":"/Users/wooojin/.codex/plugins/cache/openai-bundled/browser/26.908.40834/scripts/browser-service.mjs","sky":"@oai/sky/service"}'
 SKY_CUA_SERVICE_PATH = "/Users/wooojin/.codex/computer-use/Codex Computer Use.app"
 CODEX_CLI_PATH = "/Applications/ChatGPT.app/Contents/Resources/codex"
 
@@ -373,4 +440,3 @@ matcher = ".*"
 [[hooks.PostToolUse.hooks]]
 type = "command"
 command = "test -x '/Applications/ElectronicClam.app/Contents/MacOS/eclam-hook' && exec '/Applications/ElectronicClam.app/Contents/MacOS/eclam-hook' codex.post || true"
-# <<< eclam-hook

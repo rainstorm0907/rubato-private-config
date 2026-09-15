@@ -7,8 +7,8 @@ Optionally agreed between owner and verifier before implementation when acceptan
 **Criterion version:** bump when the acceptance criterion changes; labels produced under an old version become stale, not silently trusted.
 
 **Checks:**
-- 
-- 
+-
+-
 
 **Failure conditions:** the concrete states that mean the result is a failure. Distinguish `target-failure` from `measurement-invalid` (the measurement path itself broke: resource contention, exhausted quota, plausible empty output).
 
