@@ -33,3 +33,10 @@ description: Rubato의 browser-cli 단일 정본, Aside abrowse/gbrowse, insane-
 - Reddit 넓은 피드는 `isearch` 출력이 30,827바이트라 exit 5로 막혔고 stdout에는 0바이트만 건넸다. 속도만 보고 프로토콜 우선으로 보내면 컨텍스트 비용이 커진다는 근거가 됐다.
 - 실제 `example.org` 404는 exit 8, stdout 0바이트로 끝났고 `gbrowse`로 확대하지 않았다.
 - 설치기 단위 테스트 5개, skill-picker 단위 테스트 1개, 릴리스·패키지 테스트 13개가 통과했다.
+
+## gbrowse 병렬 실행 (2026-09-10, 채용 공고 수집)
+
+- 우진 허용: "여러개 굴려도 되는데 그록" — `gbrowse` 여러 개를 한 Aside 브라우저에서 동시에 돌려도 된다. browser-cli 스킬의 "동시 실행 금지"보다 이 허용이 앞선다. 상태: 사용자 확정·실증됨(레인 3개 × 임무 9개, 탭 섞임 없이 각 9~24회 브라우저 호출).
+- 단, `gbrowse`는 실행 스트림을 `$GBROWSE_LAST`(기본 `$TMPDIR/gbrowse-last.ndjson`) 한 파일에 쓴다. 병렬로 돌리면 서로 덮어써서 "브라우저 호출 0회·max turns"로 죽는다(실측 크래프톤 임무). **병렬 시 임무마다 `GBROWSE_LAST=<고유경로>`를 붙인다.** 스크립트 자체 수정은 아직 안 함(후속).
+- `gbrowse` 감사줄에 "forbidden tool call(s) got through — the block list is stale"이 뜬다. `run_terminal_command`가 deny 목록에 있는데도 통과함. 후속 점검 대상.
+- 수집 스크립트 예: `/Users/wooojin/포트폴리오/채용-2026겨울인턴/run.sh` (레인 인자로 임무 번호).
