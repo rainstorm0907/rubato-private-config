@@ -77,7 +77,8 @@ rubato update --yes
 `shell/rubato.zsh`를 연결한다. Claude Code에 필요한 setup-token은 셸에 그대로
 두되 Rubato를 실행하는 자식 프로세스에서만 제거한다. 공식 업데이터가 작업 중
 파일과 cmux 등록을 맡고, 개인 래퍼는 오버레이 재적용과 새 `bun.lock` drift 정리만
-덧댄다. 공개 인증 수정이 합쳐지면 실행 래퍼를 제거할 수 있다.
+덧댄다. 공식 설치에서 빠질 수 있는 `harness/pi-server` 의존성도 불완전할 때만
+복구한다. 공개 인증·서버 설치 수정이 합쳐지면 실행 래퍼를 제거할 수 있다.
 
 ## 새 Mac에 복원
 
