@@ -20,6 +20,15 @@ bun_was_clean=false
 "$updater" "$@"
 after="$(git -C "$repo" rev-parse HEAD)"
 
+# The public installer currently installs harness/rubato-pi but can leave the
+# live profile server without its own dependencies. Repair only an incomplete
+# tree so ordinary up-to-date launches do not hit the network.
+server_root="$repo/harness/pi-server"
+if [[ -f "$server_root/package.json" ]] \
+  && ! npm ls --prefix "$server_root" --depth=0 >/dev/null 2>&1; then
+  npm install --prefix "$server_root"
+fi
+
 "$root/scripts/apply-rubato-overlays.sh" --apply
 
 if [[ "$before" != "$after" ]]; then
