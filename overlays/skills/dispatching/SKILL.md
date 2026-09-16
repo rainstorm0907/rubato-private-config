@@ -32,11 +32,16 @@ checks and a budget; it returns evidence and does not implement or become a cont
 owner. The receiver checks the draft's exact reference without requiring active status.
 Do not relabel execution owners as subagents to bypass combined intent/roster confirmation.
 
-When execution is approved, pass the accepted intent reference and boundaries. Owners
-settle local factual/implementation gaps; they return only consequential unresolved choices
-with evidence, options and a recommendation. The lead consolidates any human decision in
-plain language rather than forwarding each worker's questions. Related follow-ups reuse
-approval and context; material intent/roster/cost changes require a delta confirmation.
+When execution is approved, pass the accepted intent reference and boundaries. Routine
+implementation choices and already-delegated tradeoffs stay with the owner. In the brief,
+make any unresolved tradeoff that could materially sacrifice an established user benefit
+or alter agreed priorities explicit: the owner may investigate or try it within scope,
+but brings the changed benefit, evidence and recommendation to the lead before committing
+the approach broadly. The lead decides within delegated authority; only a new material
+user choice or boundary change returns to the user. Do not request sign-off for every
+number or implementation step. Related follow-ups reuse approval and context; material
+intent/roster/cost changes use the existing delta process. Carry any relevant prior failure
+and its conditions as a source reference, not a technique ban or a new checklist.
 
 ## What binds, and what is a lead
 
