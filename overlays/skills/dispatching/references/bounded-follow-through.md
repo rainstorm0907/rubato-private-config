@@ -79,10 +79,17 @@ If the runtime lacks the next hop, leave the pending action explicit and add onl
 smallest authorized connection. Do not invent a tool or claim a background loop is running.
 
 A supported failure of the accepted outcome goes to the same responsible builder for
-in-scope correction, with the actual evidence. The builder may revise its own method;
-changing a user-locked behavior, scope or commitment requires the established delta process.
-After correction, inspect the new revision on the failing path and relevant regressions.
-Preserve evidence that remains valid; no full replay of every old check by default.
+in-scope correction, with the actual evidence; recheck the changed path on the new revision.
+Before accepting a material tradeoff, the lead compares the result with the requested
+outcome and the established benefit at stake. Passing a local check does not settle that
+tradeoff. Correct a supported regression within scope; for a legitimate but unresolved
+tradeoff, use a reasoned recommendation and only the evidence needed to choose. Neither
+return every choice to the user nor let "taste" excuse an avoidable, inspectable loss.
+With no separate lead, the current owner makes this judgment without inventing a team.
+If a required observation channel is unavailable, use available evidence for what it can
+settle and request only the remaining human observation; do not make a new tool a
+prerequisite for unrelated progress. Retain valid evidence and recheck affected behavior,
+not every old check. Existing user stops, constraints, permissions and budgets still bind.
 
 A speculative improvement is not a mandatory fix. The lead judges design criticism against
 the outcome and examples, accepting, rebutting or exploring it as appropriate. Feedback must
