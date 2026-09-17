@@ -1,25 +1,11 @@
 ---
-description: Maplog V2를 Grok xhigh로 한 단계씩 구현하고 매 단계 리드 검토와 우진 승인 뒤에만 계속하는 실행 계약.
+description: Maplog V2의 지도 표현·재사용·실기기 판정 근거. 현행 리드 실행 방식은 maplog-execution-lead-contract와 프로젝트 CURRENT·PRODUCT를 따른다.
 ---
-## 확정된 실행 계약
+## 적용 범위
 
-- 상태: **사용자 확정·지속 적용**
-- 날짜: 2026-08-31
-- 우진 원문: “구현 grok xhigh로 진행하면 돼.”
-- 우진 원문: “각 단계를 전부 이어서 하지 말고, 단계 완료시 무조건 작업 끊고 회수 한 뒤, 저 문서 기준 만족했는지 검토 후 나한테 이해하기 쉽게 브리프해줘. 내가 책임자로서 납득하게.”
+현재의 리드·구현·검증 역할과 자율 진행 경계는 [[reference/maplog-execution-lead-contract.md]] 한 곳을 따른다. 승인된 결과 안의 기계적 후속은 자율 진행하며 명시된 단계 잠금·사용자 판정 경계는 보존한다.
 
-## 적용
-
-- Maplog V2 구현 owner는 Grok xhigh를 쓴다.
-- 한 번의 작업 패킷은 한 단계만 소유한다. 구현과 자체 검증을 마치면 다음 단계에 손대지 않고 중단한다.
-- 리드는 결과를 회수해 다음 두 문서와 최신 V2 계약을 기준으로 독립 검토한다.
-  - `/Users/wooojin/App/maplog/.consult/maplog-seed-first-swift-followup-response-2026-08-31.md`
-  - `/Users/wooojin/App/maplog/.consult/내가 받아온 consult.md`
-- 검토 결과는 동작, 근거, 남은 위험, 다음 선택을 우진이 책임자로서 판정할 수 있게 풀어 설명한다.
-- 우진의 다음 단계 승인이 오기 전에는 후속 단계를 시작하지 않는다.
-- 단계가 기준을 못 채우면 같은 owner가 그 단계만 보정한다. 두 번째 보정이 필요하면 구현을 계속 밀지 않고 프레임을 다시 판단한다.
-- build·unit·정지 화면 PASS는 해당 범위의 증거일 뿐 제품 PASS가 아니다. 체감이 핵심인 단계는 우진의 실제 사용을 단계 안의 필수 관문으로 둔다.
-- 목표를 맞추려고 임시 ID, 가짜 위치, fixture-only 성공, 별도 Journey 지도 복제로 끼워 맞추지 않는다.
+아래는 V2에서 얻은 제품·기술 판단의 근거다. 날짜별 승인·Consult 순서·미완료 표현은 당시 범위이며 지금의 실행 대기열이 아니다. 현재 제품 의미와 열린 작업은 `/Users/wooojin/App/maplog/record/PRODUCT.md`와 `/Users/wooojin/App/maplog/record/CURRENT.md`를 먼저 대조한다. 장기 App Store 지향을 당장 출시 준비를 시작할 권한으로 쓰지 않는다.
 
 ## App Store 출시 규모 계약 — 사용자 확정, 2026-09-01
 

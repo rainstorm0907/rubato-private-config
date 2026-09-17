@@ -23,6 +23,12 @@ description: 2026-09-10 Rubato Codex(기존 ChatGPT.app Codex에 얹은 --target
 - 말투는 AGENTS.md만으론 안 먹고 루트 지침 문장이 이김 → 오버레이가 그 줄을 패치.
 - 기억: Codex도 같은 `msearch`(독립 셸 스크립트, Redis 6380)로 Rubato 기억을 회수하고, 지속 가치 있을 때만 `~/.rubato/memory/agents/wooojin/repo`에 직접 쓴다(memory-discipline 읽기 → 편집 → 즉시 커밋, `system/` 제외). Codex 샌드박스가 read-only면 Redis가 막힘; 실제 설정은 danger-full-access라 됨.
 
+## v0.4-r2.1 소폭 보완 (2026-09-16 묶음)
+
+`rubato-v0.4-r2.1-targeted-update.zip`의 `patch.py`로 문단 3개만 교체(전체 덮어쓰기 아님). 대상: `codex-discusser/references/co-thinking.md`(현재 자료에 연결된 전례 회수), `dispatching/SKILL.md`(통상 구현은 담당 재량, 중요한 장점을 희생하는 절충만 리드에게), `dispatching/references/bounded-follow-through.md`(수치 통과가 절충을 대신 판정하지 않음). 세 벌(활성 `~/.agents/skills`, `rubato-private-config/skills`, `overlays/skills`) 총 9파일. Codex 층은 `apply-rubato-codex-overlays.sh --apply`로 co-thinking만 반영 — Codex의 `dispatching/SKILL.md`는 공개 rubato-codex 판이라 r2 문단 자체가 없고 이번 대상이 아니다.
+
+복원: `python3 patch.py rollback --plan ~/Downloads/rubato-r2.1-local-plan --confirm` (계획 폴더 보존 필요).
+
 ## 되돌리기
 
 `/Users/wooojin/App/rollback/co-thinking-v0.3-2026-09-10/README.md` (Rubato층·Codex층·프록시 각각의 사전 사본과 명령).
