@@ -73,10 +73,11 @@ for broad resets, installs or process kills.
 
 ## Turn findings into the next action
 
-Use existing completion notifications, messages and assignment state. The lead or the
-accepted participant owns the next hop; the user does not carry reports between agents.
-If the runtime lacks the next hop, leave the pending action explicit and add only the
-smallest authorized connection. Do not invent a tool or claim a background loop is running.
+Use existing completion notifications, peer messages and assignment state. Owners and
+approved verifiers exchange defects and rechecks directly; the lead handles changes to
+intent, acceptance criteria or authority. Without a team, the current owner carries the
+follow-through. The user does not relay reports. If the runtime lacks the next hop, leave
+it pending and add only the smallest authorized connection; do not invent a running loop.
 
 A supported failure of the accepted outcome goes to the same responsible builder for
 in-scope correction, with the actual evidence; recheck the changed path on the new revision.
