@@ -52,6 +52,26 @@ A fresh capable session of the same model family can be an independent verifier.
 A different family can add diversity but does not establish independence on its own.
 A verifier that helped implement the change cannot certify that change independently.
 
+## Evidence exchange
+
+A review scope is set in the existing brief: which verifier, which claim or method
+choice it can help with, and what observation or reproduction it may do. The
+verifier may start from the sources or a consequential method question before the
+result exists. The owner publishes an approach, artifact or changed result when it
+is ready for that question, by `team_send` to the named verifier with the exact
+path and revision. Team mail is durable and wakes an idle member; the runtime does
+not judge the content. Carry the original request, accepted criterion and relevant
+observations, not the whole conversation.
+
+Publication is not completion: keep the task open while required checks are pending.
+In-scope defects go verifier to owner and the changed result comes back for the
+affected check; criterion, source-authority or user-outcome conflicts also reach the
+lead. A concrete disagreement ends in an evidence check, a bounded comparison, a
+reasoned decision or a user choice, not in continued debate. An advisory creates no
+veto or new target; a required failed check cannot be relabeled advisory. Retain a
+supported observation even when its remedy is not adopted, and stop when the
+assigned question is answered.
+
 ## Milestone fresh review
 
 For a long or consequential run, a fresh context may challenge shared premises,

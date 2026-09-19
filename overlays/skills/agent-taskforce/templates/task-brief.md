@@ -33,7 +33,9 @@ actual permission. Absence of a contract grants no external delivery authority.
 
 **Peers and integration:** direct peer identities, inputs, shared interfaces, handoffs
 and the accountable integration owner when outputs must be combined. The lead is
-not the technical message relay.
+not the technical message relay. When review is assigned, name the verifier and the
+claim or method choice it helps with, including early evidence when useful; the
+owner sends it the result and revision directly.
 
 **Local authority:** methods, local correction and helpers inside approved limits.
 A helper can reason within this scope; the sender keeps the wider outcome.

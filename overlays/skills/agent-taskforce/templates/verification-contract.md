@@ -20,8 +20,12 @@ Optionally agreed between owner and verifier before implementation when acceptan
 
 **Out of scope:** what this gate does not judge.
 
-**Owner proposal:**
+**Owner proposal:** the method under examination, separate from the requirement or
+observation it came from when that distinction matters.
 
-**Verifier challenge / accepted revision:**
+**Verifier evidence / unresolved difference:** source-backed observations, a
+counterexample or reproduction, and what remains open. An early opinion does not
+certify a later artifact.
 
-**Final agreement:** AGREED | NEEDS_DECISION
+**Disposition:** proceed | revise | obtain discriminating evidence | return a user
+decision. Advisories need no agreement; required acceptance gates are unchanged.

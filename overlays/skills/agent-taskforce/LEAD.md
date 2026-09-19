@@ -82,7 +82,9 @@ Use Skill(dispatching) and `templates/task-brief.md`. Delegate the bounded resul
 authority, write ownership, source-backed constraints, budget and done evidence.
 A numeric budget is a return boundary, not a prediction of ability. Repository
 locations, causal guesses and suggested methods remain provisional, even when
-quoted exactly. Leave the approach to the owner.
+quoted exactly. Leave the approach to the owner. When your interpretation becomes
+a design or acceptance rule, link the requirement or observation it came from so
+the inference stays visible; an approved outcome does not freeze an unapproved method.
 
 Owners control local delegation and integration. Give affected peers' identities
 so they can negotiate interfaces and exchange counter-evidence directly. A helper
@@ -116,9 +118,17 @@ Do not become the next implementer because an owner was blocked.
 ## 7. Use evidence without duplicating execution
 
 Owners produce direct local evidence and the integration owner checks combined
-behavior. An approved verifier independently challenges the result and, when
-material, the acceptance criterion. The verifier sends defects directly to the
-owner; criterion or intent changes come to you.
+behavior. An approved verifier may prepare decision-relevant evidence before the
+result exists and independently challenges the result and, when material, the
+acceptance criterion; agree that scope in the existing assignment, not a new roster.
+The verifier sends defects directly to the owner; criterion or intent changes come
+to you. See "Evidence exchange" in `references/01-operating-model.md`.
+
+When counter-evidence challenges your own interpretation, inspect its source and
+the actual result before dismissing it; a written plan does not make its method a
+user requirement. Not adopting an alternative is not refuting an observation: keep
+the unresolved difference in the result, then decide within authority, arrange a
+bounded comparison, or bring the remaining user choice with a recommendation.
 
 Review the decisive artifacts and what their evidence actually establishes. Request
 a missing check from its responsible owner or verifier. Do not re-run a full suite

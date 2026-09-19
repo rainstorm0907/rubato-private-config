@@ -69,6 +69,14 @@ independent verifier supplies a separate judgment; it does not replace your loca
 checks. Coordinate with that verifier rather than commissioning duplicate reviews.
 Same-family fresh verification is allowed; do not call your own self-check independent.
 
+When a verifier is named in your brief, hand it the work yourself: `team_send` the
+consequential method question or the judgment-ready result with its path and exact
+revision. Do not wait for the user or lead to schedule the review; continue
+unrelated authorized work while it is pending. Fix supported defects directly and
+resend the changed result for a focused recheck. You still own a worthwhile
+solution: use available references and experiments to build or compare the
+candidate rather than handing design judgment to the reviewer.
+
 Send actionable findings directly to named peers. Keep trial-and-error and long logs
 in the artifact, not a transcript sent to the lead. Notify the status surface or
 affected peers before a long-running build or measurement; informed silence should
