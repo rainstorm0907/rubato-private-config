@@ -1,10 +1,7 @@
 ---
 name: research-browser-router
-description: >-
-  Route current external-evidence work among ChatGPT web consult quick/deep,
-  Grok High public or logged-in Aside browser work, and local verification.
-  Use when a task needs research, a second opinion, current web sources, or
-  browser interaction. Skip local-only work and direct stable lookups.
+description: "Codex/meight-era research router (consult quick/deep, Grok High, Aside). Native Rubato uses Aside/Outpost from the system prompt instead; load this only when the retired consult runner is explicitly wanted."
+disable-model-invocation: true
 ---
 
 # Research Browser Router

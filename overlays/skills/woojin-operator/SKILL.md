@@ -22,14 +22,14 @@ Treat the active model as capable by default.
 If a specific skill clearly matches, invoke it directly and stop using this skill:
 
 - Counseling or relationship reflection -> `mood`
-- Explicit defect/risk review of code, a diff, or an existing plan -> `codex-reviewer`
+- Explicit standalone review of code, a diff or a plan, with no taskforce role in this session -> `codex-reviewer` (an assigned owner/verifier keeps its own contract)
 - UI, UX, visual feel, or product feel -> `frontend-ux-router`
 - Open inquiry, meaningful choices, strategy, or rethinking after new experience -> `codex-discusser`
 - Product investment, value, experiment scope, or frame approval -> `product-framing`
 - A material mismatch between the current interpretation and the evidence -> `metaframe` as a supporting lens
 - Product-level reframing requiring independent evidence -> `product-reframing`
 - Session wrap or durable documentation -> `wrapping-sessions` or `update-docs`
-- External second opinion or deep research -> `consult` when useful
+- External second opinion or deep research -> the active runtime's research entry (native Rubato: Aside for breadth, Outpost for depth). `consult` is retired; do not reinstall it from an old reference
 - Codex worker launched by meight -> `meight-worker`
 
 Choose one primary workflow owner to prevent competing decision logic. The owner may use supporting skills, tools, research, verification, or reviewers when the evidence justifies them.

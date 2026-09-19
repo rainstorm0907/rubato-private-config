@@ -1,86 +1,21 @@
 ---
 name: wrapping-sessions
-description: "Generate RAG-optimized wrap documents for cycles/. TRIGGERS: -마무리 -문서화 -wrap"
+description: "작업을 마무리하거나 다음 담당에게 이어줄 기록을 만든다. 같은 과제의 기존 대표 문서를 우선 갱신하고, 새로운 회고가 필요한 때만 새 파일을 만든다. 단순 상태 질문이나 매 대화마다 실행하지 않는다."
 ---
 
-<role>
-Document sessions so a fresh AI agent can fully onboard from this document alone.
+# 현재 작업을 이어갈 기록을 남긴다
 
-문체와 형식의 정본은 메모리의 `reference/writing.md`다. wrap을 쓰기 전에 그 파일을
-통째로 읽고 원문 표본을 따라 써라. 이 스킬의 안내가 writing.md의 판단과 부딪히면
-writing.md가 이긴다.
-</role>
+[공통 작성 원칙](references/documentation.md)을 적용해. 이미 같은 판본을 읽었으면 다시 읽지 않아.
+이 스킬은 문서를 쓰는 입구야. checkup이나 update-docs를 추가 단계로 실행하지 않아.
 
-<core_principle>
-**Onboarding-Ready Documentation**
+프로젝트의 현재 문서와 이번 결과를 보고, 기존 파일을 갱신할지 새 회고가 필요한지 판단해.
+다음 담당이 현재 목표·유효한 결정·실제 결과·남은 질문·원문 위치를 찾을 만큼 기록해.
+전체 대화를 복사하거나 모든 과제에 같은 제목과 체크리스트를 강제하지 않아.
 
-A new agent should understand from this document:
-- **Why**: Background, why this work was needed
-- **How**: Analysis/debugging process, how you found the cause
-- **What**: What was changed
-- **Decision**: Why this approach, what alternatives were considered
-- **Impact**: System effects, side effects, caveats
-
-Sections are flexible. Content must be detailed enough for full context transfer.
-
-Preserve distinctions that can change the next choice: actual user words versus interpretation,
-proposal versus adoption, bounded experiment versus implementation or publication approval,
-doing versus observing, and the conditions in which a preference applied. Say what remains
-open rather than forcing a final conclusion. If new experience changed the chosen direction,
-carry the reason and the other agreements that remain in force. Do not certify a past trial
-with criteria invented afterward. A wrap is not a personality profile or permission to widen
-scope. Keep this in the existing handoff; do not create a second decision ledger or run a wrap
-for every ordinary exchange.
-</core_principle>
-
-<instructions>
-1. Run `date +"%Y-%m-%d %H:%M"` to get current time
-2. Create file at `cycles/YYYY-MM/wkN/MM-DD/HHMM-topic-wrap.md`
-3. Write with enough detail for agent onboarding
-4. Return the created path and any open verification gap
-5. Do not stage, commit, or push; the caller owns Git operations
-</instructions>
-
-<week_mapping>
-Days 1-7: wk1 | Days 8-14: wk2 | Days 15-21: wk3 | Days 22-28: wk4 | Days 29-31: wk5
-</week_mapping>
-
-<writing_guide>
-**Context** - Not just "bug fix":
-- What situation triggered this work
-- What symptoms users experienced
-- Why this matters
-
-**Investigation/Analysis** (when applicable):
-- What hypotheses you had
-- How you verified (logs, debugging, tests)
-- How you narrowed down the cause
-
-**What Didn't Work** - Lessons from failures:
-- What you tried
-- Why it failed (specific reason)
-- Takeaway for future
-
-**Decision Rationale** (when applicable):
-- Alternatives considered
-- Pros/cons of each
-- Why you chose this approach
-
-**Work Accomplished** - What + Why + How:
-- Not just "modified file"
-- Why you implemented it this way
-- Key logic/patterns explained
-
-**Architecture Impact** (when applicable):
-- Components affected
-- Caveats, side effects
-- Notes for future related work
-</writing_guide>
-
-<template>
-아래는 참고용 예시다. 절 이름과 순서를 그대로 강제하지 마라. 무엇을 남기고 뺄지는
-writing.md의 독자 기준으로 정하고, frontmatter(date/scope/type)와 Files Changed처럼
-검색·이력에 쓰이는 항목만 유지하면 된다.
+새 회고 위치에 프로젝트 규약이 없으면 기존 `cycles/YYYY-MM/wkN/MM-DD/HHMM-topic-wrap.md`를
+사용해. 날짜와 시각은 실제 환경에서 확인하고, wk1은 1–7일, wk2는 8–14일,
+wk3은 15–21일, wk4는 22–28일, wk5는 나머지 날이야. 검색이 쓰는 frontmatter와
+`Files Changed` 표는 유지해:
 
 ```markdown
 ---
@@ -88,49 +23,9 @@ date: YYYY-MM-DD
 scope: [module1, tech1]
 type: feature | fix | refactor | debug
 ---
-
-## TL;DR
-[1-2 sentences: what + why + result]
-
-## Keywords
-`keyword1` `keyword2` `function_name`
-
-## Context
-[Background, problem situation, why it matters - detailed]
-
-## Investigation (when debugging/analyzing)
-[Hypothesis → Verification → Discovery]
-
-## What Didn't Work (when applicable)
-### ❌ [Failed approach]
-- Tried: [what]
-- Problem: [why failed]
-- Lesson: [takeaway]
-
-## Decision Rationale (when significant decisions made)
-[Alternatives compared, why this choice]
-
-## Work Accomplished
-### 1. [Change group]
-[What, why, how - detailed]
-- File: `path/file.ts:line`
-
-## Architecture Impact (when applicable)
-[Scope of impact, caveats]
-
-## Files Changed
-| File | Change |
-|------|--------|
-| `path/file.ts` | [description] |
-
 ```
-</template>
 
-<checklist>
-After writing:
-- [ ] Can a new agent fully onboard from this document?
-- [ ] Is Why/How/What sufficiently explained?
-- [ ] Are decision rationales recorded (when applicable)?
-- [ ] Are failed attempts and lessons recorded (when applicable)?
-</checklist>
+절 이름(TL;DR, Context, Decision, Files Changed 등)은 참고일 뿐 순서와 개수를 강제하지 않아.
 
+기록을 썼으면 생성·갱신한 경로와 중요한 남은 공백을 짧게 돌려줘.
+이 스킬은 stage·commit·push나 자동 기억 승격을 하지 않아. 해당 권한은 호출한 작업이 맡아.

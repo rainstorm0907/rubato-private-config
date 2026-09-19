@@ -1,81 +1,37 @@
 ---
 name: pr-wrap
-description: Manage pull-request creation and updates from the current git worktree. Use when asked to create a PR, update an existing PR, or update PR documentation. This skill owns staging, committing, pushing, and GitHub PR operations; document-only requests use their dedicated document skills.
+description: "현재 작업의 PR 생성·수정 또는 PR 설명 갱신을 맡는다. 기존 변경·시험 기록을 재사용하며 새 전체 회고를 강제하지 않는다. Git·공개 작업은 사용자가 실제로 요청한 범위에서만 한다."
 ---
 
-# PR Wrap
+# 현재 변경을 올바른 PR에 연결한다
 
-Execute a deterministic PR-doc workflow based on whether the current branch already has an open PR.
+현재 요청이 PR 생성·갱신인지, 설명만 쓰는 것인지 먼저 구별해.
+스킬이 선택됐다는 사실만으로 stage·commit·push·공개 댓글·병합 권한이 생기지는 않아.
+문서만 요청받았다면 문서만 바꾸고 끝내. 병합은 별도 실제 승인과 저장소의 검사 조건을 따라.
 
-## Preconditions
+## 현재 저장소와 PR을 확인한다
 
-- Work from the current repository/worktree.
-- Ensure `gh` is installed and authenticated.
-- Assume `wrapping-sessions` and `update-docs` skills are available.
+사용 가능한 GitHub 연결이나 인증된 `gh` 등 현재 도구로 저장소·브랜치·base·열린 PR을 확인해.
+`gh pr view`가 실패했다고 모두 'PR 없음'으로 처리하지 않아. 인증·네트워크·권한 오류와 구별해.
+실제 정보로 대응 PR을 찾을 수 있으면 직접 찾고, 끝까지 모호한 중요한 대상만 사용자에게 물어.
+새 도구 설치나 로그인 복구를 무관한 선행 과제로 만들지 않아.
 
-## Branch And PR Detection
+## 이미 있는 설명과 근거를 사용한다
 
-1. Detect current branch:
-   - `git rev-parse --abbrev-ref HEAD`
-2. Detect whether a PR exists for that branch:
-   - `gh pr view --json number,url,title,headRefName,baseRefName`
-3. Branch by result:
-   - Success: follow **Existing PR Path**
-   - Error "no pull requests found": follow **No PR Path**
-4. If branch/PR mapping is ambiguous, pause and ask for PR number.
+[공통 작성 원칙](../wrapping-sessions/references/documentation.md)을 필요한 부분에 적용해.
+기존 PR 설명·대표 문서·변경 diff·실제로 실행한 검사와 결과물을 읽어.
+이번 변경의 이유, 사용자에게 달라지는 점, 확인한 것과 남은 공백을 현재 판본에 맞춰 설명해.
+이미 충분한 기록이 있으면 연결하고, PR마다 별도 wrap이나 전체 이력 재생을 만들지 않아.
+프로젝트가 특정 회고나 항목을 실제로 요구하면 그 규약은 유지해.
 
-## No PR Path (Create)
+## 승인된 변경만 제출한다
 
-1. Run the `wrapping-sessions` workflow:
-   - Create a new wrap document under `cycles/YYYY-MM/wkN/MM-DD/HHMM-topic-wrap.md`.
-   - Document full journey from checkpoint replay (early → middle → latest), not only latest session.
-2. Keep the created wrap path for common finalization.
+파일을 확인해 이번 주제에 속한 변경만 stage해. 다른 작업자의 파일·인증값·개인 기억은 포함하지 않아.
+요청한 전달 계약에 맞게 커밋·푸시·PR 생성 또는 갱신을 이어가고, 기존 커밋이 있으면 중복 생성하지 않아.
+커밋 형식과 기여자 표기는 저장소 규칙과 실제 기여를 따르며 고정 모델 서명을 넣지 않아.
+기존 PR을 갱신할 때 불필요한 반복 댓글을 남기지 않아. 공개 변경을 만드는 권한과
+그것을 병합하는 권한을 섞지 않아.
 
-## Existing PR Path (Update)
-
-1. Find wrap doc already included in PR:
-   - `gh pr view --json files --jq '.files[].path' | rg '(^|/)cycles/.+-wrap\\.md$'`
-2. Select the matching wrap file for current task context.
-3. Run the `update-docs` workflow:
-   - Append an update section with current time.
-   - Reconfirm full checkpoint replay and record how this update fits the whole journey.
-4. Keep the updated wrap path for common finalization.
-
-## Common Git Finalization
-
-After either document workflow returns:
-
-1. Stage the topic-scoped code and documentation changes plus the wrap document.
-2. Create one conventional commit containing the whole topic change.
-3. Include the required trailer:
-   - `Co-Authored-By: Codex <noreply@openai.com>`
-4. Push:
-   - No PR path: `git push -u origin HEAD`
-   - Existing PR path: `git push`
-
-## GitHub Finalization
-
-- No PR path:
-  1. Create the PR with `gh pr create --fill`.
-  2. Ensure the PR text references the wrap document path.
-- Existing PR path:
-  1. Optionally add a comment summarizing the update and wrap path.
-- Return the PR URL, commit hash, and wrap file path.
-
-## Fallback Rules
-
-- If no wrap file exists in the existing PR, create one using `wrapping-sessions`, then continue to common finalization.
-- If `gh` is not authenticated, request `gh auth login` and pause.
-- Do not rewrite or remove previous wrap sections; append only.
-- Avoid touching unrelated files.
-- `wrapping-sessions` and `update-docs` only write documents; never delegate Git operations to them.
-
-## Completion Checklist
-
-- Wrap document created or updated correctly.
-- Commit created and pushed.
-- PR created or updated on current branch.
-- Final report includes:
-  - PR URL
-  - Commit hash
-  - Wrap file path
+완료 시 실제 PR과 개정, 중요한 검사 결과·남은 공백을 반환해.
+커밋·푸시가 실패했거나 아직 초안만 썼다면 그 상태를 그대로 말해.
+wrapping-sessions와 update-docs는 Git 작업을 소유하지 않으며, 호출 순서를 위한 필수 단계도 아니야.

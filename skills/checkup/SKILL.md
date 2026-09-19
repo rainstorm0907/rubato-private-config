@@ -1,81 +1,56 @@
 ---
 name: checkup
-description: 정기점검 — doctor로 환경 검사 후, 지난 실행 이후 새 세션 transcript를 digest→luna 추출→승격 판단 3단계로 교훈을 회수한다. 우진님이 /checkup 또는 "정기점검"으로 직접 부를 때만 실행.
+description: "우진이 필요할 때 원문 세션을 싸게 찾아 읽는 수동 도구. /checkup, '정기점검', 또는 특정 세션·기간 분석 요청으로만 실행. 환경 점검·교훈 저장은 그 요청이 있을 때만."
 disable-model-invocation: true
 ---
 
-# Checkup
+# Checkup — 세션을 싸게 읽는다
 
-환경 점검과 세션 교훈 회수를 한 번에 도는 정기점검. 원칙 하나가 전체를 지배한다:
-**원본 transcript를 LLM에게 직접 읽히지 않는다.** 압축은 로컬 스크립트(토큰 0),
-대량 읽기는 luna(코덱스 쿼터), 판단만 Claude가 한다.
+원본 transcript를 통째로 LLM에 읽히지 않는다. 압축은 로컬 스크립트(토큰 0), 대량
+읽기는 저비용 모델, 판단은 이 세션이 한다. 결론을 바꿀 발화·승인·실패 원인은 요약이
+아니라 원문의 해당 구간(앞뒤 포함)으로 돌아가 확인한다. 요약에 없다고 원문에 없던
+사실로 취급하지 않는다.
 
-## 0. 상태 읽기
+## 0. 범위
 
-```bash
-cat ~/dev/claude-ops/state/checkup.json   # {"last_run": "<ISO8601>"}
-```
+우진이 지정한 세션·기간·질문이 범위다. 지정이 없는 정기점검만
+`~/dev/claude-ops/state/checkup.json`의 `last_run` 이후를 대상으로 한다.
+현재 세션·서브에이전트 로그·상담 자료(`~/mood`)는 요청 없이 넣지 않는다.
 
-파일이 없으면 비정상(최초 구축 시 생성됨) — 사용자에게 분석 시작 시점을 확인한다.
+세션 원문 위치:
+- Rubato: `~/.rubato-pi/agent/sessions/*.jsonl` (`*-artifacts/`는 도구 출력)
+- Claude Code: `~/.claude/projects/**/*.jsonl` (`subagents/` 제외)
+- Codex: `~/.codex/sessions/`
 
-## 1. 환경 점검
-
-```bash
-python3 ~/dev/claude-ops/bin/doctor.py
-```
-
-DRIFT 항목은 그대로 보고한다. doctor는 수리하지 않으며, 수리는 사용자 승인 후 별도로.
-한 달 넘게 stocktake를 안 돌렸으면 `python3 ~/dev/claude-ops/bin/stocktake.py`도 같이 돌려 보고.
-
-## 2. 새 세션 수집 + 다이제스트 (토큰 0)
-
-last_run 이후 수정된 대화 transcript만 고른다. 서브에이전트 로그와 현재 세션은 제외.
+## 1. 다이제스트 (토큰 0)
 
 ```bash
-find ~/.claude/projects -name '*.jsonl' -not -path '*/subagents/*' \
-  -newermt "<last_run>" | grep -v "<현재 세션 ID>"
+python3 ~/dev/claude-ops/bin/digest.py <transcript.jsonl> <out.md>            # 사용자 발화 + 답변 꼬리 + 툴 에러
+python3 ~/dev/claude-ops/bin/digest.py --mode workflow <transcript.jsonl> <out.md>  # 지시별 반응·대상 파일까지
 ```
 
-각각을 다이제스트로 압축한다 (출력: `state/digests/checkup/YYYYMMDD/<세션ID 앞8자>.md`):
+출력은 `~/dev/claude-ops/state/digests/checkup/YYYYMMDD/<세션ID 앞8자>.md`. 두 형식(Rubato·Claude Code)
+모두 읽힌다(2026-09-19 확인). 짧고 범위가 분명한 세션은 다이제스트 없이 직접 읽는 게 더 싸면 그렇게 한다.
+지정한 세션은 짧아도 읽고, 발화 수 필터는 지정 없는 정기점검의 대량 선별에만 적용한다.
 
-```bash
-python3 ~/dev/claude-ops/bin/digest.py <transcript.jsonl> <출력.md>
-```
+## 2. 대량 추출 (필요할 때만)
 
-사용자 발화가 2개 미만인 다이제스트는 버린다. 남은 게 0개면 여기서 종료하고 그렇게 보고.
-resume된 세션은 파일이 이어 쓰여 지난 실행 발화가 다시 나올 수 있다 — 중복은 4단계에서 걸러진다.
+다이제스트가 많을 때만 저비용 모델(현재 `meight ... --model luna --effort xhigh`)에
+15~20개씩 묶어 넘긴다. 돌려받을 것은 질문에 필요한 사건·발화·근거 원문·세션 파일명과
+위치다. 매 발화에서 교훈을 짜내거나 후보 수·기각 비율을 채우게 하지 않는다.
 
-## 3. 교훈 후보 추출 — meight luna xhigh
+## 3. 답한다. 기록은 요청 범위에서만
 
-다이제스트를 워커당 15~20개로 묶어 병렬 디스패치한다. 모델 고정: luna xhigh (terra 이상 금지 — 잔바리 작업).
+읽은 목적에 맞춰 답한다. 교훈 회수·기억 갱신까지 요청받았을 때만 승격을 판단한다:
+화자·상황·이후 정정·현재 상위 지침을 확인하고, 원문을 확인 못 한 것은 확정 규칙으로
+올리지 않는다. 기각 기준은 기존과 같다 — 이미 있는 항목(→ 기존 파일 갱신), 헌장이 이미
+커버, 일회성 사건, 레포 문서가 정본인 제품 규칙.
 
-```bash
-meight start checkup-b<N> --role worker --mode delegate --report decision \
-  --sandbox ws --model luna --effort xhigh --cwd ~/dev/claude-ops --brief-file - <<'EOF'
-## Goal
-아래 다이제스트 파일들에서 "Claude가 다음 세션부터 다르게 행동해야 할 교훈 후보"를 추출한다.
-후보 = 사용자의 교정·반복 마찰·선호 표현·좌절 신호. 사실 나열이 아니라 행동 교정 재료만.
+환경 점검(`python3 ~/dev/claude-ops/bin/doctor.py`)은 요청했거나 도구가 고장 났을 때만.
+doctor는 수리하지 않는다.
 
-## Scope
-읽기: <다이제스트 경로 목록>. 쓰기: state/digests/checkup/YYYYMMDD/candidates-b<N>.md 하나만.
+`last_run`은 지정 없는 정기점검을 끝까지 돌렸을 때만 실행 시작 시각으로 갱신한다.
+특정 세션 읽기나 중간에 막힌 실행은 갱신하지 않는다.
 
-## Constraints
-- **각 다이제스트의 사용자 발화 전수를 하나씩 후보 여부 판정할 것.** 짧은 발화("좀 이해되게 말해봐" 류)가 최고 가치 후보다 — 길이로 거르지 말 것.
-- 후보마다: 한 줄 요약 + 근거 발화 원문 인용 + 세션 파일명.
-- 판정 원장(발화 수 / 후보 수 / 기각 사유 분포)을 파일 끝에 첨부.
-
-## Report
-candidates 파일 경로와 후보 수만. 후보 본문을 decision에 중복 붙여넣지 말 것.
-EOF
-```
-
-## 4. 승격 판단 — Claude 본인, 자동화 금지
-
-**candidates 파일만 읽는다.** 원본 transcript·다이제스트 재독 금지.
-
-기각 기준: ① MEMORY.md 기존 항목과 중복(→ 새 파일 대신 기존 파일 갱신) ② 헌장·CLAUDE.md가
-이미 커버 ③ 일회성 사건 ④ 레포 문서가 SSOT인 제품 규칙. 승격은 메모리 규칙(파일 + MEMORY.md
-인덱스 한 줄)대로.
-
-마무리: `checkup.json`의 last_run을 실행 시작 시각으로 갱신하고, 결과를 보고한다 —
-doctor 상태, 분석 세션 수, 후보 수, 신규/갱신/기각 수와 대표 기각 사유.
+홈의 `checkup`은 `~/dev/claude-ops/skills/checkup`으로 가는 심볼릭 링크다. 링크를
+디렉터리로 덮지 말고 정본을 고친다.
