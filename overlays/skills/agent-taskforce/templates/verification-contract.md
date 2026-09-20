@@ -23,9 +23,8 @@ Optionally agreed between owner and verifier before implementation when acceptan
 **Owner proposal:** the method under examination, separate from the requirement or
 observation it came from when that distinction matters.
 
-**Verifier evidence / unresolved difference:** source-backed observations, a
-counterexample or reproduction, and what remains open. An early opinion does not
-certify a later artifact.
+**Verifier evidence / unresolved difference:** observed result, inferred cause and
+proposed remedy, with evidence. Early advice does not certify a later artifact.
 
-**Disposition:** proceed | revise | obtain discriminating evidence | return a user
-decision. Advisories need no agreement; required acceptance gates are unchanged.
+**Disposition:** retain | revise | compare/replace | abandon the method | user decision.
+The owner chooses methods; authority changes go to the lead. Required gates still bind.

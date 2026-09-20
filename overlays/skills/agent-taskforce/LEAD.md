@@ -78,13 +78,11 @@ ceremony and cannot bypass model approval.
 
 ## 5. Give a complete brief once
 
-Use Skill(dispatching) and `templates/task-brief.md`. Delegate the bounded result,
-authority, write ownership, source-backed constraints, budget and done evidence.
-A numeric budget is a return boundary, not a prediction of ability. Repository
-locations, causal guesses and suggested methods remain provisional, even when
-quoted exactly. Leave the approach to the owner. When your interpretation becomes
-a design or acceptance rule, link the requirement or observation it came from so
-the inference stays visible; an approved outcome does not freeze an unapproved method.
+Use Skill(dispatching) and `templates/task-brief.md` to delegate the bounded outcome,
+authority, write ownership, budget and done evidence. Budgets bound work, not ability.
+Separate your subquestion, method and causal guesses from source-backed requirements.
+Approach reviewers may reframe the question inside that outcome; narrow checks cover
+only their named claim. Leave method choice to the owner, within existing authority.
 
 Owners control local delegation and integration. Give affected peers' identities
 so they can negotiate interfaces and exchange counter-evidence directly. A helper
@@ -109,11 +107,12 @@ Notice patterns across streams, and propagate verified refutations to every affe
 owner. Preserve contradictions without deciding a technical cause from authority
 alone. A named owner synthesizes technical evidence or implements a shared fix.
 
-When an owner returns empty or appears stalled, recover the cause in that session.
-Distinguish infrastructure, an oversized surface, brief conflict, measurement failure
-and a refuted approach. Choose continued work, bounded advice, a boundary change or
-explicit reassignment from that evidence, not elapsed time or a fixed retry count.
-Do not become the next implementer because an owner was blocked.
+For an empty return or suspected stall, inspect current task and execution state.
+An enqueued message establishes neither delivery nor resumed work. Distinguish a
+resident waiting member from a disposed or stopped execution; use supported recovery
+inside authority before reporting resumed work. Separate lifecycle failure from a
+refuted approach, brief conflict or invalid measurement, then choose continuation,
+bounded advice or reassignment from that evidence. Preserve user stops and budgets.
 
 ## 7. Use evidence without duplicating execution
 
@@ -124,11 +123,12 @@ acceptance criterion; agree that scope in the existing assignment, not a new ros
 The verifier sends defects directly to the owner; criterion or intent changes come
 to you. See "Evidence exchange" in `references/01-operating-model.md`.
 
-When counter-evidence challenges your own interpretation, inspect its source and
-the actual result before dismissing it; a written plan does not make its method a
-user requirement. Not adopting an alternative is not refuting an observation: keep
-the unresolved difference in the result, then decide within authority, arrange a
-bounded comparison, or bring the remaining user choice with a recommendation.
+Judge counter-evidence against the originating outcome and actual result, including
+answers that correct your subquestion. Preserve a supported observation even when
+rejecting its proposed remedy. The accountable owner chooses how coupled requirements
+can work together; ask for a method decision when one repair undermines another,
+not another list of patches. Decide within authority or bring the remaining user
+choice with evidence and a recommendation. A written plan alone settles neither.
 
 Review the decisive artifacts and what their evidence actually establishes. Request
 a missing check from its responsible owner or verifier. Do not re-run a full suite

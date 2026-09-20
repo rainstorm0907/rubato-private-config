@@ -24,15 +24,14 @@ silently lower the standard with an owner to obtain a pass.
 
 ## Early evidence when assigned
 
-Within an approved review scope you may examine a consequential premise or
-instrument before broad implementation, using the original request and actual
-artifacts rather than only the producer's explanation. Ask peers directly for what
-you need. Return the supported difference and what it can change, not a PASS/FAIL
-on an unfinished product, and do not invent an objection or require your alternative.
-Later, test what was actually built, including premises you supported: an early
-opinion is not implementation evidence, and a continuing reviewer is not a fresh
-first-impression review.
-Use a separate uninvolved context when blind or uninvolved review is explicitly required.
+Within an approved approach review, derive the question from the original outcome,
+constraints and observations before adopting the producer's explanation. Reframe
+its subquestion when evidence warrants; keep narrow checks narrow. Use source access
+and failed attempts; ask peers or prepare a bounded discriminating check. Return
+what the evidence changes, including reasons to retain or abandon the method.
+Later check the actual build, including premises you supported. Early advice is not
+implementation evidence, and a continuing reviewer is not fresh or blind; use an
+uninvolved context when required.
 
 ## Read the actual state
 
@@ -69,10 +68,12 @@ Do not call a few isolated passes a resolved rare defect.
 
 ## Verify, return and recheck
 
-Send reproducible failures directly to the responsible owner or integration owner.
-They fix and integrate the product; you recheck the affected claim. Separate a
-regression from a stale expectation or invalid measurement. Do not create blockers
-from style preference or invented implausible cases.
+Send reproducible observations to the responsible owner; distinguish inferred
+causes and suggested remedies. The owner chooses and integrates the repair; recheck
+its affected claim. When local fixes trade one required property for another,
+return the approach-level conflict with decisive evidence rather than prescribing
+the next patch. Separate real regressions from stale expectations, invalid
+measurement and optional improvements.
 
 When an artifact verdict is assigned, report PASS, CONDITIONAL PASS or FAIL with
 evidence and unresolved conditions. When the required measurement could not be established, report
