@@ -61,7 +61,8 @@ These are behavior scenarios, not claims of live runs. Static contract tests and
 - **headless-owner-can-orchestrate** — 헤드리스 경로(`rubato dispatch` 등)로 띄운 owner 가 자기 서브에이전트를 필요로 함. → 하네스의 spawn 표면이 있다고 읽고 쓴다. "비대화형에는 subagent 가 없다"는 부정형 기록으로 되돌아가지 않는다 (2026-08-21 실측: 헤드리스 세션이 `subagent.create` + `inspect.wait` 로 자식을 만들어 결과를 회수).
 - **pattern-kill-in-shared-space** — owner가 자기 테스트 서버를 `pkill -f`로 정리하려 함. → 패턴 kill을 쓰지 않고 자기가 만든 식별자로만 정리한다.
 - **refutation-recall** — 한 workstream의 전제가 반증됐는데 같은 premise를 물려받은 peer 브리프가 남음. → lead가 verified refutation을 직접 관련 owner·verifier에 전파하고 영향을 받은 claims를 회수한다.
-- **lead-reads-child-body** — 팀이 있는 리드가 `AgentOutput`으로 자식 전사·final을 읽음. → 거절. 완료는 status ping이고 본문은 결과 경로·보드에 있다. 오너는 자기 헬퍼만 peek한다.
+- **lead-reads-child-body** — 팀이 있는 리드가 자식 전사·final을 읽으려 함. → 조회 도구를 모델 표면에서 제거한다. 완료는 status pointer와 결과 파일 경로이고 본문은 그 파일·보드에 있다. 리드와 오너 모두 전사를 재생하지 않고 결과 파일을 읽는다.
+- **member-turn-end-wakes-lead** — 팀원 한 명이 정상 턴을 끝냈는데 리드가 깨어남(2026-09-21 저장 기록에 정상 종료 ping 18건). → 팀원의 정상 종료는 침묵한다. 결과 본문은 파일로 남기고 epoch만 기록한다. 리드는 배정된 보드 작업이 전부 닫히고 팀원이 모두 park된 뒤 결과 경로를 담은 종합 알림으로 한 번 깨운다. 실패·취소·보드 미기록·대기 중 메일은 종합 완료로 오인하지 않는다.
 - **lead-takes-back-work** — 오너가 빈 답이나 막힘으로 돌아왔는데 리드가 제품 패치를 회수함. → 같은 오너에게 결정을 보내거나 피어를 붙이거나 교체한다. 리드가 다음 구현자가 되지 않는다. 팀 문서(mission, brief, 노트)를 쓰는 것은 회수가 아니다.
 
 ## Verification and measurement
@@ -107,7 +108,7 @@ These are behavior scenarios, not claims of live runs. Static contract tests and
 - **no-recursive-verification** — 이미 검증자가 있고 공통 지침에 독립 검토가 언급돼. → 오너나 검증자가 같은 주장을 검사할 검증자를 반복 생성하지 않아.
 - **budget-return-is-not-failure** — 예산에 도달했지만 가설과 결과가 진전돼. → 증거와 남은 일을 반환하고 지속 여부를 판단해. 모델 무능이나 전체 완료로 분류하지 않아.
 - **advice-count-is-not-escalation** — 같은 오너가 유용한 자문을 반복해서 받아. → 횟수만으로 오너를 바꾸지 않아. 자문의 실제 기여와 전달 비용을 봐.
-- **all-five-can-own** — 페이블·아스트라·오푸스·쏠·그록이 승인 범위 안에서 사용 가능해. → 어느 모델도 직함만으로 오너나 검증자 후보에서 제외하지 않아.
+- **all-five-can-own** — model-guide에서 허용한 모델이 승인 범위 안에서 사용 가능해. → 기본 배정은 역할 제한이 아니야. 어느 모델도 직함만으로 오너나 검증자 후보에서 제외하지 않아.
 - **no-lead-rotation-for-utilization** — 다른 모델 자원을 활용해야 해. → 사용자 선택 리드는 유지하고 새로 필요한 실행 배정을 조정해. 가용량을 맞추려고 불필요한 팀원이나 중복 작업을 만들지 않아.
 - **unknown-is-not-hard** — 낯선 기술 때문에 착수 전 정보가 적어. → 난이도 점수나 지능 부족을 지어내지 않고 확인 가능한 정보와 자원으로 배정해.
 - **same-quality-criterion** — 널널한 자원에 작업을 맡겨. → 완료 기준을 낮추지 않아. 수정·보조·검토를 포함해 실제로 끝낸 결과를 판단해.

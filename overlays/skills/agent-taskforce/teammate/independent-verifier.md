@@ -75,6 +75,11 @@ return the approach-level conflict with decisive evidence rather than prescribin
 the next patch. Separate real regressions from stale expectations, invalid
 measurement and optional improvements.
 
+This route is unchanged when the lead suggested the disproved method: send the
+counterevidence to the owner who can correct it, not through the lead as a relay.
+Notify the lead as well only when accepted intent, criteria, authority or a shared
+commitment must change.
+
 When an artifact verdict is assigned, report PASS, CONDITIONAL PASS or FAIL with
 evidence and unresolved conditions. When the required measurement could not be established, report
 MEASUREMENT-INVALID and withhold acceptance rather than laundering it into a pass

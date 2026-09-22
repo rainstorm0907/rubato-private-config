@@ -31,21 +31,11 @@ fi
 
 "$root/scripts/apply-rubato-overlays.sh" --apply
 
-if [[ "$before" != "$after" ]]; then
-  changed="$(
-    git -C "$repo" diff --name-only "$before..$after" -- harness/skills |
-      awk -F/ 'NF >= 3 { print $3 }' |
-      sort -u
-  )"
-  overlap=""
-  while IFS= read -r name; do
-    [[ -n "$name" && -d "$root/overlays/skills/$name" ]] && overlap+="${overlap:+, }$name"
-  done <<< "$changed"
-  if [[ -n "$overlap" ]]; then
-    echo "warning: official updates also changed personal overlay skills: $overlap" >&2
-    echo "the personal versions remain active; review and merge those upstream changes separately" >&2
-  fi
-fi
+# Each overlay skill records the official commit it was last merged against in
+# `.rubato-private-overlay` (`base=<sha>`). Compare that base, not the commit this
+# run started from: a delta that fell behind on an earlier update must keep
+# warning until it is actually re-merged, even when HEAD did not move today.
+"$root/scripts/check-overlay-bases.sh" || true
 
 # `bun install` can refresh workspace resolution rows even when the fetched commit
 # already carries its intended lockfile. Only clean a new unstaged drift; preserve a
