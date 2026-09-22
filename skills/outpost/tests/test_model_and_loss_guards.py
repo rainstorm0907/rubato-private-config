@@ -3,6 +3,7 @@ from __future__ import annotations
 import importlib.util
 import json
 import os
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 import tempfile
 import unittest
@@ -38,7 +39,14 @@ class ModelAndLossGuardTest(unittest.TestCase):
         env.start()
         self.addCleanup(env.stop)
 
-    def _run(self, root: Path, slug: str, *, body: str = "# Topic\n\nquestion") -> tuple[int, Path, Path]:
+    def _run(
+        self,
+        root: Path,
+        slug: str,
+        *,
+        quality: str = "pro",
+        body: str = "# Topic\n\nquestion",
+    ) -> tuple[int, Path, Path]:
         sentinel = root / "aside-ran"
         fake = root / "aside"
         fake.write_text(
@@ -56,7 +64,7 @@ class ModelAndLossGuardTest(unittest.TestCase):
                 with mock.patch.object(MODULE, "recover_outpost_from_backend", return_value=None):
                     code = MODULE.main(
                         [
-                            "--quality", "pro",
+                            "--quality", quality,
                             "--packet", str(packet),
                             "--url", "https://chatgpt.com/g/g-p-test-work/project",
                             "--response-output", str(response_path),
@@ -66,7 +74,62 @@ class ModelAndLossGuardTest(unittest.TestCase):
                     )
         return code, result_path, sentinel
 
-    def test_a_model_other_than_gpt_6_pro_fails_the_run(self) -> None:
+    def test_daemon_uptime_and_its_display(self) -> None:
+        now = datetime.now(timezone.utc)
+        health = {"startedAt": (now - timedelta(seconds=125)).isoformat().replace("+00:00", "Z")}
+        self.assertAlmostEqual(MODULE.daemon_uptime_seconds(health) or 0, 125, delta=5)
+        self.assertEqual(MODULE.format_daemon_uptime(health), "2m")
+        self.assertEqual(MODULE.format_daemon_uptime({"startedAt": "not-a-date"}), "unknown")
+        self.assertEqual(MODULE.format_daemon_uptime(None), "unknown")
+
+    def test_a_settling_daemon_holds_the_send(self) -> None:
+        fresh = {"startedAt": datetime.now(timezone.utc).isoformat(), "ready": True}
+        with mock.patch.object(MODULE, "aside_daemon_health", return_value=fresh):
+            self.assertIn("has not settled", MODULE.wait_for_settled_daemon(0.01) or "")
+        settled = {
+            "startedAt": (datetime.now(timezone.utc) - timedelta(hours=2)).isoformat(),
+            "ready": True,
+        }
+        with mock.patch.object(MODULE, "aside_daemon_health", return_value=settled):
+            self.assertIsNone(MODULE.wait_for_settled_daemon(0.01))
+
+    def test_an_unreadable_health_endpoint_never_blocks(self) -> None:
+        # The endpoint is a bonus: not reading it is not evidence of a daemon
+        # that is about to restart.
+        with mock.patch.object(MODULE, "aside_daemon_health", return_value=None):
+            self.assertIsNone(MODULE.wait_for_settled_daemon(0.01))
+
+    def test_the_daemon_check_holds_a_send_that_would_race_a_restart(self) -> None:
+        with mock.patch.object(MODULE, "aside_repl_ping", return_value=True):
+            with mock.patch.object(
+                MODULE, "wait_for_settled_daemon", return_value="has not settled"
+            ) as settle:
+                self.assertEqual(MODULE.ensure_aside_daemon(), "has not settled")
+        settle.assert_called_once()
+
+    def test_a_failure_message_yields_the_stage_for_the_turn_record(self) -> None:
+        stage, detail = MODULE.failure_reason_from(
+            "exit 75 — 전송 안 됨\n"
+            "단계: select-tier (추론 수준/Pro 버튼)\n"
+            "tier button not visible: expected ...\n"
+        )
+        self.assertEqual(stage, "select-tier")
+        self.assertEqual(detail, "exit 75 — 전송 안 됨")
+
+    def test_a_failure_without_a_stage_line_still_yields_a_detail(self) -> None:
+        stage, detail = MODULE.failure_reason_from("aside daemon is not reachable")
+        self.assertEqual(stage, "")
+        self.assertEqual(detail, "aside daemon is not reachable")
+
+    def test_each_quality_expects_exactly_one_model(self) -> None:
+        self.assertEqual(tuple(MODULE.QUALITIES), ("pro", "xhigh"))
+        self.assertEqual(MODULE.required_model_slug("pro"), "gpt-6-pro")
+        self.assertEqual(MODULE.required_model_slug("xhigh"), "gpt-5-6-thinking")
+        # recover reads the quality off the saved evidence, so an old xhigh run
+        # keeps expecting the tier it was sent to
+        self.assertEqual(MODULE.required_model_slug("xhigh"), MODULE.QUALITY_MODEL_SLUGS["xhigh"])
+
+    def test_a_model_other_than_the_quality_asked_for_fails_the_run(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
             code, result_path, _sentinel = self._run(root, "gpt-5-6-thinking")
@@ -78,6 +141,27 @@ class ModelAndLossGuardTest(unittest.TestCase):
             self.assertEqual(evidence["requiredModel"], "gpt-6-pro")
             # the answer is still saved, so quota is never silently thrown away
             self.assertIn("answer", (root / "response.md").read_text(encoding="utf-8"))
+
+    def test_xhigh_passes_on_gpt_5_6_thinking(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            code, result_path, _sentinel = self._run(
+                root, "gpt-5-6-thinking", quality="xhigh"
+            )
+            self.assertEqual(code, 0)
+            evidence = json.loads(result_path.read_text(encoding="utf-8"))
+            self.assertTrue(evidence["modelOk"])
+            self.assertEqual(evidence["quality"], "xhigh")
+            self.assertEqual(evidence["requiredModel"], "gpt-5-6-thinking")
+
+    def test_xhigh_on_the_pro_model_fails_the_run(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            code, result_path, _sentinel = self._run(root, "gpt-6-pro", quality="xhigh")
+            self.assertEqual(code, MODULE.WRONG_MODEL_EXIT)
+            evidence = json.loads(result_path.read_text(encoding="utf-8"))
+            self.assertFalse(evidence["modelOk"])
+            self.assertEqual(evidence["requiredModel"], "gpt-5-6-thinking")
 
     def test_gpt_6_pro_passes_and_records_the_server_slug(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
@@ -172,12 +256,30 @@ class ModelAndLossGuardTest(unittest.TestCase):
             response_timeout_ms=1000,
         )
         self.assertIn("async function primeRoles(target)", script)
-        self.assertIn("waitRole(workPage, 'button', tierNameRe", script)
+        self.assertIn("waitNamedRef(workPage, 'button', tierNameRe", script)
         self.assertIn("waitRole(workPage, 'menuitem', '성능'", script)
-        self.assertIn("waitRole(workPage, 'menuitemradio', modelNameRe", script)
+        self.assertIn("waitNamedRef(workPage, 'menuitemradio', modelNameRe", script)
         self.assertIn("waitRole(workPage, 'group', attachmentName", script)
         # a bare role lookup before the first snapshot silently matches nothing
         self.assertNotIn("workPage.getByRole('heading'", script.split("await primeRoles")[0])
+
+    def test_no_regexp_name_reaches_get_by_role(self) -> None:
+        # getByRole(role, {name}) silently matches nothing when the name is a
+        # RegExp, and it never sees a name that comes from the element's own
+        # text. Both the Pro pill and the model radios are named by their text,
+        # so a RegExp handed to a role lookup kills the send without a word.
+        script = MODULE.build_repl_script(
+            project_url="https://chatgpt.com/g/g-p-test-work/project",
+            quality="pro",
+            packet_name="packet.md",
+            packet_base64="cGFja2V0",
+            topic="t",
+            outpost_id="abc123",
+            response_timeout_ms=1000,
+        )
+        self.assertNotIn("name: /", script)
+        self.assertNotIn("waitRole(workPage, 'button', tierNameRe", script)
+        self.assertNotIn("waitRole(workPage, 'menuitemradio', modelNameRe", script)
 
     def test_a_project_page_that_will_not_render_is_named(self) -> None:
         script = MODULE.build_repl_script(

@@ -332,16 +332,15 @@ applies_to: cwd=/Users/wooojin/App/openaigame; reuse_rule=OpenAI Game의 다음 
 
 - OpenAI Game, 맵 재설계, 넓어진 거리, 빠른 속도, 배경·전경 사물, 글 없이 안내, 실제 비행선, 상승과 하강, 3단계 바람 구역, 높이와 구조, 음향 비교
 
-## Task 4: Run or continue an isolated aerial A/B analysis, success/partial
+## Task 4: Run an isolated aerial A/B analysis, success
 
 ### rollout_summary_files
 
 - rollout_summaries/2026-08-17T17-25-51-AJQ3-independent_aerial_scene_comparison_grok_4_6.md (cwd=/Users/wooojin/App/openaigame, rollout_path=/Users/wooojin/.codex/sessions/2026/08/18/rollout-2026-08-18T02-25-51-01a010c2-1a1d-7b41-a3f8-3f38339acecf.jsonl, updated_at=2026-08-17T17:35:41+00:00, thread_id=01a010c2-1a1d-7b41-a3f8-3f38339acecf, Grok independent artifact completed)
-- rollout_summaries/2026-08-17T17-25-52-x82e-independent_airborne_scene_comparison_incomplete.md (cwd=/Users/wooojin/App/openaigame, rollout_path=/Users/wooojin/.codex/archived_sessions/rollout-2026-08-18T02-25-52-01a010c2-1fc1-7060-82f6-5f8df8d6bc42.jsonl, updated_at=2026-08-17T17:26:23+00:00, thread_id=01a010c2-1fc1-7060-82f6-5f8df8d6bc42, Opus task stopped after protocol read; do not treat as completed)
 
 ### keywords
 
-- docs/28-scene-comparison-protocol.md, scene-comparison-grok-4.6-high.md, scene-comparison-opus-5-high.md, 공통 입력 패킷, 교차 오염, 단일 산출물, [예상], [검증], A안 거대한 매달린 형태, B안 듬성듬성한 스카이라인, 급강하→속도→상승→활공
+- docs/28-scene-comparison-protocol.md, scene-comparison-grok-4.6-high.md, 공통 입력 패킷, 교차 오염, 단일 산출물, [예상], [검증], A안 거대한 매달린 형태, B안 듬성듬성한 스카이라인, 급강하→속도→상승→활공
 
 ## User preferences
 
@@ -363,7 +362,7 @@ applies_to: cwd=/Users/wooojin/App/openaigame; reuse_rule=OpenAI Game의 다음 
 - The Fable check uses the existing `@maplog_bot` (`어플개발`) slot at `~/.claude/channels/telegram-2`. Do not enable the global Telegram plugin; configure only that session with `TELEGRAM_STATE_DIR=~/.claude/channels/telegram-2` and the Telegram channel plugin so another session does not capture the bot. [Task 1] [ad-hoc note]
 - Verify the bridge by `mirror.last` updating or by successful Telegram delivery, not merely by a live Claude process. Codex desktop chat is not automatically mirrored by the Claude channel hook; send stage decision, task start, and completion updates directly through the same bot. [Task 1] [ad-hoc note]
 - Minimum new-session reading path: `START_HERE.md` → `AGENTS.md` → `DECISIONS.md` → `docs/14` §0·§4 → `docs/28-scene-comparison-protocol.md`. `HANDOFF.md` is `CLOSED` historical handoff, not the entrypoint; `DECISIONS.md` is append-only one-line decisions. [Task 2]
-- `docs/28` is the A/B definition, comparison criteria, and independent-analysis SSOT. The available Grok artifact chose A, while the listed Opus task is incomplete; do not promote a cross-session consensus or descend to structure diagrams, block maps, coordinates, or map implementation from that evidence. [Task 2][Task 4]
+- `docs/28` is the A/B definition, comparison criteria, and independent-analysis SSOT. The available Grok artifact chose A; do not promote that one independent conclusion to consensus or descend to structure diagrams, block maps, coordinates, or map implementation from it. [Task 2][Task 4]
 - Keep `docs/08`, `10`, `11`, `19`, `20`, `21`, `docs/02`, and `docs/frame/raw-brief-rocket-plan.md` as preserved library context rather than deleting/moving them for entrypoint simplification. [Task 2]
 - For later map redesign, use small background/foreground objects to guide the next airship and wind through direction, spacing, and motion rather than text; reduce big rectangular assemblies in favor of curved, overlapping, asymmetric airships. From stage 3 introduce ascent/descent and make later equipment reveal previously unseen heights/structures; redesign the stage-3 wind approach line and force direction. [Task 3] [ad-hoc note]
 - The completed Grok artifact chose A안 because large suspended forms may make speedwing and glider routes qualitatively different. Treat that as one independent conclusion, not final adoption; `docs/23` measurements can be cited, but post-patch climb/camera feel remains `[예상]` until flight-verified. [Task 4]
@@ -376,7 +375,6 @@ applies_to: cwd=/Users/wooojin/App/openaigame; reuse_rule=OpenAI Game의 다음 
 - Symptom: long `cs sub` stdout appears empty and triggers duplicate external-model calls. Cause: result may still be in a live process or response file. Fix: inspect PID and output file before retrying; run one managed call. [Task 2]
 - Symptom: a compact entrypoint deletes the project's early large plan. Cause: current routing was conflated with archival value. Fix: make the entrypoint a pointer layer and retain the library documents. [Task 2]
 - Symptom: an independent review leaks parallel conclusions or becomes a map design. Cause: protocol isolation, single-artifact scope, or qualitative boundary was ignored. Fix: read only the ordered common packet; label unverified physics `[예상]`; keep the fixed A/B template and separate verdict from implementation. [Task 4]
-- Symptom: an initiated analysis is reported as finished. Cause: protocol read was mistaken for completion. Fix: require the ordered inputs, required A/B headings, verdict, reversal conditions, and designated output-file check before marking success. [Task 4]
 
 # Task Group: OpenAI Game Dumbfire reference research and physics-clip hook analysis
 scope: `/Users/wooojin/App/openaigame`에서 Dumbfire처럼 이목을 끈 로켓 게임 사례를 조사하고, 표면 장르 복제 없이 짧은 물리 클립의 조작·성공 훅을 검증할 때 쓴다. Instagram 관찰 수치와 외부 모델 해석은 구분한다.
@@ -408,82 +406,6 @@ applies_to: cwd=/Users/wooojin/App/openaigame; reuse_rule=OpenAI Game의 레퍼�
 
 - Symptom: Instagram automation breaks on login popups, unsupported `page.waitForTimeout`, `:has-text` selector/REPL errors, snapshot truncation, or `adapter_eof`. Fix: use Aside `sleep()` plus a fresh snapshot, collect a small set of representative reels in short independent sessions, and save each result immediately. [Task 1]
 - Symptom: Grok High keeps browsing and ends without a final report. Fix: set a web-search cap and explicit stop condition; when no result returns, close as partial using only acquired evidence and label direct observation, official confirmation, interpretation, and unknown separately. Do not run broad `rg` over `.codex`/sessions; search the project path and explicit file globs. [Task 1]
-
-# Task Group: Career eligibility, student internships, Baekseok contests, and context-transfer format
-scope: `/Users/wooojin`에서 채용 자격을 공식 원문과 학점 자료로 판단하고, 재학생 인턴/백석대 대회를 현황·조건별로 조사하며, 다른 AI용 사용자 컨텍스트를 지정 형식으로 옮길 때 쓴다.
-applies_to: cwd=/Users/wooojin; reuse_rule=채용 공고·대회 일정·토큰 가격은 확인 시점 의존이므로 매번 공식 원문을 다시 검증한다. 지원/제출 행위는 명시 승인 없이는 범위 밖이다.
-
-## Task 1: Verify KakaoBank internship eligibility and leave-of-absence premise, success
-
-### rollout_summary_files
-
-- rollout_summaries/2026-08-18T00-23-26-kfik-career_research_internships_baekseok_contests_context_transf.md (cwd=/Users/wooojin, rollout_path=/Users/wooojin/.codex/sessions/2026/08/18/rollout-2026-08-18T09-23-26-01a01240-6ac7-7db1-8c62-4dcdf522026c.jsonl, updated_at=2026-08-18T01:32:38+00:00, thread_id=01a01240-6ac7-7db1-8c62-4dcdf522026c, official eligibility plus local credit-file check)
-
-### keywords
-
-- 카카오뱅크, AI Native 서비스 기획자, recruit.kakaobank.com/jobs/263159, 기졸업자, 졸업 요건, 수료자, 휴학, 120학점, 84.5학점, 35.5학점
-
-## Task 2: Research currently open student-eligible internship alternatives, partial
-
-### rollout_summary_files
-
-- rollout_summaries/2026-08-18T00-23-26-kfik-career_research_internships_baekseok_contests_context_transf.md (cwd=/Users/wooojin, rollout_path=/Users/wooojin/.codex/sessions/2026/08/18/rollout-2026-08-18T09-23-26-01a01240-6ac7-7db1-8c62-4dcdf522026c.jsonl, updated_at=2026-08-18T01:32:38+00:00, thread_id=01a01240-6ac7-7db1-8c62-4dcdf522026c, time-specific jobs; candidate list partly revalidated)
-
-### keywords
-
-- 재학생 인턴, 현재 열림, 마감, 시즌 추정, 딥오토 AI Engineer, 피치에이아이 AI/ML Engineer, 카카오뱅크 AI 운영 어시스턴트, 6개월 풀타임, Wanted 379363, Wanted 376376
-
-## Task 3: Compare Baekseok Smart IT, Hacking Festival, and JAVA contests, partial
-
-### rollout_summary_files
-
-- rollout_summaries/2026-08-18T00-23-26-kfik-career_research_internships_baekseok_contests_context_transf.md (cwd=/Users/wooojin, rollout_path=/Users/wooojin/.codex/sessions/2026/08/18/rollout-2026-08-18T09-23-26-01a01240-6ac7-7db1-8c62-4dcdf522026c.jsonl, updated_at=2026-08-18T01:32:38+00:00, thread_id=01a01240-6ac7-7db1-8c62-4dcdf522026c, official past notices; 2026-2 timing is inference)
-
-### keywords
-
-- 백석대, Smart IT, Hacking Festival, JAVA 경진대회, 개인 참가, 2인, 5인 이내, 상금, 2026-2, 70%, 20%, 10%
-
-## Task 4: Explain Codex research-token cost with uncertainty, success
-
-### rollout_summary_files
-
-- rollout_summaries/2026-08-18T00-23-26-kfik-career_research_internships_baekseok_contests_context_transf.md (cwd=/Users/wooojin, rollout_path=/Users/wooojin/.codex/sessions/2026/08/18/rollout-2026-08-18T09-23-26-01a01240-6ac7-7db1-8c62-4dcdf522026c.jsonl, updated_at=2026-08-18T01:32:38+00:00, thread_id=01a01240-6ac7-7db1-8c62-4dcdf522026c, official pricing distinction; session total estimated, not measured)
-
-### keywords
-
-- Codex 토큰, GPT-5.4 API, input 1M, cache input, output 1M, 정액제, usage limits, credits, 현재 열린 것만 10개
-
-## Task 5: Transfer user context to another AI in a specified format, success
-
-### rollout_summary_files
-
-- rollout_summaries/2026-08-18T00-23-26-kfik-career_research_internships_baekseok_contests_context_transf.md (cwd=/Users/wooojin, rollout_path=/Users/wooojin/.codex/sessions/2026/08/18/rollout-2026-08-18T09-23-26-01a01240-6ac7-7db1-8c62-4dcdf522026c.jsonl, updated_at=2026-08-18T01:32:38+00:00, thread_id=01a01240-6ac7-7db1-8c62-4dcdf522026c, migration-output preference and privacy boundary)
-
-### keywords
-
-- 컨텍스트 이전, 1인칭, 2인칭, 사용자, 원문 유지, 저장된 메모리, 가져온 위치, 한국어 존댓말, 결과 먼저, 검증 증거
-
-## User preferences
-
-- when researching jobs, the user repeatedly said “지원 버튼은 절대 누르지 마” -> read and verify only; do not apply or submit. [Task 1]
-- when deciding eligibility, the user asked for “원문 근거로만 판정” -> separate official job wording from local credit/academic evidence. [Task 1]
-- after “많이많이 찾아줘,” the user accepted rechecking only actually open postings -> collect broadly, then label `현재 열림 / 마감 / 시즌 추정` before giving candidates. [Task 2]
-- when comparing Baekseok contests, “가능하면 1인이 좋은데 안되면 친구 한명까진 ㄱㅊ” and “현실적으로 내가 그렇게 3개정도 한다면” -> prioritize solo participation, use a two-person fallback, and compare prize, format, likely timing, and effort allocation together. [Task 3]
-- for context transfer, the user asked “1인칭 대명사와 2인칭 대명사는 사용하지 말아 줘,” preserve user wording especially for requests/preferences, use only stored-memory rules, and end with `가져온 위치: <name>`. [Task 5]
-
-## Reusable knowledge
-
-- At the 2026-08-18 check, KakaoBank AI Native service-planner internship allowed only graduates or people who had completed graduation requirements, and prohibited academic commitments during the internship. The local degree file showed 84.5/120 credits earned, 35.5 short, and 33/54 major credits, so leave of absence did not create the required completion status. [Task 1]
-- Time-specific examples: DeepAuto explicitly allowed enrolled/on-leave/graduated applicants; Peach AI allowed vacation-period students/on-leave/future or completed graduates but required no semester classes and 5×40-hour work. KakaoBank assistant roles centered on six-month full-time availability. Recheck each original page before acting. [Task 2]
-- From official past notices, Smart IT allowed individual or teams up to five (₩1m grand prize); Hacking Festival was for Baekseok students with team-based awards but no stated one-person ban/size limit; JAVA was individual online problem solving. 2026-2 months were past-pattern estimates only. The proposed fit was Smart IT 70%, Hacking Festival 20%, JAVA 10%; solo JAVA, solo/2-person Smart IT, and a one-friend Hacking Festival. [Task 3]
-- Do not present estimated session token counts as measured usage. Official API prices and Codex subscription usage/credits are different; reduce large research by bounding it upfront, e.g. `현재 열린 것만 10개` or `백석대 교내만`. [Task 4]
-
-## Failures and how to do differently
-
-- Symptom: LinkedIn URL is `페이지 없음`, or Aside has stale refs/redeclared `const`. Fix: find the `kr.linkedin.com`/official source again; take a new snapshot after each action, use new variable names, and stay within supported APIs. [Task 1]
-- Symptom: a candidate list mixes open roles, closed roles, season patterns, and inferred eligibility. Fix: enforce the three status buckets from the outset and do not call an unverified role student-eligible. [Task 2]
-- Symptom: a past contest notice becomes a confirmed 2026 date. Fix: explicitly mark month estimates as inference and re-open the exact board post/2026 notice. [Task 3]
-- Symptom: context transfer leaks sensitive personal information or adds current-chat inference as a permanent rule. Fix: include only requested, needed stored-memory facts; exclude contact data, addresses, tokens, and unsupported inference. [Task 5]
 
 # Task Group: 백석대 2026-2 수강계획의 보류된 기독교세계관 분반 선택
 scope: 소프트웨어학전공 3학년 2학기 시간표의 확정 과목과, 여자친구 시간표를 대조한 뒤 결정할 기독교세계관 공용 분반 선택을 보존한다. 현재 성적 위험 판단은 당시 강의평 근거이며 최종 수강신청 확정은 아니다.
@@ -522,16 +444,6 @@ applies_to: cwd=/Users/wooojin; reuse_rule=다음 Cofathon·KB AI Challenge 등 
 
 - Cofathon, KB AI Challenge, hackathon, proof spine, 한 줄 → 한 사용자 경로 → 한 코드 경로 → 한 검증 명령 → 한 제출 주장, START_HERE.md, DECISIONS.md, CONTRACT.md, RELEASE.md, AGENTS.md, clean release worktree, claim-evidence, final ZIP
 
-## Task 2: Locate and verify the KB AI Challenge final GitHub ZIP, success
-
-### rollout_summary_files
-
-- rollout_summaries/2026-08-04T02-48-42-CVQC-kb_ai_submission_check_and_claude_skill_port.md (cwd=/Users/wooojin/App/maplog, rollout_path=/Users/wooojin/.codex/sessions/2026/08/04/rollout-2026-08-04T11-48-42-019fcaac-6218-7d51-9588-26b61af9a752.jsonl, updated_at=2026-08-04T14:50:45+00:00, thread_id=019fcaac-6218-7d51-9588-26b61af9a752, exact final archive confirmed in a private collaborator repository)
-
-### keywords
-
-- KB-hackaton, keepitmello/KB-hackaton, KB이음케어_우브라더스_제출_최종.zip, 587c9dec032e8043c303829e29ce0636dad633c7, GitHub API, affiliation=owner,collaborator,organization_member, final ZIP
-
 ## User preferences
 
 - when preparing the next contest, the user has decided to combine “Cofathon의 동결·재현 규율” with “KB AI Challenge의 제품 서사·다역할 UX” -> use one operating system rather than treating reproducibility and product narrative as separate tracks. [Task 1] [ad-hoc note]
@@ -544,14 +456,12 @@ applies_to: cwd=/Users/wooojin; reuse_rule=다음 Cofathon·KB AI Challenge 등 
 - Keep private judgment notes separate from shared meeting notes: `지금 믿는 것 / 찜찜한 것 / 상대에게 전달할 것 / 지금 끝낼 하나 / 나중에 볼 것`; promote only human-confirmed material into the shared decision record. [Task 1] [ad-hoc note]
 - Default collaboration topology: shared development host plus independent worktrees per person/agent, one integration owner, and a separate clean release worktree. GitHub is milestone backup/final publication, not the real-time handoff channel. Integrate every 60–90 minutes; check contract changes immediately; if two people must edit the same file, pause parallel work for a short pair session. [Task 1] [ad-hoc note]
 - Freeze new features early in release. Extract the exact submission ZIP into a fresh directory and run install, build, test, hero smoke, PDF render, and claim-evidence comparison there; only that archive-level result can be final PASS. [Task 1] [ad-hoc note]
-- The KB AI Challenge final repository was private `keepitmello/KB-hackaton`; at the 2026-08-04 check, `main` contained `KB이음케어_우브라더스_제출_최종.zip` (about 6.78 MB) in commit `587c9dec032e8043c303829e29ce0636dad633c7`, alongside the technical PDF, participation documents, prototype code, and screenshots. This identifies the archival target, but does not replace fresh-archive verification for a future submission claim. [Task 2]
 
 ## Failures and how to do differently
 
 - Symptom: documents grow but SSOT keeps moving, fixture UI is disconnected from runtime, or the last integration is rushed. Cause: document authority/lifetime, people/agent ownership, and phase-transition conditions were not narrow and explicit. Fix: use the three-layer structure and lock the proof spine before broad parallelism. [Task 1] [ad-hoc note]
 - Symptom: parallel `main` push/pull is used as live coordination, or the same file is edited concurrently. Cause: GitHub and worktree boundaries were treated as collaboration protocol. Fix: keep worktrees independent under one integration owner; use milestone GitHub sync and pair briefly for shared-file edits. [Task 1] [ad-hoc note]
 - Symptom: the working repository passes but the submitted artifact cannot substantiate the claims. Cause: final submission archive was not revalidated. Fix: re-extract the exact ZIP into a clean directory and run the complete release checklist before calling it PASS. [Task 1] [ad-hoc note]
-- Symptom: a GitHub search finds only personal repositories and misses the submitted archive. Cause: collaborator/organization repositories were excluded. Fix: query the GitHub API with `affiliation=owner,collaborator,organization_member`, then inspect the named archive and its commit/tree. [Task 2]
 
 # Task Group: Maplog structure-first implementation and design-stage boundary
 scope: `/Users/wooojin/App/maplog`에서 기능·권한·데이터 흐름을 연결하는 구현 단계와 별도 감성/시각 디자인 단계를 혼동하지 않고, native interaction과 필수 UX를 먼저 안정시킬 때 쓴다.
@@ -951,35 +861,6 @@ applies_to: cwd=/Users/wooojin/App/maplog; reuse_rule=동일한 cover-selection 
 ## Failures and how to do differently
 
 - 증상: rear/layer photo까지 user-editable slot으로 노출하거나 full cover order를 보존한다. 원인: superseded된 cover-selection contract를 계속 적용했다. 수정: manual state는 representative 한 장만 보관하고 rear layer는 deterministic automatic selection으로 재생성하며, legacy migration은 첫 cover만 대표로 읽는다. [Task 1] [ad-hoc note]
-
-# Task Group: Claude Code selective skill port and discovery verification
-scope: Codex에서 쓰던 특정 skill을 Claude Code용으로 이식하고 실제 discovery까지 검증하는 로컬 설정 작업이다. 삭제된 인증 정리와 전체 skill 동기화의 과거 근거는 포함하지 않는다.
-applies_to: cwd=/Users/wooojin/App/maplog; reuse_rule=Claude용 selective skill port에만 재사용한다. target tool names, `CLAUDE.md`, skill layout은 설치 시점마다 다시 확인한다.
-
-## Task 1: Port framing/reframing to Claude Code and verify discovery, success
-
-### rollout_summary_files
-
-- rollout_summaries/2026-08-04T02-48-42-CVQC-kb_ai_submission_check_and_claude_skill_port.md (cwd=/Users/wooojin/App/maplog, rollout_path=/Users/wooojin/.codex/sessions/2026/08/04/rollout-2026-08-04T11-48-42-019fcaac-6218-7d51-9588-26b61af9a752.jsonl, updated_at=2026-08-04T14:50:45+00:00, thread_id=019fcaac-6218-7d51-9588-26b61af9a752, Claude-native selective skill port and smoke-tested installation)
-
-### keywords
-
-- framing, reframing, Claude Code, Agent, meight, consult, CLAUDE.md, ~/.claude/skills, claude-framing-skills-staging, sensitive file, Task(Agent), roo-channel, trigger-evals.json, skill discovery
-
-## User preferences
-
-- when the user said “매번 사용이 아니라 특이 사항 설계 간에서 사용하는 것” -> `framing`/`reframing`을 일반 작업의 상시 게이트로 만들지 않고 명시적·선택적 호출 도구로 유지한다. [Task 1]
-- when the user asked to have it “Claude한테 맞는 방식으로 수정해서 설치” -> do not copy Codex skill files verbatim; inspect the target `CLAUDE.md`, tool names, skill conventions, and actual discovery before calling the port complete. [Task 1]
-
-## Reusable knowledge
-
-- At the 2026-08-04 check, Claude used `Agent`; `meight` routed Codex worker/mate work and `consult` the external high-quality review route. The installed targets were `/Users/wooojin/.claude/skills/framing` and `/Users/wooojin/.claude/skills/reframing`; recheck these environment-dependent names and paths before a later port. [Task 1]
-- For a Claude skill port, verify in this order: file tree, frontmatter, internal relative links, JSON validity (for example `trigger-evals.json`), grep for Codex-only remnants, then a fresh Claude-session `/framing` and `/reframing` discovery smoke test. `framing` is for unusual design forks; `reframing` is manual after user approval when the team is stuck or options converge. [Task 1]
-
-## Failures and how to do differently
-
-- Symptom: a helper cannot write directly under `~/.claude/skills` and reports a `sensitive file` boundary. Cause: the target path is protected in that execution environment. Fix: create the port first in an allowed staging directory such as `/Users/wooojin/Downloads/claude-framing-skills-staging`, then have the authorized outer process perform the final move. [Task 1]
-- Symptom: a staged port retains `Task(Agent)`, a nonexistent `roo-channel` reference, or root-relative `references/...` links. Cause: Codex-specific wording and paths were copied without checking the target layout. Fix: compare against actual `CLAUDE.md`/existing skills and validate links from each file's directory before installation. [Task 1]
 
 # Task Group: Maplog live-map QA native-quality escalation
 scope: Maplog live map QA처럼 지도/실시간 UI에서 체감 품질이 부족할 때, 현재 구현 계층 튜닝을 계속할지 native/정석 계층으로 피벗할지 판단하는 작업에 쓴다. 성능 수치 자체보다 marker sync 같은 핵심 품질 기준 충족 여부를 본다.
