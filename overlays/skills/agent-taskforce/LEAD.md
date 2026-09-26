@@ -44,7 +44,8 @@ can support a direction and a useful ownership decision; do not solve the whole
 technical problem merely to estimate its difficulty.
 
 A bounded discovery agent may gather authorized evidence under a draft with a
-budget; it does not implement or become a continuing owner. Draft only when no
+budget; it does not implement or become a continuing owner. Execution owners are
+not relabeled as discovery subagents to skip the combined confirmation. Draft only when no
 existing source serves the purpose. Show the result, preserved behavior, non-goals,
 completion evidence, meaningful choices and smallest useful roster together in the
 user's language, using the sibling `work-intent/templates/approval-message.md`.
@@ -120,9 +121,10 @@ alone. A named owner synthesizes technical evidence or implements a shared fix.
 For an empty return or suspected stall, inspect current task and execution state.
 An enqueued message establishes neither delivery nor resumed work. Distinguish a
 resident waiting member from a disposed or stopped execution; use supported recovery
-inside authority before reporting resumed work. Separate lifecycle failure from a
-refuted approach, brief conflict or invalid measurement, then choose continuation,
-bounded advice or reassignment from that evidence. Preserve user stops and budgets.
+inside authority before reporting resumed work. Once execution is live, recover the
+cause in that session as Skill(dispatching) "When it comes back short" describes.
+Preserve user stops and budgets. Do not become the next implementer because an
+owner was blocked.
 
 ## 7. Use evidence without duplicating execution
 
