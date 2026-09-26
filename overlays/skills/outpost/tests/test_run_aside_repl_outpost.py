@@ -130,10 +130,8 @@ class AsideReplConsultTest(unittest.TestCase):
             outpost_id="abc123",
             response_timeout_ms=1000,
         )
-        self.assertIn(
-            """#prompt-textarea[contenteditable="true"][aria-label="' + composerLabel + '"]""",
-            shopping,
-        )
+        self.assertIn("waitComposer(workPage, composerSel, 3)", shopping)
+        self.assertIn("Shopping의 새 채팅", shopping)
         self.assertNotIn(".and(", shopping)
         self.assertIn("Shopping에서 새 채팅", shopping)
         self.assertNotIn("Work에서 새 채팅", shopping)
@@ -216,7 +214,7 @@ class AsideReplConsultTest(unittest.TestCase):
         self.assertIn("name: packetName", pro)
         self.assertIn("setInputFiles([{", pro)
         self.assertNotIn("setInputFiles(packetPath)", pro)
-        self.assertIn('#prompt-textarea[contenteditable="true"]', pro)
+        self.assertIn('waitComposer(workPage, continueComposerSel, 3)', pro)
         self.assertNotIn(".and(", pro)
         self.assertIn("Work에서 새 채팅", pro)
         self.assertIn("project composer not visible", pro)
@@ -226,10 +224,10 @@ class AsideReplConsultTest(unittest.TestCase):
         self.assertIn("Array.from(el.children)", pro)
         self.assertIn("composerValue !== composerPrompt", pro)
         self.assertIn(
-            '#composer-submit-button:not(:disabled):not([aria-disabled="true"]):not([data-visually-disabled])',
+            'form button[aria-label="보내기"]',
             pro,
         )
-        self.assertIn("#upload-files", pro)
+        self.assertIn("input[type=\"file\"]:not([accept])", pro)
         self.assertIn("waitRole(workPage, 'group'", pro)
         self.assertIn("attachmentPresent(", pro)
         self.assertNotIn("getByText(packetName, { exact: true })", pro)
@@ -274,7 +272,7 @@ class AsideReplConsultTest(unittest.TestCase):
         self.assertIn("modelRadios", script)
         # doctor probes the same lookup send uses; no click fallback may cover
         # for a failed name lookup and report a green light send cannot reach
-        self.assertIn("waitNamedRef(page, 'button', tierNameRe", script)
+        self.assertIn("waitNamedRef(page, 'button', tierButtonRe", script)
         self.assertNotIn("tierFallback", script)
         self.assertNotIn("menus.nth(", script)
         self.assertNotIn("insertText", script)

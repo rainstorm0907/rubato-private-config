@@ -256,8 +256,8 @@ class ModelAndLossGuardTest(unittest.TestCase):
             response_timeout_ms=1000,
         )
         self.assertIn("async function primeRoles(target)", script)
-        self.assertIn("waitNamedRef(workPage, 'button', tierNameRe", script)
-        self.assertIn("waitRole(workPage, 'menuitem', '성능'", script)
+        self.assertIn("waitNamedRef(workPage, 'button', tierButtonRe", script)
+        self.assertIn("waitNamedRef(workPage, 'menuitem', performanceNameRe", script)
         self.assertIn("waitNamedRef(workPage, 'menuitemradio', modelNameRe", script)
         self.assertIn("waitRole(workPage, 'group', attachmentName", script)
         # a bare role lookup before the first snapshot silently matches nothing

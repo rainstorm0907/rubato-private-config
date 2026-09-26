@@ -320,6 +320,18 @@ def composer_aria_label(project_name: str) -> str:
     return f"{project_name}에서 새 채팅"
 
 
+def composer_aria_labels(project_name: str) -> list[str]:
+    # ChatGPT renamed the project composer label (2026-09-26: "<name>의 새 채팅") and dropped #prompt-textarea.
+    return [f"{project_name}의 새 채팅", composer_aria_label(project_name)]
+
+
+def composer_selector(project_name: str) -> str:
+    return ", ".join(f'[contenteditable="true"][aria-label="{label}"]' for label in composer_aria_labels(project_name))
+
+
+CONTINUE_COMPOSER_SELECTOR = '#prompt-textarea[contenteditable="true"], .ProseMirror[contenteditable="true"][role="textbox"]'
+
+
 def resolve_project_name(
     *,
     cli_value: str | None,
@@ -994,6 +1006,7 @@ def build_repl_script(
     tier_pattern = tier_name_pattern(picker.get("tierAliases") or DEFAULT_TIER_ALIASES)
     model_pattern = r"^" + re.escape(target_model) + r"$"
     composer_label = composer_aria_label(project_name)
+    composer_sel = composer_selector(project_name)
     continue_mode = bool(conversation_url)
     start_url = conversation_url or project_url
     expected_conversation_id = conversation_id_from_url(conversation_url) or ""
@@ -1004,6 +1017,8 @@ var continueMode = {js(continue_mode)};
 var expectedConversationId = {js(expected_conversation_id)};
 var outpostId = {js(outpost_id)};
 var composerLabel = {js(composer_label)};
+var composerSel = {js(composer_sel)};
+var continueComposerSel = {js(CONTINUE_COMPOSER_SELECTOR)};
 var quality = {js(quality)};
 var packetName = {js(packet_name)};
 var packetBase64 = {js(packet_base64)};
@@ -1013,6 +1028,8 @@ var composerPrompt = {js(build_composer_prompt(topic, outpost_id, artifact_outpu
 var targetLabel = {js(target_label)};
 var targetModel = {js(target_model)};
 var tierNameRe = new RegExp({js(tier_pattern)});
+var tierButtonRe = new RegExp(tierNameRe.source + '|^ChatGPT 모델 선택$');
+var performanceNameRe = /^(?:성능|파워)$/;
 var modelNameRe = new RegExp({js(model_pattern)});
 var verifiedTier = null;
 var dryRun = {js(dry_run)};
@@ -1086,7 +1103,7 @@ var submitState = await Promise.race([
     var composer;
     if (continueMode) {{
       submitStage = 'wait-conversation-composer';
-      composer = await waitComposer(workPage, '#prompt-textarea[contenteditable="true"]', 3);
+      composer = await waitComposer(workPage, continueComposerSel, 3);
       if (!composer) {{
         throw new Error(
           'saved conversation composer not visible url=' + workPage.url() +
@@ -1102,13 +1119,9 @@ var submitState = await Promise.race([
       }}
     }} else {{
       submitStage = 'wait-project-composer';
-      composer = await waitComposer(
-        workPage,
-        '#prompt-textarea[contenteditable="true"][aria-label="' + composerLabel + '"]',
-        3
-      );
+      composer = await waitComposer(workPage, composerSel, 3);
       if (!composer) {{
-        var found = await workPage.locator('#prompt-textarea').evaluateAll((els) =>
+        var found = await workPage.locator('[contenteditable="true"]').evaluateAll((els) =>
           els.map((el) => ({{
             ariaLabel: el.getAttribute('aria-label'),
             contenteditable: el.getAttribute('contenteditable')
@@ -1156,15 +1169,13 @@ var submitState = await Promise.race([
       throw new Error('Work mode selected and Chat toggle missing');
     }}
     composer = continueMode
-      ? workPage.locator('#prompt-textarea[contenteditable="true"]')
-      : workPage.locator(
-          '#prompt-textarea[contenteditable="true"][aria-label="' + composerLabel + '"]'
-        );
+      ? workPage.locator(continueComposerSel)
+      : workPage.locator(composerSel);
     await composer.waitFor({{ state: 'visible', timeout: 15000 }});
     submitStage = 'select-tier';
     // Closed Pro pill accessible name is quota+label, e.g. "6 Pro" or "6Pro".
     // The pill has no aria-label, so resolve its name off the snapshot tree.
-    var tierButton = await waitNamedRef(workPage, 'button', tierNameRe, 20000);
+    var tierButton = await waitNamedRef(workPage, 'button', tierButtonRe, 20000);
     if (!tierButton) {{
       var foundTiers = await workPage.locator('button[aria-haspopup="menu"]').evaluateAll((els) =>
         els.map((el) => ({{
@@ -1179,7 +1190,7 @@ var submitState = await Promise.race([
       );
     }}
     await tierButton.click();
-    var performance = await waitRole(workPage, 'menuitem', '성능', 8000);
+    var performance = await waitNamedRef(workPage, 'menuitem', performanceNameRe, 8000);
     if (!performance) throw new Error('performance menuitem not visible');
     var readTier = (tree) => {{
       var match = tree.match(/([^\\n"]+), (\\d+)개 중 (\\d+)번째/);
@@ -1195,7 +1206,7 @@ var submitState = await Promise.race([
     if (!current) throw new Error('tier position not readable');
     if (current.label !== targetLabel) {{
       await primeRoles(workPage);
-      performance = workPage.getByRole('menuitem', {{ name: '성능' }});
+      performance = await waitNamedRef(workPage, 'menuitem', performanceNameRe, 8000);
       await performance.focus();
       for (var i = 0; i < current.total; i += 1) {{
         await workPage.keyboard.press('ArrowLeft');
@@ -1254,7 +1265,8 @@ var submitState = await Promise.race([
     );
     if (composerValue !== composerPrompt) throw new Error('composer prompt mismatch');
     submitStage = 'attach-packet';
-    var fileInput = workPage.locator('#upload-files');
+    // 2026-09-26 ChatGPT UI dropped #upload-files; the generic uploader is the file input without an accept filter.
+    var fileInput = workPage.locator('#upload-files, input[type="file"]:not([accept]), input[type="file"][accept=""]').first();
     var attachmentName = {js(outpost_id)};
     async function attachmentPresent(timeoutMs) {{
       var attachDeadline = Date.now() + timeoutMs;
@@ -1283,7 +1295,8 @@ var submitState = await Promise.race([
     if (!attached) throw new Error('packet attachment missing before send');
     submitStage = 'ready-to-send';
     var send = workPage.locator(
-      '#composer-submit-button:not(:disabled):not([aria-disabled="true"]):not([data-visually-disabled])'
+      ['#composer-submit-button', 'form button[aria-label="보내기"]', 'form button[aria-label="프롬프트 보내기"]']
+        .map((sel) => sel + ':not(:disabled):not([aria-disabled="true"]):not([data-visually-disabled])').join(', ')
     );
     await send.waitFor({{ state: 'visible', timeout: 60000 }});
     if (!(await attachmentPresent(10000))) {{
@@ -1323,7 +1336,7 @@ if (dryRun) {{
     stage: 'ready-to-send',
     url: workPage.url(),
     expectedComposer: composerLabel,
-    composerLabels: await workPage.locator('#prompt-textarea').evaluateAll((els) =>
+    composerLabels: await workPage.locator('[contenteditable="true"]').evaluateAll((els) =>
       els.map((el) => el.getAttribute('aria-label'))
     ).catch(() => []),
     tierInnerText: await workPage.locator('button[aria-haspopup="menu"]').evaluateAll((els) =>
@@ -1959,13 +1972,17 @@ def run_repl_outpost(
 
 def build_doctor_script(*, project_url: str, project_name: str, picker: dict[str, Any] | None = None) -> str:
     composer_label = composer_aria_label(project_name)
+    composer_sel = composer_selector(project_name)
     picker = picker or load_picker_contract()
     tier_pattern = tier_name_pattern(picker.get("tierAliases") or DEFAULT_TIER_ALIASES)
     return f"""
 var projectUrl = {js(project_url)};
 var composerLabel = {js(composer_label)};
+var composerSel = {js(composer_sel)};
 var preferredModel = {js(PREFERRED_MODEL_RADIO)};
 var tierNameRe = new RegExp({js(tier_pattern)});
+var tierButtonRe = new RegExp(tierNameRe.source + '|^ChatGPT 모델 선택$');
+var performanceNameRe = /^(?:성능|파워)$/;
 var report = {{
   url: '',
   title: '',
@@ -1990,16 +2007,14 @@ await page.waitForLoadState('domcontentloaded');
 try {{
   report.url = page.url();
   report.title = await page.title();
-  var composer = page.locator(
-    '#prompt-textarea[contenteditable="true"][aria-label="' + composerLabel + '"]'
-  );
+  var composer = page.locator(composerSel);
   try {{
     await composer.waitFor({{ state: 'visible', timeout: 30000 }});
     report.composerOk = true;
   }} catch (error) {{
     report.blockers.push('composer');
   }}
-  report.composerLabels = await page.locator('#prompt-textarea').evaluateAll((els) =>
+  report.composerLabels = await page.locator('[contenteditable="true"]').evaluateAll((els) =>
     els.map((el) => el.getAttribute('aria-label'))
   ).catch(() => []);
   var chatToggle = page.locator('button[data-tpp-toggle-value="chatgpt"]');
@@ -2017,7 +2032,7 @@ try {{
   // Doctor has to probe the same lookup send uses, or its green light is a lie.
   // The click-every-menu fallback that used to cover for getByRole() is why
   // doctor passed while every send died at select-tier.
-  var tierButton = await waitNamedRef(page, 'button', tierNameRe, 20000);
+  var tierButton = await waitNamedRef(page, 'button', tierButtonRe, 20000);
   report.tierRoleMatched = !!tierButton
     && await tierButton.isVisible().catch(() => false);
   if (!report.tierRoleMatched) {{
@@ -2026,7 +2041,7 @@ try {{
     await tierButton.click();
     await sleep(800);
     await snapshot(page, {{ interactive: true }});
-    report.performanceVisible = await page.getByRole('menuitem', {{ name: '성능' }})
+    report.performanceVisible = await (await waitNamedRef(page, 'menuitem', performanceNameRe, 8000) || page.getByRole('menuitem', {{ name: '성능' }}))
       .isVisible().catch(() => false);
     var modelItem = page.getByRole('menuitem', {{ name: '모델 선택' }});
     report.modelMenuVisible = await modelItem.isVisible().catch(() => false);
