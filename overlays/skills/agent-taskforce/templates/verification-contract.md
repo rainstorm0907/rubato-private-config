@@ -20,11 +20,10 @@ Optionally agreed between owner and verifier before implementation when acceptan
 
 **Out of scope:** what this gate does not judge.
 
-**Owner proposal:** the method under examination, separate from the requirement or
-observation it came from when that distinction matters.
+**Owner proposal:** the method, separate from the requirement it serves.
 
 **Verifier evidence / unresolved difference:** observed result, inferred cause and
-proposed remedy, with evidence. Early advice does not certify a later artifact.
+proposed remedy, with evidence.
 
 **Disposition:** retain | revise | compare/replace | abandon the method | user decision.
-The owner chooses methods; authority changes go to the lead. Required gates still bind.
+Required gates still bind.

@@ -118,29 +118,27 @@ Notice patterns across streams, and propagate verified refutations to every affe
 owner. Preserve contradictions without deciding a technical cause from authority
 alone. A named owner synthesizes technical evidence or implements a shared fix.
 
-For an empty return or suspected stall, inspect current task and execution state.
-An enqueued message establishes neither delivery nor resumed work. Distinguish a
-resident waiting member from a disposed or stopped execution; use supported recovery
-inside authority before reporting resumed work. Once execution is live, recover the
-cause in that session as Skill(dispatching) "When it comes back short" describes.
-Preserve user stops and budgets. Do not become the next implementer because an
-owner was blocked.
+For an empty return or suspected stall, first establish whether the member is waiting,
+stopped or disposed: an enqueued message proves neither delivery nor resumed work, so
+use supported recovery before reporting it resumed. Then recover the cause as
+Skill(dispatching) "When it comes back short" describes. Preserve user stops and
+budgets. Do not become the next implementer because an owner was blocked.
 
 ## 7. Use evidence without duplicating execution
 
 Owners produce direct local evidence and the integration owner checks combined
-behavior. An approved verifier may prepare decision-relevant evidence before the
-result exists and independently challenges the result and, when material, the
-acceptance criterion; agree that scope in the existing assignment, not a new roster.
-The verifier sends defects directly to the owner; criterion or intent changes come
-to you. See "Evidence exchange" in `references/01-operating-model.md`.
+behavior. An approved verifier independently challenges the result and, when
+material, the acceptance criterion; within its existing assignment it may also bring
+evidence before the result exists. Defects go directly to the owner; criterion or
+intent changes come to you. How findings travel is in "Evidence exchange",
+`references/01-operating-model.md`.
 
 Judge counter-evidence against the originating outcome and actual result, including
 answers that correct your subquestion. Preserve a supported observation even when
-rejecting its proposed remedy. The accountable owner chooses how coupled requirements
-can work together; ask for a method decision when one repair undermines another,
-not another list of patches. Decide within authority or bring the remaining user
-choice with evidence and a recommendation. A written plan alone settles neither.
+rejecting its proposed remedy. When one repair keeps undermining another, ask the
+owner for a method decision, not another list of patches. Decide within authority
+or bring the remaining user choice with evidence and a recommendation. A written
+plan alone settles neither.
 
 Review the decisive artifacts and what their evidence actually establishes. Request
 a missing check from its responsible owner or verifier. Do not re-run a full suite

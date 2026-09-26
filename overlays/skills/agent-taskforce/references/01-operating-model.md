@@ -58,8 +58,7 @@ Name the reviewer, its question and observation/budget boundary in the existing
 brief. Approach review may reframe the sender's subquestion; narrow checks stay
 narrow. Give the originating request, observations and accepted constraints before
 method advocacy, with source access and failed attempts. The owner `team_send`s the
-reviewable question or result with its path and revision. Mail acceptance alone
-does not establish resumed execution.
+reviewable question or result with its path and revision.
 
 Keep tasks open while required checks are pending. Send observed defects directly
 to their owner, separating observation, inferred cause and proposed remedy. The
@@ -81,12 +80,10 @@ criteria or instruments that every resident context inherited. At actual milesto
 gates, run the review or record why it was omitted. Do not invent a gate structure
 for small tasks, and do not add another permanent reviewer.
 
-Provide the originating outcome, accepted constraints, observations and source
-access; distinguish the team's explanation from these facts. Let the reviewer
-choose what evidence could distinguish current and alternative approaches, then
-use existing plans and failed attempts to avoid repetition. A continuing reviewer
-is not fresh to an approach it helped sustain. Use an already approved fresh path
-when that distinction can change the decision, not a recursive review hierarchy.
+Give it the same inputs as "Evidence exchange" and let it choose what evidence could
+distinguish current and alternative approaches. A continuing reviewer is not fresh
+to an approach it helped sustain; use an already approved fresh path when that can
+change the decision, not a recursive review hierarchy.
 
 ## Peers and local support
 

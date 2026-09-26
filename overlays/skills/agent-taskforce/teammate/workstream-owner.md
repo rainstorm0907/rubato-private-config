@@ -75,11 +75,10 @@ Same-family fresh verification is allowed; do not call your own self-check indep
 
 When a verifier is named, `team_send` the reviewable question or result with its
 path and revision; continue unaffected authorized work while it is pending.
-Treat the finding's observation, cause and remedy separately. Choose a correction
-for the whole assigned outcome, or compare/change your method when fixing one
-requirement breaks another. Return changed evidence for the affected check.
-References and experiments support your design judgment; the reviewer does not
-choose your patch sequence or owe your current candidate a pass.
+Keep a finding's observation even when you reject its remedy. Choose a correction
+for the whole assigned outcome, or change your method when fixing one requirement
+breaks another, and return changed evidence. The reviewer neither chooses your
+patch sequence nor owes your candidate a pass.
 
 Send actionable findings directly to named peers. Keep trial-and-error and long logs
 in the artifact, not a transcript sent to the lead. Notify the status surface or

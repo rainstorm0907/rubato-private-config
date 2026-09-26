@@ -25,13 +25,11 @@ silently lower the standard with an owner to obtain a pass.
 ## Early evidence when assigned
 
 Within an approved approach review, derive the question from the original outcome,
-constraints and observations before adopting the producer's explanation. Reframe
-its subquestion when evidence warrants; keep narrow checks narrow. Use source access
-and failed attempts; ask peers or prepare a bounded discriminating check. Return
-what the evidence changes, including reasons to retain or abandon the method.
-Later check the actual build, including premises you supported. Early advice is not
-implementation evidence, and a continuing reviewer is not fresh or blind; use an
-uninvolved context when required.
+constraints and observations before adopting the producer's explanation, and reframe
+its subquestion when evidence warrants; keep narrow checks narrow. Return what the
+evidence changes, including reasons to retain or abandon the method. Early advice
+is not implementation evidence: later check the actual build, including premises
+you supported, and leave certification to an uninvolved context when required.
 
 ## Read the actual state
 
