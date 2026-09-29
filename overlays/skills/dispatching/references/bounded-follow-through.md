@@ -43,7 +43,7 @@ just the builder's completion summary. Before dispatch, give it only what change
 - the original request and accepted constraints, with the current intent/spec reference;
 - the exact result to examine and a verified existing way to launch/inspect it;
 - the permitted environment/data and, when helpful, relevant accepted/rejected examples;
-- the question its observation can settle, and the authority/budget limits for this work.
+- the question its observation can settle, and the authority and scale of this work.
 
 Use existing brief fields and artifact locations; these bullets are not a new form.
 For a goal review, the evaluator needs the goal and constraints. For a first-impression
@@ -102,7 +102,7 @@ experience. A user's preference for the baseline is a valid outcome.
 Conclude when the requested result has adequate evidence for its stated scope and no
 unresolved material failure, or when a meaningful human decision, explicit stop, permission
 boundary, capability blocker or agreed work limit is reached. No compulsory retry count.
-Do not repeat a failed approach without a changed hypothesis or repair. A budget/blocker
+Do not repeat a failed approach without a changed hypothesis or repair. A scale/blocker
 return may validly end the attempt without fulfilling the outcome. Do not hide a useful
 preview while seeking a perfect score, and do not keep working merely to find more issues.
 

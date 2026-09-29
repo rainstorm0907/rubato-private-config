@@ -54,7 +54,7 @@ A verifier that helped implement the change cannot certify that change independe
 
 ## Evidence exchange
 
-Name the reviewer, its question and observation/budget boundary in the existing
+Name the reviewer, its question and observation/scale boundary in the existing
 brief. Approach review may reframe the sender's subquestion; narrow checks stay
 narrow. Give the originating request, observations and accepted constraints before
 method advocacy, with source access and failed attempts. The owner `team_send`s the
@@ -110,7 +110,7 @@ advice or relevant peer evidence; then a scope/boundary change or explicit reass
 when warranted. A user goal or active-frame conflict goes to the lead and human.
 These are alternatives tied to causes, not a mandatory ladder of model tiers.
 
-Budget return is a control boundary, not model failure. A announced long-running
+A scale return or a lead's stop is a control boundary, not model failure. A announced long-running
 check is not silence-based evidence of a stall. A meaningful stall is resource use
 without new artifacts, valid checks or appropriate hypothesis reduction. Do not
 mistake broken measurement, missing permissions or a contradictory brief for lack
