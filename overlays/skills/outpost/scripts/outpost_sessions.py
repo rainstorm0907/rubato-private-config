@@ -26,6 +26,7 @@ STATUS_ORDER = {
     "working": 0,
     "running": 0,
     "submitted_response_unavailable": 1,
+    "submit_unknown": 1,
     "finished": 2,
     "failed": 3,
 }

@@ -212,7 +212,9 @@ class ModelAndLossGuardTest(unittest.TestCase):
                         )
             self.assertTrue(result_path.is_file())
             pending = json.loads(result_path.read_text(encoding="utf-8"))
-            self.assertEqual(pending["status"], "submitted_pending")
+            # A marker-less transcript is "unknown", never "not sent": the id
+            # and packet hash stay so 'outpost recover' can find the turn.
+            self.assertEqual(pending["status"], "submit_unknown")
             self.assertTrue(pending["id"])
             self.assertTrue(pending["packetSha"])
 

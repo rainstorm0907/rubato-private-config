@@ -233,7 +233,14 @@ SESSIONS = load_sessions_module()
 
 
 class SubmitUnknownError(RuntimeError):
-    """The send click happened but provider commit could not be proven."""
+    """Submission could not be proven either way: the click may have happened
+    without the commit being verified, or the REPL ended without any marker.
+    Never resend; recover by outpost id."""
+
+
+class NotSubmittedError(RuntimeError):
+    """The send script itself reported a failure at a stage before the click,
+    so the packet provably never reached ChatGPT. Resending is safe."""
 
 
 class SubmittedResponseError(RuntimeError):
@@ -1359,9 +1366,22 @@ if (dryRun) {{
 }}
 var assistantCountBefore = submitState.assistantCountBefore || 0;
 var remainingSubmitMs = 120000 - (Date.now() - submitStartedAt);
-if (remainingSubmitMs <= 0) throw new Error('pre-submit preparation exceeded 120 seconds');
+if (remainingSubmitMs <= 0) throw new Error('OUTPOST_FAIL stage=ready-to-send pre-submit preparation exceeded 120 seconds');
 submitStage = 'commit-user-turn';
-await submitState.send.click({{ timeout: remainingSubmitMs }});
+try {{
+  await submitState.send.click({{ timeout: remainingSubmitMs }});
+}} catch (error) {{
+  // The click may have reached the page before the action timed out, so the
+  // turn is unknown, not unsent.
+  console.log({js(SUBMIT_UNKNOWN_MARKER)} + JSON.stringify({{
+    id: {js(outpost_id)},
+    quality,
+    reason: 'send click did not complete: ' + String(error && error.message || error),
+    conversationUrl: workPage.url(),
+    targetId: submitState.ownedTargetId
+  }}));
+  throw new Error('SUBMIT_UNKNOWN');
+}}
 var userTurn = workPage.locator('[data-message-author-role="user"]').filter({{ hasText: {js(f"ID: {outpost_id}")} }}).last();
 try {{
   await userTurn.waitFor({{ state: 'visible', timeout: remainingSubmitMs }});
@@ -1842,6 +1862,44 @@ def describe_pre_submit_failure(transcript: str) -> str:
     return f"{header}\n\n{transcript}"
 
 
+def describe_submit_unknown(reason: str, transcript: str) -> str:
+    header = (
+        "exit 76 — 제출 여부 불명 (보내졌을 수 있음)\n"
+        f"{reason}\n"
+        "재전송 금지. 'outpost recover <run>' 로 회수하거나 ChatGPT 프로젝트에서 ID로 찾는다."
+    )
+    return f"{header}\n\n{transcript}" if transcript else header
+
+
+def pre_submit_failure_stage(transcript: str) -> str:
+    """Stage name when the send script itself aborted before the click.
+
+    Only an explicit `OUTPOST_FAIL stage=<pre-submit stage>` line is proof:
+    the REPL prints it while aborting the preparation promise, so the click
+    never ran. A transcript with no marker at all proves nothing — the CLI
+    can exit or lose the daemon after the click and before the marker.
+    """
+    stage = ""
+    for line in transcript.splitlines():
+        match = FAIL_STAGE_RE.search(ANSI_RE.sub("", line))
+        if match:
+            stage = match.group(1)
+    if stage and stage != "commit-user-turn":
+        return stage
+    return ""
+
+
+def classify_send_transcript(transcript: str) -> str:
+    """'submitted' | 'unknown' | 'not_submitted' from one REPL transcript."""
+    if marker_payload(transcript, SUBMIT_MARKER) is not None:
+        return "submitted"
+    if marker_payload(transcript, SUBMIT_UNKNOWN_MARKER) is not None:
+        return "unknown"
+    if pre_submit_failure_stage(transcript):
+        return "not_submitted"
+    return "unknown"
+
+
 def run_repl_process(script: str, *, timeout: int) -> str:
     try:
         completed = subprocess.run(
@@ -1877,29 +1935,30 @@ def run_repl_outpost(
     outpost_id: str = "",
     on_submit: Callable[[dict[str, Any]], None] | None = None,
 ) -> tuple[dict[str, Any], dict[str, Any], float, float, str]:
+    """Run the send script exactly once and classify what happened.
+
+    The script is never re-run from here: after the click a re-run spends a
+    second Pro turn. When the transcript proves nothing, backend recovery by
+    outpost id is tried first; if that finds nothing the state stays unknown.
+    """
     timeout = submit_timeout + response_timeout + 30
-    transcript = ""
-    earlier = ""
-    submit_payload = None
-    for attempt in range(2):
-        transcript = run_repl_process(script, timeout=timeout)
-        submit_unknown_payload = marker_payload(transcript, SUBMIT_UNKNOWN_MARKER)
-        if submit_unknown_payload is not None:
-            raise SubmitUnknownError(
-                "submission state unknown; do not retry\n"
-                + json.dumps(submit_unknown_payload, ensure_ascii=False)
-                + "\n"
-                + earlier
-                + transcript
+    transcript = run_repl_process(script, timeout=timeout)
+    outcome = classify_send_transcript(transcript)
+    if outcome == "not_submitted":
+        if transcript_lost_aside_daemon(transcript):
+            transcript = "aside daemon closed before submission; packet was not sent\n" + transcript
+        raise NotSubmittedError(describe_pre_submit_failure(transcript))
+    if outcome == "unknown":
+        unknown_payload = marker_payload(transcript, SUBMIT_UNKNOWN_MARKER)
+        if unknown_payload is not None:
+            reason = "send clicked but commit unverified: " + json.dumps(
+                unknown_payload, ensure_ascii=False
             )
-        submit_payload = marker_payload(transcript, SUBMIT_MARKER)
-        if submit_payload is not None:
-            break
-        recovered = None
-        if outpost_id and (
-            transcript_lost_aside_daemon(transcript) or "/c/" in transcript
-        ):
-            recovered = recover_outpost_from_backend(outpost_id)
+        elif transcript_lost_aside_daemon(transcript):
+            reason = "aside daemon was lost before any submission marker; the click may already have happened"
+        else:
+            reason = "Aside REPL exited without a submission marker; the click may already have happened"
+        recovered = recover_outpost_from_backend(outpost_id) if outpost_id else None
         if recovered and recovered.get("conversationUrl"):
             submit_payload = {
                 "quality": "",
@@ -1924,26 +1983,14 @@ def run_repl_outpost(
                     },
                     0.0,
                     0.0,
-                    earlier + transcript,
+                    transcript,
                 )
-            raise SubmittedResponseError(submit_payload, 0.0, earlier + transcript)
-        if attempt == 0 and transcript_lost_aside_daemon(transcript):
-            earlier = transcript + "\n"
-            if ensure_aside_daemon() is None:
-                continue
-        if transcript_lost_aside_daemon(transcript):
-            raise RuntimeError(
-                describe_pre_submit_failure(
-                    "aside daemon closed before submission; packet was not sent\n"
-                    + earlier
-                    + transcript
-                )
-            )
-        raise RuntimeError(
-            describe_pre_submit_failure(
-                "Aside REPL exited before submission marker\n" + transcript
-            )
+            raise SubmittedResponseError(submit_payload, 0.0, transcript)
+        raise SubmitUnknownError(
+            "submission state unknown; do not retry\n"
+            + describe_submit_unknown(reason, transcript)
         )
+    submit_payload = marker_payload(transcript, SUBMIT_MARKER)
     assert submit_payload is not None
     submit_elapsed = float(submit_payload["submitElapsedMs"]) / 1000
     print(
@@ -2605,6 +2652,7 @@ def main(argv: Sequence[str]) -> int:
             previous_status = str(previous.get("status") or ("finished" if previous.get("ok") else ""))
             if previous.get("ok") or previous_status in {
                 "submitted_pending",
+                "submit_unknown",
                 "submitted_response_unavailable",
                 "submitted_artifact_unavailable",
                 "finished",
@@ -2743,10 +2791,13 @@ def main(argv: Sequence[str]) -> int:
         stderr_path.write_text(str(exc), encoding="utf-8")
         print(str(exc), file=sys.stderr)
         stage, detail = failure_reason_from(exc)
+        # The turn may exist in ChatGPT. Keep the id and packet hash so
+        # 'outpost recover' can find it and the duplicate guard blocks a resend.
+        write_pending({"status": "submit_unknown", "failureDetail": detail})
         record_thread_outcome(
             store,
             thread,
-            status="failed",
+            status="submit_unknown",
             outpost_id=outpost_id,
             json_output=str(json_path),
             failure_stage=stage or "commit-user-turn",
@@ -2898,6 +2949,9 @@ def main(argv: Sequence[str]) -> int:
         stderr_path.write_text(str(exc), encoding="utf-8")
         print(str(exc), file=sys.stderr)
         stage, detail = failure_reason_from(exc)
+        if isinstance(exc, NotSubmittedError):
+            # Proven pre-click failure: the same run directory may send again.
+            write_pending({"status": "not_submitted", "failureStage": stage, "failureDetail": detail})
         record_thread_outcome(
             store,
             thread,

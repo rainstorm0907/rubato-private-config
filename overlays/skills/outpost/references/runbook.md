@@ -93,7 +93,8 @@ outpost send --quality pro .outpost/<run>/packet.md --to last
 ```
 
 The runner's in-browser guard must commit the user turn under 120 seconds and
-record `submitElapsedSeconds`; it exits `75` at that boundary. Never increase
+record `submitElapsedSeconds`; past that boundary it exits `75` when the click
+had not happened yet and `76` when it had. Never increase
 or blindly retry the budget. One REPL process keeps the Work page alive through
 submission, response completion, and optional download. Never split those
 stages across REPL processes: closing the first process can terminate the
@@ -142,9 +143,23 @@ outpost send --quality pro .outpost/<run>/packet.md --artifact .outpost/<run>/ar
 Aside waits for the ChatGPT download event, saves the zip directly, and the
 runner requires a nonempty zip with a valid CRC.
 
-Exit `76` is `SUBMIT_UNKNOWN`: the click occurred but the user turn was not
-commit-verified before the deadline. Preserve its evidence and never retry,
-invoke the Aside agent, or enter the Playwright fallback.
+Exit `76` is `SUBMIT_UNKNOWN`: submission could not be proven either way —
+the click occurred but the user turn was not commit-verified before the
+deadline, or the REPL ended (daemon lost, CLI exited, process timeout) with
+no submission marker at all. The runner tries backend recovery by outpost ID
+once; if that finds nothing the state stays unknown and `result.json` keeps
+`status: submit_unknown` with the ID. Preserve its evidence and never retry,
+invoke the Aside agent, or enter the Playwright fallback. The send script is
+never re-run automatically: a re-run after a click is a second Pro turn.
+Not seeing a conversation in the project is not proof of unsent (a `--to`
+continuation creates none; 2026-09-29 two sends reported as unsent had both
+reached ChatGPT). Find the turn by its outpost ID before deciding anything.
+
+Exit `75` is `NOT_SUBMITTED` only when the send script printed
+`OUTPOST_FAIL stage=<pre-submit stage>` — it aborted before the click.
+A transcript with no marker is not proof of that; it is exit `76`.
+`result.json` then has `status: not_submitted` and `failureStage`, and the
+same run directory may send again once the cause is fixed.
 
 Exit `77` is `SUBMITTED_RESPONSE_UNAVAILABLE`: the exact user turn committed,
 but response tracking ended. Use the saved `conversationUrl` to recover that
