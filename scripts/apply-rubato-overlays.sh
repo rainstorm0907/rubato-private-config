@@ -22,15 +22,7 @@ for source in "$source_root"/*/; do
   rsync -a --delete "$source/" "$target/"
 done
 
-mkdir -p "$HOME/.claude/skills" "$HOME/.codex/skills" "$HOME/.local/bin"
-for client in claude codex; do
-  link="$HOME/.$client/skills/browser-cli"
-  rm -rf "$link"
-  ln -s "$destination/browser-cli" "$link"
-done
-for command in abrowse gbrowse isearch; do
-  ln -sf "$destination/browser-cli/scripts/$command" "$HOME/.local/bin/$command"
-done
+mkdir -p "$HOME/.local/bin"
 ln -sf "$root/scripts/rubato-clean-env.sh" "$HOME/.local/bin/rubato-personal"
 
 shell_hook="[ -f \"$root/shell/rubato.zsh\" ] && source \"$root/shell/rubato.zsh\""

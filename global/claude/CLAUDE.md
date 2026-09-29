@@ -59,9 +59,13 @@ The builder performs local checks. The lead chooses how to obtain evidence that 
 candidate serves the outcome: direct inspection, an existing repeatable run, or independent
 actual-use review when another observer can resolve a material blind spot. Select this
 help without waiting for the user to name a reviewer; required staffing, model, device and
-budget permissions still apply. When preparation, review and correction need a coordinated
-return path, use the runtime-correct dispatching workflow guide. Reuse decisive evidence;
-no extra evaluator for routine work. Comprehension-only and goal reviews need different inputs.
+budget permissions still apply. Reuse decisive evidence; no extra evaluator for routine
+work. Comprehension-only and goal reviews need different inputs.
+
+Peer review: a reviewer of an approach may reframe the question it was given; a narrow
+check stays on its named claim. Keep a supported observation even when you reject its
+proposed remedy. When one repair keeps undermining another, ask the owner for a method
+decision instead of another patch.
 
 Mechanical checks cover what they measure. Critique craft from available evidence, while
 leaving the user's own experience and adoption to them. Frames do not prove full-speed
