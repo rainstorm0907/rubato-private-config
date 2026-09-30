@@ -14,13 +14,25 @@ A 재료 → B 메인 핀 → C Recap 로직 → D Recap 표현 → E 친구 베
 
 | 단계 | 할 일 | 끝 기준 | 상태 |
 |---|---|---|---|
-| **A 재료** | 폰 실제 보관함을 시뮬 `maplog-real`에 옮긴다(위치 있는 사진, 긴 변 1280px, `tools/phone-photos/`). 폰 보관함 날짜·위치 자료는 `2026-09-30-photo-points/v2/` | 시뮬 앱의 지도와 Recap이 폰과 같은 규모로 돈다 | 끝(2,465장·장소 564, 2026년 Recap 817장 → 멈춤 38·113.6초, `2026-09-30-real-sim/`). 새 시뮬이라 미감·유사도 분석 전(`features-skipped`) |
-| **B 메인 핀** | 넓게 볼 때도 사진이 실제 양만큼 많아 보이게(“7천장이 이렇게밖에 안보인다고? 특히나 작게 보면 더”, `d7c9d06d`). 후보 `2026-09-30-pin-quantity/`(opus: 두께 B·끝까지 커지기 A, astra: 얇은 더미) | 사용자가 폰에서 고름 | 앱 DEBUG 핀 칩에 F6·두께·끝까지·더미(`dev` `66f1f0c`), 비교 `2026-09-30-pin-app/index.html`. 사용자 선택 대기 |
-| **C Recap 로직** | 무엇에 멈추고 어떻게 움직일지 하루~여러 해를 다시 설계(“단순 지금 수정으로 해결안되면”, `e2e0defd`). 설계 두 판 `2026-09-30-recap-redesign/`(opus 추천: 넓은 지도에서 시간이 흐르며 흔적이 쌓이고 여행에서 들어갔다 나옴, astra: 해마다 장을 넘기고 먼 이동은 넓은 지도) | 한 달·한 해·전체를 폰에서 봄 | 방향 고를 차례 |
+| **A 재료** | 폰 실제 보관함을 시뮬 `maplog-real`에 옮긴다(위치 있는 사진, 긴 변 1280px, `tools/phone-photos/`). 폰 보관함 날짜·위치 자료는 `2026-09-30-photo-points/v2/` | 시뮬 앱의 지도와 Recap이 폰과 같은 규모로 돈다 | 실사진 2,465장 이관 완료(장소 564, 2026년 Recap 817장 → 멈춤 38·113.6초, `2026-09-30-real-sim/`). 폰과 다른 점: 실용 사진 494장·영상 152개 없음, 새 시뮬이라 미감·유사도 분석 전(`features-skipped`) |
+| **B 메인 핀** | 넓게 볼 때도 사진이 실제 양만큼 많아 보이게(“7천장이 이렇게밖에 안보인다고? 특히나 작게 보면 더”, `d7c9d06d`). 후보 `2026-09-30-pin-quantity/`(opus: 두께 B·끝까지 커지기 A, astra: 얇은 더미) | 사용자가 폰에서 고름 | 두께 기본(`dev` `1f909df`: 한두 장 핀은 F6 크기, 사진 많은 곳만 커지고 종이 옆면). TestFlight 빌드 4(`dev` `1f909df` Release, 내부 테스터만)를 사용자가 폰에서 봄: 손가락 확대·축소 검증 실패(사진 0.3초 늦게, 축소 뒤 무더기로 생김·손 떼야 크기 바뀜), 보완 중 `2026-09-30-pin-gesture/`. 두께 모양 자체의 느낌은 그 뒤에 본다 |
+| **C Recap 로직** | 무엇에 멈추고 어떻게 움직일지 하루~여러 해를 다시 설계(“단순 지금 수정으로 해결안되면”, `e2e0defd`). 설계 두 판 `2026-09-30-recap-redesign/`(opus 추천: 넓은 지도에서 시간이 흐르며 흔적이 쌓이고 여행에서 들어갔다 나옴, astra: 해마다 장을 넘기고 먼 이동은 넓은 지도) | 한 달·한 해·전체를 폰에서 봄 | 방향 합의(여행 중심 X, 길이 한 달 1분·한 해 90초·여러 해 2분, `06751f65`). C1 무엇을 보여 줄지(편집 층 + 실사진 미리보기) 비교 `2026-09-30-recap-c1/compare.html` → Opus 편집 층 바탕 선호(`95f5df0c`, `c1-opus` `4f460eb`, dev 반영 대기). C2 카메라는 그 뒤 |
 | **D Recap 표현** | 도입 ④(콜라주 속도·날짜 1+3·선), 멈출 핀(세운 핀), 도착 액자·등장. B·C 결과 위에서 다시 연다. 견본 `2026-09-30-which-photos/`, 비교 `2026-09-30-decide/` | 사용자가 폰에서 봄 | B·C 뒤 |
 | **E 친구 베타** | `dev`를 main에 합침, TestFlight 빌드, 처리방침 문구 셋 고침, 개인정보 라벨 게시(사용자가 누름) | 친구 설치 | 맨 끝 |
 
 단계 안에서 일하는 방식: 사용자 판단을 올리는 줄기는 한 번에 하나, 결정 페이지도 하나. HTML 견본은 방향 잡기에만 쓰고 고르는 건 `maplog-real`과 폰에서 한다. 후보를 만들기 전에 불만을 실제 자료로 먼저 확인한다(9/30 “멈출 핀이 안 보임”은 F6 크기=사진 수와의 충돌, “사진이 적어 보임”은 크기 상한과 위치 없는 사진 59%였다). 모델 비교는 C 구현에서 한다.
+
+**일하는 흐름은 `AGENTS.md` “한 작업을 닫는 흐름”**(사용자 `f3e10fc5`·`4a91c977`, 검토 `2026-09-30-process/review.md`·`review2.md`). 폰 전 점검 도구 `/Users/wooojin/Downloads/maplog-qa/tools/PREPHONE.md`. 결정 상태 표는 폰·코드와 어긋날 수 있는 결정만 둔다.
+
+## 사용자 결정의 반영 상태
+
+| 결정 (PRODUCT) | 상태 |
+|---|---|
+| 탭 열 때 콜라주 없음, ▶ 뒤에만 (④, `6920e7c2`) | 코드 반영 대기 — 빌드 4에 첫 진입 콜라주가 남아 있음(`RecapPickerView`), 휠 담당이 제거 중 |
+| 기본 핀 두께 (`08def48f`) | 코드 반영, 빌드 4 설치 — 폰 손가락 확대·축소 검증 실패, 보완 중(위 B) |
+| 휠 도는 중엔 핀만 갱신, 카메라는 멈춘 뒤 한 번 (`d7c9d06d` → `9500ad6`) | 코드 반영, 빌드 4 설치 — 시뮬 측정만(`2026-09-30-recap-picker/media/fb2-wheel-updown-before-after.mp4`, 카메라 이동 48→0), 빌드 4 피드백에 춤춘다는 말은 없었음(확인은 아님). 미리보기 사진 늦게 뜨는 것 남음 |
+| Recap 길이 한 달 1분·한 해 90초·여러 해 2분, 여행마다 한 장은 바닥 (`06751f65`, `6920e7c2`) | 반영 대기 — C1 편집 층 선호(`c1-opus` `4f460eb`, dev 밖) |
+| 여행 중심 설계 X, 일상·재미난 사진도 기억 (`06751f65`) | 반영 대기 — C1 편집 층 |
 
 ## 지금 앱에 있는 것
 
@@ -43,7 +55,7 @@ A 재료 → B 메인 핀 → C Recap 로직 → D Recap 표현 → E 친구 베
 
 - **계정·스토어.** Apple Developer Program 개인 가입·결제(주문 W1419181904, 팀 `5WGZKZGPQS`). 번들 ID `com.wooojin.bihengun` 등록(“ㅇㅇ 그ㅜ럼 그걸로 ㄱㄱ” `71016360`). App Store Connect 앱 “비행운”(한국어, SKU `bihengun-ios`)으로 스토어 이름 확보. 상표 준비표 `/Users/wooojin/Downloads/maplog-qa/2026-09-28-app-name/TRADEMARK-PLAN.md`.
 - **App Store Connect·네이버 클라우드(9/28–29).** 카테고리 사진 및 비디오(보조 여행), 개인정보 처리방침·지원 URL, 저작권 “2026 정우진”, 연령 등급 4+(한국 전체) 입력. 개인정보 라벨은 “기타 사용 데이터 · 앱 기능 · 사용자와 연결 안 됨 · 추적 안 함”으로 답까지 저장했고 **게시 버튼은 아직 안 눌렀다**(법적 확인 문구라 사용자가 누름, 9/29 오전 확인). 네이버 클라우드 Maps 앱에 iOS 번들 `com.wooojin.bihengun` 추가(기존 `com.wooojin.maplog` 유지).
-- **TestFlight.** 빌드 1·2는 Internal Only(내부 테스터만). 빌드 3(1.0 (3), `618905a`, 9/29 14:19)은 일반 방식으로 올려 내부 그룹에 들어갔고, 외부 그룹 ‘친구’(테스터 0명)에 붙여 **베타 앱 심사 대기 중**. 테스트 정보(베타 설명 습니다체, 피드백 rainstorm0907@gmail.com, 심사 연락처, 로그인 불필요, 영문 심사 메모)는 저장됨. 친구에게는 디자인을 다듬은 빌드가 나오면 공개 링크(인원 상한 5)를 켠다. 업로드는 App Store Connect API 키(`M8442F4527`, 제품 개발 권한, 키 파일 `~/.appstoreconnect/private_keys/`)로 한다 — 명령은 `/Users/wooojin/Downloads/maplog-qa/2026-09-29-release/UPLOAD.md`. Xcode 계정 인증은 자주 풀린다.
+- **TestFlight.** 빌드 1·2는 Internal Only(내부 테스터만). 빌드 3(1.0 (3), `618905a`, 9/29 14:19)은 일반 방식으로 올려 내부 그룹에 들어갔고, 외부 그룹 ‘친구’(테스터 0명)에 붙여 **베타 앱 심사 대기 중**. 테스트 정보(베타 설명 습니다체, 피드백 rainstorm0907@gmail.com, 심사 연락처, 로그인 불필요, 영문 심사 메모)는 저장됨. 친구에게는 디자인을 다듬은 빌드가 나오면 공개 링크(인원 상한 5)를 켠다. 업로드는 App Store Connect 관리자 API 키(`4AK4L3FNS3`, 9/30 발급; 옛 `M8442F4527`은 9/30 무효화, 키 파일 `~/.appstoreconnect/private_keys/`)로 한다. 빌드 4 = 9/30 `dev` 두께판(내부만) — 명령은 `/Users/wooojin/Downloads/maplog-qa/2026-09-29-release/UPLOAD.md`. Xcode 계정 인증은 자주 풀린다.
 - **개인정보·지원 페이지.** GitHub Pages `https://rainstorm0907.github.io/bihengun/privacy/`·`/support/`(저장소 `rainstorm0907/bihengun`, 원본 `/Users/wooojin/App/bihengun-site`, 문의 rainstorm0907@gmail.com — 사용자 지정 `403045ec`). 9/29 감사에서 문구가 실제보다 좁은 곳 셋(Apple 조회 조건, 네이버 지도 영역 요청, 기기 백업)이 나와 고치는 중 — 다른 지도 앱 문장 조사 뒤 확정. 위치정보법 신고는 기기 밖 전송이 없어 제외로 해석(lbsc.kr 비신고 ②, 법률 자문 아님).
 - **지도 스타일.** My Style ID 쿨 v1 `c0bd79de-5f86-4e71-9088-ac562c358891`, 크리스프 v3 `ec048c83-9517-47ba-ace3-dec192d420f8`, 웜 v2 `b91359bb-907c-4d14-8a50-1cc9d26f193e`(사용자 선호 “v1 >> v3 => v2”, `831bfd40`). 앱은 에디터 주소창 uuid가 아니라 My Style ID를 받는다. 에디터 Hex 입력이 일부 회색을 잘못 받으니(#f4f4f2→#f4f42c) 저장 뒤 값을 다시 본다. 거리 축척 식당·병원 아이콘은 아직 켜져 있다.
 
@@ -59,7 +71,7 @@ A 재료 → B 메인 핀 → C Recap 로직 → D Recap 표현 → E 친구 베
 
 앱 전체를 리드 세션 하나가 맡는다(9/29 저녁 `01a0e5b9`에서 인계). 담당 에이전트는 위 환경 규칙으로 일한다. `record/CURRENT.md`·`record/PRODUCT.md`는 리드만 고친다.
 
-모델 쓰임(사용자 `195e24a6`, `e2e0defd`, `e35c4c9c`): 판단·전환점 검토는 Astra(`openai-codex/gpt-6-astra`) xhigh를 부탁 없이 쓴다. 싸게 넓게 찾는 탐색은 DeepSeek 또는 Grok high. 두 번째 계정 한도가 10/1에 초기화될 때까지 Opus 담당은 `anthropic/claude-opus-5-5-sub`·fast·effort high. 어려운 판단·설계는 GPT Pro(Outpost)도 쓴다. 같은 브리프로 Opus와 Astra를 나란히 비교하는 건 C 구현에서 한다(`54b4a7c4`, 기록 `/Users/wooojin/Downloads/maplog-qa/model-compare/`).
+모델 쓰임(사용자 `195e24a6`, `e2e0defd`, `e35c4c9c`): 판단·전환점 검토는 Astra(`openai-codex/gpt-6-astra`) xhigh를 리드가 필요할 때 부탁 없이 쓴다(상시 필수 검토자는 아니다). 싸게 넓게 찾는 탐색은 DeepSeek 또는 Grok high. 두 번째 계정 한도가 10/1에 초기화될 때까지 Opus 담당은 `anthropic/claude-opus-5-5-sub`·fast·effort high. 어려운 판단·설계는 GPT Pro(Outpost)도 쓴다. 같은 브리프로 Opus와 Astra를 나란히 비교하는 건 C 구현에서 한다(`54b4a7c4`, 기록 `/Users/wooojin/Downloads/maplog-qa/model-compare/`).
 
 ## 폰에서 볼 것·막힌 판단
 

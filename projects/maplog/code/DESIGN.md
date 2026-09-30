@@ -2,7 +2,7 @@
 
 **현재 적용 안내 (2026-09-29):** 먼저 [CURRENT](../record/CURRENT.md)와 [PRODUCT](../record/PRODUCT.md)를 읽는다. 아래의 모임 중심 정체성·고정 토큰은 6~7월 옛 앱(`code/Maplog/`)의 디자인 자산 기록이며 새 제품 정의를 덮지 않는다. 관련 화면의 이유와 보호할 경험에 맞는 부분만 재사용하고, 과거 화면 계약·검사 통과를 새 표현의 채택으로 승계하지 않는다. 친구·모임 기능은 이번 출시에 없다([PRODUCT 이번 출시에서도 안 하는 것](../record/PRODUCT.md#not-this-release)).
 
-**9/24 갱신:** 한 화면의 정보량은 최소로 둔다(사용자 확정, 아래 6장 10항과 [PRODUCT 화면 규칙](../record/PRODUCT.md#screen-rule)). Recap 탭(기간 모음)은 어두운 사진 감상 표면(Ambient Dark)이다. 아래 2장의 밝은 방향은 지도·앨범 화면 기준이고, Recap 탭 합의는 [PRODUCT Recap 모음 화면](../record/PRODUCT.md#recap-collection)을 따른다.
+**화면별 적용 범위:** 한 화면의 정보량을 최소로 두는 9/24 사용자 결정은 아래 6장 10항과 [PRODUCT 화면 규칙](../record/PRODUCT.md#screen-rule)을 따른다. 어두운 사진 감상 표면(Ambient Dark)은 [이전 Recap 모음 화면](../record/PRODUCT.md#recap-collection)의 채택 이력이다. 새 [기간 고르기](../record/PRODUCT.md#recap-period-picker)·오프닝·재생은 해당 화면의 채택 범위와 실제 결과를 따르며, 이 문서만으로 표면의 색을 새로 확정하거나 기존 어두운 표현을 일괄 폐기하지 않는다. 실제 적용 판본은 [CURRENT](../record/CURRENT.md)에서 확인한다.
 
 이 문서는 관련 디자인 자산과 세부 계약을 찾는 입구다. 특정 화면의 수치와 과거 QA 이력은 필요한 범위에서만 읽는다.
 
@@ -21,7 +21,8 @@
 | 사진 선택·grouping·location segment·cover·album flow | [`design/import-and-album-flows.md`](design/import-and-album-flows.md) |
 | 하단 navigation·로컬 앨범 탐색 | [`design/navigation-and-album.md`](design/navigation-and-album.md) |
 | 여러 화면을 가로지르는 정보 계층·표면·행동·공용 UI | [`design/app-wide-design-language.md`](design/app-wide-design-language.md) |
-| Recap 탭(기간 모음)·Recap 카드 | [PRODUCT Recap 모음 화면](../record/PRODUCT.md#recap-collection) + [`design/app-wide-design-language.md`](design/app-wide-design-language.md) |
+| Recap 탭·기간 고르기·오프닝·재생 연결 | [PRODUCT 기간 고르기](../record/PRODUCT.md#recap-period-picker) + [`design/app-wide-design-language.md`](design/app-wide-design-language.md) |
+| 이전 모음 화면·Recap 카드의 유지 또는 재사용 | [PRODUCT 이전 모음 화면](../record/PRODUCT.md#recap-collection) + [`design/app-wide-design-language.md`](design/app-wide-design-language.md) |
 | 사용자 확정사항이나 제품 전략을 바꿀 가능성 | [PRODUCT](../record/PRODUCT.md) |
 | 과거 결정 근거나 회귀 여부 | git 기록의 옛 작업 일지(2026-09-29 정리로 지움) 중 필요한 것 하나 |
 
@@ -67,7 +68,7 @@ Maplog가 아닌 것:
 
 구조 제목은 실제로 여러 콘텐츠를 묶을 때만 둡니다. 제목·본문·배지·꼬리말이 같은 뜻을 반복하지 않으며, 사용자가 눌러야 할 주 행동·보조 행동·파괴 행동과 결정에 필요한 조건을 낮은 대비 설명문보다 먼저 읽히게 합니다. 직관은 설명을 더 붙이는 것이 아니라 구역과 시각적 무게로 만듭니다.
 
-현재 앱 전체 디자인 언어의 기준은 사진이 깔린 메인 지도와 기간 Recap(모음·재생)입니다. 앞은 지도 위 사진을 둘러보는 밝은 표면, 뒤는 사진을 감상하는 어두운 표면(Ambient Dark)을 대표합니다. 7월의 `모임 상세 추억 타임라인`·`멤버 초대 sheet` 기준은 옛 앱 기록입니다. 다른 화면은 배치를 복사하는 대신 [`app-wide-design-language.md`](design/app-wide-design-language.md)의 콘텐츠 우선순위·정보 계층·행동 문법을 자기 목적에 맞게 적용합니다.
+현재 화면의 목적과 보호할 경험은 [PRODUCT](../record/PRODUCT.md)에서 확인합니다. 메인 지도와 이전 모음 화면에서 채택한 표현은 재사용 자산이며, 새 기간 고르기·오프닝·재생에 같은 배치와 표면을 자동으로 적용하지 않습니다. 7월의 `모임 상세 추억 타임라인`·`멤버 초대 sheet` 기준은 옛 앱 기록입니다. 다른 화면은 배치를 복사하는 대신 [`app-wide-design-language.md`](design/app-wide-design-language.md)의 콘텐츠 우선순위·정보 계층·행동 문법을 자기 목적에 맞게 적용합니다.
 
 기준 이미지: `/Users/wooojin/Downloads/생성된 이미지 3.png`
 
