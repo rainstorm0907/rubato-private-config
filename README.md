@@ -19,6 +19,7 @@
 - `memory/codex/`: `~/.codex/memories/`
 - `memory/claude/projects/`: `~/.claude/projects/*/memory/`
 - `memory/rubato/agents/`: `~/.rubato/memory/agents/*/repo/`
+- `projects/maplog/`: `~/App/maplog`의 대표문서(`AGENTS.md`, `README.md`, `record/*.md`, `code/DESIGN.md`) 작업 트리 사본
 
 `skills/checkup`은 원래 심볼릭 링크지만, 다른 Mac에서도 복원할 수 있도록
 현재 대상 파일을 일반 디렉터리로 보관한다. 새 Mac에서는 일반 디렉터리로

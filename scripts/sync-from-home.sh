@@ -72,4 +72,17 @@ sync_dir "$HOME/.rubato/memory/agents" "$root/memory/rubato/agents" \
   --include='*/repo/***' \
   --exclude='*'
 
+# Maplog representative docs (project rules + canonical records), working-tree version.
+maplog="$HOME/App/maplog"
+if [[ -d "$maplog" ]]; then
+  sync_dir "$maplog" "$root/projects/maplog" -a --delete --prune-empty-dirs \
+    --include='/AGENTS.md' \
+    --include='/README.md' \
+    --include='/record/' \
+    --include='/record/*.md' \
+    --include='/code/' \
+    --include='/code/DESIGN.md' \
+    --exclude='*'
+fi
+
 echo "synced global config into $root"

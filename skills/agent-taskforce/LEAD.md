@@ -44,7 +44,8 @@ can support a direction and a useful ownership decision; do not solve the whole
 technical problem merely to estimate its difficulty.
 
 A bounded discovery agent may gather authorized evidence under a draft with a
-budget; it does not implement or become a continuing owner. Draft only when no
+stated scale; it does not implement or become a continuing owner. Execution owners are
+not relabeled as discovery subagents to skip the combined confirmation. Draft only when no
 existing source serves the purpose. Show the result, preserved behavior, non-goals,
 completion evidence, meaningful choices and smallest useful roster together in the
 user's language, using the sibling `work-intent/templates/approval-message.md`.
@@ -52,7 +53,7 @@ user's language, using the sibling `work-intent/templates/approval-message.md`.
 Wait for explicit acceptance of both intent and roster. Link the actual human reply
 to the proposal and reviewed intent revision; silence and generic earlier requests
 do not count. Follow work-intent for partial approval, accepted corrections and
-changed scope. Intent acceptance does not waive model, budget, frame or delivery
+changed scope. Intent acceptance does not waive model, spend, frame or delivery
 permissions. Carry exact `intent_ref` and canonical workspace into briefs and board
 metadata; the mission links these rather than duplicating intent.
 
@@ -78,11 +79,12 @@ ceremony and cannot bypass model approval.
 
 ## 5. Give a complete brief once
 
-Use Skill(dispatching) and `templates/task-brief.md` to delegate the bounded outcome,
-authority, write ownership, budget and done evidence. Budgets bound work, not ability.
-Separate your subquestion, method and causal guesses from source-backed requirements.
-Approach reviewers may reframe the question inside that outcome; narrow checks cover
-only their named claim. Leave method choice to the owner, within existing authority.
+Use Skill(dispatching) and `templates/task-brief.md`. Delegate the bounded result,
+authority, write ownership, source-backed constraints, scale and done evidence.
+Scale tells the owner when the surface outgrows the assignment; it is not a clock.
+Time and spend are your own checks: a time limit in the brief trades depth for speed. Repository
+locations, causal guesses and suggested methods remain provisional, even when
+quoted exactly. Leave the approach to the owner.
 
 Owners control local delegation and integration. Give affected peers' identities
 so they can negotiate interfaces and exchange counter-evidence directly. A helper
@@ -99,43 +101,39 @@ of each owner's work.
 Owners settle technical choices within approved boundaries and contracts. When a
 shared surface needs one decision owner, identify the accountable owner rather than
 collecting every next command. An unresolved conflict returns with evidence, options
-and a recommendation. You handle changes to priorities, scope, budget or authority
+and a recommendation. You handle changes to priorities, scope, spend or authority
 and bring consequential user choices back to the user. Do not use escalation as a
 synonym for moving to a higher-tier model.
+
+A teammate's normal turn end does not wake you: it stops, and only a message revives
+it. Record each member's assignment as a board item when you form the team, and have
+the member mark it completed when that assigned work is finished — the runtime's one
+aggregate wake for a finished batch is keyed on the run's board, so an unrecorded
+assignment cannot be reported as done. Do not watch progress instead: no monitor
+subscription, peek or log poll aimed at a delegate's or teammate's progress, task
+state or result file. A file landing is not work completion; the completion, failure
+and permission notifications already arrive, and a block that a peer cannot settle
+still reaches you.
 
 Notice patterns across streams, and propagate verified refutations to every affected
 owner. Preserve contradictions without deciding a technical cause from authority
 alone. A named owner synthesizes technical evidence or implements a shared fix.
 
-For an empty return or suspected stall, inspect current task and execution state.
-An enqueued message establishes neither delivery nor resumed work. Distinguish a
-resident waiting member from a disposed or stopped execution; use supported recovery
-inside authority before reporting resumed work. Separate lifecycle failure from a
-refuted approach, brief conflict or invalid measurement, then choose continuation,
-bounded advice or reassignment from that evidence. Preserve user stops and budgets.
+When an owner returns short or reports a block, recover the cause in that session
+as Skill(dispatching) "When it comes back short" describes. Do not become the next
+implementer because an owner was blocked.
 
 ## 7. Use evidence without duplicating execution
 
 Owners produce direct local evidence and the integration owner checks combined
-behavior. An approved verifier may prepare decision-relevant evidence before the
-result exists and independently challenges the result and, when material, the
-acceptance criterion; agree that scope in the existing assignment, not a new roster.
-The verifier sends defects directly to the owner; criterion or intent changes come
-to you. See "Evidence exchange" in `references/01-operating-model.md`.
-
-Judge counter-evidence against the originating outcome and actual result, including
-answers that correct your subquestion. Preserve a supported observation even when
-rejecting its proposed remedy. The accountable owner chooses how coupled requirements
-can work together; ask for a method decision when one repair undermines another,
-not another list of patches. Decide within authority or bring the remaining user
-choice with evidence and a recommendation. A written plan alone settles neither.
+behavior. An approved verifier independently challenges the result and, when
+material, the acceptance criterion. The verifier sends defects directly to the
+owner; criterion or intent changes come to you.
 
 Review the decisive artifacts and what their evidence actually establishes. Request
 a missing check from its responsible owner or verifier. Do not re-run a full suite
 merely because the lead must accept the result. If no independent verifier is warranted,
 use reproducible owner/integration evidence without calling it independent.
-For an actual-use review with correction and recheck, use
-`../dispatching/references/bounded-follow-through.md` when that path is needed.
 
 For a long or consequential run, a fresh milestone review may challenge shared
 premises or a measurement that all resident contexts assumed. Follow
@@ -146,7 +144,7 @@ path rather than recursively adding reviews to reviewers.
 ## 8. Discuss fulfillment against the current intent
 
 Reread current intent and acceptance links before final communication. A finished
-turn, valid budget return, passed local test and fulfilled user goal are different
+turn, valid scale return or stop, passed local test and fulfilled user goal are different
 states. Accept only claims supported by the agreed evidence path. A required failed
 or unavailable check remains a gap, regardless of confidence.
 

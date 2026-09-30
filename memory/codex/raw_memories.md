@@ -2,269 +2,6 @@
 
 Merged stage-1 raw memories (stable ascending thread-id order):
 
-## Thread `019fa306-06b3-71f3-a29a-649ca3a279a1`
-updated_at: 2026-08-13T14:05:16+00:00
-cwd: /Users/wooojin/dev/maple
-rollout_path: /Users/wooojin/.codex/sessions/2026/07/27/rollout-2026-07-27T19-01-48-019fa306-06b3-71f3-a29a-649ca3a279a1.jsonl
-rollout_summary_file: 2026-07-27T10-01-48-N8Pv-maple_tool_optimization_and_legongre_exp_event_workflow.md
-
----
-description: Maple 프로젝트 실제 사용 기반 도구 개선, 14일 snapshot 재사용 정책, 레공레 경험치/메카베리 계산 및 운영 규칙
- task: maple-tool-optimization-and-legongre-exp-planning
- task_group: maple-growth-assistant
- task_outcome: success
- cwd: /Users/wooojin/dev/maple
- keywords: maple-growth-assistant, growth-assistant, latest_digest, package_share, 레공레, 모멘텀-패스, 메카베리, 소재, KST, quiet-browse, ECONNREFUSED
----
-
-### Task 1: 실제 도구 실행과 최소 개선
-
-task: run-maple-tools-and-fix-observed-friction
-task_group: maple-tooling
-task_outcome: success
-
-Preference signals:
-- 사용자가 “오늘 한번 업뎃하고 2주정돈 괜찮”이라고 했다 -> snapshot에 고정 30분 freshness gate를 두지 말고 오늘 갱신한 데이터는 약 14일 재사용한다. 단, 경매장 매물·이벤트 일정·주간 진행은 별도 최신 확인.
-- 사용자는 도구 코드를 실제로 사용해 보며 최적화할 것을 요청했다 -> 문서만 보고 과잉 설계하지 말고 실제 CLI 실행에서 관찰된 마찰만 최소 수정한다.
-
-Reusable knowledge:
-- 진입 문서: `AGENTS.md` → `kb/codex-brief.md` → `kb/session-handoff.md`.
-- 실제 갱신 명령: `./scripts/fetch_character.sh <캐릭터명>`.
-- `today`는 KST로 표시해야 한다. `formatSeoulTimestamp()`가 UTC ISO 출력 문제를 해결했다.
-- 해방 필드는 실제로 추적 중인 캐릭터에서만 blocker를 만들고, `manual.liberation`이 완전히 비어 있으면 blocker를 만들지 않는다.
-- 브라우저 정찰 실패는 부분 결과를 보존하되 `latest_digest.sh`가 exit 1을 반환해야 한다. 검증 실패 사례: `ECONNREFUSED 127.0.0.1:9223`.
-- `package_share.sh` 보안 검사는 느슨하게 하지 않는다. KB에 남은 `/Users/...` 경로를 제거하면 공유 zip과 secret scan이 통과한다.
-
-Failures and how to do differently:
-- `rg`를 `character` 전체에 실행하면 대형 JSON으로 출력이 폭발한다. 특정 파일/필드와 `jq` projection을 사용한다.
-- 브라우저 섹션 실패를 파일 생성만으로 성공 판단하지 않는다.
-
-References:
-- `npm test` → growth 테스트 7개 통과, auction fixture/429 backoff 통과.
-- `bash -n scripts/*.sh && node --check tools/auction-scan.js` 통과.
-- `package_share PASS (non-empty archive, secret scan passed)`.
-
-### Task 2: 레공레 경험치·모멘텀 패스·메카베리
-
-task: calculate-legongre-exp-bm-and-mechaberry-order
-task_group: maple-exp-planning
- task_outcome: success
-
-Preference signals:
-- 사용자는 “1소재=30분”으로 계산하고 “시간대비 몇억까지인지 결론”을 원했다 -> 답변은 소재/시간/메소 환산과 구매 상한을 결론 먼저 제시한다.
-- 구매 후에는 실제 사용 직전 수치와 스크린샷을 우선해 계산을 갱신한다.
-
-Reusable knowledge:
-- 레공레 기준 1소재(30분)는 약 0.545~0.581% EXP.
-- 모멘텀 패스 유료 보상은 메카베리 10장 + 상급 EXP 9,000장. 당시 추정은 약 160~171소재, 80~85시간 사냥 상당.
-- 49,800원, 억당 1,600원 가정 시 31.125억 메소 상당. 30억까지 확실히 납득 가능, 35억까지 시간 절약 목적이면 허용.
-- 메카베리→상급 EXP와 상급 EXP→메카베리는 실측 차이가 반올림 오차 수준(약 Lv.284 69.360% vs 69.359%). 편한 순서로 사용해도 된다.
-- 메카베리 피버는 경험치 배율이 아니다. 피버 중 `슈피겔버스트`를 쿨타임 없이 사용하게 할 뿐이다. 추가 경험치 효과도 적용되지 않는다. 30분 제한 내 복구율 100%를 달성하고, 피버 중 퇴장하면 재입장 시 게이지가 초기화된다.
-
-Failures and how to do differently:
-- 4배 경쿠 3시간 전체를 절약 시간으로 세지 말고, 평소 3배 대비 추가분만 분리한다.
-- 예측값보다 실제 스크린샷이 우선이다. 실제 사용 후 결과는 Lv.284 76.386%로 이전 예측보다 높았다.
-
-References:
-- `1소재 = 30분 사냥`
-- `https://maplestory.nexon.com/news/update/790`
-- `https://mapleroad.kr/lib/calculator/golden_berry`
-- `https://mapleroad.kr/lib/calculator/exp`
-- `https://mapleroad.kr/lib/exp_calculator/hunt`
-
-### Task 3: 렌 창룡파천검 질문
-
-task: explain-ren-changryongpacheongeom-activation
-task_group: maple-skill-help
- task_outcome: partial
-
-Preference signals:
-- 사용자는 “쉽게 설명좀해줘”라고 했다 -> 스킬 사용법은 복잡한 원리보다 게임 내 입력 순서와 핵심 조건을 짧게 설명한다.
-
-Reusable knowledge:
-- `./scripts/fetch_character.sh 렌`은 API HTTP 400, `OPENAPI00004 Please input valid parameter`로 실패했다.
-- 전체 JSON grep은 출력 폭발 위험이 있다. 관련 파일을 좁혀 읽어야 한다.
-
-Failures and how to do differently:
-- API 400 시 traceback 대신 상태 코드와 error body를 먼저 출력한다.
-- 검색 자료에서 창룡파천검 관련 트리거가 일부 보였지만, 공식 입력 순서를 확정하지 못했으므로 다음 실행에서는 공식 스킬 설명/툴팁을 먼저 검증한다.
-
-References:
-- `{"error":{"name":"OPENAPI00004","message":"Please input valid parameter"}}`
-- 검색 핸들: `창룡파천검 : 승천`, `망혼검 절기 : 심검 이후 발동`
-
-## Thread `01a010c2-1a1d-7b41-a3f8-3f38339acecf`
-updated_at: 2026-08-17T17:35:41+00:00
-cwd: /Users/wooojin/App/openaigame
-rollout_path: /Users/wooojin/.codex/sessions/2026/08/18/rollout-2026-08-18T02-25-51-01a010c2-1a1d-7b41-a3f8-3f38339acecf.jsonl
-rollout_summary_file: 2026-08-17T17-25-51-AJQ3-independent_aerial_scene_comparison_grok_4_6.md
-
----
-description: 독립 공중 맵 장면 A/B 분석을 규약대로 단일 파일에 작성 완료; A안 판정과 엄격한 입력·출력·검증 절차
- task: independent-aerial-scene-comparison
- task_group: openaigame-scene-design
- task_outcome: success
- cwd: /Users/wooojin/App/openaigame
- keywords: openaigame, scene-comparison-protocol, aerial-map, Grok-4.6, docs/23, glide-boost, apply_patch, git-status
----
-
-### Task 1: 독립 공중 장면 A/B 비교
-
-task: `docs/28-scene-comparison-protocol.md`에 따른 독립 분석 파일 작성
-task_group: openaigame scene design
-task_outcome: success
-
-Preference signals:
-- 사용자는 “공통 입력 패킷만 지정 순서로 읽으세요”라고 요구했다 -> 유사한 독립 분석에서는 지정 문서만 정확한 순서로 읽는다.
-- 사용자는 “다른 분석 세션의 존재나 결과를 찾거나 읽거나 언급하지 마세요”라고 요구했다 -> 교차 세션 오염을 피하고 다른 결과를 탐색하지 않는다.
-- 사용자는 “유일한 산출물은 ... 지정된 파일 하나”라고 요구했다 -> 승인된 파일 하나만 수정하고 나머지 프로젝트 파일은 건드리지 않는다.
-- 사용자는 좌표·픽셀 수치·블록맵·구조도·코드 산출 금지를 명시했다 -> 장면·감각·물리 문법 수준에서만 분석한다.
-
-Reusable knowledge:
-- 현재 프로젝트 단계는 열린 공중 맵 장면 비교다. A/B 중 하나를 선택하기 전 구조도·블록맵·좌표·구현으로 내려가지 않는다.
-- `docs/23-measured-balance-patch.md`에서 속도날개 I의 약 32,000px 도달은 검증됐지만, 활공 상승 부스터와 패치 후 카메라 감각은 `[예상]`으로 남겨야 한다.
-- 규약 §3 필수 출력 제목은 A/B 각각 `대표 비행 1회 서사`, `속도날개 경로 vs 활공날개 경로`, `랜드마크 3개`, `다시 오고 싶은 구석 1곳`, `실패 위험`이며, 이후 `## 판정`과 `## 이 판정을 뒤집을 수 있는 것`을 포함한다.
-- 최종 산출물은 `/Users/wooojin/App/openaigame/docs/reviews/scene-comparison-grok-4.6-high.md`에 작성됐고, 필수 섹션 검사는 모두 통과했다.
-- 분석 판정은 A안 「거대한 매달린 형태」였다. 큰 매달린 형태의 위·아래 공간이 급강하→속도→상승→활공 문법과 속도날개/활공날개의 대가 차이를 더 명확히 보여준다는 논리였다.
-
-Failures and how to do differently:
-- `apply_patch` 호출은 문자열/래퍼 형식 오류로 반복 실패했다. 긴 단일 문서 작성에서는 이 환경의 `exec` 내부 Python heredoc으로 대상 파일만 쓰는 방식이 성공했다.
-- `git status`는 해당 디렉터리가 Git 저장소가 아니어서 실패했다(`fatal: not a git repository`). 변경 검증은 Git에 의존하지 말고 파일 존재, 필수 제목, 크기, 내용 직접 검사로 대체한다.
-- 초기 셸 출력이 비었고 JS 실행기에는 `console`이 없었다. `text(...)`와 반환 객체의 `.output`을 사용해야 한다.
-
-References:
-- `/Users/wooojin/App/openaigame/docs/28-scene-comparison-protocol.md`
-- `/Users/wooojin/App/openaigame/docs/reviews/scene-comparison-grok-4.6-high.md`
-- 검증: 필수 섹션 모두 `OK`; 파일 크기 11089 bytes, 56 lines.
-- 판정 비행 전 조건: 활공 상승 부스터·활공날개 II 안전성·카메라 선행 개선은 아직 실제 비행으로 확정되지 않음.
-
-## Thread `01a01218-e960-74f1-bdc9-b2aca428d6c9`
-updated_at: 2026-08-20T10:14:19+00:00
-cwd: /Users/wooojin
-rollout_path: /Users/wooojin/.codex/sessions/2026/08/18/rollout-2026-08-18T08-40-17-01a01218-e960-74f1-bdc9-b2aca428d6c9.jsonl
-rollout_summary_file: 2026-08-17T23-40-17-o5At-openaigame_doc_routing_and_dumbfire_research.md
-
----
-description: OpenAI Game 문서 입구를 단일화하고 장기 설계 자료를 보존했으며, Dumbfire Instagram 사례 조사에서 재사용할 브라우저/Grok 절차와 조사 한계를 확인함
- task: openaigame 문서 라우팅 정리 및 Dumbfire 사례 조사
-task_group: /Users/wooojin/App/openaigame
- task_outcome: partial
-cwd: /Users/wooojin/App/openaigame
-keywords: OpenAI Game, START_HERE, AGENTS.md, CLAUDE.md, DECISIONS.md, HANDOFF.md, docs/14, docs/28, Dumbfire, Instagram, aside-browser, browser-cli, grok-4.6, adapter_eof
----
-
-### Task 1: 대표 문서 라우팅 정리
-
-task: Claude/Codex가 OpenAI Game에서 중복 없이 현재 작업과 장기 설계를 구분하도록 대표 문서를 정리
-task_group: openaigame 문서 운영
-task_outcome: success
-
-Preference signals:
-- 사용자가 “대표 문서들만 최적화하고 통합”하길 원했고 큰 맥락 계획은 보존하길 확인함 -> 입구를 짧게 만들되 기존 설계 자료를 삭제하거나 폴더 재분류하지 않는다.
-- `cs sub`로 Opus 5 High와 논의 후 수정하길 요청함 -> 중요한 구조 결정은 독립 검토를 참고하되 메인 세션이 최종 통합한다.
-
-Reusable knowledge:
-- 새 세션 최소 읽기 경로는 `START_HERE.md` → `AGENTS.md` → `DECISIONS.md` → `docs/14` §0·§4 → `docs/28-scene-comparison-protocol.md`.
-- 파일 역할: `START_HERE`=현재 단계/읽기 라우팅, `AGENTS.md`=고정 규약, `DECISIONS.md`=append-only 이력, `docs/14`=허용·금지 게이트, `docs/28`=A/B 비교 절차·입력 패킷, `HANDOFF.md`=닫힌 세션 기록, `CLAUDE.md`=AGENTS 포인터.
-- 장기 설계·감성 자료는 `docs/08`, `docs/10`, `docs/11`, `docs/19`, `docs/20`, `docs/21`, `docs/frame/raw-brief-*`에 보존된다. 대부분 `DRAFT`/구현 허가 아님이다.
-- 프로젝트에는 Git 저장소가 없어 커밋 검증은 불가능하다.
-
-Failures and how to do differently:
-- `apply_patch`는 형식 오류로 실패했으므로 Python 파일 쓰기로 전환했다.
-- 긴 `cs sub` 호출은 stdout이 비어도 프로세스·출력 파일(`/tmp/openaigame-doc-opt/opus-response.md`)을 확인해 실제 응답 여부를 판단한다.
-
-References:
-- `/Users/wooojin/App/openaigame/START_HERE.md`
-- `/Users/wooojin/App/openaigame/AGENTS.md`
-- `/Users/wooojin/App/openaigame/CLAUDE.md`
-- `/Users/wooojin/App/openaigame/HANDOFF.md`
-- `/Users/wooojin/App/openaigame/docs/14-execution-gates.md`
-- `/Users/wooojin/App/openaigame/docs/28-scene-comparison-protocol.md`
-- `cs sub --model opus --effort high -p ...`
-
-### Task 2: Dumbfire Instagram 사례 조사
-
-task: 공개 Instagram 릴스·댓글과 공식 Steam 자료를 조사해 Dumbfire의 주목 원리와 OpenAI Game에 옮길 수 없는 표면 요소를 분리
- task_group: 외부 게임 사례 리서치
- task_outcome: partial
-
-Preference signals:
-- 사용자는 Dumbfire를 우리와 같은 계열로 억지 비교하지 말고 “이목을 끈 로켓 게임 사례”로 조사하길 원함 -> 유사 장르 판단보다 훅·반응·전이 가능한 원리를 분리한다.
-- 댓글은 즉시 기능 백로그로 만들지 말고 감탄, 숙련 욕망, 플레이/구매 신호, 확장 상상, 혼선으로 분류한다.
-- 공개 자료만 읽고 좋아요/팔로우/댓글/메시지 등 외부 상태 변경은 하지 않는다.
-
-Reusable knowledge:
-- 직접 관찰한 릴스: `DcJ3LTtJ7rs` 그래플(약 8.7천 좋아요/234댓글), `DbdcYQYJUYQ` 정확도(약 4.3천/141), `DbQy_Bgpi6b` 멀티 타깃(약 1.3만/235), `DboFffGp8Z6` 업데이트 조작(약 3.5천/129).
-- 반복 댓글: 조작 감탄, 지글 물리·그래플 반응, TAS/타임트라이얼, demo/release 요구, Mac·모바일·Xbox, sandbox/custom maps/level editor/Workshop, POV/fixed camera/FPV 조작 질문.
-- Dumbfire의 조사 가치는 “짧은 클립에서 물리 한 줄과 성공/실패가 읽히면 관객이 숙련을 상상하는가”를 보는 사례라는 점이다. 그래플·3D 장애물·군사 톤·밈을 복사하지 않는다.
-- Steam/itch의 제품 루프는 발사 → 운동량·기수 조작 → 좁은 코스/타깃 통과·격파 → 기록/별 → 즉시 재시작으로 요약되며, 우리 OpenAI Game의 급강하→속도→상승→활공과는 다르다. 위시리스트·판매량·전환율은 확인되지 않았다.
-
-Failures and how to do differently:
-- Aside 조사에서 `page.waitForTimeout is not a function`, 잘못된 `:has-text` selector, REPL 스코프 오류, `adapter_eof`가 발생했다. `sleep()`과 fresh snapshot을 사용하고 릴스 표본을 나눠 조사한다.
-- Grok 4.6 High는 웹 탐색만 반복하고 최종 응답이 늦었다. 리서치 범위·최대 턴을 좁히고 충분한 증거가 모이면 추가 검색 없이 결론을 닫는다.
-- 이번 Grok 응답은 롤아웃 종료 시점에 완전히 회수되지 않았으므로, 최종 보고서에서 직접 관찰·공식 확인·Grok 해석을 각각 표시한다.
-- `.codex` 전체를 넓게 `rg`하지 않는다. 프로젝트 경로와 명시적 glob만 검색한다.
-
-References:
-- `https://www.instagram.com/dumbfiregame?igsh=dXBnd25yMmplcm5z`
-- `https://www.instagram.com/dumbfiregame/reel/DcJ3LTtJ7rs/`
-- `https://www.instagram.com/dumbfiregame/reel/DbdcYQYJUYQ/`
-- `https://www.instagram.com/dumbfiregame/reel/DbQy_Bgpi6b/`
-- `https://www.instagram.com/dumbfiregame/reel/DboFffGp8Z6/`
-- `https://store.steampowered.com/app/4944600/Dumbfire`
-- `grok --model grok-4.6 --reasoning-effort high --permission-mode bypassPermissions --no-subagents --max-turns 12 ...`
-- Grok session: `/Users/wooojin/.grok/sessions/%2FUsers%2Fwooojin%2FApp%2Fopenaigame/01a018bf-6ab3-7ec3-b108-df076b2e7025/events.jsonl`
-
-## Thread `01a01eac-0c17-76a0-80b8-cba135b66726`
-updated_at: 2026-08-20T12:32:54+00:00
-cwd: /Users/wooojin
-rollout_path: /Users/wooojin/.codex/sessions/2026/08/20/rollout-2026-08-20T19-16-26-01a01eac-0c17-76a0-80b8-cba135b66726.jsonl
-rollout_summary_file: 2026-08-20T10-16-26-Z7ls-aside_grok_research_routing.md
-
----
-description: Sol이 최종 작업·비교를 맡고 Consult/Grok/Aside를 최소 호출로 라우팅하는 환경을 구축했으며, Grok은 Aside의 로그인 브라우저에서 reversible 탐색과 정확한 클릭까지 직접 수행하도록 설정됨
- task: research-browser-router-and-aside-grok-execution
- task_group: cross-session research workflow
- task_outcome: success
- cwd: /Users/wooojin
- keywords: research-browser-router, run_grok_research.py, consult, run_aside_consult.py, Aside, xai-grok-oauth, grok-4.6, GPT-5.6-Sol, MCP, browser tabs
----
-
-### Task 1: 경량 리서치 라우팅 및 Grok+Aside 실행
-
-task: 자동 리서치 라우팅, Consult Aside 백엔드, Grok Aside 브라우저 실행기 구축
-task_group: cross-session research workflow
-task_outcome: success
-
-Preference signals:
-- 사용자는 “Sol이 작업 및 비교, 에이전트로 Grok이 경매장 Aside 브라우저에서 탐색”하는 구조를 원한다 -> Sol은 브라우저를 직접 따라가지 말고 compact report를 받아 최종 비교·판결만 한다.
-- 공개 웹에는 Consult도 포함하고, “정확한 클릭같은 것도 알아서 에이전트가 끝내게” 하며 Sol 토큰을 아끼길 원한다 -> Consult는 좁은 공개 판단, Grok은 넓은 공개·로그인 브라우저 탐색으로 라우팅한다.
-- “별도 grok-aside-research 스킬은 없는 게 낫다”, “그록 실행기까지만”을 요청했다 -> 별도 중복 스킬·공용 라이브러리·자동 체이닝 없이 라우터와 두 실행기만 유지한다.
-
-Reusable knowledge:
-- `research-browser-router`는 implicit invocation이 켜져 있어 “리서치해줘”, “최신 자료 확인”, “로그인 페이지 확인” 요청에서 먼저 로드되지만, 로컬 근거로 충분하면 외부 호출을 생략한다.
-- Grok native Aside 설정은 `provider=xai-grok-oauth`, `model=grok-4.6`, `effort=high`다. `xai/grok-4.6`은 실패한다.
-- `/Users/wooojin/.codex/skills/research-browser-router/scripts/run_grok_research.py`는 Aside native Grok agent를 호출하고, 공개 웹·로그인 브라우저의 reversible 작업을 수행하게 한다. 페이지/액션/시간 예산, 구조화 보고서, 부분 결과, process-group cleanup, task-tab cleanup을 담당한다.
-- Grok report는 `직접 관찰`, `공식 확인`, `해석`, `미확인`, `브라우저 작업`, `상태 변경`, `승인 필요`를 포함한다. Sol은 성공 시 `grok-report.md`와 compact `grok-run.json`만 읽고 raw logs는 실패·모순 때만 읽는다.
-- 구매·제출·삭제·메시지·계정/보안 변경은 explicit approval 없이는 실행하지 않는다. 검색·필터·상세 열기·정확한 클릭·읽기 전용 다운로드는 Grok이 끝낸다.
-- `/Users/wooojin/.codex/skills/consult/scripts/run_aside_consult.py`는 ChatGPT Pro의 `GPT-5.6 Sol + 매우 높음` quick 및 `GPT-5.6 Sol + Pro` deep을 검증하고, 패킷 업로드·응답 저장·대화 URL·작업 탭 정리를 수행한다.
-- Consult 모델 선택이 검증되지 않으면 fail-closed한다. Aside ChatGPT UI의 contenteditable 입력에는 `click()` 후 `keyboard.insertText()`를 사용한다.
-
-Failures and how to do differently:
-- 초기 Grok runner가 WebSearch/WebFetch만 허용해 로그인 경매장을 다루지 못했다. 로그인 웹의 넓은 탐색은 Grok+Aside runner로 보내야 한다.
-- `aside exec`에서 잘못된 provider ID를 쓰면 “Requested model ... not available”이 난다. Aside 모델 카탈로그에서 provider를 확인하고 `xai-grok-oauth`를 사용한다.
-- 진행 중인 다른 세션은 환경 변경을 자동으로 재로드하지 않는다. 라우터·실행기 변경 후에는 해당 thread에 짧은 follow-up을 보내고 이미 완료한 작업은 반복하지 않는다.
-- Grok native Wikipedia 클릭 검증은 성공했다: 기존 Maple Auction/메이플 가이드 탭 보존, 새 Wikipedia 탭 생성·English 클릭·`en.wikipedia.org` 확인·작업 탭 종료, `orphanCheck=gone`.
-
-References:
-- `/Users/wooojin/.codex/skills/research-browser-router/SKILL.md`
-- `/Users/wooojin/.codex/skills/research-browser-router/scripts/run_grok_research.py`
-- `/Users/wooojin/.codex/skills/consult/SKILL.md`
-- `/Users/wooojin/.codex/skills/consult/scripts/run_aside_consult.py`
-- Successful pilot: `/Users/wooojin/dev/maple/.research/aside-native-grok-click/grok-run.json`
-- Successful report: `/Users/wooojin/dev/maple/.research/aside-native-grok-click/grok-report.md`
-- Verified model catalog entry: `~/.aside/u/0/models.json` provider key `xai-grok-oauth`, model `grok-4.6`
-
 ## Thread `01a01f5c-e998-7b62-96fb-5484a42b5beb`
 updated_at: 2026-08-20T13:32:41+00:00
 cwd: /Users/wooojin
@@ -304,185 +41,6 @@ References:
 - `xattr -l <path>`
 - `/usr/sbin/spctl --assess --type execute --verbose=4 <path>`
 - `log show --predicate '(process == "syspolicyd" OR process == "CoreServicesUIAgent") ...'`
-
-## Thread `01a022f5-a89b-7671-978c-f79906f9abdd`
-updated_at: 2026-08-21T06:22:00+00:00
-cwd: /Users/wooojin
-rollout_path: /Users/wooojin/.codex/sessions/2026/08/21/rollout-2026-08-21T15-15-19-01a022f5-a89b-7671-978c-f79906f9abdd.jsonl
-rollout_summary_file: 2026-08-21T06-15-19-V1Kd-karabiner_rollback_fixes_varmilo_shortcuts.md
-
-description: Karabiner의 최근 Varmilo 키 변환 규칙 때문에 한영, Rectangle, ⌘⇧3 캡처가 모두 깨졌으나 8월 16일 백업으로 롤백해 해결함
- task: karabiner-varmilo-shortcut-rollback
- task_group: macos-keyboard-configuration
- task_outcome: success
- cwd: /Users/wooojin
- keywords: Karabiner, Varmilo, Rectangle, 한영, keyboard_fn, apple_vendor_top_case_key_code, ⌘⇧3, automatic_backups, rollback
-
-### Task 1: Karabiner 설정 롤백
-
-task: 최근 Varmilo 규칙 변경으로 망가진 macOS 단축키 복구
-task_group: macos-keyboard-configuration
-task_outcome: success
-
-Preference signals:
-- 사용자가 “며칠 전으로 돌릴 수 없나?”라고 요청함 -> 새 규칙을 즉시 추가하기보다 가장 가까운 정상 백업으로 복구하는 접근을 우선할 것.
-- 사용자는 복구 후 한영 전환, `⌘⇧3`, Rectangle 단축키를 직접 확인했고 “다 된다”고 확인함 -> 유사한 키보드 복구에서는 이 세 가지를 최소 검증 목록으로 사용할 것.
-- 사용자는 EventViewer의 실제 Varmilo 키값을 기준으로 최소 수정하는 후속 작업을 수용할 수 있음 -> 물리 입력을 추정하지 말고 이벤트 확인 후 장치별 규칙을 추가할 것.
-
-Reusable knowledge:
-- 설정 파일은 `/Users/wooojin/.config/karabiner/karabiner.json`, 백업은 `/Users/wooojin/.config/karabiner/automatic_backups/`에 있음.
-- 현재 문제가 생긴 설정에는 Varmilo 장치(`vendor_id: 1241`, `product_id: 41169`)에 대해 Ctrl, left_command, Caps를 서로 여러 방향으로 변환하는 규칙이 겹쳐 있었다. 이 규칙들이 Command 조합과 한영/Rectangle을 연쇄적으로 깨뜨린 원인으로 추정됨.
-- 복구에 사용한 백업은 `karabiner_20260820-161923-before-moonlight-except.json`이며, 내용상 최근 Varmilo 수정 전의 8월 16일 상태다.
-- 롤백 전 현재 설정은 `karabiner_20260821-152022-before-rollback-to-20260816.json`으로 별도 보존됨.
-- 복구 후 SHA-256은 소스 백업과 현재 파일이 동일했고, `jq` JSON 검사, `Default profile`, Karabiner 프로세스 및 CLI 상태가 정상이었다.
-
-Failures and how to do differently:
-- 최근 Varmilo 전용 규칙은 같은 물리 키를 여러 변환 규칙이 다시 매핑하는 구조였음. 향후에는 먼저 현재 설정을 백업하고, EventViewer의 실제 키 이벤트와 장치 식별자를 확인한 뒤 최소한의 단일 변환만 추가할 것.
-- `⌘⇧3` 문제는 macOS 캡처 symbolic hotkey 비활성화보다 Command 변환 이상과 관련된 것으로 확인됨. 캡처 설정을 먼저 변경하지 말고 Karabiner의 Command/Fn 변환부터 점검할 것.
-
-References:
-- `/Users/wooojin/.config/karabiner/karabiner.json`
-- `/Users/wooojin/.config/karabiner/automatic_backups/karabiner_20260820-161923-before-moonlight-except.json`
-- `/Users/wooojin/.config/karabiner/automatic_backups/karabiner_20260821-152022-before-rollback-to-20260816.json`
-- 관련 이벤트 키 문자열: `apple_vendor_top_case_key_code`, `keyboard_fn`
-- 최종 검증: 사용자가 “다 된다”라고 확인함.
-
-## Thread `01a024a9-c89d-7ef3-84eb-d0ecf22a31ca`
-updated_at: 2026-08-21T16:55:15+00:00
-cwd: /
-rollout_path: /Users/wooojin/.codex/sessions/2026/08/21/rollout-2026-08-21T23-11-41-01a024a9-c89d-7ef3-84eb-d0ecf22a31ca.jsonl
-rollout_summary_file: 2026-08-21T14-11-41-Xjho-aerial_world_lab_comparison_build.md
-
----
-description: Built an isolated three-preset aerial-world comparison lab from an approved brief; static checks and headless browser interaction passed, while user first-impression flight and final world selection remain unverified.
-task: implement-approved-aerial-world-comparison-lab
-task_group: openaigame-aerial-world-implementation
- task_outcome: partial
-cwd: /Users/wooojin/App/openaigame
-keywords: aerial-world-lab, WORLD_PRESETS, world-presets.js, presetId, sceneId, world_first_impression, flightTime, collisionShapes, V-key, headless-Chrome, CDP, node-check
----
-
-### Task 1: Implement and verify isolated aerial-world comparison lab
-
-task: implement-approved-aerial-world-comparison-lab
-task_group: /Users/wooojin/App/openaigame
- task_outcome: partial
-
-Preference signals:
-- The user explicitly required writes only under `experiments/aerial-world-lab/**` and said not to modify the baseline, docs, or use commit/reset/clean/revert -> keep future implementation strictly scoped and report conflicts rather than broadening.
-- The user required actual browser interaction and a report separating changed files, checks, browser-confirmed items, and unverified items -> preserve this verification/reporting structure.
-
-Reusable knowledge:
-- Approved brief hash: `2a8a82fc1454213f54bd88a881a6974dc1e1a133f2dd81ef61488c02624cb0cf`.
-- Lab files: `experiments/aerial-world-lab/{README.md,game.js,index.html,telemetry.js,world-presets.js}`.
-- `WORLD_PRESETS` owns world placement. Rendering and collision generation consume the same form parts; forms include `layer`, `collide`, material, `assetKey`, and optional deterministic motion.
-- Presets are A/Grok, B/Fable, C/Sol. `V` cycles only while on the bench; `R` resets the current world/equipment. Telemetry uses `aerial-world-lab-flight-telemetry-v1` and records `presetId`, `sceneId`, per-flight environment, and `world_first_impression`.
-- Static checks passed: `node --check` for all three JS files. Baseline `speed-feedback-v1` hashes and approved `docs/31` hash remained unchanged.
-- Headless Chrome confirmed `J` inspection blocks `V`, bench cycling `A→B→C→A`, equipment preservation across switching, state reset, telemetry tagging, and collision counts matching form parts: A 12, B 10, C 14.
-- B’s moving collision form is derived from `flightTime`: offset zero at `flightTime=0`, approximately `{x:560,y:49.497}` at `2.125` seconds.
-
-Failures and how to do differently:
-- Large inline patches repeatedly failed from nested backticks/template strings. Use small file-based scripts or correctly formatted patches and run syntax checks incrementally.
-- CDP/browser runs encountered stale cache and short-lived processes. Start a fresh target, cache-bust script URLs, and assert `typeof window.game.getPreset === 'function'` before interaction.
-- Screenshot verification initially captured stale/start-like frames; force an exposed lab-only render after camera mutation.
-- Existing old telemetry storage was observed in the browser, so report “new key is isolated” rather than claiming the old key is absent.
-- User first-impression flights, A→B→C and reverse comparison, and final world selection were not performed; do not mark the comparison decision complete.
-
-References:
-- Brief: `/Users/wooojin/App/openaigame/docs/31-aerial-world-playable-comparison-implementation-brief.md`
-- Run: `cd /Users/wooojin/App/openaigame/experiments/aerial-world-lab && python3 -m http.server 8654`
-- Verification handles: `WORLD_PRESETS`, `window.game.getPreset()`, `window.game.collisionShapes()`, localStorage key `aerial-world-lab-flight-telemetry-v1`.
-- Hook note: local `codex-native-hook.js` Stop invocation returned exit code 0 and stdout `{}`; repeated hook prompts were infrastructure behavior, not implementation blockers.
-
-## Thread `01a024a9-cb4b-7851-bf7d-6b80ef0f140b`
-updated_at: 2026-08-21T14:15:36+00:00
-cwd: /Users/wooojin/App/openaigame
-rollout_path: /Users/wooojin/.codex/sessions/2026/08/21/rollout-2026-08-21T23-11-42-01a024a9-cb4b-7851-bf7d-6b80ef0f140b.jsonl
-rollout_summary_file: 2026-08-21T14-11-42-qFpV-independent_aerial_world_sol_medium_structure_exploration.md
-
----
-description: A안의 단일 공중 월드 비전을 지정 문서에 작성하고 검증함; 강한 하나의 세계에 베팅하며 코드·기존 문서는 건드리지 않는 작업 방식이 확인됨
-task: write-independent-aerial-world-structure-proposal
-task_group: openaigame-world-design
-task_outcome: success
-cwd: /Users/wooojin/App/openaigame
-keywords: aerial-world, world-structure, aerial-world-sol-medium, docs-29, speed-wing, glide-wing, open-air, blockout, collision-outline
----
-
-### Task 1: A안 공중 월드 구조 제안
-
-task: write-independent-aerial-world-structure-proposal
-task_group: openaigame-world-design
-task_outcome: success
-
-Preference signals:
-- 사용자가 “구조 유형을 미리 분류하지 말고”, “안전한 평균안 대신 하나의 응집된 월드 비전에 베팅하세요”라고 요청함 -> 유사한 창작 설계에서는 대안 목록보다 하나의 강한 비전, 트레이드오프, 폐기 기준을 제시한다.
-- 사용자가 “지정된 산출물 파일 하나만 작성”하고 완료 후 “그 파일 경로만 짧게 보고”라고 요청함 -> 명시된 산출물 범위를 넘지 않고 최종 보고도 최소화한다.
-- 브리프가 `압도적이지만 자유로운 거대한 놀이방 70 / 근접 비행 긴장 30`을 고정함 -> 거대한 형태 사이의 열린 공중을 중심으로 설계하고 연속 코스·촘촘한 장애물로 변질시키지 않는다.
-
-Reusable knowledge:
-- 작성된 세계는 “창가로 항해하는 미완성 하늘배”: 아이 방 전체의 선체·갈비뼈·돛·추·선수가 하나의 거대한 천장 배를 이루지만, 플레이어는 표면이 아니라 부품 사이 열린 공중을 자기 궤적으로 연결한다.
-- 속도날개는 선체 안쪽의 낮고 깊은 진입 뒤 늦은 상승을 택하고, 활공날개는 전진 속도를 남긴 긴 바깥 상승과 높은 활공을 택한다. 두 경로는 주돛 앞에서 갈라지고 넓은 공간에서 다시 합류한다.
-- 블록아웃 데이터는 공간 기준점, 비행층, 충돌 외곽, 교체 자산, 움직임 역할, 소리 역할, 랜드마크 가림/노출을 분리해야 최종 아트 교체 때 구조를 재작성하지 않는다.
-- 폐기 기준: 두 날개가 같은 선을 택함, 활공 윗길이 대가 없는 안전선이 됨, 플레이어가 먼 목표보다 작은 틈 암기에 집중함, 속도 II에서 보기 전에 충돌함.
-
-Failures and how to do differently:
-- `git status --short`는 `fatal: not a git repository`를 반환했다. 저장소 여부를 전제하지 말고 대상 파일 존재와 내용 검증을 직접 수행한다.
-
-References:
-- 브리프: `docs/29-aerial-world-structure-exploration-brief.md`
-- 결과 파일: `/Users/wooojin/App/openaigame/docs/reviews/aerial-world-sol-medium.md`
-- 검증 결과: 148줄; 필수 `##` 섹션, 실제 충돌 외곽, 코드 없이 검증할 가설이 확인됨.
-
-## Thread `01a02546-d269-77a2-b0f7-2e3d866d61cc`
-updated_at: 2026-08-21T17:50:14+00:00
-cwd: /Users/wooojin/App/openaigame
-rollout_path: /Users/wooojin/.codex/sessions/2026/08/22/rollout-2026-08-22T02-03-13-01a02546-d269-77a2-b0f7-2e3d866d61cc.jsonl
-rollout_summary_file: 2026-08-21T17-03-13-D4yU-aerial_world_lab_implementation_verification.md
-
-description: 승인된 세 월드 비교용 플레이 빌드를 제한된 경로에서 보강하고 브라우저 QA까지 수행했으나 일부 공정성·첫인상 검증은 사용자 몫으로 남은 작업
- task: complete-and-verify-aerial-world-playable-comparison-build
- task_group: openaigame-aerial-world-lab
- task_outcome: partial
- cwd: /Users/wooojin/App/openaigame
- keywords: aerial-world-lab, WORLD_PRESETS, speed-feedback-v1, telemetry, world_first_impression, presetId, sceneId, node-check, agent-browser, V, R, J, F1
-
-### Task 1: 세 월드 비교 빌드 완성 및 검증
-
-task: 승인된 docs/31 구현 브리프에 맞춰 `experiments/aerial-world-lab/**`만 수정하고 실제 브라우저에서 비교 흐름을 검증
- task_group: openaigame-aerial-world-lab
- task_outcome: partial
-
-Preference signals:
-- 사용자는 “단독 쓰기 범위는 experiments/aerial-world-lab/** 뿐”이라고 명시했다 -> 유사 작업에서 기준본, docs, START_HERE, 훅/로그를 수정하지 말고 변경 파일을 엄격히 제한해야 한다.
-- 사용자는 기존 구현을 믿지 말고 “실제 코드·실행 결과만 기준”으로 직접 점검하라고 했다 -> 자기보고나 이전 세션 로그보다 현재 파일과 실행 증거를 우선한다.
-- 사용자는 계획만 보고 멈추지 말고 “실제 브라우저 조작 증거”와 미확인 항목을 구분하라고 했다 -> 렌더·키 입력·콘솔·가독성 검증을 완료 보고에 포함한다.
-
-Reusable knowledge:
-- `WORLD_PRESETS`가 월드 배치·구역·형태·레이어·충돌·자산 키를 소유한다. 렌더와 `collisionShapes()`는 동일한 `forms` 배열을 순회한다.
-- 충돌 이동은 B의 `rocking-horse` 하나이며 `flightTime`에서 파생된다. 검증 시 `flightTime=2.125`에서 렌더 변환과 collision shape의 x/y가 동일했다.
-- 기준본과 lab의 `P` 파라미터 67개가 텍스트·값 모두 동일했고, `WORLD={floor:4200, ceil:-1400, left:20, right:48000}`, `R=13`, 시작점 `(190,886)`도 확인했다. 증거는 `experiments/aerial-world-lab/verify/params-identity.json`.
-- 프리셋 전환은 `state.mode === 'bench'`에서만 허용된다. 전환 시 날개·추진기는 보존하고 bestX, attempts, flightLog, 궤적, 파티클, 카메라, barrier 상태, flightTime 등을 초기화한다.
-- 텔레메트리 저장 키는 `aerial-world-lab-flight-telemetry-v1`이며 기본 테스트는 `world_first_impression`; configuration/environment와 샘플에 `presetId`, `sceneId`가 포함된다.
-- 서버는 `python3 -m http.server 8654`로 `experiments/aerial-world-lab`을 서빙했고 브라우저 URL은 `http://127.0.0.1:8654/`였다.
-
-Failures and how to do differently:
-- `apply_patch`가 환경에서 형식 오류로 실패해 Python 치환 스크립트로 전환했다. 이 환경에서는 패치 도구 실패 시 작은 검증 가능한 Python 치환을 사용한다.
-- 최초 J 검사 위치가 구역 시작점이라 대표 형태를 비껴갔다. 각 zone에 `inspectX`를 추가하고 `jumpToZone()`이 이를 사용하도록 고쳤다.
-- `node --check`는 모두 PASS했고 브라우저 페이지도 로드됐지만, 기준본과 lab의 동일한 짧은 입력에 대한 위치·속도 텔레메트리 재현은 실행하지 않았다. 파라미터 동일성만 확인했으므로 이 항목은 미검증으로 유지한다.
-- A→B→C 및 C→B→A를 속도날개 I/활공날개 I로 모두 날리는 첫인상 판정과 속도 II 충돌 전 노출 시간은 수행하지 않았고 사용자 직접 플레이 몫으로 남겼다.
-- 작업 중 docs/31과 START_HERE가 다른 세션에서 갱신되어 초기 승인 해시 `2a8a82fc1454213f54bd88a881a6974dc1e1a133f2dd81ef61488c02624cb0cf`와 최종 확인 해시 `7ec1034df70a41143e6afe59994bca3895da3b63a486d483f53a781ea3991996`가 달라졌다. 해당 문서들은 수정하지 않았으며 향후 보고 시 해시 변화를 명시해야 한다.
-
-References:
-- `experiments/aerial-world-lab/game.js`
-- `experiments/aerial-world-lab/world-presets.js`
-- `experiments/aerial-world-lab/telemetry.js`
-- `experiments/aerial-world-lab/index.html`
-- `experiments/aerial-world-lab/README.md`
-- `experiments/aerial-world-lab/verify/params-identity.json`
-- Screenshots: `verify/12-A-bones.png`, `verify/14-A-moon.png`, `verify/15-B-horse.png`, `verify/16-C-sail.png`, `verify/13-A-bones-F1.png`, `verify/17-C-sail-F1.png`, `verify/18-B-horse-F1.png`
-- Commands: `node --check experiments/aerial-world-lab/game.js && node --check experiments/aerial-world-lab/world-presets.js && node --check experiments/aerial-world-lab/telemetry.js`; `shasum -a 256 docs/31-aerial-world-playable-comparison-implementation-brief.md`
-- Browser evidence: title `장난감 세계 로켓 — 세 월드 비교용`; no output from `agent-browser errors` or `console`; actual key checks for `3`, `V`, `R`, `J`, `F1`; browser URL `http://127.0.0.1:8654/`
 
 ## Thread `01a089f9-1c16-7771-b0ff-44d3883daafd`
 updated_at: 2026-09-10T07:19:04+00:00
@@ -668,4 +226,115 @@ References:
 - `CODEX_HOME="$HOME/App/codex-plain-home" /opt/homebrew/bin/codex plugin list`
 - `CODEX_HOME="$HOME/App/codex-plain-home" /opt/homebrew/bin/codex doctor --json`
 - 공식 AGENTS.md 문서: `https://learn.chatgpt.com/docs/agent-configuration/agents-md`
+
+## Thread `01a0a396-c7a2-7420-8aef-d722947e4ea6`
+updated_at: 2026-09-15T08:40:08+00:00
+cwd: /Users/wooojin
+rollout_path: /Users/wooojin/.codex/sessions/2026/09/15/rollout-2026-09-15T14-42-42-01a0a396-c7a2-7420-8aef-d722947e4ea6.jsonl
+rollout_summary_file: 2026-09-15T05-42-42-Bgp0-rubato_gui_install_and_t3_stale_queue_pr.md
+
+description: Rubato T3 GUI 설치를 기존 CLI 설정 보존 상태로 검증하고, Maplog stale queue 복구 PR을 작성했으나 CI의 무관한 checkpoint 실패로 머지는 보류한 롤아웃
+ task: install-rubato-t3-gui-and-prepare-stale-queue-recovery-pr
+ task_group: /Users/wooojin/dev/Rubato macOS GUI and T3 workflow
+ task_outcome: partial
+ cwd: /Users/wooojin/dev/Rubato
+ keywords: Rubato, T3, install-gui.sh, t3-home, rubato-pi, stale-queue, PR-12, restart-profile.test.mjs, no-pid, mergeable, UNSTABLE
+---
+
+### Task 1: Install and verify Rubato desktop GUI
+
+task: Install the current T3-based Rubato GUI without changing existing CLI settings.
+task_group: Rubato macOS GUI installation
+task_outcome: success
+
+Preference signals:
+- when the user asked “우리 세팅 그대로인지 확인”, the rollout compared pre/post SHA-256 hashes and verified the actual UI -> future installs should prove preservation rather than infer it from a successful launch.
+- the user values existing projects, sessions, personal settings, and credentials remaining intact -> use GUI-isolated paths and explicitly compare the original CLI profile before/after installation.
+
+Reusable knowledge:
+- Run `bash harness/t3-integration/install-gui.sh --apply` from `/Users/wooojin/dev/Rubato`.
+- GUI data paths: `~/.rubato/t3-home`; GUI Pi profile: `~/.rubato-pi/agent`; existing CLI profile: `~/.rubato/agent`.
+- `/Applications/Rubato.app` points to the built runtime bundle under `~/.rubato/t3-source/apps/desktop/.electron-runtime/Rubato.app`.
+- The installed GUI showed existing projects/sessions and model list. Existing CLI setting/auth/model-store and `.zshrc` hashes stayed unchanged.
+
+Failures and how to do differently:
+- CUA display-name lookup timed out once; `cua.getState()` showed `app.rubato.t3`, after which binding by bundle ID worked. Re-observe and retry by bundle ID before claiming failure.
+- `peekaboo` was unavailable; if needed, use it only with `--no-remote` as documented fallback.
+
+References:
+- `/Users/wooojin/dev/Rubato/harness/t3-integration/install-gui.sh`
+- `/Users/wooojin/dev/Rubato/harness/t3-integration/write-gui-settings.mjs`
+- `/Applications/Rubato.app`
+- `codesign --verify --deep --strict /Applications/Rubato.app`
+- T3 commit used during installation: `3138f5716098a331f9a7d4cfc1bcd07118967a83`
+
+### Task 2: Recover stale queue and prepare PR
+
+task: Preserve the original Maplog session, recover stranded queued messages, and prepare a reviewable PR.
+task_group: T3 bridge and Pi session recovery
+ task_outcome: partial
+
+Preference signals:
+- when the user asked about preserving personal commits/settings such as `v0.4+r2`, the rollout treated existing sessions and user changes as off-limits -> future PR work should preserve them explicitly and avoid destructive session migration.
+- when the PR was mergeable but CI was unstable, the user asked whether to merge directly or wait for external confirmation -> report mergeability separately from merge recommendation and do not merge with unresolved red checks without explicit approval.
+
+Reusable knowledge:
+- Original Maplog session `01a0993f-d6f1-799f-8e7a-f0defac63083` was retained; recovery used new session `01a0a42b-c9f9-7117-85c1-c9feca2e6b4b`.
+- PR #12: `https://github.com/keepitmello/Rubato/pull/12`; branch `fix/t3-client-queued-messages`; commit `cbb13a29a578b25c73c4e44c41e22941f0e1dd7c`.
+- Local T3 verification passed: bridge tests 27/27, full T3 suite 34 passed with 5 skipped, exact overlay/apply checks passed, typecheck/build/Codex audit passed.
+- PR checks: `codex-audit` and `t3-integration` passed; `checkpoint` repeatedly failed at `harness/pi-server/test/restart-profile.test.mjs` with `{"restarted":false,"reason":"no-pid"}`; `stock-pi` remained pending/in progress at rollout end.
+- At the final decision point GitHub reported `mergeable=MERGEABLE` but `mergeStateStatus=UNSTABLE`; recommend waiting for stock-pi and external approval before merging.
+
+Failures and how to do differently:
+- A shell command adding CI notes to the PR body accidentally expanded backticks; use a quoted heredoc (`cat <<'EOF'`) for Markdown containing backticks.
+- Do not weaken or silently ignore an unrelated failing checkpoint. Record the exact failure and state whether changed files overlap the failing subsystem.
+- Do not reinstall the PR version while the live Maplog recovery session is still running; it can interrupt the session. Finish or safely stop the session first.
+
+References:
+- PR URL: `https://github.com/keepitmello/Rubato/pull/12`
+- Commit: `cbb13a29a578b25c73c4e44c41e22941f0e1dd7c`
+- CI error: `restart-profile.test.mjs` / `reason: "no-pid"`
+- Recovery session status at end: `Maplog Movement Recovery`, `running`, queue `0`; original `Opus Selection Review`, `idle` and preserved.
+
+## Thread `01a0c517-a93a-7712-9358-9473c8960fb9`
+updated_at: 2026-09-21T17:56:21+00:00
+cwd: /Users/wooojin
+rollout_path: /Users/wooojin/.codex/sessions/2026/09/22/rollout-2026-09-22T02-50-57-01a0c517-a93a-7712-9358-9473c8960fb9.jsonl
+rollout_summary_file: 2026-09-21T17-50-57-Kmrn-rubato_update_session_freeze_duplicate_gui_socket_emfile.md
+
+description: Rubato 업데이트 후 중복 GUI와 끊긴 pi 소켓으로 세션이 멈춘 현상을 진단하고 모든 관련 프로세스를 종료함
+ task: rubato-session-freeze-diagnosis-and-shutdown
+ task_group: /Users/wooojin local Rubato runtime troubleshooting
+ task_outcome: success
+ cwd: /Users/wooojin
+ keywords: Rubato, pi-server, Electron, duplicate-GUI, pi.sock, EMFILE, pending-byte-limit, start-electron, macOS
+
+### Task 1: Rubato 세션 정지 진단 및 종료
+
+task: 업데이트 후 메시지는 들어가지만 세션 응답이 멈춘 원인 조사 및 Rubato 전체 종료
+task_group: local Rubato/Electron runtime
+task_outcome: success
+
+Preference signals:
+- 사용자가 원인 설명 후 “둘다 종료해줘”라고 명확히 요청함 -> 프로세스 정리 작업은 확인을 받은 뒤 GUI·런처·엔진까지 완전히 종료하고 최종 프로세스 상태를 검증한다.
+
+Reusable knowledge:
+- 업데이트 직후 Rubato GUI가 두 개 실행됐다: 기존 Electron PID 1520과 새 Electron PID 8764(`start-electron.mjs` PID 8692).
+- `pi-server` PID 25083은 살아 있었지만 `/Users/wooojin/.rubato-pi/agent/server/pi.sock`에 연결된 GUI가 없었고 `.tty` 소켓만 엔진이 점유했다.
+- 로그에 `Unix connection exceeded its pending byte limit`, `EMFILE: too many open files, watch`, `Failed to load extension ... build receipt does not match the selected runtime/schema`, `rubato-pi-server: Unknown option '--no-extensions'`, `Lock file is already being held`가 있었다.
+- GUI 설치 로그에서는 `vp build`가 `Terminated: 15`로 실패했다. 빌드 실패 후 중복 앱이 남은 상태가 세션 정지와 함께 발생했다.
+- macOS 셸의 `maxfiles` soft limit은 256이었고, Node watcher가 `EMFILE`로 죽은 직접 증거가 있다.
+- 세션 기록은 `/Users/wooojin/.rubato-pi/agent/sessions`에 계속 저장되어 프로세스 종료로 데이터가 삭제되지는 않았다.
+
+Failures and how to do differently:
+- `osascript -e 'tell application id "app.rubato.t3" to quit'`가 성공 코드를 반환했지만 프로세스가 남았다. 앱 종료 명령만 믿지 말고 PID와 창을 재확인한다.
+- 첫 직접 종료 검증 스크립트는 템플릿 문법 오류가 났다. 단순한 셸 명령 배열로 재실행했다.
+- GUI 두 개 종료 후 고아 엔진 PID 25083이 남았으므로, 부모-자식 관계가 끊긴 엔진도 별도로 확인하고 종료한다.
+
+References:
+- Logs: `/Users/wooojin/.rubato-pi/logs/pi-server.log`, `/Users/wooojin/.rubato-pi/logs/t3-bridge.log`, `/Users/wooojin/.rubato-pi/logs/rubato-gui-install.log`
+- Session directory: `/Users/wooojin/.rubato-pi/agent/sessions`
+- Socket descriptor: `/Users/wooojin/.rubato-pi/agent/server/connection.json`
+- Verified final command pattern: `pgrep -lf 'start-electron|Rubato.app/Contents/MacOS/Electron|apps/server/dist/bin.mjs|pi-server/src/cli.mjs|pi-rpc'` -> `no matching processes`
+- Final terminated PIDs: GUI 1520, GUI 8764, launcher 8692, engine 25083.
 

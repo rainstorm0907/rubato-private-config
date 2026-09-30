@@ -78,6 +78,12 @@ description: 이 Mac 고유의 CLI·도구 설정과 알려진 함정.
 - **laventador12는 뺐다(2026-09-21)**: cswap alias/rotation에서 제외(`cswap disable 3`), `~/.claude-default-profile.sh`는 dali 프로필로, CodexBar claude는 `cookieSource: off`(그 전엔 크롬 쿠키로 laventador12 신원이 새어 들어왔다). dali의 CLI refresh token은 죽어 있어서 cswap 슬롯으로 `claude`를 쓰려면 재로그인이 필요하다 — setup-token 쪽은 살아 있다.
 - **CodexBar 자체 Claude 읽기는 이 맥에서 어느 모드로도 안 살아난다(2026-09-22 확인).** `source: cli` 는 `claude /usage` 를 실행해 stdout 의 `% left` 글자를 파싱하는데(래퍼 + 파이프에서는 print-mode 푸터만 나온다) 여기선 늘 `Claude usage probe timed out` 이다. `source: oauth` 는 키체인 항목을 읽어야 하는데 `claudeOAuthKeychainPromptMode=never`(팝업을 막으려고 정한 값)면 CodexBar 가 키체인을 아예 안 읽고, `onUserAction` 으로 풀어도 배경 컨텍스트에선 `Claude OAuth credentials not found` 다. 그래서 앱 자체 Claude 행/카드는 "새로 고치는 중 / 세션 0% 남음" 같은 **자리표시(0%, 빈 막대)** 에 머물 수 있다 — 이건 실제 데이터가 아니다. 카드는 claude-swap 어댑터가 넣는 값으로 굴러간다.
 - **키체인 공유 슬롯(`Claude Code-credentials`)에는 dali 자격증명을 넣어 뒀다(2026-09-22).** 앱은 위 이유로 그걸 안 읽지만, 래퍼 없이 `claude` 를 돌리면 dali 로 붙는다. 앱이 키체인을 읽게 하려면 `claudeOAuthKeychainPromptMode` 를 `onUserAction` 이상으로 풀어야 하고, 그러면 Claude Code 가 토큰을 갱신할 때 ACL 이 리셋돼 키체인 팝업이 돌아온다(아래 함정).
+- **CodexBar의 코덱스·클로드 비용은 pi 세션 스캐너가 계산한다(2026-09-23 확인·보수).** `PiSessionCostScanner`가 **설정된 루트 하나(`~/.rubato-pi/agent/sessions`)만** 훑는다(`.omp`/`.pi` 루트는 안 본다 — 캐시의 `sessionRootsFingerprint`에 `requiredresolvedconfigured`로 찍힌다). 그런데 **서브에이전트가 돌린 요청은 세션 jsonl에 usage를 안 남기고 `~/.rubato-pi/agent/speed-index/samples/*.jsonl`에만 남는다** → 리드가 Claude/DeepSeek인 날에는 코덱스(astra) 사용량이 통째로 비어 보인다(9/23 실측: speed-index 335콜 45M vs 세션 0).
+  - **다리**: `~/.codexbar/bin/codexbar-live-extract`가 (1) 세션+speed-index를 읽어 Codex/Claude 홈의 extract를 갱신하고(둘 중 큰 쪽), (2) **(speed-index − 세션) 차이만** pi 세션 형식 합성 파일로 `~/.rubato-pi/agent/sessions/subagent-usage-extract/by-day/`에 쓴다. **반드시 두 단계 아래여야 한다**: pi 서버는 `sessions/<폴더>/*.jsonl` 한 단계까지를 세션으로 치므로, 한 단계 아래에 두면 GUI 가 `sessions` 프로젝트의 `(no messages)` 스레드로 매일 가져온다(9/23~9/28 그렇게 쌓였다). CodexBar 스캐너는 두 단계 아래도 읽는다(9/28 확인: 합성 파일 빼면 4일 $918→$695, `by-day/`에 두면 $918 복귀). 합성 파일은 세션 tail 입력에서 제외(이중 계산 방지)하고, 차이가 0이 되면 그날 파일을 지운다.
+  - **함정**: 정리(삭제) glob을 날짜 없이 `*_subagent-…jsonl`로 쓰면 다른 날짜의 차이가 0일 때 그 모델의 **모든 날짜 파일을 지운다**(한 번 그렇게 날려서 숫자가 옛값으로 돌아갔다). 항상 그날 파일 경로를 정확히 지정한다.
+  - **캐시**: `~/Library/Caches/CodexBar/cost-usage/pi-sessions-v9.json`. 숫자를 강제로 다시 계산시키려면 이 파일을 지우고 `codexbar cost --provider codex --refresh --days 4`를 돌린다(앱은 이 캐시를 읽어 위젯에 반영한다).
+  - **검증(2026-09-23)**: 9/22 103.0M→141.5M($185.77→$289.14), 9/23(오늘) 없음→48.97M($150.10).
+
 
 ## 아이폰에서 맥에 붙는 법
 

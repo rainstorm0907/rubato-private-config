@@ -77,8 +77,10 @@ Read `response.md` and `result.json`. Verify consequential claims before acting.
 A supported correction to your question is not an unrelated reply. Use
 `references/after-advice.md` to choose the next action inside existing authority.
 
-- Exit `75` — nothing was sent. Report the failure and stop.
-- Exit `76` — send is unproven. Do not retry.
+- Exit `75` — provably not sent: the script failed at a named pre-click stage
+  (`result.json`: `status: not_submitted`). Report and stop.
+- Exit `76` — unknown: no proof either way (no marker, daemon lost, REPL ended
+  early); the click may have happened. Never resend; `outpost recover` first.
 - Exit `77` — the turn committed but the reply was not saved. Run
   `outpost recover`. Never resend that packet. A later `--to` is a new turn,
   not a resend.

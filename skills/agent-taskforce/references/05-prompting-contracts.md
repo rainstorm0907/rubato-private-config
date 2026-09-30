@@ -9,7 +9,7 @@ does not create another routing or configuration layer.
 
 ## Make the assignment self-contained
 
-A teammate needs its result, authority, write ownership, evidence, peers and budget.
+A teammate needs its result, authority, write ownership, evidence, peers and scale.
 Use `templates/task-brief.md`, or compress those same commitments for a focused task.
 Name upstream intent/spec authority instead of duplicating its requirements.
 
@@ -24,8 +24,10 @@ normally belongs to an existing owner. Name an independent verifier only when
 its evidence serves a real acceptance decision; do not require every participant
 to create another reviewer.
 
-A budget states the time, spend or scope boundary for returning what was covered.
-It does not predict competence, authorize extra spending or convert an unfinished
+Scale states what the assignment is sized for, so the owner returns with the size
+when the surface proves larger. It is not a clock: time and spend are the lead's
+own checks, and a time limit in the brief trades depth for speed. A scale return
+does not predict competence, authorize extra spending or convert an unfinished
 mission into success. Explain which decisions stay local and which would alter
 user commitments.
 
@@ -49,18 +51,9 @@ a mandatory worker below it.
 
 ## Independence and identity
 
-The actual builder cannot independently verify its own work. A fresh capable
-session of the same model family can be an independent verifier. Describe actual
-family diversity separately from context independence; neither guarantees correctness.
-
-Inspect runtime-reported role, model, effort and route where available. A requested
-label or registered catalog entry alone is not proof of what ran. If identity is
-unavailable, report that limitation; do not provoke extra quota/auth errors merely
-to guess it. A proxy may route a label differently.
-
-Preserve the active runtime's model resolution and explicit user settings.
-Like-for-like recovery retains approval; material reassignment requires the
-appropriate delta confirmation. Do not import another runtime's inheritance or
+Which models may verify independently, how to report the identity that actually
+ran and when approval carries over belong to Skill(model-guide). Use the active
+runtime's own model resolution; do not import another runtime's inheritance or
 effort rules.
 
 ## Keep prompts small enough to use

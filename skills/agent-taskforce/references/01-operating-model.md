@@ -52,28 +52,6 @@ A fresh capable session of the same model family can be an independent verifier.
 A different family can add diversity but does not establish independence on its own.
 A verifier that helped implement the change cannot certify that change independently.
 
-## Evidence exchange
-
-Name the reviewer, its question and observation/budget boundary in the existing
-brief. Approach review may reframe the sender's subquestion; narrow checks stay
-narrow. Give the originating request, observations and accepted constraints before
-method advocacy, with source access and failed attempts. The owner `team_send`s the
-reviewable question or result with its path and revision. Mail acceptance alone
-does not establish resumed execution.
-
-Keep tasks open while required checks are pending. Send observed defects directly
-to their owner, separating observation, inferred cause and proposed remedy. The
-owner chooses a correction for the coupled outcome and returns changed evidence.
-When repairing one requirement undermines another, compare the shared approach
-before expanding the patch sequence. Retaining, replacing or abandoning a method
-can be sound; changing accepted criteria or authority goes to the lead.
-
-A useful review changes the next decision or establishes that no change is needed;
-it does not owe the current candidate a pass. Resolve a concrete disagreement with
-discriminating evidence or a reasoned decision, keeping supported observations even
-when their remedy is rejected. Advisory input creates no veto; required checks
-remain required. Close the exchange when its assigned question is answered.
-
 ## Milestone fresh review
 
 For a long or consequential run, a fresh context may challenge shared premises,
@@ -81,12 +59,13 @@ criteria or instruments that every resident context inherited. At actual milesto
 gates, run the review or record why it was omitted. Do not invent a gate structure
 for small tasks, and do not add another permanent reviewer.
 
-Provide the originating outcome, accepted constraints, observations and source
-access; distinguish the team's explanation from these facts. Let the reviewer
-choose what evidence could distinguish current and alternative approaches, then
-use existing plans and failed attempts to avoid repetition. A continuing reviewer
-is not fresh to an approach it helped sustain. Use an already approved fresh path
-when that distinction can change the decision, not a recursive review hierarchy.
+Provide mission, authoritative artifacts, criteria, results and relevant shared
+state, not the lead's or builder's reasoning narrative. Ask whether something can
+pass yet fail the intended outcome, or succeed yet fail the instrument. Check
+continued work on refuted premises. A resident verifier deeply involved in the
+trajectory is not a fresh milestone reviewer; reuse an already approved genuinely
+fresh evidence path where it serves the same decision. A reviewer does not recursively
+request a reviewer by default.
 
 ## Peers and local support
 
@@ -113,7 +92,7 @@ advice or relevant peer evidence; then a scope/boundary change or explicit reass
 when warranted. A user goal or active-frame conflict goes to the lead and human.
 These are alternatives tied to causes, not a mandatory ladder of model tiers.
 
-Budget return is a control boundary, not model failure. A announced long-running
+A scale return or a lead's stop is a control boundary, not model failure. A announced long-running
 check is not silence-based evidence of a stall. A meaningful stall is resource use
 without new artifacts, valid checks or appropriate hypothesis reduction. Do not
 mistake broken measurement, missing permissions or a contradictory brief for lack
@@ -129,8 +108,11 @@ and relaying peer questions through the lead.
 
 The lead retains cross-stream visibility and the conversation's reasons. It can
 notice a shared pattern and identify who should examine it; an owner performs the
-technical synthesis. Verified refutations are sent to every stream that inherited
-the premise, and affected claims are recalled before their results are relied on.
+technical synthesis. Decision-changing evidence goes to the peers it affects — a
+verified refutation, and equally an accepted result or new user feedback that changes
+an ongoing assignment's premise. Send the changed fact, its artifact or revision and
+the remaining question; recall affected claims before their results are relied on.
+No broadcast, no per-turn digest, and a changed observation grants no new authority.
 
 ## Decision rights
 

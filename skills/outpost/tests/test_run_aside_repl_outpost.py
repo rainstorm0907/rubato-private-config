@@ -130,10 +130,8 @@ class AsideReplConsultTest(unittest.TestCase):
             outpost_id="abc123",
             response_timeout_ms=1000,
         )
-        self.assertIn(
-            """#prompt-textarea[contenteditable="true"][aria-label="' + composerLabel + '"]""",
-            shopping,
-        )
+        self.assertIn("waitComposer(workPage, composerSel, 3)", shopping)
+        self.assertIn("Shopping의 새 채팅", shopping)
         self.assertNotIn(".and(", shopping)
         self.assertIn("Shopping에서 새 채팅", shopping)
         self.assertNotIn("Work에서 새 채팅", shopping)
@@ -216,7 +214,7 @@ class AsideReplConsultTest(unittest.TestCase):
         self.assertIn("name: packetName", pro)
         self.assertIn("setInputFiles([{", pro)
         self.assertNotIn("setInputFiles(packetPath)", pro)
-        self.assertIn('#prompt-textarea[contenteditable="true"]', pro)
+        self.assertIn('waitComposer(workPage, continueComposerSel, 3)', pro)
         self.assertNotIn(".and(", pro)
         self.assertIn("Work에서 새 채팅", pro)
         self.assertIn("project composer not visible", pro)
@@ -226,10 +224,10 @@ class AsideReplConsultTest(unittest.TestCase):
         self.assertIn("Array.from(el.children)", pro)
         self.assertIn("composerValue !== composerPrompt", pro)
         self.assertIn(
-            '#composer-submit-button:not(:disabled):not([aria-disabled="true"]):not([data-visually-disabled])',
+            'form button[aria-label="보내기"]',
             pro,
         )
-        self.assertIn("#upload-files", pro)
+        self.assertIn("input[type=\"file\"]:not([accept])", pro)
         self.assertIn("waitRole(workPage, 'group'", pro)
         self.assertIn("attachmentPresent(", pro)
         self.assertNotIn("getByText(packetName, { exact: true })", pro)
@@ -274,7 +272,7 @@ class AsideReplConsultTest(unittest.TestCase):
         self.assertIn("modelRadios", script)
         # doctor probes the same lookup send uses; no click fallback may cover
         # for a failed name lookup and report a green light send cannot reach
-        self.assertIn("waitNamedRef(page, 'button', tierNameRe", script)
+        self.assertIn("waitNamedRef(page, 'button', tierButtonRe", script)
         self.assertNotIn("tierFallback", script)
         self.assertNotIn("menus.nth(", script)
         self.assertNotIn("insertText", script)
@@ -674,6 +672,24 @@ print('ASIDE_REPL_RESPONSE_RESULT {"modelSlug":"gpt-6-pro","responseText":"no id
             )
         )
         self.assertFalse(MODULE.transcript_lost_aside_daemon("ASIDE_REPL_SUBMIT_RESULT {}\n"))
+        # Daemon loss with a pre-submit stage failure is proven unsent ...
+        with tempfile.TemporaryDirectory() as temp:
+            fake = Path(temp) / "aside"
+            fake.write_text(
+                "#!/bin/sh\nprintf 'OUTPOST_FAIL stage=load-work-project fetch failed: other side closed\\nAside daemon is not reachable\\n'\n",
+                encoding="utf-8",
+            )
+            fake.chmod(0o755)
+            path = f"{temp}{os.pathsep}{os.environ.get('PATH', '')}"
+            with mock.patch.dict(os.environ, {"PATH": path}):
+                with self.assertRaisesRegex(MODULE.NotSubmittedError, "daemon closed before submission"):
+                    MODULE.run_repl_outpost(
+                        "ignored",
+                        submit_timeout=1,
+                        response_timeout=1,
+                    )
+        # ... but daemon loss with no stage line proves nothing (the click may
+        # have happened), so it is unknown and never re-run.
         with tempfile.TemporaryDirectory() as temp:
             fake = Path(temp) / "aside"
             fake.write_text(
@@ -683,60 +699,23 @@ print('ASIDE_REPL_RESPONSE_RESULT {"modelSlug":"gpt-6-pro","responseText":"no id
             fake.chmod(0o755)
             path = f"{temp}{os.pathsep}{os.environ.get('PATH', '')}"
             with mock.patch.dict(os.environ, {"PATH": path}):
-                with mock.patch.object(
-                    MODULE,
-                    "ensure_aside_daemon",
-                    return_value="aside daemon is not reachable",
-                ):
-                    with self.assertRaisesRegex(RuntimeError, "daemon closed before submission"):
+                with mock.patch.object(MODULE, "ensure_aside_daemon") as restart:
+                    with self.assertRaisesRegex(MODULE.SubmitUnknownError, "do not retry"):
                         MODULE.run_repl_outpost(
                             "ignored",
                             submit_timeout=1,
                             response_timeout=1,
                         )
+        restart.assert_not_called()
 
-    def test_daemon_loss_before_submit_retries_once(self) -> None:
-        with tempfile.TemporaryDirectory() as temp:
-            root = Path(temp)
-            counter = root / "n"
-            counter.write_text("0", encoding="utf-8")
-            fake = root / "aside"
-            fake.write_text(
-                f"""#!/bin/sh
-n=$(cat '{counter}')
-n=$((n + 1))
-printf '%s' "$n" > '{counter}'
-if [ "$n" -eq 1 ]; then
-  printf 'fetch failed: other side closed\\nAside daemon is not reachable\\n'
-  exit 0
-fi
-printf '%s\\n' 'ASIDE_REPL_SUBMIT_RESULT {{"quality":"pro","submitElapsedMs":1234,"conversationUrl":"https://chatgpt.com/g/g-p-test-work/c/1","targetId":"target"}}'
-printf '%s\\n' 'ASIDE_REPL_RESPONSE_RESULT {{"modelSlug":"gpt-6-pro","responseText":"ok","responseElapsedMs":5678,"conversationUrl":"https://chatgpt.com/g/g-p-test-work/c/1"}}'
-""",
-                encoding="utf-8",
-            )
-            fake.chmod(0o755)
-            path = f"{temp}{os.pathsep}{os.environ.get('PATH', '')}"
-            with mock.patch.dict(os.environ, {"PATH": path}):
-                with mock.patch.object(MODULE, "ensure_aside_daemon", return_value=None):
-                    submitted, response, _submit_s, _response_s, _transcript = (
-                        MODULE.run_repl_outpost(
-                            "ignored",
-                            submit_timeout=1,
-                            response_timeout=1,
-                        )
-                    )
-        self.assertEqual(submitted["quality"], "pro")
-        self.assertEqual(response["responseText"], "ok")
-
-    def test_submission_runner_rejects_missing_marker(self) -> None:
+    def test_submission_runner_treats_missing_marker_as_unknown(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             fake = Path(temp) / "aside"
             fake.write_text("#!/bin/sh\nprintf 'no markers\\n'\n", encoding="utf-8")
             fake.chmod(0o755)
             path = f"{temp}{os.pathsep}{os.environ.get('PATH', '')}"
             with mock.patch.dict(os.environ, {"PATH": path}):
-                with self.assertRaisesRegex(RuntimeError, "before submission marker"):
+                with self.assertRaisesRegex(MODULE.SubmitUnknownError, "without a submission marker"):
                     MODULE.run_repl_outpost(
                         "ignored",
                         submit_timeout=1,

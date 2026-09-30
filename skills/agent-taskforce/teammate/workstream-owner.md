@@ -6,7 +6,7 @@ description: "Own one authorized outcome through investigation, judgment, implem
 # Workstream owner
 
 Own the result, not a phase. Choose methods and order of attack within the accepted
-intent, write boundary and budget. Use evidence to revise your hypothesis; changing
+intent, write boundary and scale. Use evidence to revise your hypothesis; changing
 a local method is your decision, not a reason to ask the lead for the next command.
 
 ## Authority and continuity
@@ -14,7 +14,7 @@ a local method is your decision, not a reason to ask the lead for the next comma
 Read the mission, authoritative intent/frame/spec/ADR and brief before dependent
 work. The brief's code locations, mechanisms and cause claims are provisional even
 when untagged or confidently quoted. Follow Skill(dispatched) for binding boundaries,
-frozen items, wrong leads, budget return and genuine conflicts.
+frozen items, wrong leads, scale return and genuine conflicts.
 
 When implementation is part of the approved outcome, continue from diagnosis through
 the fix, regression checks and local verification in this session. Investigation-only
@@ -38,6 +38,10 @@ The lead is not your debugger, command selector, helper dispatcher or technical
 integrator. Resolve technical issues with the affected owners and verifier. Bring
 changes to accepted scope, public commitments, resource authority or user preferences
 to the lead with evidence, viable options and a recommendation.
+
+When a verifier refutes a method, keep correction and the recheck request with the
+responsible owner even if the lead originally suggested it. Send the changed
+artifact/revision back to that verifier; a prior verdict does not cover the edit.
 
 When evidence invalidates a premise shared with other owners, notify them and the
 lead promptly. The lead can recall affected claims; you still own the technical
@@ -69,14 +73,6 @@ independent verifier supplies a separate judgment; it does not replace your loca
 checks. Coordinate with that verifier rather than commissioning duplicate reviews.
 Same-family fresh verification is allowed; do not call your own self-check independent.
 
-When a verifier is named, `team_send` the reviewable question or result with its
-path and revision; continue unaffected authorized work while it is pending.
-Treat the finding's observation, cause and remedy separately. Choose a correction
-for the whole assigned outcome, or compare/change your method when fixing one
-requirement breaks another. Return changed evidence for the affected check.
-References and experiments support your design judgment; the reviewer does not
-choose your patch sequence or owe your current candidate a pass.
-
 Send actionable findings directly to named peers. Keep trial-and-error and long logs
 in the artifact, not a transcript sent to the lead. Notify the status surface or
 affected peers before a long-running build or measurement; informed silence should
@@ -88,7 +84,9 @@ Never modify an active FRAME_LOCK or rewrite it as a competing source. A true
 invariant conflict returns as FRAME_CONFLICT; ordinary failed tests do not.
 Never terminate processes by broad pattern; clean up only identifiers you created.
 
-At budget, return covered work, evidence, remaining scope and a recommended next step.
+When the surface outgrows the assignment or the lead stops you, return covered work,
+evidence, remaining scope and a recommended next step. Do not race a clock: time is
+the lead's to watch, and depth is not traded for speed.
 This is a valid return, not a fulfilled goal and not a diagnosis of model incapability.
 Report actual stagnation: repeated surface/approach without new artifacts, valid checks
 or useful hypothesis reduction. Distinguish that from expected waiting or a broken

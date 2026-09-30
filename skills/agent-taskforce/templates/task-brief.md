@@ -9,9 +9,8 @@ Link the accepted clauses rather than copying the entire mission. Pass the same
 reference to descendants and existing board `metadata.intent_ref`. A focused
 subagent without durable intent works from its authorized bounded brief.
 
-**Why this result and this separation:** originating outcome, unresolved decision
-and why another context helps. Specify open approach selection or the exact claim
-of a narrow check.
+**Why this result and this separation:** what the result contributes, and why
+another context or resource is useful. Unknown difficulty is not a sufficient reason.
 
 **Write ownership / off-limits / frozen items:** owned paths, other writers' paths
 and actual user freezes with their authority. Keep suggested reading separate.
@@ -22,9 +21,8 @@ hypotheses and methods to verify. Tag provenance `[inherited]` or `[assumed] whe
 appropriate; tone or exact quotes do not make claims binding. A claimed infeasible
 path needs its evidence, or must remain open to re-verification.
 
-**Authoritative context:** original request, intent/frame/spec/ADR and observations,
-distinct from the sender's explanation. Preserve source access and failed attempts;
-external recipients need accessible excerpts, not local paths.
+**Authoritative context:** mission, current intent/frame/spec/ADR and facts or user
+choices the repository cannot supply. A brief does not overrule their authority.
 
 **Done evidence:** checks, actual artifact/environment state and the intent/criterion
 revision this outcome must satisfy. Identify evidence for combined behavior when
@@ -35,9 +33,7 @@ actual permission. Absence of a contract grants no external delivery authority.
 
 **Peers and integration:** direct peer identities, inputs, shared interfaces, handoffs
 and the accountable integration owner when outputs must be combined. The lead is
-not the technical message relay. When review is assigned, name the verifier and the
-claim or method choice it helps with, including early evidence when useful; the
-owner sends it the result and revision directly.
+not the technical message relay.
 
 **Local authority:** methods, local correction and helpers inside approved limits.
 A helper can reason within this scope; the sender keeps the wider outcome.
@@ -46,14 +42,16 @@ A helper can reason within this scope; the sender keeps the wider outcome.
 commitments, irreversible actions or unapproved resource use. Ordinary diagnosis
 and authorized technical integration belong to owners.
 
-**Budget:** a numeric time, spend or scope boundary. At that boundary, return evidence,
-covered work and what remains. This is a valid return, not proof of completion or
-model incapability. Expected long-running checks should be visible in status.
+**Scale:** what the assignment is sized for (areas, investigation or implementation),
+so the owner can tell when the real surface is larger and return with its size,
+evidence, covered work and what remains before going deep. No time, spend or call
+limit here; those are the lead's own checks. A scale return is valid, not proof of
+completion or model incapability. Expected long-running checks should be visible in status.
 
-**Result contract:** artifact path and revision; outcome and actual execution status;
-observation versus proposed cause/remedy; uncertainty and required decisions.
-Preserve the frozen-item report and preview checkpoint. A completed narrow check
-does not settle the whole approach.
+**Result contract:** artifact path; outcome status separate from session status;
+checked revision; decisive evidence; remaining uncertainty; required peer or user
+decision. Carry the frozen-item report and any explicit preview checkpoint from
+dispatching. Match the returned artifact to the assigned decision, not just its first render.
 
 ## Optional active-frame link
 

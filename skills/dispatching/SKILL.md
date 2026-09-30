@@ -1,45 +1,17 @@
 ---
 name: dispatching
-description: "Handing work to another session, or sending the next task to an existing one: decide continue-versus-fresh, separate binding from hints, carry budget and return contract, watch after dispatch. Read before every Agent spawn or AgentSend."
+description: "Handing work to another session, or sending the next task to an existing one: decide continue-versus-fresh, separate binding from hints, carry scale and return contract, handle blocks and short returns. Read before every Agent spawn or AgentSend."
 ---
 
 # Dispatching
 
 Run this when you are about to hand work to another session (a teammate, a subagent, a freehand worker on any lane), and when you are about to send the next task to a session that already exists. It shapes the brief you are composing and the choice of who receives it; it is not a template to fill.
 
-## Check the execution shape and carry its authority
+## Is a separate session worth it
 
-A root lead considering continuing owners, independently ownable outcomes or
-cross-owner coordination reads the runtime-correct `agent-taskforce` skill before
-settling on a team or focused agent. This read may choose no team. A small isolated
-subagent or an owner delegating within an accepted boundary needs no new team ceremony.
+Name what the separate session contributes and what stays with you. Weigh that against briefing, duplicate reading, result integration, waiting and shared-resource contention, not token volume alone; a cheaper model being available is not a saving by itself. Coupled judgment and implementation can stay in one strong session, and a bounded helper still reasons inside its assignment.
 
-For work with durable intent, resolve it through `work-intent` before continuing-owner
-assignments. Put the same `intent_ref` and canonical workspace in the brief and in
-existing board `metadata` where supported. Link the relevant intent/spec clauses;
-state only this owner's outcome and its contribution, not a duplicate overall mission.
-Require the recipient to read the referenced source before dependent work and to name
-its revision with returned evidence. Propagate that reference to subagents and replacement
-sessions. A follow-up that materially changes the intent first goes through the lead's
-acceptance/update path; an old brief must not silently override the new source.
-
-## Discovery before the combined proposal
-
-Before team staffing, the lead uses relevant repository/connected evidence and current
-primary web sources to resolve discoverable facts. A bounded discovery subagent may receive
-a draft intent with explicit discovery-only authority, read scope, permitted disposable
-checks and a budget; it returns evidence and does not implement or become a continuing
-owner. The receiver checks the draft's exact reference without requiring active status.
-Do not relabel execution owners as subagents to bypass combined intent/roster confirmation.
-
-When execution is approved, pass the accepted intent reference and boundaries. Owners
-settle local factual/implementation gaps and already-delegated tradeoffs. If a choice
-would materially sacrifice an established benefit or change agreed priorities beyond
-that authority, return the evidence and recommendation before applying it broadly.
-The lead decides within its authority and consolidates only the remaining human decision.
-Related follow-ups reuse approval and context; material intent/roster/cost changes require
-a delta confirmation. Carry directly relevant prior failures with their conditions as
-source references, not technique bans or a requirement to reread the whole history.
+A focused subagent, or an owner delegating inside its accepted boundary, needs no team ceremony. A root lead weighing continuing owners, independent outcomes or a team reads Skill(agent-taskforce) first; that read may choose no team.
 
 ## What binds, and what is a lead
 
@@ -50,10 +22,12 @@ Binding: the things you are the canon of:
 - The outcome and why it matters.
 - Done evidence: what will count as done for this outcome.
 - Write ownership and off-limits paths; these protect other sessions' work.
-- The budget: the elapsed time, spend, or scope growth at which the worker returns even though nothing is blocked. Name a number, and say that returning at budget with the surface still open is a valid return, not proof that the outcome is satisfied.
+- The scale: what the assignment is sized for (which areas, investigation or implementation), so the worker can tell when the real surface is larger and come back with its size before going deep. Say that such a return, with the surface still open, is valid and not proof that the outcome is satisfied. Do not put a time, spend or tool-call limit in the brief: a clock makes the worker hurry and trade depth for speed. Elapsed time and spend are your own checks (see While it is out).
 - Constraints that carry a named authority source: the user asked for it, a spec or active frame states it, an external contract or another session's ownership requires it. Name the source next to the constraint.
 - Frozen items: values, behaviors, feels, layouts, or copy the user has locked ("keep this", "do not touch", "freeze"). List each one in the brief with its source and date ("physics constants and the formula that uses them: frozen, user, 2026-08-14"). A frozen item that lives only in a document the worker was not told to read does not exist for that worker. If the task cannot be completed without changing a frozen item, the worker stops and returns with that conflict; it does not choose between the task and the freeze, and it does not satisfy the freeze by leaving the old value in a comment while replacing what uses it.
-- Open variables: for an authorized exploration, list the dimensions the user opened and the extent allowed (for example layout, interaction, or copy), with the source and date, immediately after Frozen items. Record `none` when no exploratory change is authorized. Missing authorization is not an open variable; recover it from the user instruction or return the gap to the lead. A broader open dimension may cover its ordinary design choices; this is not a pixel-by-pixel permission list. Do not infer permission to alter a frozen item from an open variable or a generic frame VARIABLES list. Unlisted dimensions are not newly opened by the experiment, but routine implementation choices inside the already assigned scope remain delegated. When feedback revises a choice, carry the adopted change and its reason here or beside the relevant binding item, and retire the superseded interim rule together with the check that enforced it, retaining the other agreements; do not create a second ledger.
+- Open variables: when the user opened dimensions for exploration ("try other layouts", "copy is open"), list them right after Frozen items with source and date. They never override a frozen item; dimensions the user explicitly closed stay closed, and ordinary method choices inside the assignment stay delegated.
+
+When feedback revises a choice inside existing authority, record the adopted change and its reason beside the binding item it affects, and retire the superseded interim rule together with the check that enforced it. Do not append the new requirement on top of the old one or keep a second ledger.
 
 Provisional: owner-chosen methods, sequence, candidate counts and comparison setup, plus beliefs about how the code is shaped: file coordinates, call paths, causal guesses, method ideas, suggested files to inspect. Ship them when they help (verified knowledge from earlier runs saves the worker a cold read), but they travel as leads the worker verifies against code, tests, and runtime, and may overrule. Being able to quote the line does not upgrade a lead: a correctly quoted line can still be a wrong interpretation. Provisionality does not survive serialization unless your register carries it; a guess shipped as fact pins the search to the wrong spot.
 
@@ -68,36 +42,19 @@ Two boundary cases, drawn from a real incident:
 - Invented constraint → observable: "Do not widen the cache invalidation" forbade the only fix. "Widen it if you must; measure the repaint delta and report it" keeps the same performance concern and lets the worker move.
 - Lead vs fence: "`transcript_blocks.zig` is probably where entries are assembled; verify" is a lead the worker may overrule. "`runtime.zig` is held by another session today; do not write it" is a fence, and stays one even if the worker disagrees.
 
+Some assignments carry one more line. For technical integration, name the accountable owner and the shared write surface. For independent verification, send authoritative artifacts, acceptance criteria and actual state, not the producer's reasoning or desired verdict. For discovery ahead of a decision, state discovery-only authority, read scope, permitted disposable checks and the scale. Carry directly relevant prior failures with their conditions as source references, not as technique bans or a demand to reread the whole history.
+
+## Carry the intent reference
+
+When the work has durable intent (Skill(work-intent)), put the same `intent_ref` and canonical workspace in the brief, and in board `metadata` where supported. Link the relevant clauses and state only this recipient's outcome, not a copy of the whole mission. Ask the recipient to read the source before dependent work and to name the revision its evidence covers; the same reference travels to its subagents and to replacement sessions. A follow-up that materially changes the intent goes through the lead's acceptance path first; an old brief never overrides the new source.
+
 ## The receiving end
 
-A worker whose session loads a role contract already knows how to read this brief. A worker that loads none (a freehand lane, an ad-hoc subagent) gets one line instead: start by reading Skill(dispatched). Where that skill cannot reach the worker's harness, carry the license inline: repo claims here are provisional; verify them; a conflict with a binding line returns with evidence and a recommendation; at budget, return what you covered; no finding is a valid result.
+A worker whose session loads a role contract already knows how to read this brief. A worker that loads none (a freehand lane, an ad-hoc subagent) gets one line instead: start by reading Skill(dispatched). Where that skill cannot reach the worker's harness, carry the license inline: repo claims here are provisional; verify them; a conflict with a binding line returns with evidence and a recommendation; when the work proves larger than the assignment, return what you covered and its size; no finding is a valid result.
 
 The return contract has a fixed column when frozen items were listed, with three values: `Frozen items touched: none`, `Frozen items touched: <which>, <why the task required it>`, or `Frozen items: list unavailable, <why>` (the brief named a list the worker could not read, or the repository's frozen list could not be found). "Unavailable" is not "none"; a worker that could not read the list reports that, and does not report `none`. A return without this column when the brief listed frozen items is incomplete. This column makes the worker check the list before returning; it is a self-report, not evidence. Where the repository carries frozen checks, the checks are the evidence, and a self-report of `none` does not replace running them.
 
-If the brief contains Open variables, add `Open variables explored: <which, or none>` to the return. If the referenced authorization list was unavailable, say `Open variables: list unavailable, <why>` rather than `none`. This is a report of what was explored, not evidence of product quality or new permission.
-
-For visual or felt work (a screen, a sound, a control feel), name the decision the
-artifact must support and any explicit preview checkpoint in the brief. A first render
-is not an automatic stop. Within the accepted scope, the owner prepares a functioning,
-judgment-ready candidate and corrects inspectable omissions before returning it.
-An explicit first-preview checkpoint or user stop still binds, even if the candidate
-has known gaps; report those gaps rather than polishing past that boundary. Once a
-meaningful user preference is needed, show the useful candidate promptly instead of
-polishing unseen. A preview assignment does not authorize product integration.
-
-Use evidence the observer can actually inspect. Static frames do not prove full-speed
-rhythm. If an observation channel is unavailable, report that limit and request only
-the remaining observation; do not make a new tool a prerequisite for unrelated progress.
-Do not relabel an avoidable, inspectable loss as taste, or an optional improvement as a
-required repair. On receipt, return a supported in-scope failure to its implementation
-owner for correction and recheck of the changed result through the agreed evidence path.
-A reviewer does not repair production code it will independently judge. A review report
-or a first screenshot is not automatic user handoff. The lead handles acceptance and
-material choices without duplicating the owner's technical checks.
-
-When preparation, actual-use review, correction and recheck need a coordinated path,
-use [bounded follow-through](references/bounded-follow-through.md) when choosing that
-path. Carry it in the existing brief; this creates no extra approval or required reviewer.
+For visual or felt work (a screen, a sound, a control feel), name the decision the artifact must support and any explicit preview checkpoint. A preview assignment does not authorize product integration. What the receiver owes in return (a judgment-ready candidate, honest observation limits) is in Skill(dispatched).
 
 ## Reuse the agent or start a new one
 
@@ -105,42 +62,20 @@ Part of every dispatch is choosing who gets it. If an agent already worked on th
 
 A fresh session needs a concrete reason: a genuinely different outcome, independent review, a persistently refuted premise the old session cannot release, unavailable continuation, or an explicit approved reassignment whose remaining benefit repays the handoff. A stronger model merely being available is not enough. For an actual reassignment, preserve artifacts, current modifications, refuted hypotheses, remaining checks and authority; do not transfer an unexplained failure and call it escalation. Once a new assignment is justified, Skill(model-guide) chooses its model. Keep related work with the current session whenever it remains the useful choice.
 
-If `AgentSend` says the agent cannot be continued, first tell why. Evicted, crashed or expired is an execution failure: when the assignment still permits it, start a new one (or `team_replace_member` for a teammate) and pass along whatever the old one left behind (its report, files, evidence) as leads to verify; if nothing was left, say so in the brief. Cancelled by the user, an explicit stop or an exhausted budget is not permission to restart the same work under a new session — report the remaining gap instead of silently changing the owner.
+If `AgentSend` says the agent cannot be continued, first tell why. Evicted, crashed or expired is an execution failure: when the assignment still permits it, start a new one (or `team_replace_member` for a teammate) and pass along whatever the old one left behind (its report, files, evidence) as leads to verify; if nothing was left, say so in the brief. Cancelled by the user or an explicit stop is not permission to restart the same work under a new session — report the remaining gap instead of silently changing the owner.
 
 ## While it is out
 
-A stalled worker has a shape you can see from outside: budget draining while nothing new appears (no edit, no test, no narrowed hypothesis appropriate to the task) and the same surface being read again. That shape, not elapsed time alone, is the signal.
+Let the worker work. Completion, failure and permission notices arrive on their own; do not watch its transcript, logs or result file for progress. A worker that finds itself blocked says so (Skill(dispatched)), and a scale return comes back by itself. A declared long-running check or an expected dependency wait is not a stall.
 
-Ask the current owner what blocked progress and request the evidence needed to choose a response. A declared long-running check or expected dependency wait is not a stall merely because no message arrived. Owners manage local corrections, helpers and integration; the lead addresses intent, commitments and responsibility changes rather than selecting the next debugging command.
+Time and spend stay with you. When a worker runs longer than the work should take, ask it what it is doing and what, if anything, blocks it; stop it yourself when continuing no longer pays. Neither needs a limit announced in advance.
 
-Budget exhaustion, a failed test or repeated advice is not proof of model incapability. Distinguish target defects, invalid measurements, environment/permission failures, brief conflicts, oversized scope and a refuted approach. Continue, obtain bounded peer evidence, revise an authorized method or explicitly reassign according to that cause. Do not impose a retry count or cheapest-first failure ladder.
+When a worker reports it is stuck, ask what blocked progress and request the evidence you need to choose a response. Answer at the level of the brief (a decision, a boundary change, peer evidence) rather than picking its next debugging command.
 
-## When it comes back empty
+## When it comes back short
 
-Judge the return against its assignment. A judgment-ready preview completes a preview
-assignment; a screenshot of an absent promised behavior does not fulfill an implementation
-assignment. Budget, authority, observation limits and explicit checkpoints can all justify
-a valid return with work remaining. They are not proof that the requested outcome is done.
+Judge the return against its assignment. A judgment-ready preview completes a preview assignment; a screenshot of an absent promised behavior does not fulfill an implementation assignment. A review report or a first screenshot does not go to the user automatically; the lead decides what reaches the user. Scale, a stop you made, authority, observation limits and explicit checkpoints can all justify a valid return with work remaining; they are not proof that the requested outcome is done. Do not relabel an avoidable, inspectable loss as taste, or an optional improvement as a required repair.
 
-Recover the cause from the same session first when the required result is missing.
-Ask which premise, constraint or capability blocked it, with evidence; use that cause to
-choose in-scope repair, a revised approach, a material decision or a stop at the boundary.
-Do not resend an unchanged brief to a new worker instead of diagnosing the shared cause.
-An auxiliary tool failure grants no new installation or environment-rebuild authority;
-use an authorized existing route or return the concrete gap that blocks progress.
+When the required result is missing, recover the cause from the same session first: which premise, constraint or capability blocked it, with evidence. Tell apart a target defect, an invalid measurement, an environment or permission failure, a brief conflict, an oversized scope and a refuted approach. Running long, a failed test or repeated advice is not proof of model incapability. From that cause choose in-scope repair, a revised approach, bounded peer evidence, a material decision, an explicit reassignment or a stop at the boundary; there is no retry count or cheapest-first ladder. Do not resend an unchanged brief to a new worker instead of diagnosing the shared cause.
 
-## Account for the extra context before delegating
-
-The sending owner chooses local support; the lead does not relay those assignments.
-Name what the separate session contributes and what work stays with the sender.
-Consider briefing, duplicate reading, result integration, waiting and shared resource
-contention as well as token volume. Do not fabricate savings from the mere presence
-of a cheaper model. Coupled judgment and implementation can remain in one strong
-session; bounded helpers still reason inside their assignment.
-
-For a technical integration assignment, name the accountable owner and shared write
-surface. For independent verification, send authoritative artifacts, acceptance
-criteria and actual state rather than the producer's reasoning or desired verdict.
-Use an existing approved verifier when it covers the claim. A verifier does not need
-a further verifier automatically, and the lead's fulfillment decision does not
-require redoing the owner's implementation or the verifier's checks.
+A supported in-scope failure goes back to its implementation owner for correction and a recheck of the changed result; the sender does not take the fix over. An auxiliary tool failure grants no new installation or environment-rebuild authority; use an authorized existing route or return the concrete gap that blocks progress.
