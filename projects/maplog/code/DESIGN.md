@@ -1,177 +1,71 @@
-# Maplog Design Contract
+# 비행운 디자인 계약
 
-**현재 적용 안내 (2026-09-29):** 먼저 [CURRENT](../record/CURRENT.md)와 [PRODUCT](../record/PRODUCT.md)를 읽는다. 아래의 모임 중심 정체성·고정 토큰은 6~7월 옛 앱(`code/Maplog/`)의 디자인 자산 기록이며 새 제품 정의를 덮지 않는다. 관련 화면의 이유와 보호할 경험에 맞는 부분만 재사용하고, 과거 화면 계약·검사 통과를 새 표현의 채택으로 승계하지 않는다. 친구·모임 기능은 이번 출시에 없다([PRODUCT 이번 출시에서도 안 하는 것](../record/PRODUCT.md#not-this-release)).
+갱신: 2026-10-01. 화면을 만들거나 고칠 때 읽는 입구다. 먼저 [CURRENT](../record/CURRENT.md)(지금 앱에 있는 것)와 [PRODUCT](../record/PRODUCT.md)(제품 정의·감성·화면별 결정)를 읽고, 화면 작업이면 [PRODUCT 화면 규칙](../record/PRODUCT.md#screen-rule)과 `~/.agents/skills/frontend-ux-router/SKILL.md`도 읽는다. 사용자 결정은 PRODUCT에 있고 이 문서는 그것을 화면 언어로 모은다. 둘이 다르면 PRODUCT가 맞다. 수치의 단일 출처는 현재 코드(`code/MaplogV2/`)다.
 
-**화면별 적용 범위:** 한 화면의 정보량을 최소로 두는 9/24 사용자 결정은 아래 6장 10항과 [PRODUCT 화면 규칙](../record/PRODUCT.md#screen-rule)을 따른다. 어두운 사진 감상 표면(Ambient Dark)은 [이전 Recap 모음 화면](../record/PRODUCT.md#recap-collection)의 채택 이력이다. 새 [기간 고르기](../record/PRODUCT.md#recap-period-picker)·오프닝·재생은 해당 화면의 채택 범위와 실제 결과를 따르며, 이 문서만으로 표면의 색을 새로 확정하거나 기존 어두운 표현을 일괄 폐기하지 않는다. 실제 적용 판본은 [CURRENT](../record/CURRENT.md)에서 확인한다.
+6~7월의 친구 모임 지도앨범(옛 앱 `code/Maplog`, 10/1 `dev`에서 삭제)의 디자인 — 핀 꼬리, `+N` 배지, 1·2·3장 핀, 부채(hand fan) 표지 고르기, 따뜻한 종이·코랄·핑크 토큰, `지도·친구·앨범·프로필` 네 탭, 모임 상세·멤버 초대 기준 화면 — 은 지금 지시가 아니다. 친구·모임 기능은 이번 출시에 없다([PRODUCT 안 하는 것](../record/PRODUCT.md#not-this-release)). 옛 문서는 git 기록에 있다.
 
-이 문서는 관련 디자인 자산과 세부 계약을 찾는 입구다. 특정 화면의 수치와 과거 QA 이력은 필요한 범위에서만 읽는다.
+## 1. 무엇을 보여 주는 앱인가
 
-## 읽는 순서
+이미 찍어 둔 내 사진이 실제 지도 위에 붙어 있고, 지나온 시간을 그 지도 위에서 다시 보는 앱이다. 사진이 주인공이고 지도는 기억을 받쳐 주는 조용한 바닥이다. 지도 위 조작부·글씨·장식이 사진보다 강해지지 않는다. 빈·권한·실패 상태는 없는 콘텐츠를 가장하지 않는다.
 
-1. 현재 상태·승인·잠금은 [`record/CURRENT.md`](../record/CURRENT.md)를 봅니다.
-2. 제품 정체성·감성·보호 조건·열린 판단은 [`record/PRODUCT.md`](../record/PRODUCT.md)를 봅니다.
-3. 지금 유효한 사용자 결정은 PRODUCT에 있고, 6~9월의 흐름은 [RETRO](../record/RETRO.md)에 요약돼 있습니다.
-4. 이 문서의 기존 디자인 방향 중 현재 목적에 맞게 재사용할 부분을 확인합니다. 현재 사용자 결정과 충돌하면 원문·상태부터 대조합니다.
-5. 승인된 UI 작업에서 아래 trigger에 해당하는 세부 계약을 읽되, 옛 기능을 자동 재개하지 않습니다.
+아닌 것: 공개 피드 중심 SNS, 여행 플래너, 실시간 위치추적 앱, 꾸미기 중심 다이어리, 네이버지도 복제품.
 
-| 건드리는 범위 | 반드시 읽을 계약 |
-| --- | --- |
-| 색·글꼴·radius·depth·glass·motion token | [`design/visual-system.md`](design/visual-system.md) |
-| 지도 홈·사진핀·선택 상태·map overlay | [`design/map-home-and-photo-pins.md`](design/map-home-and-photo-pins.md) |
-| 사진 선택·grouping·location segment·cover·album flow | [`design/import-and-album-flows.md`](design/import-and-album-flows.md) |
-| 하단 navigation·로컬 앨범 탐색 | [`design/navigation-and-album.md`](design/navigation-and-album.md) |
-| 여러 화면을 가로지르는 정보 계층·표면·행동·공용 UI | [`design/app-wide-design-language.md`](design/app-wide-design-language.md) |
-| Recap 탭·기간 고르기·오프닝·재생 연결 | [PRODUCT 기간 고르기](../record/PRODUCT.md#recap-period-picker) + [`design/app-wide-design-language.md`](design/app-wide-design-language.md) |
-| 이전 모음 화면·Recap 카드의 유지 또는 재사용 | [PRODUCT 이전 모음 화면](../record/PRODUCT.md#recap-collection) + [`design/app-wide-design-language.md`](design/app-wide-design-language.md) |
-| 사용자 확정사항이나 제품 전략을 바꿀 가능성 | [PRODUCT](../record/PRODUCT.md) |
-| 과거 결정 근거나 회귀 여부 | git 기록의 옛 작업 일지(2026-09-29 정리로 지움) 중 필요한 것 하나 |
+감성의 기준과 사용자 원문은 [PRODUCT 보호할 감성](../record/PRODUCT.md#구현-단계와-무관하게-지킬-감성). 화면에서 특히 자주 걸리는 말: “최대한 정보가 적어야돼.”, “다 ai slop어플이랑 비슷해보이고싶지않아”, “좀 화면별로 필요와 기능에 맞춰 디자인 해줘 앞으로 기억해” 되풀이된 아쉬움의 말은 밋밋, 촐싹, 밤티, 아이패드, 허접·초라다.
 
-한 변경이 여러 화면을 가로지르거나 shared token·data meaning을 바꾸거나 현재 artifact와 충돌하면 인접한 세부 계약도 구현 전에 읽습니다.
-6. 수치의 채택 근거와 실행 증거가 필요할 때만 QA 폴더나 git 기록에서 찾습니다.
+## 2. 지금 화면
 
-문서보다 현재 코드가 구현 수치의 단일 출처인 경우 코드가 우선합니다. 문서와 코드가 의미 수준에서 충돌하면 조용히 섞지 말고 차이를 드러냅니다.
+| 화면 | 하는 일 | 계약 |
+| --- | --- | --- |
+| **지도 탭** | 실제 지도 위 사진 핀으로 장소와 기억을 발견한다. 첫 지도는 한국 위주. | 핀 하나 = 장소 하나, 대표 사진 한 장, 사진 수에 따라 크기만 커짐, 꼬리·숫자·원·더미·뒷장 없음, 제 좌표에서 제자리 합치기·가르기, 정말 많이 포개질 때만 조금 묶음. 지도 바닥은 네이버 Style Editor로 조용하게 만든 스타일. 오른쪽 아래 「내 위치」, ⚙ 설정. [PRODUCT 메인 지도](../record/PRODUCT.md#release-remaining)·[핀](../record/PRODUCT.md#pin-shape) |
+| **장소 갤러리 시트** | 핀을 누르면 그 장소 사진을 날짜별로 본다. | 지도는 그대로, 아래 시트. 시트가 열린 채 다른 핀을 누르면 그 장소로 바뀐다. 사진을 누르면 크게. 개편 예정(디테일 미정) |
+| **Recap 탭 — 기간 고르기** | 볼 기간을 고르고 ▶. | 화면 전체가 지도 한 장, 그 위에 휠 패널(언제부터·언제까지 연·월 네 휠). 탭을 열 때 콜라주 없음. 미리보기 핀은 메인 핀 규칙을 따르고 더 작게. [PRODUCT 기간 고르기](../record/PRODUCT.md#recap-period-picker) |
+| **Recap 재생** | 지나온 시간을 지도 위에서 편하게 따라간다. | ▶ → 콜라주 오프닝 → 사진이 제 핀으로 → 이동·확대축소·도착 감상. 사진은 핀에서 이어져 나온다(A). 재생바는 얇은 선·숫자만 늘 두고 버튼 줄은 숨겼다 나온다. [PRODUCT 지금 원하는 Recap](../record/PRODUCT.md#recap-current-experience)·[재생 조작](../record/PRODUCT.md#recap-app-controls-idea) |
+| **첫 실행 카드 넷** | 첫 안내·찾는 중·권한 거절/제한·베타 피드백 | 흰 카드(A″), 제목 크게, 버튼은 짙은 남색 알약, 뒤 화면은 같은 흐림·어둡게. 첫 안내 카드는 사진 권한 창을 누를 때 뜨게 하는 역할 하나라 제목 두 줄 + 버튼 + 작은 「접근권한 안내 ›」만. [PRODUCT 첫 실행](../record/PRODUCT.md#release-remaining) |
+| **하단 탭바** | `지도 | Recap` | 남색 떠 있는 알약, 두 탭 같은 색(탭마다 색 반전 없음). NAVER 로고는 세 화면 모두 왼쪽 아래 알약 바로 위 한 자리 |
 
-## 1. Product Identity
+새 화면·진입·전환은 이 표에 없으면 만들지 않는다. 사용자와 디테일까지 정한 뒤 만든다([화면 규칙](../record/PRODUCT.md#screen-rule)).
 
-> 조용한 지도 위에 친구 모임 사진이 작은 유리 스티커처럼 붙는 지도앨범 앱.
+## 3. 톤과 표면
 
-Maplog는 기존 갤러리 사진을 고르면 과거 추억이 지도 위에 바로 펼쳐지고, 이후 친구들과 모임 사진을 간편하게 함께 쌓는 비공개 지도앨범입니다.
+- **밝은 화면(지도·시트·첫 실행 카드):** 흰 표면, 짙은 잉크 글씨(`ink #191817`, 본문 `#4B4845`, 흐린 보조 `#7B7770`·`#8E8A85`), 주 행동과 탭바는 남색 `#15202B`. 카드 뒤는 남색 계열 딤과 약한 흐림. 정확한 값은 `code/MaplogV2/App/MapHomeChrome.swift`.
+- **하늘색 `#2EA9DF`:** 앱 아이콘(닭의장풀 → 옅은 물빛 `#A5DEE4`)에서 온 색. 기간 고르기 강조처럼 작게만 쓴다.
+- **Ambient Dark — Recap 탭·재생:** 사진 감상 표면은 어둡다(사용자 “이번 어두운건 괜찮아”, 9/24, [이전 모음 화면](../record/PRODUCT.md#recap-collection)). 다른 실용 화면을 분위기 내려고 어둡게 바꾸지 않는다.
+- **사진 핀·액자:** 얇은 흰 테와 얕은 그림자에서 출발한다. 핀 테·그림자는 보완 중이다(흰 테 12%에 “뭔가... 하나의 아이패드같아....”).
+- **쓰지 않는 표면:** 유리·그라데이션 버튼·빛번짐을 겹친 표면(사용자 기록 “AI slop”), 카드 안 카드, 장식용 배지.
+- **글꼴:** iOS 시스템 글꼴. 한국어 본문에 손글씨 글꼴을 쓰지 않는다.
+- **지도 위 우선순위**(7월부터 이어 온 기준): 사진 핀 > 역·강·큰 공원·동네 이름 > 큰 길·랜드마크 > 일반 건물·생활 도로·세부 시설.
 
-사용자가 느껴야 할 것:
+## 4. 화면 문법
 
-- `어? 여기 갔었지`
-- `사진첩보다 찾기 쉽다`
-- `지도 위에 추억이 붙어 있다`
-- `귀찮지 않은데 예쁘다`
+PRODUCT 화면 규칙의 세 사용자 확정(함께 디테일까지 정하고 구현 / 한 화면 정보량 최소 / 화면마다 하는 일에 맞춰)을 화면에 옮기는 방법이다.
 
-Maplog가 아닌 것:
+- 화면을 열면 먼저 보이는 것은 실제 콘텐츠(지도·사진)나 지금 내릴 결정 하나다. 이미 쓰는 화면에 다시 소개 문구를 올리지 않는다.
+- 구역은 글이 아니라 여백·정렬·무게로 나눈다. 강한 정보 단계는 세 단계 안팎. 같은 날짜·시간·사진 수를 제목·요약·카드에서 반복하지 않는다. 숫자는 고르거나 찾는 데 쓰일 때만.
+- 결정에 필요한 조건은 작은 회색 꼬리말에 숨기지 않는다. 보조 글씨는 작고 흐리게.
+- 화면 수준 주 행동은 하나, 버튼 문구는 누른 뒤 결과를 말한다. 처리 중에는 같은 버튼이 상태로 바뀐다.
+- 단순한 시트는 끌어 닫기를 쓰고 습관적인 X·완료를 붙이지 않는다.
+- 다른 곳(예: iOS 권한 창)이 이미 하는 말은 되풀이하지 않는다. 사진·장식은 기능을 돕거나 첫인상을 맡는 화면에만.
 
-- 공개 피드 중심 SNS
-- 여행 플래너나 장소 토론 채팅
-- 실시간 위치추적 앱
-- 꾸미기 중심 다이어리
-- 네이버지도 복제품
+**새 화면을 만들기 전 다섯 질문.** ① 사용자는 여기서 무엇을 보거나 결정하려고 왔나 ② 첫 1초에 읽혀야 하는 것은 무엇인가 ③ 주 행동은 하나인가 ④ 제목·설명·배지·꼬리말이 같은 뜻을 반복하지 않나 ⑤ 감상 화면인가 실용 화면인가, 섞고 있지 않나.
 
-주요 진입 뒤 홈에서는 권한과 사용 가능한 데이터가 허용하는 가장 이른 시점에 실제 지도와 사용자 사진을 만납니다. empty·permission·failure 상태는 없는 콘텐츠를 가장하지 않고 목적에 맞는 대안을 보여줄 수 있습니다. 지도는 기억을 받쳐주는 조용한 바닥이고, 사진은 주요 기억 콘텐츠이므로 map chrome·label·control·decoration이 지속적으로 사진보다 강해지지 않습니다.
+## 5. 글
 
-## 2. Current Visual Direction
+앱 전체 해요체. 말할 때 나오는 순서로, 이유가 먼저, 대구 금지, 문어 단어 금지, 소리 내 읽어 본다. 막연한 안심 대신 실제로 하는 일을 쓰고 사실과 다른 약속은 쓰지 않는다(“아무것도 안 나가요” 금지, “사진은 업로드하지 않아요”까지). 사진에서 감정·상황을 추측해 감성 문구를 만들지 않는다. 비어 있음과 실패를 같은 상태처럼 보이게 하지 않는다. 부산스럽지 않게. 정리본 `/Users/wooojin/Downloads/maplog-qa/2026-09-29-friends-fix/COPY-GUIDE.md`, 결정은 [PRODUCT 말투](../record/PRODUCT.md#release-remaining).
 
-현재 채택된 방향은 `시크하고 세련된 새 iPhone 기본앱 감성`입니다.
+## 6. 움직임·조작·접근성
 
-- calm, bright, photo-first, warm white, quiet Korean map
-- native control behavior와 읽기 쉬운 soft glass
-- 작은 coral/pink accent와 warm ink
-- 스케치 감성은 얇은 선, wordmark, 작은 marker 디테일에만 제한
-- 귀여움은 핀 꼬리, 작은 반응, 빈 상태처럼 좁은 곳에서만 사용
+- 움직임은 상태 변화와 공간 관계를 설명할 때 쓴다. 지도 이동·확대축소와 핀 동기화보다 앞설 수 없다. 핀이 꿈틀거리거나 빈 데서 솟지 않게 한다.
+- 핀은 지도 좌표에 붙는 네이버 지도 마커로 그린다. SwiftUI 겹침 화면으로 좌표를 따라가게 하지 않는다.
+- 주요 터치 영역 44pt 이상. Dynamic Type, VoiceOver, 동작 줄이기, 투명도 줄이기에서 의미와 조작이 유지되어야 한다.
 
-화면은 맑고 바로 조작할 수 있어야 합니다. 병원·금융앱처럼 차갑거나, 꾸민 다이어리·카페 템플릿·AI glassmorphism처럼 보이면 현재 방향에서 벗어난 것입니다.
+## 7. 만드는 방식과 완료
 
-구조 제목은 실제로 여러 콘텐츠를 묶을 때만 둡니다. 제목·본문·배지·꼬리말이 같은 뜻을 반복하지 않으며, 사용자가 눌러야 할 주 행동·보조 행동·파괴 행동과 결정에 필요한 조건을 낮은 대비 설명문보다 먼저 읽히게 합니다. 직관은 설명을 더 붙이는 것이 아니라 구역과 시각적 무게로 만듭니다.
+1. 지금 화면과 실제 사진(실사진 시뮬·폰)을 먼저 본다. 가짜 보관함으로 판단하지 않는다.
+2. 배치·상태별 움직임은 구현이나 시안 전에 텍스트 도식으로 먼저 맞춘다.
+3. 새 모양을 찾을 때는 [PRODUCT 화면 규칙](../record/PRODUCT.md#screen-rule)의 “표현 방향을 함께 찾을 때의 기본”을 따른다. 판을 늘리지 않고 추천 하나와 전후 한 장.
+4. 구현 뒤 대상 기기에서 진입 → 주 행동 → 결과·오류·복구를 실제로 걷고, 코드가 아니라 렌더 결과를 비평한다. 마지막에 보이는 요소를 하나씩 가리며 없어도 되는 것을 덜어낸다.
+5. 완료라고 말하기 전에 해당하는 것을 본다: 대상 기기 렌더, 영향받은 상태(기본·빈·로딩·오류·권한), 긴 한국어·작은 화면·큰 글자, 손가락 제스처와 핀 동기화, VoiceOver·동작 줄이기. 빌드 성공만으로 끝내지 않는다. 폰 전에는 `/Users/wooojin/Downloads/maplog-qa/tools/PREPHONE.md`. 근거는 QA 폴더에.
 
-현재 화면의 목적과 보호할 경험은 [PRODUCT](../record/PRODUCT.md)에서 확인합니다. 메인 지도와 이전 모음 화면에서 채택한 표현은 재사용 자산이며, 새 기간 고르기·오프닝·재생에 같은 배치와 표면을 자동으로 적용하지 않습니다. 7월의 `모임 상세 추억 타임라인`·`멤버 초대 sheet` 기준은 옛 앱 기록입니다. 다른 화면은 배치를 복사하는 대신 [`app-wide-design-language.md`](design/app-wide-design-language.md)의 콘텐츠 우선순위·정보 계층·행동 문법을 자기 목적에 맞게 적용합니다.
+## 8. 옛 세부 문서
 
-기준 이미지: `/Users/wooojin/Downloads/생성된 이미지 3.png`
-
-## 3. Fixed, Flexible, Exploratory
-
-모든 문장은 같은 강도의 규칙이 아닙니다. 변경 권한과 필요한 검증 수준에 따라 아래처럼 구분합니다.
-
-### Fixed
-
-`Fixed`는 비판할 수 없는 영구 진리가 아니라, 변경 권한이 현재 작업에 위임되지 않은 항목입니다. 반대 근거가 있으면 영향·근거·migration 범위를 갖춘 제안으로 올릴 수 있지만 사용자 확인 없이 구현을 바꾸지 않습니다.
-
-- 제품 약속: 지도앨범이라는 정체성, 비공개 기본값, 주요 진입 뒤 실제 지도와 사용자 사진을 가능한 이른 시점에 보여주는 경험
-- 플랫폼·상호작용 계약: native Naver map gesture·camera behavior, marker가 지도 좌표에 붙는 의미
-- 안전 불변조건: 선택한 사진 범위, 접근성, 개인정보, data semantics
-- 명시적 사용자 결정: `record/PRODUCT.md`에 `사용자 확정`으로 적힌 결정
-
-Native marker의 radius·scale·stack 표현 같은 시각 파라미터는 Fixed 자체가 아니라 아래 Flexible 계약입니다.
-
-### Flexible
-
-현재 구현의 일관성을 위해 우선 따르되, 실제 화면 근거가 있으면 조정할 수 있습니다.
-
-- 시각 표현: 색상·타이포 처리·radius·depth·카드 구성·간격·지도 라벨과 사진핀의 광학적 대비
-- 조정 가능한 행동 수치: zoom·hit geometry·marker scale·selection expansion·motion timing
-
-시각 표현은 현재 화면과 비교합니다. 행동 수치는 interaction, accessibility, occlusion, data meaning 영향을 함께 확인합니다. Shared SSOT나 화면 간 계약을 바꾸면 구현 SSOT와 세부 계약을 맞추고 재사용 가치가 있는 근거를 worklog에 남깁니다. 단일 화면의 local padding 같은 광학 보정은 별도 이력 문서가 필요하지 않습니다.
-
-### Exploratory
-
-새 화면, 홍보 웹, 리캡 테마, 사용자가 명시적으로 요청한 리디자인에서는 자유롭게 제안할 수 있습니다.
-
-- 새로운 구성, 이미지 언어, 전환, 타이포 조합
-- 현재 토큰을 확장하거나 대체하는 시각 방향
-- 익숙한 패턴과 표현적인 패턴 중 제품 목표에 맞는 선택
-
-탐색은 기존 장식을 무작위로 섞는 일이 아닙니다. 대상 사용자, 전달할 메시지, 기억에 남을 아이디어 하나를 정하고 실제 렌더로 비교합니다. Fixed 항목을 바꾸는 안은 구현하지 않고 제안으로 명시합니다.
-
-## 4. Visual System
-
-현재 토큰은 구현 호환성을 위한 기본값이며 보편적 미감 규칙이 아닙니다.
-
-정확한 radius, shadow, motion, glass fallback 수치는 [`design/visual-system.md`](design/visual-system.md)에 둡니다. 토큰 작업이 아니라면 이 snapshot을 미리 읽을 필요가 없습니다.
-
-### Color
-
-- surfaces: `mapPaper #F8F4EC`, `surface #FFFDF9`, `surfaceGlass #FFFFFFCC`
-- text: `ink #191817`, `inkSoft #4B4945`, `caption #7B7770`
-- lines: `hairline #D8D0C4`, `hairlineStrong #B9AA99`
-- accents: `memoryPink #EF7898`, `softCoral #F28B72`, `warmGold #E7B84D`
-- map context: `parkSage #A9C59B`, `waterMist #CFE8EE`, `stationBlue #5D8DD7`
-- semantic: `success #65A77A`, `warning #D9A441`, `danger #D96A5E`
-
-넓은 면은 warm surface가 맡고 accent는 선택 상태와 핵심 행동에 집중합니다. 색 수를 기계적으로 제한하기보다 한 화면에서 무엇이 주도색인지 분명하게 만듭니다.
-
-### Typography
-
-iOS 시스템 폰트와 SwiftUI 기본 San Francisco 계열을 사용합니다. 한국어 본문에는 손글씨 폰트를 쓰지 않고, 별도 wordmark가 필요할 때만 브랜드 표현을 탐색합니다. 화면의 정보 단계는 콘텐츠가 한눈에 읽힐 만큼만 둡니다.
-
-### Surface and Motion
-
-- 사진, 지도, 기본 콘텐츠에는 glass를 씌우지 않습니다.
-- glass는 top controls, 주요 추가 버튼, 선택 카드, sheet·tab navigation처럼 조작 계층에 사용합니다.
-- glass가 글자를 흐리게 만들면 opacity를 높이거나 solid surface로 바꿉니다.
-- motion은 상태 변화와 공간 관계를 설명해야 하며 지도 pan·zoom·rotate 동기화보다 앞설 수 없습니다.
-- Reduce Motion과 Reduce Transparency에서 의미와 조작성이 유지되어야 합니다.
-
-## 5. Interaction and Accessibility
-
-- 현재 활성 surface가 입력을 소유하고 배경 gesture와 scroll을 일관되게 처리합니다.
-- 지도핀 선택, 빈 곳 탭 해제, 상세 진입은 세부 계약과 실제 상태가 같은 의미를 보여야 합니다.
-- 주요 touch target은 최소 44pt를 유지합니다.
-- Dynamic Type, VoiceOver, 대비, reduced motion, reduced transparency를 affected flow에서 확인합니다.
-- mock map과 live map은 가능한 한 같은 marker renderer와 상태 의미를 공유합니다.
-- 실제 참여자·공개 범위·장소 공급자가 없을 때 가짜 production 데이터를 표시하지 않습니다.
-- 대표사진 선택은 일반 설정 form이 아니라, 사용자가 고른 **한 장**이 실제 지도핀의 첫 카드로 들어가는 짧은 경험이어야 합니다. 뒤 카드는 위치·촬영시간 규칙으로 자동 구성하며, user-facing slot·순서 조립 UI는 두지 않습니다. hand fan·motion의 구체 계약은 [`design/import-and-album-flows.md`](design/import-and-album-flows.md)를 따릅니다.
-- 친구 초대는 주소록을 수집하는 검색 화면이 아니라, 초대자 정체·상호 수락·참여 모임 경계를 먼저 읽게 하는 짧은 카드 경험이어야 합니다.
-
-## 6. Design Working Agreement
-
-디자인 작업에서는 이 문서를 스타일 생성 공식으로 쓰지 않습니다.
-
-1. 현재 artifact와 실제 콘텐츠를 먼저 봅니다.
-2. 새 화면이나 의미 있는 재구성은 `누가 / 무엇을 하려는지 / 주 행동 / 성공 신호`를 한 문장씩 먼저 적습니다. 화면에서 이 경로와 관계없는 요소는 만들지 않거나 약하게 둡니다.
-3. 로그인·친구·공유·사진 선택처럼 이미 성공한 소비자 앱의 관습이 있는 화면은 실제 동종 앱 1~3개와 iOS 기본 패턴을 확인합니다. 브랜드 외형을 복사하지 않고 정보 계층·행동 수·피드백 방식을 Maplog 언어로 번역합니다. 이미 확정된 Maplog 컴포넌트를 그대로 재사용하는 작은 수정은 같은 조사를 반복하지 않습니다.
-4. Fixed 항목과 이번 작업에서 열려 있는 선택을 구분합니다.
-5. 결정이 high-impact이고, 요구가 실질적으로 덜 정해졌으며, 비교 렌더 비용이 낮을 때만 두 방향을 비교합니다. 그 외에는 가장 잘 맞는 한 방향을 선택해 구현합니다.
-6. 표현적이거나 정체성을 담당하는 화면은 한 가지 authored visual idea를 유지합니다. Utility 화면은 clarity, continuity, state completeness를 우선합니다.
-7. 구현 뒤 target viewport에서 진입 → 주 행동 → 결과·오류·복구를 실제로 걷고, 코드가 아니라 렌더 결과를 비평합니다. 마지막에는 보이는 모든 요소가 사용자 행동에 필요한지 한 번 덜어냅니다.
-8. 가입·개인정보·결제·공유처럼 고위험 화면이나 위임 구현은 가능할 때 구현 맥락을 모르는 fresh-eyes 검토를 추가합니다. 독립 검토를 못 했으면 자체 렌더 검토와 구분해 기록합니다.
-9. 직관을 높인다는 이유로 제목을 소제목·본문·배지·꼬리말에서 반복하지 않습니다. 사용자가 결정하거나 행동하는 데 필요한 조건은 작은 회색 문단에 숨기지 않고, 실제 구역·항목·행동의 시각적 무게로 드러냅니다.
-10. 한 화면의 정보량은 최소로 둡니다(사용자 확정 2026-09-24, [PRODUCT 화면 규칙](../record/PRODUCT.md#screen-rule)). 문제를 풀 때 요소를 더하기 전에 기존 요소의 무게·자리로 풀 수 있는지 보고, 보여주기 전에 한 화면에서 읽을 글씨·아이콘·사진 수를 세어 이전 판과 비교합니다.
-
-시스템 폰트, 대칭, 절제, 익숙한 레이아웃도 맥락에 맞으면 좋은 선택입니다. 반대로 custom type, 비대칭, overlap, texture, 강한 motion도 제품과 메시지가 비용을 정당화하면 사용할 수 있습니다. `AI 티 제거`를 이유로 어느 쪽도 자동 선택하지 않습니다.
-
-## 7. Completion Gate
-
-디자인 구현을 완료했다고 말하기 전에 다음 중 이번 변경에 해당하는 항목을 관찰합니다.
-
-- target device 또는 viewport의 렌더 결과
-- 기본·선택·빈·로딩·오류·권한 상태 중 영향받은 상태
-- 긴 한국어, 작은 화면, Dynamic Type과 text clipping
-- 지도 gesture와 native marker 동기화
-- glass 위 가독성, focus/VoiceOver, reduced motion/transparency
-- mock과 live behavior의 의미 일치
-
-빌드 성공만으로 화면 품질을 완료 처리하지 않습니다. 비교 근거와 남은 한계는 QA 폴더(`/Users/wooojin/Downloads/maplog-qa/`)에 남깁니다.
+`code/design/`의 다섯 문서(`visual-system`, `map-home-and-photo-pins`, `navigation-and-album`, `import-and-album-flows`, `app-wide-design-language`)는 6~7월 옛 앱의 계약이라 지웠다(2026-10-01). 아직 맞는 부분 — 지도 위 우선순위, 화면 문법, 새 화면 전 다섯 질문, 글 규칙 — 은 위 §3–5로 옮겼다. 옛 수치·근거가 필요하면 git 기록에서 찾는다.
