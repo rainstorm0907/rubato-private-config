@@ -8,10 +8,10 @@ Codex 워커는 이 파일을 읽지 않는다 — SKILL.md 라우팅 테이블�
 - 이 스킬은 Codex가 프론트엔드를 데이터-퍼스트로 만드는 실패(주석 같은 카피, 사용자
   여정 부재, 클러터)를 막기 위해 존재한다. 원점이 된 사고 기록:
   `references/task-design-failure-case-study.md` (2026-07-12, Arcaea 채보 검수 UI).
-- 라이브 사본: `~/.codex/skills/frontend-ux-router/` (Codex가 실제로 로드하는 위치)
+- 정본·설치 경로는 아래 「정본·설치·공유 저장소」 절을 따른다. 실행 시 실제로 선택된 경로는 해당 실행의 기록으로 확인한다.
 - 공유 레포: https://github.com/keepitmello/frontend-ux-router (gh 계정: keepitmello)
-- 디스패처 쪽 연동: 워커가 `IMPLEMENTED, FRESH-EYES PENDING`을 보고하면 디스패처가 컨텍스트 없는
-  리뷰어를 돌리고, PASS 기록이 있어야 `VERIFIED`를 인정한다.
+- 디스패처 쪽 연동: 예전에는 fresh-eyes PASS 기록을 `VERIFIED` 조건으로 썼다. 현재 스킬은 독립 검토를
+  중요한 결정을 바꿀 수 있을 때만 쓰고, 실제로 한 검사의 범위를 이름 붙여 보고한다(SKILL.md #8·Completion, frontend-creation §10).
 
 ## 개선 루프 (개판 발견 → 스킬 강화)
 
@@ -31,8 +31,8 @@ Codex 워커는 이 파일을 읽지 않는다 — SKILL.md 라우팅 테이블�
 
 | 질문 | 답이 yes면 |
 |---|---|
-| 기존 게이트(버짓/금지어/deletion pass/fresh-eyes)가 잡았어야 하는 실패인가? | **집행 문제.** 스킬을 고치지 말고 왜 게이트가 안 돌았는지 추적 — 워커가 스킬을 로드 안 했나, 디스패처가 fresh-eyes를 생략했나, 브리프에 `$frontend-ux-router` 명시가 빠졌나. |
-| 게이트는 돌았는데 형식적으로 통과됐나? (path card 기계적 작성, 빈 삭제 목록 등) | **규칙의 검증 가능성 문제.** 해당 규칙을 판단 기반 → 기계 확인 가능(숫자, 목록, 산출물 요구)으로 바꾼다. |
+| 현재 SKILL.md 책임(#1~#14)이 다루는데 지켜지지 않은 실패인가? | **집행 문제.** 스킬을 고치지 말고 왜 안 지켜졌는지 추적 — 워커가 스킬을 읽었나, 브리프에 판단할 결정·보호 조건이 갔나, 렌더한 경로를 실제로 걸어 봤나. |
+| 형식만 채우고 원래 질문을 못 풀었나? | **판단 기준이 흐린 문제.** 그 책임을 무엇을 보고 판단하는지(관찰 가능한 장면·상태)로 구체화한다. 숫자 버짓·금지어 목록·삭제 목록 같은 범용 관문은 되살리지 않는다(frontend-creation §2·§8). |
 | 어떤 규칙도 이 실패를 다루지 않나? | **새 실패 모드.** 3단계로 — 케이스 스터디를 쓰고 규칙으로 증류한다. |
 
 ### 3. 케이스 스터디 작성
@@ -51,34 +51,24 @@ Codex 워커는 이 파일을 읽지 않는다 — SKILL.md 라우팅 테이블�
 
 케이스 스터디에서 본편으로 끌어올릴 때의 우선순위:
 
-1. `frontend-creation.md` §2 하드 버짓 또는 §4 금지어 목록에 **숫자/목록으로** 추가
+1. 실제 실패 장면을 `frontend-creation.md`의 해당 절(§3 구성, §4 문구, §5 시각 개념 등)에 관찰 가능한 기준으로 추가. §2 버짓은 사용자·제품·플랫폼이 준 한도만 담는다
 2. stop-and-redesign 트리거에 새 시그니처 추가
-3. SKILL.md Non-negotiables는 정말 load-bearing할 때만 (10개 이하 유지)
+3. SKILL.md의 Responsibilities and boundaries는 기존 책임으로 설명되지 않는 핵심 누락이 있을 때만 고친다
 
-### 5. 동기화
+### 5. 정본·설치·공유 저장소
+
+이 개인 오버레이의 정본은 `/Users/wooojin/App/rubato-private-config/overlays/skills/frontend-ux-router/`다. `~/.agents/skills/frontend-ux-router/`는 설치본이고, 오버레이 적용(`scripts/apply-rubato-overlays.sh --apply`) 때 정본에서 rsync로 덮어써진다. 설치본을 직접 고쳐 정본을 대신하지 않는다.
+
+`~/.claude/skills`는 `~/.agents/skills`를 가리키는 심링크다. Codex의 `~/.codex/skills/frontend-ux-router/`는 별도 사본이며 이 오버레이 적용으로 갱신되지 않는다. 다른 실행 경로도 실제 연결을 확인하기 전에는 같은 본문을 받는다고 가정하지 않는다.
+
+공유 레포에 올릴 때는 정본 폴더에서 보낸다. README.md는 레포에만 있다(rsync에서 exclude). 정본 수정·설치·공유 저장소 반영은 현재 요청의 쓰기·배포 권한을 따른다.
 
 ```bash
-# 로컬이 source of truth. 수정은 항상 ~/.agents/skills/frontend-ux-router/에서.
 cd $(mktemp -d) && gh repo clone keepitmello/frontend-ux-router repo && cd repo
-rsync -a --delete --exclude .git --exclude README.md ~/.agents/skills/frontend-ux-router/ .
-git add -A && git commit -m "<what failure this addresses>" 
+rsync -a --delete --exclude .git --exclude README.md --exclude .rubato-private-overlay /Users/wooojin/App/rubato-private-config/overlays/skills/frontend-ux-router/ .
+git add -A && git commit -m "<what failure this addresses>"
 gh auth switch --user keepitmello && git push && gh auth switch --user mysubb01
 ```
-
-README.md는 레포에만 있다(rsync에서 exclude). 스킬 구조가 바뀌면 README도 수동 갱신.
-
-### 설치 위치 (2026-07-28 통합)
-
-실물은 `~/.agents/skills/frontend-ux-router/` 하나. 아래 4곳은 전부 여기로 걸린 심링크다.
-
-```
-~/.claude/skills/                            (Claude 전역)
-~/.codex/skills/                             (Codex 전역)
-~/.claude/roo-channel/.claude/skills/
-~/.claude/companion-channel/.claude/skills/
-```
-
-새 위치에 깔 때도 사본을 만들지 말고 심링크를 건다. 사본을 만들면 07-28 이전처럼 6/29·7/2 구버전이 방치된다.
 
 하위 참조 디렉토리의 진입점은 `guide.md`다 — `SKILL.md`로 되돌리지 마라. 중첩 `SKILL.md`가 없어야 Claude 스킬 로더가 최상위 하나만 스킬로 잡는다. SKILL.md 라우트 표가 `references/<name>/guide.md`로 직접 부르므로 이름을 바꾸면 링크가 깨진다.
 
@@ -99,19 +89,18 @@ README.md는 레포에만 있다(rsync에서 exclude). 스킬 구조가 바뀌�
 
 이 스킬이 작동하는 이유는 아래 네 가지다. 개선하다가 이걸 깨면 퇴화다.
 
-1. **형용사 금지, 검증 가능한 규칙만.** "깔끔하게"는 안 먹힌다. LLM은 판단 기반
-   규칙을 자기 채점으로 통과시킨다. 숫자 버짓, grep 가능한 금지어, 산출물 요구
-   (삭제 목록 제출)만이 실제로 강제된다.
-2. **빼기는 명시적 단계여야 한다.** LLM은 스스로 빼지 않는다. deletion pass가
-   별도 단계 + 보고 의무인 이유. "빈 삭제 목록 = 건너뛴 것" 조항 유지.
-3. **만든 놈과 검증하는 놈 분리.** 구현자는 자기 화면의 이해도를 판정할 수 없다.
-   fresh-eyes 리뷰어의 무지가 게이트의 가치 전부다 — 오염(브리프/패스카드 전달)
-   금지 규칙을 절대 완화하지 말 것.
+1. **형용사 대신 관찰할 수 있는 기준.** "깔끔하게"는 안 먹힌다. 판단 기준은 무엇을 보고
+   판단하는지(렌더한 경로, 상태 전이, 첫 화면에서 읽히는 것)로 적는다. 다만 숫자 버짓·금지어·삭제 목록을
+   모든 화면의 관문으로 되살리지 않는다 — 형식 통과가 원래 질문을 가렸던 것이 이 스킬을 고친 이유다.
+2. **빼기는 렌더한 화면에서 판단한다.** 목적 없는 요소는 구성 중과 렌더 뒤에 덜어 낸다. 요소별 장부나
+   삭제 할당량, 별도 보고는 요구하지 않는다(frontend-creation §8).
+3. **이해도 검토는 만든 맥락과 분리한다.** 이해만 보는 fresh-eyes 검토에는 만든 사람의 설명을 주지 않는다.
+   목표·품질 검토에는 그 검토가 확인할 요구를 숨기지 않는다(frontend-creation §10).
 4. **구체적 실패 사례가 최고의 교보재다.** "빨간 소리" 같은 실제 실패 예시가
    일반론보다 잘 먹힌다. 증류하면서 사례의 구체성을 버리지 말고, 사례는 사례
    문서에 살려두고 규칙만 본편으로 올린다.
 
-하지 말 것: SKILL.md 비대화(라우터+비협상 규칙만), 판단 기반 조항 추가,
+하지 말 것: SKILL.md 비대화(라우터+책임 목록만), 관찰할 수 없는 형용사 조항 추가,
 이해 실패를 스킬 문서의 설명 추가로 때우기(제품에서 금지한 걸 스킬에서 하는 셈).
 
 ## 백로그 (실전 데이터 확보 후)
@@ -119,4 +108,4 @@ README.md는 레포에만 있다(rsync에서 exclude). 스킬 구조가 바뀌�
 - `scripts/copy-lint.sh`: §4 금지어 목록의 grep 자동화 (첫 실전 투입 후)
 - fresh-eyes FAIL 트랜스크립트 아카이브 → 반복 패턴이 보이면 규칙 증류
 - Codex가 라우터를 실제로 타는지 확인: 첫 디스패치 브리프에 `$frontend-ux-router`
-  명시, 보고서에 필수 3필드 + 삭제 목록이 오는지 검사
+  명시, 반환에 결과물·관찰한 동작·남은 공백이 오는지 확인(SKILL.md Completion)

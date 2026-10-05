@@ -59,8 +59,8 @@ git diff
 공개 저장소의 `rubato/base`는 `origin/rubato/base`와 같게 유지한다. 개인 스킬은
 별도 오버레이에서 다시 설치한다.
 
-오버레이 스킬마다 `.rubato-private-overlay`에 마지막으로 병합한 공식 커밋을
-`base=<sha>`로 적는다. `scripts/update-rubato.sh`는 매번
+공개 원본이 있는 오버레이 스킬은 `.rubato-private-overlay`에 마지막으로 병합한 공식 커밋을
+`base=<sha>`로 적는다. 공개 원본이 없는 개인 전용 스킬은 관리 표식만 두고 `base`를 만들지 않는다. `scripts/update-rubato.sh`는 매번
 `scripts/check-overlay-bases.sh`로 그 기준 이후 공식이 바뀐 스킬을 경고한다
 (공식 HEAD가 그날 안 움직였어도 병합 전까지 계속 뜬다). 경고가 뜨면 공식 변경을
 오버레이에 3-way 병합한 뒤 `scripts/check-overlay-bases.sh --mark <skill>`로
