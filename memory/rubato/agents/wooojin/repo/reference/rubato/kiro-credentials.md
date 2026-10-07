@@ -1,74 +1,62 @@
 ---
-description: Rubato에 Kiro 구독을 붙일 때 자격증명 이전이 실패하는 구조적 원인과 올바른 이전 방법.
+description: The structural cause of credential-transfer failure when attaching a Kiro subscription to Rubato, and the correct transfer method.
 ---
-# Kiro 자격증명 이전
+# Transferring Kiro credentials
 
-`harness/scripts/kiro-setup.sh`로 Kiro 구독을 rubato에 붙일 때, 기기 간 자격증명 이전이
-실패하는 원인은 거의 항상 `clientId` 누락이다.
+When attaching a Kiro subscription to rubato with `harness/scripts/kiro-setup.sh`, the reason a credential transfer between machines fails is almost always a missing `clientId`.
 
-## 실측으로 확인한 제약 (2026-08-26)
+## Constraints confirmed by measurement (2026-08-26)
 
-IdC(`authMethod: idc`) 자격은 refreshToken 하나로는 못 쓴다. 갱신에 **그 토큰을 발급한
-바로 그 clientId**가 필요하다.
+An IdC (`authMethod: idc`) credential cannot be used with a refreshToken alone. Refresh needs **the very clientId that issued that token**.
 
-- 새 public client를 `oidc.us-east-1.amazonaws.com/client/register`로 등록해서(200 OK)
-  그 clientId로 refresh를 시도하면 `400 invalid_grant: Invalid refresh token provided`.
-  AWS가 refreshToken과 clientId를 묶어놨다 — 우회 불가.
-- 파일에 실려온 accessToken은 1시간짜리다. 만료 뒤 직접 호출하면
-  `403 The bearer token included in the request is invalid`.
+- Register a new public client at `oidc.us-east-1.amazonaws.com/client/register` (200 OK) and try a refresh with that clientId, and you get `400 invalid_grant: Invalid refresh token provided`. AWS has bound the refreshToken and the clientId together — no bypass.
+- The accessToken carried in the file lasts 1 hour. Calling it directly after it expires gives `403 The bearer token included in the request is invalid`.
 
-즉 clientId 없는 export 파일은 **받은 직후 한 시간만 살아있고** 그 뒤 죽는다.
-검증할 때 "모델 뜨고 응답 왔다"가 나와도 이 결함을 못 잡는 이유다.
+So an export file with no clientId **lives for only one hour right after it is received**, and then dies. That is why, even when verifying produces "모델 뜨고 응답 왔다", this defect is not caught.
 
-## clientId가 어디 있나
+## Where the clientId is
 
-토큰 파일에는 `clientIdHash`만 있고, 실제 값은 **옆 파일**에 있다:
+The token file has only `clientIdHash`, and the actual value is in **the file next to it**:
 
 ```
 ~/.aws/sso/cache/kiro-auth-token.json   ← clientIdHash만
 ~/.aws/sso/cache/<clientIdHash>.json    ← clientId, clientSecret
 ```
 
-export가 이 짝을 못 찾으면 반쪽 파일이 나온다.
+If export cannot find this pair, a half file comes out.
 
-## 올바른 이전 방법
+## The correct transfer method
 
-`export`로 단일 파일을 뽑는 것보다, 원본 기기에서 캐시 디렉토리를 통째로 옮기는 쪽이
-짝을 깨뜨리지 않는다:
+Rather than pulling a single file with `export`, moving the cache directory whole from the source machine does not break the pair:
 
 ```bash
 cd ~ && tar czf ~/Downloads/kiro-sso.tgz .aws/sso/cache
 ```
 
-받는 기기에서 풀고 `kiro-setup.sh`(인자 없이)를 돌린다.
+Unpack it on the receiving machine and run `kiro-setup.sh` (with no arguments).
 
-## 붙인 뒤 엔진 반영
+## Reflecting it in the engine after attaching
 
-브리지 소스를 pull 해도 **실행 엔진은 자동으로 안 바뀐다.** `~/.rubato-pi/engine/`이
-낡아 있으면 `kiro/` 프로바이더가 없어서 모델이 안 뜬다.
+Even if you pull the bridge source, **the running engine does not change on its own.** If `~/.rubato-pi/engine/` is stale, there is no `kiro/` provider and the model does not come up.
 
-- `rubato restart`는 **브리지(:8788)만** 다시 띄운다. 엔진은 안 건드린다.
-- 엔진 재빌드는 `rubato-pi.sh`가 **세션 기동 때마다** 부른다. 새 세션이든 resume이든
-  같은 경로를 타므로, 창을 닫았다 켜는 것으로 충분하다.
-- 낡았는지 판정: `node harness/scripts/build-engine.mjs --check` (0 신선, 10 낡음).
+- `rubato restart` brings back **only the bridge (:8788)**. It does not touch the engine.
+- The engine rebuild is what `rubato-pi.sh` calls **every time a session starts**. A new session and a resume take the same path, so closing the window and opening it again is enough.
+- Judging whether it is stale: `node harness/scripts/build-engine.mjs --check` (0 fresh, 10 stale).
 
-## 만료 구조 (세 겹)
+## Expiry structure (three layers)
 
-| | 수명 | 만료되면 |
+| | Lifetime | When it expires |
 |---|---|---|
-| accessToken | 1시간 | kiro.rs가 자동 갱신 — 신경 안 써도 된다 |
-| **clientId 등록** | **90일** | ⚠️ 진짜 시한. 갱신이 막힌다 |
-| refreshToken | 만료 필드 없음 | 사실상 계속 |
+| accessToken | 1 hour | kiro.rs refreshes it automatically — no need to worry |
+| **clientId registration** | **90 days** | ⚠️ The real deadline. Refresh is blocked |
+| refreshToken | no expiry field | effectively continues |
 
-90일이 지나면 원본 기기에서 Kiro IDE를 한 번 열면 재등록된다. 로그인은 다시 안 해도 된다.
+After 90 days, opening Kiro IDE once on the source machine re-registers it. You do not have to log in again.
 
-**미확인 위험**: 두 기기가 같은 refreshToken을 공유하면, AWS가 rotation 방식일 때
-한쪽 갱신이 다른 쪽을 무효화할 수 있다. 2026-08-26 시점 미검증.
+**Unconfirmed risk**: if two machines share the same refreshToken, and AWS is using rotation, one side's refresh can invalidate the other. Unverified as of 2026-08-26.
 
-## 걸리기 쉬운 함정
+## Traps easy to fall into
 
-- **export를 받는 기기에서 돌리면 순환이다.** export는 `~/.rubato-pi/kiro/credentials.json`을
-  먼저 읽으므로, 앞선 import가 만든 깨진 파일을 다시 읽고 같은 결함을 재생산한다.
-- **OAuth 로그인 링크를 다른 기기 브라우저에서 열면 안 된다.** 콜백이 localhost로
-  돌아오므로 링크를 만든 기기에서만 완결된다. 다른 기기에서 열면 `ERR_CONNECTION_REFUSED`.
-- `kiro-cli login`은 OAuth 콜백 타임아웃이 잦다. Kiro IDE 쪽이 안전하다(스크립트 주석).
+- **Running export on the receiving machine is a cycle.** export reads `~/.rubato-pi/kiro/credentials.json` first, so it reads again the broken file an earlier import made and reproduces the same defect.
+- **Do not open the OAuth login link in a browser on another machine.** The callback returns to localhost, so it completes only on the machine that created the link. Opening it on another machine gives `ERR_CONNECTION_REFUSED`.
+- `kiro-cli login` often times out on the OAuth callback. The Kiro IDE side is safer (a script comment).

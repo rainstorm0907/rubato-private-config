@@ -1,29 +1,35 @@
 ---
-description: 백석대 수강 계획, 인턴 지원 자격, 교내 공모전 일정.
+description: Baekseok University course plan, internship eligibility, and on-campus contest schedule.
 ---
-백석대 학업·진로 관련 사실. `~/.codex/memories`에서 옮겨왔다. 학기·공고는 시점 의존적이라 재확인이 필요하다.
+Facts about Baekseok University studies and career. Moved from `~/.codex/memories`. Semesters and postings are time-dependent, so they need rechecking.
 
-## 2026-2학기 (3학년 2학기) 수강
+## 2026 semester 2 (year 3, semester 2) courses
 
-- 목표: 월·수·목 등교, 화·금 공강.
-- 확정 6과목: 프런티어십(한정수 월1), 컴퓨터공학부 채플(월3), 소프트웨어공학(이승화 월4,5), 빅데이터(이시은 사이버), 다함께 파이썬(손은영 목5,6), 창의융합 Leading Class(박지연 수7,8).
-- 기독교세계관은 여자친구 시간표 확정 전까지 보류. 서현덕 월2가 성적 우선 후보, 김은득 수4는 등교일이 유지되나 A 성적 위험이 크다.
+- Goal: attend Mon, Wed, and Thu; Tue and Fri off.
+- Six courses confirmed: Frontiership (한정수 Mon 1), School of Computer Engineering chapel (Mon 3), Software Engineering (이승화 Mon 4,5), Big Data (이시은 cyber), Python Together (손은영 Thu 5,6), Creative Convergence Leading Class (박지연 Wed 7,8).
+- Christian Worldview is on hold until the girlfriend's timetable is confirmed. 서현덕 Mon 2 is the grade-first candidate; 김은득 Wed 4 keeps the attendance day but the risk to an A is large.
 
-## 2026 겨울 인턴 공고 수집 (2026-09-10)
+## Career goal and current canon (2026-10-01)
 
-- ChatGPT 진로상담 기준 + 우진 사실로 만든 규칙과 결과: `/Users/wooojin/포트폴리오/채용-2026겨울인턴/` (`규칙.md`, `공고목록.md`, `raw/`, `run.sh`). 우진: "저기에 나온 기준과 너가 아는 내 내용을 합쳐서 규칙을 만들고 에이전트가 그대로 사이트 수집하게".
-- 9/10 기준 겨울방학형(12~1월 시작·8주 이내) 공고는 0건. 열려 있는 개발·AI 인턴은 거의 3~6개월 전환형. 재확인 시점: 10월 말(기업은행 동계), 12월 초(네이버 AI CHALLENGE 인턴십 과제형 4주, 작년 12/10~16 접수·1/19~2/13 근무, 학·석사 재학생 가능).
-- 학교 문의처: 취업진로지원처 인성관 2층 041-550-2784, 현장실습은 산학협력단 본부동 916호 041-550-0834. 9/10 기준 겨울 현장실습 공지 없음.
+- Woojin's goal: take a leave from school via early employment (employment-leave filing) in 4-2 (2027 semester 2, the 8th semester). For now, start with a winter internship within this year (end of term 12/21 → before the March start of term). The judgment canon is `/Users/wooojin/포트폴리오/포지션-2026-10/포지션과-스탠스.md`, and the rationale is `근거.md` in the same folder. The 9/10 collection below is a record from before that.
+- Early-employment conditions (Computer Engineering undergraduate notice 2026-09-22): registered for 8 or more semesters + fewer than 19 credits remaining, certificate of employment and health-insurance qualification certificate; internships and training are a separate review. Inquiry 041-550-2516.
+- Field-practice credits (operating rules revised 2025-08-11): long 15 weeks · 450 hours, 15 credits; medium 8 weeks · 240 hours, 6 credits; short 4 weeks · 120 hours, 3 credits; maximum 15; P/F. Inquiry: Field Practice Support Center 041-550-0834.
 
-## 인턴 지원 자격
+## 2026 winter internship posting collection (2026-09-10)
 
-- 카카오뱅크 AI Native 서비스기획자 인턴은 기졸업자나 졸업요건 충족 수료자만 지원 가능하다. 수업 병행 불가. 휴학은 자격 우회 수단이 되지 않는다. (당시 84.5/120학점, 35.5학점 부족)
-- 딥오토와 피치에이아이는 재학·휴학생을 허용한다.
+- Rules and results made from ChatGPT career-counseling criteria plus Woojin's facts: `/Users/wooojin/포트폴리오/채용-2026겨울인턴/` (`규칙.md`, `공고목록.md`, `raw/`, `run.sh`). Woojin: "저기에 나온 기준과 너가 아는 내 내용을 합쳐서 규칙을 만들고 에이전트가 그대로 사이트 수집하게".
+- As of 9/10, winter-break postings (start in Dec–Jan, within 8 weeks) were 0. Open development and AI internships are almost all 3–6 month conversion types. Recheck points: late October (Industrial Bank of Korea winter), early December (Naver AI CHALLENGE internship, task type, 4 weeks; last year applications 12/10–16, work 1/19–2/13, undergraduate and master's students enrolled are eligible).
+- School contacts: Career and Employment Support Office, 인성관 2nd floor, 041-550-2784; field practice is Industry-Academic Cooperation Foundation, main building room 916, 041-550-0834. As of 9/10 there was no winter field-practice notice.
 
-## 교내 공모전 3종
+## Internship eligibility
 
-- Smart IT: 개인 또는 5인팀, 대상 100만원
-- Hacking Festival: 팀, 대상 50만원, 1인 제한 명시 없음
-- JAVA: 개인 온라인, 대상 20만원
-- 제안된 노력 배분 Smart IT 70% / Hacking Festival 20% / JAVA 10%
-- 2026-2 일정은 과거 공지 기반 **추정치**이며 확정이 아니다.
+- The KakaoBank AI Native service-planner internship accepts only people who have already graduated or who have completed the graduation requirements. Classes cannot be taken alongside it. A leave of absence is not a way around the eligibility. (At the time 84.5/120 credits, 35.5 credits short)
+- 딥오토 and 피치에이아이 allow enrolled students and students on leave.
+
+## Three on-campus contests
+
+- Smart IT: individual or a team of 5, grand prize 1,000,000 won
+- Hacking Festival: team, grand prize 500,000 won, no one-person limit stated
+- JAVA: individual online, grand prize 200,000 won
+- Proposed effort split: Smart IT 70% / Hacking Festival 20% / JAVA 10%
+- The 2026-2 schedule is an **estimate** based on past notices, not a confirmation.

@@ -1,12 +1,12 @@
 ---
-description: 비행운(Maplog) 화면 디자인 시안 원칙: 화면마다 필요·기능에 맞춰 장식을 고르고, 비교안은 조건(배경 블러 등)을 통일한다 (사용자 확정 2026-09-29)
+description: Maplog ("비행운") screen-design mock principles. Pick decoration to fit each screen's need and function, and keep comparison proposals on the same conditions, such as background blur (user confirmed 2026-09-29).
 ---
-# 비행운 화면 디자인: 화면별 필요에 맞추고, 비교는 조건을 같게
+# Maplog screen design: fit each screen's need, and keep comparison conditions the same
 
-사용자 확정(2026-09-29, 카드 스타일 시안 논의).
+User confirmed (2026-09-29, card-style mock discussion).
 
-- 한 스타일을 모든 화면에 똑같이 복사하지 않는다. 화면마다 그 화면이 하는 일에 맞춰 요소를 고른다.
-  예: 첫 안내 카드는 첫인상이라 하늘 사진 같은 감성 요소가 맞지만, 베타 피드백 안내 카드는 방법을 알려 주는 카드라 사진이 필요 없다. 넣는다면 기능을 돕는 그림(버튼 위치 등)이어야 한다.
-- 장식·사진은 빈 곳에 둔다. 제목·본문과 겹치거나 카드 윗단을 덮는 띠로 넣지 않는다(카드 위 둥근 사진 띠가 "대머리"처럼 보인다는 피드백).
-- 여러 안을 비교할 때는 비교 대상(카드 표면)만 다르게 하고 뒤 배경 처리(블러·어둡게 정도)는 모두 같게 맞춘다.
-- 취향 기록: 효과를 겹친 유리·빛번짐·그라데이션 버튼은 "AI slop"으로 봤다. 엽서/우표안은 안 예쁘다고 했다. 손그림 테두리 + 여백(C)을 가장 좋아했고, 거기에 진짜 하늘 사진 한 조각을 붙이는 안(C′)을 좋게 봤다.
+- Do not copy one style identically onto every screen. Pick elements to fit what that screen does.
+  Example: the first guide card is a first impression, so a feel element such as a sky photo fits, but the beta-feedback guide card is a card that tells you the method, so it does not need a photo. If one is added, it should be a picture that helps the function (button position and the like).
+- Put decoration and photos in empty space. Do not put them overlapping the title or body, or as a band covering the top edge of the card (feedback that a rounded photo band on the card looked like "대머리").
+- When comparing several proposals, change only the comparison target (the card surface), and match the background treatment behind (blur and how dark) so all are the same.
+- Taste record: glass, light bloom, and gradient buttons with stacked effects were seen as "AI slop". The postcard/stamp proposal was said to be not pretty. He liked the hand-drawn border plus margin (C) most, and liked the proposal (C′) that sticks one piece of a real sky photo onto it.

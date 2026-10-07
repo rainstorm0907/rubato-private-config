@@ -1,21 +1,22 @@
 ---
-description: Maplog 실사진 장소 판정에서 우진이 직접 확인해 정한 거리·최대 너비 기준과 적용 상태.
+description: Same-place verdict defaults Woojin confirmed for Maplog real photos — 40m link, 100m maximum width.
 ---
-## 2026-09-03 — 실사진 장소 판정 기준
 
-- 맥락: DEBUG 실사진 판정 화면에서 12개 검토 구역을 직접 조작한 뒤, 9~12번처럼 사진이 밀집한 구역 외에는 기존 18m/45m 범위가 의미 있는 차이를 거의 만들지 못했다고 판단했다.
-- 우진 원문: “다 해봤는데, 일단 9, 10 , 11, 12 같이 다닥다닥 붙은거 아니면 거의 의미가 없네. 그냥 널널하게 30m / 100m정도로 하면 좋을거같은데?”
-- 결정: 기본값을 사진 연결 거리 30m, 한 장소 최대 너비 100m로 둔다.
-- 상태: 사용자 확정·구현됨·검증됨·iPhone 재설치됨.
+## Conclusion
 
-### 최종 선택
+- A same-place verdict starts at a photo link distance of 40m and a maximum width of 100m per place. `SceneSpatialGrouping.swift` still states that policy (`coreDistanceMeters == 40`, `diameterCapMeters == 100`).
+- DEBUG comparison ranges stay wide: link 20–60m, width 70–300m. Those ranges are for a later look, not a second default.
 
-- 우진 원문: “40m / 100m가 최적인거같아 일단 이거로 고정하고 마무리 해도 되럭같아”
-- 결정: 같은 장소 판정의 시작 기준을 사진 연결 거리 40m, 한 장소 최대 너비 100m로 확정한다. DEBUG 비교 범위 20~60m와 70~300m는 후속 재검토를 위해 유지한다.
-- 상태: 사용자 확정·구현됨·검증됨·iPhone 재설치됨.
+## Rationale
 
-### 후속 범위 확장
+- Chose 40m/100m after Woojin tried the real-photo verdict screen and replaced his own looser guess. Outside densely packed zones the old 18m/45m range made almost no difference.
+- Rejected: 18m/45m as the default. Rejected: 30m/100m as the lasting default. He floated 30m, then fixed 40m the same day.
+- Do not retune these from a synthetic fixture or from this file's earlier guess. Reopen only with another real-photo verdict.
 
-- 우진 원문: “폭 넓게 수정하게 해줘. 20에서 60. 70에서 300정도까지 그냥 다 해보게”
-- 결정: 기본값 30m/100m는 유지하고, DEBUG 조절 범위를 각각 20~60m와 70~300m로 넓힌다.
-- 상태: 사용자 확정·구현됨·검증됨·iPhone 재설치됨.
+## Symptom
+
+다 해봤는데, 일단 9, 10 , 11, 12 같이 다닥다닥 붙은거 아니면 거의 의미가 없네. 그냥 널널하게 30m / 100m정도로 하면 좋을거같은데?
+
+40m / 100m가 최적인거같아 일단 이거로 고정하고 마무리 해도 되럭같아
+
+폭 넓게 수정하게 해줘. 20에서 60. 70에서 300정도까지 그냥 다 해보게

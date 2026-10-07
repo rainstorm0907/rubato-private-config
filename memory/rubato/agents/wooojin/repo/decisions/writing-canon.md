@@ -1,18 +1,18 @@
 ---
-description: 우진 문체 정본을 만들 때 원문 표본과 모델 판단을 우선하고 과도한 규칙·금지 조항을 피한다는 확정 결정.
+description: The confirmed decision that, when making the canon of Woojin's prose style, original samples and model judgment come first, and excessive rules and prohibitions are avoided.
 ---
-## 문체 정본의 규칙 밀도
+## Rule density of the style canon
 
-상태: 사용자 확정 (2026-08-29)
+Status: user confirmed (2026-08-29)
 
-우진 원문: "그리고 루바토 규칙에 맞게 과한 규칙과 제한은 금지인거 알지? 전 세션에서 fable이 지적한것도 명심해"
+Woojin, original wording: "그리고 루바토 규칙에 맞게 과한 규칙과 제한은 금지인거 알지? 전 세션에서 fable이 지적한것도 명심해"
 
-문체 분석의 세부 항목은 조사 누락을 막는 용도이지, 그대로 정본의 규칙 목록이 되어서는 안 된다. 정본은 우진의 실제 원문 전체를 few-shot으로 두고, 규칙은 다음 글에서 모델 판단을 돕는 최소 방향만 남긴다. 반복되는 표면 특징을 모두 의무나 금지로 승격하지 않고, 장르와 독자에 따른 판단 여지를 보존한다.
+The detailed items of a style analysis are for preventing a missed investigation, and must not become the canon's rule list as they stand. The canon keeps all of Woojin's actual originals as few-shot, and leaves rules as only the minimum direction that helps the model's judgment on the next piece. Do not promote every repeated surface feature to an obligation or a prohibition, and preserve room for judgment by genre and reader.
 
-## 통합 목적
+## Purpose of the consolidation
 
-상태: 사용자 확정 (2026-08-29)
+Status: user confirmed (2026-08-29)
 
-우진 원문: "애초에 이걸 시작한게 말투교정이 흩어져서 통합하려는거였어"
+Woojin, original wording: "애초에 이걸 시작한게 말투교정이 흩어져서 통합하려는거였어"
 
-`writing.md`를 표본 포인터만 남긴 빈 라우터로 줄이는 것이 목적은 아니다. 전역 프롬프트·스킬·메모리에 흩어진 문서 말투 교정을 한곳에서 실제로 쓸 수 있게 통합하되, 상태 이력이나 장황한 규칙 목록이 아니라 짧고 자연스러운 작성 안내로 풀어낸다.
+The purpose is not to shrink `writing.md` into an empty router that leaves only sample pointers. Consolidate the document tone corrections scattered across the global prompt, skills, and memory so they can actually be used from one place, but unpack them as a short, natural writing guide, not a status history or a lengthy rule list.

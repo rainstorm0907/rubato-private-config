@@ -1,33 +1,33 @@
 ---
-description: MapleStory 캐릭터 벤치마크, 측정 도구, 리서치 워크플로우.
+description: MapleStory character benchmarks, measurement tools, and research workflow.
 ---
-메이플스토리 관련 프로젝트 사실. `~/.codex/memories`에서 옮겨왔다. 벤치마크 수치는 측정 시점 기준이라 재확인이 필요하다.
+MapleStory project facts. Moved from `~/.codex/memories`. Benchmark numbers are as of the measurement time, so they need rechecking.
 
-## 레공레 (레테)
+## "레공레" ("레테")
 
-- 2026-06-26 기준 Lv276, EMERALD 30000 챌린저.
-- Chaos Gloom(카오스 더스크) 클리어는 초기 추정 15:02가 아니라 정정 후 약 5~6분. 중앙 4:58은 보스 타이머가 아니라 사후 5분 종료 타이머다.
-- Hard Will은 가이드 없이 클리어 가능하지만 느리고 학습형. 다음 비교 후보: Hard Darknell, Chaos Guardian Angel Slime, Hard Lucid, Hard Verus Hilla.
-- 경험치: 1소재(30분) ≈ 0.545~0.581% EXP. 모멘텀 패스(메카베리10 + 상급EXP9000)는 약 160~171소재/80~85시간 상당. 49,800원을 억당 1,600원으로 환산하면 31.125억 메소. 30억까지는 확실히 납득, 35억까지는 시간 절약 목적으로 허용.
-- 메카베리 피버는 경험치 배율이 아니라 슈피겔버스트 쿨타임 제거 효과만 있다.
+- As of 2026-06-26, Lv276, EMERALD 30000 Challenger.
+- A Chaos Gloom ("카오스 더스크") clear was not the initial estimate of 15:02 but about 5~6 minutes after the correction. The center 4:58 is not the boss timer but the 5-minute end timer after the clear.
+- Hard Will can be cleared without a guide, but it is slow and a learning type. Next comparison candidates: Hard Darknell, Chaos Guardian Angel Slime, Hard Lucid, Hard Verus Hilla.
+- Experience: 1 "소재" (30 min) ≈ 0.545~0.581% EXP. A Momentum Pass ("메카베리" 10 + "상급EXP9000") is about 160~171 "소재" / 80~85 hours. Converting 49,800 won at 1,600 won per 100 million gives 31.125 hundred million meso. Up to 30 hundred million is clearly acceptable; up to 35 hundred million is allowed for the purpose of saving time.
+- "메카베리" fever has only the effect of removing the "슈피겔버스트" (Spiegel Burst) cooldown, not an EXP multiplier.
 
-## 오렌지솥밥
+## "오렌지솥밥"
 
-- Lv.282, 2026-06-25 기준 전투력 70,409,457.
-- 보스 비율 어림 규칙: 110%대 near-cut, 120%대 실수 허용 가능 클리어, 170%대 데미지 충분(기믹·피로만 변수), 200%+ 안정적 파밍.
-- Kalos/Adversary는 기믹·다운타임 가중이 필요하다. 피곤하다고 하면 새 기믹형 보스 추천은 자제.
+- Lv.282, combat power 70,409,457 as of 2026-06-25.
+- Rough boss-ratio rule: the 110% range near-cut, the 120% range a clear that can allow mistakes, the 170% range damage enough (only gimmicks and fatigue are variables), 200%+ stable farming.
+- Kalos/Adversary need gimmick and downtime weighting. If they say they are tired, hold off recommending a new gimmick boss.
 
-## 측정 도구
+## Measurement tools
 
-- Maplescouter 브라우저 접근이 막히면 `https://api.maplescouter.com/api/id?name=<캐릭>&preset=00000`에 `api-key` 헤더로 직접 조회한다.
-- Nexon in-game 전투력보다 Maplescouter 환산·헥환·보스 스탯을 SSOT로 우선한다. 정축여축 스타일 전투력 왜곡 때문.
-- 2026-07-08 측정: Black Mage 추정 89.97% → HEXA 이후 97.2% → 전설 심연 결계 이후 약 99~103%(중심 101%).
-- 장비 효율 계산은 두 모드. exact = API before/after delta + 스크린샷 툴팁을 하드 에비던스로 스탯 성분 분해. rough = 최근 비율 재사용 + rough 라벨 + 결론 우선.
-- HEXA/VI 스킬 델타: 기존 V/IV 툴팁과 VI 툴팁을 비교해 중복 텍스트를 제거한다. 전체 VI 툴팁을 증가분으로 세면 안 된다. hexaOrder 순위가 늦다고 자동으로 나쁜 코어는 아니고, 경쟁 코어의 상대적 기회비용으로 판단한다.
+- If Maplescouter browser access is blocked, query `https://api.maplescouter.com/api/id?name=<캐릭>&preset=00000` directly with an `api-key` header.
+- Prefer Maplescouter converted stats, HEXA conversion, and boss stats over Nexon in-game combat power as the SSOT. Because of "정축여축"-style combat-power distortion.
+- 2026-07-08 measurement: Black Mage estimate 89.97% → 97.2% after HEXA → about 99~103% (center 101%) after the legendary "심연 결계" (abyss barrier).
+- Equipment-efficiency calculation has two modes. exact = API before/after delta + screenshot tooltip as hard evidence, decomposing stat components. rough = reuse recent ratios + a rough label + conclusion first.
+- HEXA/VI skill delta: compare the existing V/IV tooltip with the VI tooltip and remove duplicate text. Do not count the whole VI tooltip as the increase. A late hexaOrder rank does not automatically mean a bad core; judge by the relative opportunity cost of competing cores.
 
-## 리서치 워크플로우
+## Research workflow
 
-- 챌린저 서버 시세·여론: `item-equipment.json` + `kb/branchpoints`로 현재 상태 고정 → `latest_digest.sh` + `rg` 병렬 → 아카/디시는 quiet-browse만(raw curl 금지) → 뉴비/저메소/교불 매몰/완제품 여부 전제 분리 → 깡통가와 완성품가 분리.
-- YouTube는 트랜스크립트·자막 우선. 특정 타임스탬프의 시각 증거가 필요할 때만 영상을 연다. 재생 시 반드시 mute(`--mute-audio`), 격리된 브라우저 프로필 사용(우진 실제 Chrome 프로필 금지).
-- snapshot은 갱신 후 약 14일 재사용 가능. 단 경매장·이벤트·주간진행은 매번 최신 확인.
-- `formatSeoulTimestamp()`로 KST 강제. `latest_digest.sh`는 브라우저 실패 시 exit 1을 유지한다 — 부분 결과를 성공으로 오인하면 안 된다.
+- Challenger server prices and opinion: lock the current state with `item-equipment.json` + `kb/branchpoints` → `latest_digest.sh` + `rg` in parallel → Arca.live/DCInside quiet-browse only (raw curl forbidden) → separate the premises of newbie / low-meso / untradable sunk ("교불 매몰") / finished product → separate shell price ("깡통가") and finished-product price.
+- YouTube: transcripts and subtitles first. Open the video only when visual evidence at a specific timestamp is needed. When playing, always mute (`--mute-audio`), and use an isolated browser profile (Woojin's actual Chrome profile forbidden).
+- A snapshot can be reused for about 14 days after a refresh. But the auction house, events, and weekly progress are checked fresh every time.
+- Force KST with `formatSeoulTimestamp()`. `latest_digest.sh` keeps exit 1 when the browser fails — do not mistake a partial result for success.

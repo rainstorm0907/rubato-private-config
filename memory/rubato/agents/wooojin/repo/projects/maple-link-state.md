@@ -1,10 +1,10 @@
 ---
-description: 레공레의 찬란한 영웅의 증거 사용 상태와 추출 가능 조건.
+description: Use state of "레공레" (a character)'s "찬란한 영웅의 증거" (brilliant proof of a hero), and the conditions under which it can be extracted.
 ---
-## 레공레 링크 3레벨
+## "레공레" link level 3
 
-- 상태: 사용자 확정·적용됨.
-- 2026-08-28, 챌린저스 월드에서 우진: "나 이미 챌섭에서 레공레 먹였는ㄷ..데..."
-- 레공레가 `찬란한 영웅의 증거`를 본인에게 사용해 `커버넌트` 3레벨 상태다.
-- 챌린저스 월드에서는 증거를 추출할 수 없다. 일반 월드로 리프한 뒤 마법사 협회의 아울 NPC에게서 추출할 수 있으며, 월드당 첫 추출은 무료이고 이후는 20억 메소다.
-- 하드 메이린 도전 중에는 커버넌트 3레벨이 2레벨보다 소환수 소환 중 데미지 4%p 높으므로 현재 사용은 실수가 아니라 즉시 전력 상승이다.
+- Status: user confirmed and applied.
+- On 2026-08-28, in the Challengers world, Woojin: "나 이미 챌섭에서 레공레 먹였는ㄷ..데..."
+- "레공레" used `찬란한 영웅의 증거` on himself and is in a level-3 `커버넌트` state.
+- The proof cannot be extracted in the Challengers world. After leaping to a regular world, it can be extracted from the owl NPC at the Magician Association; the first extraction per world is free, and after that it costs 2 billion meso.
+- During the Hard "메이린" (a boss) challenge, Covenant level 3 is 4%p higher damage than level 2 while a summon is out, so the current use is not a mistake but an immediate power increase.

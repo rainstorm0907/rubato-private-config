@@ -1,34 +1,34 @@
 ---
-description: 2026-09-10 Rubato Codex(기존 ChatGPT.app Codex에 얹은 --target codex) 설치 상태, co-thinking v0.3 오버레이 방식, Codex↔Rubato 기억 공유 규칙, 되돌리기 위치.
+description: 2026-09-10 Rubato Codex (the existing ChatGPT.app Codex with --target codex laid on top) install state, the co-thinking v0.3 overlay method, the Codex↔Rubato memory-sharing rule, and where to roll back.
 ---
-# Rubato Codex 설치 상태 (2026-09-10)
+# Rubato Codex install state (2026-09-10)
 
-상태: 사용자 확정·구현됨·검증됨(Codex CLI로 실제 홈에 질의).
+Status: user confirmed · implemented · verified (queried the actual home with the Codex CLI).
 
-## 구조
+## Structure
 
-- 방식 B: 기존 `ChatGPT.app`의 Codex(`~/.codex`)에 `rubato-codex/install.sh install --target codex --providers cursor,xai --migrate-legacy` 로 얹음. 별도 Rubato.app(격리 프로필)은 프로젝트·기록이 안 보여서 폐기. 우진: "내 프로젝트랑 로컬 기록 다 안뜨는데" → "b로 해줘".
-- 프록시: 전역 opencodex 2.23→2.48. 2.48이 `gpt-6-astra`를 네이티브로 찾음(Astra 안 보이던 원인은 8/17 고정 카탈로그). 서브에이전트 roster 레포 기준: Sol·Fable·Opus·Grok(xai)·Gemini Flash.
-- 옛 `~/.codex/skills` 사본 8개는 `enabled=false`로만(파일 안 옮김).
+- Method B: laid onto the existing `ChatGPT.app` Codex (`~/.codex`) with `rubato-codex/install.sh install --target codex --providers cursor,xai --migrate-legacy`. A separate Rubato.app (isolated profile) was discarded because projects and records did not show. Woojin: "내 프로젝트랑 로컬 기록 다 안뜨는데" → "b로 해줘".
+- Proxy: global opencodex (`~/.npm-global/bin/opencodex`) 2.76 (2026-10-03). **If a new model does not show in Codex, suspect the opencodex version first** — an old version does not know the new model, so it does not put it in the catalog (`~/.codex/opencodex-catalog.json`) (9/10 Astra, and on 10/3 both `gpt-6.1-sol` and `gpt-6-luna` had this cause). `opencodex update` stops with `cache_entry_foreign_owner` because of root-owned files under `~/.npm`, so run it as `npm_config_cache=/tmp/npm-cache-ocx opencodex update`. The old homebrew copy (2.23) was deleted on 10/3 — this is the only install. Subagent roster, repository basis: Sol, Fable, Opus, Grok (xai), Gemini Flash.
+- The 8 old `~/.codex/skills` copies are `enabled=false` only (files not moved).
 
-## co-thinking v0.3을 Codex에 얹는 법
+## How to lay co-thinking v0.3 onto Codex
 
-- 정본: `/Users/wooojin/App/rubato-private-config/scripts/apply-rubato-codex-overlays.sh --apply`. 플러그인 캐시(`~/.codex/plugins/cache/rubato/rubato-codex/<ver>/skills`)에 5개 스킬 통째(`metaFrame`→`metaframe` 이름 치환) + dispatching Open variables 헝크 + AGENTS.md 개인 블록 + 루트 지침(`model-instructions.md`)의 존댓말 문장을 voice.md 반말로 패치.
-- rubato-codex 재설치는 캐시를 초기화하므로 그 뒤 이 스크립트를 다시 돌린다.
-- Codex는 `codex-discusser`를 두 번 봄(`~/.agents/skills` 판 + `rubato-codex:` 판). 내용 동일하게 유지해야 함.
+- Canonical: `/Users/wooojin/App/rubato-private-config/scripts/apply-rubato-codex-overlays.sh --apply`. Into the plugin cache (`~/.codex/plugins/cache/rubato/rubato-codex/<ver>/skills`), the 5 skills whole (`metaFrame`→`metaframe` name substitution) + the dispatching Open variables hunk + the AGENTS.md personal block + a patch of the honorific sentence in the root instructions (`model-instructions.md`) to the "반말" (informal speech) of voice.md.
+- A rubato-codex reinstall resets the cache, so run this script again after that.
+- Codex sees `codex-discusser` twice (the `~/.agents/skills` copy + the `rubato-codex:` copy). The contents must be kept the same.
 
-## 전역 지침·기억
+## Global instructions and memory
 
-- `~/.codex/AGENTS.md`는 옛 "Codex Execution Charter"(작업자 시절)를 버리고 개인 것만 남김(말투=voice.md, 지키는 것 3줄, 담당 연결, working-rules 네 단락, msearch, 스탠스, 폴더 관례). 작업 방식 계약은 rubato-codex 루트 지침이 맡음. 우진: "rubato식 관점으로 봤을때 좀 줄여도 되지 않아?"
-- 말투는 AGENTS.md만으론 안 먹고 루트 지침 문장이 이김 → 오버레이가 그 줄을 패치.
-- 기억: Codex도 같은 `msearch`(독립 셸 스크립트, Redis 6380)로 Rubato 기억을 회수하고, 지속 가치 있을 때만 `~/.rubato/memory/agents/wooojin/repo`에 직접 쓴다(memory-discipline 읽기 → 편집 → 즉시 커밋, `system/` 제외). Codex 샌드박스가 read-only면 Redis가 막힘; 실제 설정은 danger-full-access라 됨.
+- `~/.codex/AGENTS.md` dropped the old "Codex Execution Charter" (from the worker days) and kept only the personal part (speech = voice.md, 3 lines of what to keep, owner connection, the four working-rules paragraphs, msearch, stance, folder conventions). The work-method contract is owned by the rubato-codex root instructions. Woojin: "rubato식 관점으로 봤을때 좀 줄여도 되지 않아?"
+- Speech style does not take from AGENTS.md alone; the root-instruction sentence wins → the overlay patches that line.
+- Memory: Codex also retrieves Rubato memory with the same `msearch` (an independent shell script, Redis 6380), and writes directly to `~/.rubato/memory/agents/wooojin/repo` only when it has durable value (read memory-discipline → edit → commit immediately, excluding `system/`). If the Codex sandbox is read-only, Redis is blocked; the actual setting is danger-full-access, so it works.
 
-## v0.4-r2.1 소폭 보완 (2026-09-16 묶음)
+## v0.4-r2.1 small supplement (2026-09-16 bundle)
 
-`rubato-v0.4-r2.1-targeted-update.zip`의 `patch.py`로 문단 3개만 교체(전체 덮어쓰기 아님). 대상: `codex-discusser/references/co-thinking.md`(현재 자료에 연결된 전례 회수), `dispatching/SKILL.md`(통상 구현은 담당 재량, 중요한 장점을 희생하는 절충만 리드에게), `dispatching/references/bounded-follow-through.md`(수치 통과가 절충을 대신 판정하지 않음). 세 벌(활성 `~/.agents/skills`, `rubato-private-config/skills`, `overlays/skills`) 총 9파일. Codex 층은 `apply-rubato-codex-overlays.sh --apply`로 co-thinking만 반영 — Codex의 `dispatching/SKILL.md`는 공개 rubato-codex 판이라 r2 문단 자체가 없고 이번 대상이 아니다.
+Replaced only 3 paragraphs with `patch.py` from `rubato-v0.4-r2.1-targeted-update.zip` (not a full overwrite). Targets: `codex-discusser/references/co-thinking.md` (retrieve precedents connected to the current material), `dispatching/SKILL.md` (ordinary implementation is the owner's discretion; only a tradeoff that sacrifices an important advantage goes to the lead), `dispatching/references/bounded-follow-through.md` (a numeric pass does not judge a tradeoff in its place). Three copies (active `~/.agents/skills`, `rubato-private-config/skills`, `overlays/skills`), 9 files in total. The Codex layer reflects only co-thinking via `apply-rubato-codex-overlays.sh --apply` — Codex's `dispatching/SKILL.md` is the public rubato-codex copy, so the r2 paragraph itself is absent and is not a target this time.
 
-복원: `python3 patch.py rollback --plan ~/Downloads/rubato-r2.1-local-plan --confirm` (계획 폴더 보존 필요).
+Restore: `python3 patch.py rollback --plan ~/Downloads/rubato-r2.1-local-plan --confirm` (the plan folder must be kept).
 
-## 되돌리기
+## Rollback
 
-`/Users/wooojin/App/rollback/co-thinking-v0.3-2026-09-10/README.md` (Rubato층·Codex층·프록시 각각의 사전 사본과 명령).
+`/Users/wooojin/App/rollback/co-thinking-v0.3-2026-09-10/README.md` (prior copies and commands for each of the Rubato layer, the Codex layer, and the proxy).

@@ -1,16 +1,16 @@
 ---
-description: COFATHON 후기의 최종 제목, 공개 주소, 발행 상태.
+description: Final title, public URL, and publication status of the COFATHON retrospective.
 ---
-# COFATHON 후기 발행 기록
+# COFATHON retrospective publication record
 
-- 상태: 사용자 확정·구현됨·검증됨
-- 발행일: 2026-09-02
-- 최종 제목: `COFATHON 올리브영 트랙 TOP 6에 들기까지`
-- 공개 주소: https://wjing.tistory.com/entry/COFATHON-올리브영-트랙-TOP-6에-들기까지
-- 우진의 결정: "제목은 좀 겸손하고 싶어서 7번 하고싶은데"
-- 검증: 비로그인 HTTP 200, 공개 페이지 제목과 본문·이미지 캡션 확인 완료.
+- Status: user confirmed · implemented · verified
+- Published: 2026-09-02
+- Final title: `COFATHON 올리브영 트랙 TOP 6에 들기까지`
+- Public URL: https://wjing.tistory.com/entry/COFATHON-올리브영-트랙-TOP-6에-들기까지
+- Woojin's decision: "제목은 좀 겸손하고 싶어서 7번 하고싶은데"
+- Verification: logged-out HTTP 200; public page title, body, and image captions confirmed.
 
-## 프로필 연결
+## Profile links
 
-- 원티드: 기존 수상 항목에는 URL 필드가 없어 이력서 링크 섹션에 글을 추가했다. 이력서 미리보기에는 보이지만 원티드 공개 소셜 프로필에는 노출되지 않는다.
-- LinkedIn: `스페셜(Featured)` 섹션에 글을 추가했다. 제목과 25명 중 6위·문제 정의부터 설명까지의 과정 요약을 넣었고, 프로필 본문과 Featured 상세에서 카드 노출을 확인했다. LinkedIn은 URL을 같은 글의 숫자 주소 `https://wjing.tistory.com/9`로 정규화했다.
+- Wanted: the existing award item has no URL field, so the post was added in the resume links section. It shows in the resume preview but is not exposed on the Wanted public social profile.
+- LinkedIn: the post was added to the `스페셜(Featured)` section. The title and a summary of the process, 6th of 25, from problem definition through the explanation, were included, and card exposure was confirmed in the profile body and the Featured detail. LinkedIn normalized the URL to the same post's numeric address `https://wjing.tistory.com/9`.

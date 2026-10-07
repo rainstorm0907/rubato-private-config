@@ -1,20 +1,20 @@
 ---
-description: 우진이 긴 세션을 새 세션으로 넘길 때 요구하는 맥락 복원 범위와 품질 기준.
+description: The context-restoration scope and quality bar Woojin requires when handing a long session over to a new session.
 ---
-# 긴 세션 인수인계 기준
+# Handoff bar for a long session
 
-- 상태: 사용자 확정
-- 날짜: 2026-09-02
-- 맥락: Maplog 장기 세션이 세션 생애 compaction 상한에 걸려 새 세션으로 옮기는 상황.
+- Status: user confirmed
+- Date: 2026-09-02
+- Context: A long Maplog session hit the session-lifetime compaction cap and is moving to a new session.
 
-우진 원문:
+Woojin, original wording:
 
 > “알겠어 일단 그렇게해주는데 진짜 빠짐없이 해줘. 원문을 다 넣으라는개 아니라 전전전전 컴팩션 전부터 가짘 핵심 컨택스트들 유지해야돼 우리 감성과 내가 계속해서 강조한부분들”
 
-적용 기준:
+Applied bar:
 
-- 마지막 compaction 요약 하나를 그대로 넘기지 않는다.
-- 최소 최근 네 번의 compaction보다 앞까지 거슬러 올라가며, 뒤 요약에서 탈락한 핵심 결정을 복원한다.
-- 원문 전체를 덤프하는 대신 다음 세션이 같은 판단을 내릴 수 있도록 결정의 이유, 폐기한 방향, 제품 감성, 사용자가 반복해서 강조한 부분을 보존한다.
-- 마지막 compaction 뒤에 방향이 바뀌었다면 그 전 요약을 정본으로 취급하지 않는다.
-- 코드·검증·에이전트 상태와 제품 판단을 함께 넘기고, 새 세션이 실제로 이해했는지 확인한다.
+- Do not hand over a single last compaction summary as it stands.
+- Go back at least to before the most recent four compactions, and restore core decisions that later summaries dropped.
+- Instead of dumping the full original, preserve the reasons for decisions, the discarded directions, the product feel, and the parts the user kept emphasizing, so the next session can make the same judgments.
+- If the direction changed after the last compaction, do not treat the summary from before that as the source of truth.
+- Hand over code, verification, and agent state together with the product judgment, and check that the new session actually understood.

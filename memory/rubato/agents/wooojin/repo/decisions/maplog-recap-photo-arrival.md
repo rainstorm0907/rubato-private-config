@@ -1,17 +1,17 @@
 ---
-description: Maplog Recap 사진 등장: 핀에서 직접 이어지는 A를 좋아한 이유와 비교 이름 혼동 방지
+description: Maplog Recap photo arrival. Why A, which continues directly from the pin, was preferred, and how to avoid mixing up comparison names.
 ---
-## 결론
+## Conclusion
 
-Recap 사진 등장은 실제 촬영 위치의 핀에서 큰 사진으로 부드럽게 이어지는 관계를 후속 기준으로 삼는다. 상태는 최신 한 장·두 장 비교에서의 사용자 선호 확정이다. 전체 입력 검증이나 후속 구현 재개 승인으로 넓히지 않는다.
+Recap photo arrival takes, as the follow-up criterion, a relationship that continues smoothly from the pin at the actual capture location into a large photo. The status is a confirmed user preference in the latest one-photo and two-photo comparison. Do not widen it into full input verification or approval to resume follow-up implementation.
 
-## 근거
+## Rationale
 
-- 선택 이유는 화려한 효과 자체가 아니라 실제 핀과 큰 사진이 이어지는 느낌과 부드러움이다. 감상 자리 가까이에서 나타나는 다른 후보는 사용자에게 기존과 별다르지 않게 느껴졌다.
-- 이 비교의 A는 R1 ‘핀에서 직접 이어짐’, B는 R2 ‘감상 자리에서 받음’이다. 더 앞선 비교에서는 A가 조용한 등장, B가 핀 이동이었으므로 글자만으로 선택을 회수하지 않는다.
-- 정본은 `/Users/wooojin/App/maplog/record/PRODUCT.md#recap-photo-motion-comparison`, 실제 구현·남은 범위·승인은 `/Users/wooojin/App/maplog/record/CURRENT.md`를 따른다. 액자·비율·퇴장·속도와 모든 핀 조건의 최종 확정은 아니다.
+- The reason for the choice is not the flashy effect itself, but the feeling that the real pin and the large photo connect, and the smoothness. The other candidate, which appears near the viewing spot, felt to the user no different from the existing one.
+- In this comparison, A is R1 ‘핀에서 직접 이어짐’ and B is R2 ‘감상 자리에서 받음’. In the earlier comparison A was a quiet arrival and B was pin movement, so do not recover the choice from the letter alone.
+- The canonical source is `/Users/wooojin/App/maplog/record/PRODUCT.md#recap-photo-motion-comparison`; actual implementation, remaining scope, and approval follow `/Users/wooojin/App/maplog/record/CURRENT.md`. Frame, ratio, exit, speed, and every pin condition are not finally confirmed.
 
-## 증상
+## Symptom
 
 2026-09-22, 같은 실제 한 장·두 장 영상 비교를 본 우진: “A가 실제로 핀에서 이어지ㅏ는 느낌이고 부드러워서 압도적으로 좋아 B는 그냥 기존에서 별다를게 없느는낌 ?”
 

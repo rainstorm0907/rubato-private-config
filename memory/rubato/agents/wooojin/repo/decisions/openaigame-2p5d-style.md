@@ -1,43 +1,40 @@
 ---
-description: openaigame 로켓게임의 2.5D 표현 규칙 — 벽면 개구부는 정면 직사각형이 아니라 평행사변형으로 그린다.
+description: 2.5D expression rules for the openaigame rocket game — draw a wall opening as a parallelogram, not a front-facing rectangle.
 ---
-# openaigame — 2.5D 표현 규칙
+# openaigame — 2.5D expression rules
 
 > **프로젝트 종결 반영 (2026-08-28):** 평행사변형 개구부 규칙과 마지막 `교훈`은 우진이 확정한 재사용 가능한 미학/해석 규칙으로 **생존**한다. `관련 수치 (B2 시점)`과 production 과제는 닫힌 v2 이력이며 후속 과제가 아니다.
 
-## 벽면 개구부는 평행사변형이다
+## A wall opening is a parallelogram
 
-상태: **사용자 확정 (2026-08-26)**
+Status: **user confirmed (2026-08-26)**
 
-우진 발화: "2.5d에서 다가오는 옆면 벽에있는게 그렇게 보이잖아 (…) 대각선으로",
-그리고 확정 시 "평행사변형 맞아!! 내가 말하려던거야. 앞으로 이런 2.5d 스타일은
+Woojin's utterance: "2.5d에서 다가오는 옆면 벽에있는게 그렇게 보이잖아 (…) 대각선으로",
+and, when confirming, "평행사변형 맞아!! 내가 말하려던거야. 앞으로 이런 2.5d 스타일은
 나중에 디자인 입힐때 꼭 참고해."
 
-- 창·문·구멍 같은 **벽면 개구부를 정면 직사각형(액자)으로 그리지 않는다.**
-  깊이로 물러나는 측벽에 뚫린 구멍이므로 위아래 변이 기울어진 **평행사변형**으로 보인다.
-- 정면 직사각형으로 그리면 "벽에 뚫린 구멍"이 아니라 "벽에 걸린 그림"처럼 읽힌다.
-  실제로 B2 창을 정면 직사각형으로 만들었다가 이 지적을 받았다.
-- 이 규칙은 B2 ghost 단계뿐 아니라 **이후 C production 미술 전체에 적용**된다.
+- Do not draw a **wall opening** such as a window, door, or hole **as a front-facing rectangle (a frame).**
+  It is a hole cut in a side wall that recedes in depth, so it reads as a **parallelogram** whose top and bottom edges are slanted.
+- Drawn as a front-facing rectangle, it reads as "벽에 걸린 그림", not as "벽에 뚫린 구멍".
+  In fact the B2 window was made as a front-facing rectangle, and this correction followed.
+- This rule applies not only to the B2 ghost stage but to **all later C production art**.
 
-## 관련 수치 (B2 시점)
+## Related numbers (as of B2)
 
-- 창 크기: 가로 `900` 유지, 세로 `2043` (기존 B2 720의 2.8배). 세로/가로 비율 `2.27`.
-  이 비율은 우진이 직접 그려 보낸 스크린샷 박스에서 계측한 값이다.
-- 앞선 문서의 "가로·세로 2배(1800×1440)"는 비율 해석이 틀려 폐기됐다.
-  문구만 보고 정사각형에 가깝게 만든 것이 원인이다.
-- **기울기 방향: 가까운 왼쪽 문설주가 높고 오른쪽으로 흘러내린다.** 기체가 왼→오른쪽으로
-  가므로 창의 왼쪽 모서리가 카메라에 더 가깝다. 가까운 쪽 문설주를 더 두껍게 그린다.
-- 창을 창 높이의 `0.5개(1021px)`만큼 올렸고, 창에 걸린 커튼과 창 통과 비행선도 같이 올려
-  한 구조를 유지했다.
+- Window size: keep the width `900`, height `2043` (2.8× the previous B2 720). Height/width ratio `2.27`.
+  This ratio was measured from a screenshot box Woojin drew and sent.
+- The earlier document's "가로·세로 2배(1800×1440)" was discarded because the ratio reading was wrong.
+  The cause was making it close to a square from the wording alone.
+- **Slant direction: the nearer left jamb is higher and it falls off to the right.** The craft goes left→right,
+  so the window's left edge is closer to the camera. Draw the nearer jamb thicker.
+- Raised the window by `0.5개(1021px)` of the window height, and raised the curtain on the window and the airship flying through the window with it,
+  keeping one structure.
 
-## 아직 안 한 것 (production 과제)
+## Not done yet (production work)
 
-통과하는 동안 기울기가 뒤집힌다. 다가올 때는 가까운 쪽(왼쪽)이 높고, 통과 순간 정면
-직사각형에 가까워지고, 지나치고 나면 반대쪽이 높아진다. 그게 "옆을 스쳐 지나갔다"는
-감각을 만든다. B2에서는 비용 때문에 고정 기울기 하나로 두었고, 실제 parallax를 넣는
-C production에서 구현한다.
+The slant flips while passing through. Approaching, the near side (left) is higher; at the moment of passing it gets close to a front-facing rectangle; after passing, the other side is higher. That makes the sense of "옆을 스쳐 지나갔다". In B2, because of cost, it was left as one fixed slant, and it is implemented in C production, which puts in real parallax.
 
-## 교훈
+## Lesson
 
-문서의 배율 문구("2배")보다 **사용자가 그려 보낸 그림의 실제 비율을 계측**하는 쪽이 정본이다.
-배율은 어느 축 기준인지 모호하지만 그림은 모호하지 않다.
+Measuring **the actual ratio of the picture the user drew and sent** is the source of truth, over a scale phrase in a document ("2배").
+A scale is ambiguous about which axis it is based on, but a picture is not.

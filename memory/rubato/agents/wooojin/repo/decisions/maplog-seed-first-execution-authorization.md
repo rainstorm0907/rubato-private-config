@@ -1,17 +1,20 @@
 ---
-description: 2026-08-31 우진이 두 Consult 문서를 Maplog seed-first 구현 지침으로 승인하고 단계별 실행을 허용한 결정.
+description: The 2026-08-31 consult docs authorized a seed-first journey. That entry was later replaced. Do not treat those docs as the current canon.
 ---
-## 결정
 
-- 상태: **사용자 확정·구현 착수 승인**
-- 날짜: 2026-08-31
-- 맥락: `/Users/wooojin/App/maplog/.consult/maplog-seed-first-swift-followup-response-2026-08-31.md`와 `/Users/wooojin/App/maplog/.consult/내가 받아온 consult.md`를 구현 정본과 운영 번역으로 삼아 다음 단계를 정하는 자리.
-- 우진 원문: “거의 저 문서가 완벽하기 때문에 저대로 행동하면 될거같아. 단계별로 쪼개서. 목표에 도달하기 위해 억지로 하거나 끼워맞추기 금지.”
-- 우진 원문: “사용자 답변은 동의하는걸로 간주해.”
+## Conclusion
 
-## 적용
+- Recap starts from a period. A photo pin is a gallery, not a Recap seed. Saved Journey is outside 1.0. Canon: `/Users/wooojin/App/maplog/record/PRODUCT.md` and [[reference/projects/maplog-seed-first-decision.md]].
+- Do not implement the seed-first Journey direction from the 2026-08-31 consult docs. That directory, `/Users/wooojin/App/maplog/.consult/`, is gone.
 
-- seed-first Journey 방향은 추가 추상 기획 질문 없이 단계별로 구현한다.
-- 각 단계는 저장소 사실과 runtime 증거를 통과해야 다음 단계로 넘어간다.
-- production pin→stable SceneID, 동일 NMFMapView 유지, 영속 photo identity 중 하나가 자연스럽게 성립하지 않으면 억지 adapter나 임시 ID로 통과시키지 않고 구조를 재판정한다.
-- 후보 도움, Recap motion, export, social, root-tab 개편은 기본 Journey 왕복과 PhotoKit 첫 실행 뒤에 둔다.
+## Rationale
+
+- On 2026-08-31 Woojin approved those consult docs as the staged-execution guide for a seed-first Journey, and forbade forcing a fit. That entry is not the current one.
+- Still binding from that approval: do not pass a structural failure with a forced adapter or a temporary ID. If production pin to a stable SceneID, keeping the same NMFMapView, or a persistent photo identity does not hold naturally, re-judge the structure.
+- Rejected: putting Recap motion, export, and the root-tab rework after a basic Journey round trip. Recap is the 1.0 work. The orange journey-entry buttons were removed.
+
+## Symptom
+
+거의 저 문서가 완벽하기 때문에 저대로 행동하면 될거같아. 단계별로 쪼개서. 목표에 도달하기 위해 억지로 하거나 끼워맞추기 금지.
+
+사용자 답변은 동의하는걸로 간주해.

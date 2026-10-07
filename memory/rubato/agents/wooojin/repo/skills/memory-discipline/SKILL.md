@@ -149,7 +149,7 @@ Never append a new dated section to an existing decision file. If the answer cha
 
 - `msearch "<query>"` - search memory. Project-scoped by default; `-a` searches every store. Use short anchors (a component, an error, a decision), not a pasted user sentence.
 - `/reflect` - consolidate one conversation into memory; also runs on step count and compaction.
-- `/dream` - **inspection only.** It reports duplicate questions, contradicting 결론 lines, decisions that no longer match the code, bloated files, and files git already answers. It does not rewrite your files; act on what it reports.
+- `/dream` - **inspection only.** It reports duplicate questions, contradicting Conclusion lines, decisions that no longer match the code, bloated files, and files git already answers. It does not rewrite your files; act on what it reports.
 
 ## Soul rules
 

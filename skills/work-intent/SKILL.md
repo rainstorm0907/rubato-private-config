@@ -1,6 +1,6 @@
 ---
 name: work-intent
-description: "Resolve and preserve the user's intended result: investigate available evidence first, recommend a direction, and combine remaining human decisions with intent/roster confirmation before staffing. Read for durable work, continuing owners or a referenced intent. Small local work stays inline; loading this skill does not start an interview or a team."
+description: "Resolve and preserve the user's intended result: investigate available evidence first, recommend a direction, and combine remaining human decisions with intent/roster confirmation before staffing. Read for durable work, continuing owners or a referenced intent. Small local work stays inline."
 ---
 
 # Work intent
@@ -19,6 +19,12 @@ durable resumption, inspect the project's instructions and existing intent home.
 Reuse the record for the same unresolved outcome, including after a session reset,
 worktree change, failed verification or different team composition. A fresh run is
 not a fresh intent. Read candidates; similar filenames alone do not establish sameness.
+
+A different outcome on the same systems still inherits from earlier intents, whatever
+their status. Find them in the intent home or with `msearch`. A user constraint or
+correction recorded there that still holds goes into the new record's Constraints with
+its source, so the next run inherits it from the record rather than from whoever
+happens to remember it.
 
 Prefer the project's existing system of record. An existing approved intent, issue
 or specification can already express the requested change: link it and the relevant
@@ -44,7 +50,7 @@ and available alternatives cannot resolve it. Never fabricate a preference or a 
 
 Bound discovery by the decision: stop when further information is unlikely to change
 the direction, constraints, ownership or acceptance evidence. Do not exhaustively audit
-the project to eliminate every uncertainty. A focused, non-implementing discovery helper
+the project to eliminate every uncertainty. A focused, non-implementing discovery subagent
 may gather evidence under a draft and the existing permission/model/budget rules; this
 is not permission to launch continuing owners or implement the unapproved proposal.
 
@@ -57,9 +63,11 @@ Implementation methods remain revisable; avoid freezing guessed file layouts in 
 
 Preserve the originating request or an exact retrievable reference, its problem,
 proposed outcome, affected users/systems, constraints and material open decisions.
-Separate facts, inferences and proposals. Use the user's language for the body; translate
-technical mechanisms into their effect on the user. The fixed parser headings may stay
-English. The actual approval message is not a dump of parser headings, IDs or paths.
+Separate facts, inferences and proposals. Write the record in English, the language
+every role searches in; the user's own words (the originating request, quoted constraints
+and corrections) stay verbatim in their language. Translate technical mechanisms into
+their effect on the user. The approval message itself speaks the user's language and is
+not a dump of parser headings, IDs or paths.
 Link existing frame/spec clauses instead of duplicating what they own. Roster and run
 progress stay in the mission; brief discovery findings need no separate report.
 
@@ -144,5 +152,5 @@ Fulfill only after the lead accepts evidence for the intended result and promise
 delivery, not from idle agents or a completed board. Record a closure reference and
 update existing permanent documentation as needed. Historical intent is not current-system
 specification. Keep long evidence in the named run artifact area and fold useful facts
-into existing owners. The helper never stages, commits, deletes history, or starts
+into existing owners. The `intent.mjs` script never stages, commits, deletes history, or starts
 another task automatically.

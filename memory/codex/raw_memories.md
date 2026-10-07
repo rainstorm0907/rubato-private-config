@@ -338,3 +338,71 @@ References:
 - Verified final command pattern: `pgrep -lf 'start-electron|Rubato.app/Contents/MacOS/Electron|apps/server/dist/bin.mjs|pi-server/src/cli.mjs|pi-rpc'` -> `no matching processes`
 - Final terminated PIDs: GUI 1520, GUI 8764, launcher 8692, engine 25083.
 
+## Thread `01a0d3b2-2599-7122-8d6c-c4c0b2124586`
+updated_at: 2026-09-24T14:00:42+00:00
+cwd: /Users/wooojin/App/maplog
+rollout_path: /Users/wooojin/.codex/sessions/2026/09/24/rollout-2026-09-24T22-54-22-01a0d3b2-2599-7122-8d6c-c4c0b2124586.jsonl
+rollout_summary_file: 2026-09-24T13-54-22-bq7A-rubato_engine_missing_request_images_fix.md
+
+---
+description: Rubato 최신 엔진이 request-images.mjs 패키징 누락으로 시작 실패한 문제를 개인 설정과 오버레이를 보존한 채 수정하고 실제 GUI/브리지까지 검증함
+task: rubato-engine-package-closure-and-personal-overlay-preservation
+task_group: /Users/wooojin/dev/Rubato
+task_outcome: success
+cwd: /Users/wooojin/dev/Rubato
+keywords: Rubato, request-images.mjs, context-notes, build-active-engine, stock-engine, personal-overlay, install-extensions, rubato-restart, t3-bridge, codesign
+---
+
+### Task 1: 최신 Rubato 엔진 복구
+
+task: diagnose-and-fix-missing-packaged-runtime-module
+task_group: Rubato engine/runtime update
+ task_outcome: success
+
+Preference signals:
+- 사용자가 “최신 업뎃대로 맞추면서 개인 오버레이는 냅두고”라고 요청함 -> 개인 설정·확장·오버레이·세션은 변경 금지 경계로 두고 전후 해시와 실제 UI로 보존을 확인한다.
+- 사용자는 단순 재시작 성공이 아니라 실제 Rubato 창과 기존 프로젝트·세션·모델이 보이는지 확인하는 검증을 원함.
+
+Reusable knowledge:
+- 증상은 `ERR_MODULE_NOT_FOUND`로 `.../context-notes/controller.mjs`가 `request-images.mjs`를 import하지 못하는 것이었다.
+- 소스에는 `harness/rubato-pi/src/context-notes/request-images.mjs`가 존재했지만, `harness/pi-runtime/features/context-notes/patches.mjs`의 `contextNoteSources` 목록에서 누락되어 설치 엔진에 복사되지 않았다.
+- 수정은 `contextNoteSources`에 `"request-images.mjs"` 한 줄을 추가하는 최소 변경이었다.
+- `node --test harness/rubato-pi/test/unit/context-notes-request-images.test.mjs harness/pi-runtime/features/context-notes/context-notes.test.mjs` 결과 9 pass / 0 fail.
+- `node harness/scripts/build-active-engine.mjs --force` 후 설치본에 파일이 존재했고, 실제 `controller.mjs` import가 성공했다.
+- `rubato restart` 후 프로필 엔진이 실행되고 브리지가 `connected`, `catalogue ok 22`를 반환했다.
+- 실제 GUI는 `/Applications/Rubato.app`이며 `codesign --verify --deep --strict /Applications/Rubato.app`가 통과했다. `open /Applications/Rubato.app` 후 Rubato 창의 기존 프로젝트·세션과 Opus 5.5가 표시됐다.
+
+Failures and how to do differently:
+- 소스 저장소가 최신이고 GUI 번들이 정상이어도 설치된 `~/.rubato-pi/stock-engine`이 불완전할 수 있다. 다음에는 source fingerprint만 믿지 말고 feature/package closure와 핵심 import를 직접 검사한다.
+- `rubato restart` 직후 GUI가 꺼진 상태였으므로 재시작 명령의 exit 0만 성공으로 간주하지 않는다. 프로세스, bridge connection/catalogue, 실제 accessibility UI를 모두 확인한다.
+- 최종 worktree는 dirty 상태이며 수정 파일은 `harness/pi-runtime/features/context-notes/patches.mjs` 하나다. 후속 `rubato update`가 dirty tree에서 중단될 수 있으니 커밋 또는 별도 보관이 필요하다.
+
+References:
+- `harness/pi-runtime/features/context-notes/patches.mjs`
+- `harness/rubato-pi/src/context-notes/request-images.mjs`
+- `node harness/scripts/build-active-engine.mjs --force`
+- `rubato restart`
+- Error string: `Cannot find module '/Users/wooojin/.rubato-pi/stock-engine/node_modules/@earendil-works/pi-coding-agent/dist/rubato-features/context-notes/src/context-notes/request-images.mjs'`
+
+### Task 2: 개인 설정·오버레이 보존 검증
+
+task: preserve-personal-config-extension-and-gui-overlay-during-rebuild
+task_group: Rubato installation safety
+ task_outcome: success
+
+Preference signals:
+- 개인 설정과 오버레이를 건드리지 않는 것이 사용자의 핵심 제약이므로, 설치/재빌드 전후 manifest 비교를 기본 절차로 삼는다.
+
+Reusable knowledge:
+- 보존 대상은 `~/.zshrc`, `~/.rubato/agent`, `~/.rubato-pi/agent`, `~/.rubato/t3-home/userdata/settings.json` 및 관련 확장 파일이다.
+- 전후 19개 파일 SHA-256 manifest가 동일했다(`personal_manifest=identical`).
+- 기존 CLI 프로필 `~/.rubato/agent`와 GUI/Pi 프로필 `~/.rubato-pi/agent`는 분리되어 있으므로 서로 덮어쓰지 않도록 한다.
+- `harness/scripts/install-extensions.sh`는 기본적으로 이미 존재하는 확장을 유지하고 `--force` 없이는 덮어쓰지 않는다.
+
+References:
+- `/Users/wooojin/.rubato/agent`
+- `/Users/wooojin/.rubato-pi/agent`
+- `/Users/wooojin/.rubato/t3-home/userdata/settings.json`
+- `/Applications/Rubato.app`
+- Verification output: `personal_manifest=identical`
+

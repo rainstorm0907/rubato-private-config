@@ -1,8 +1,6 @@
-- [끝까지 확인하고 행동하기](verify-to-the-end-before-asking.md) — 문서 체인과 도구를 직접 끝까지 확인한 뒤 보고한다. 한 단계에서 멈추고 되던지지 않는다.
-- [전역 지침 재로딩은 도구마다 다름](global-guide-reload-differs-by-tool.md) — Claude는 세션 시작 1회, Codex는 세션 도중 반복 재주입
-- [코드 리뷰는 Opus 5로](code-review-agent-uses-opus5.md) — 리뷰 서브에이전트에 model: opus 명시, Fable 상속 금지
-- [헌장 축소 유지 원칙](charter-trim-rationale.md) — Claude엔 검증 지시 재추가 금지, Codex엔 유지. 안전 절 삭제는 우진님 확정
-- [안 시킨 구현 금지](no-unrequested-implementation.md) — 의논 우선, 착수는 명시적 지시 후
+- 맵로그 지금 기준은 저장소의 `record/CURRENT.md`·`record/PRODUCT.md`다. 7–8월 프로젝트 메모리는 2026-10-01 정리했다(낡은 v1 기준·중복 지침 삭제).
+- [헌장 축소 유지 원칙](/Users/wooojin/woojin/memory/charter-trim-rationale.md) — 전역 지침 관련, 개인 메모리로 옮김
+- [전역 지침 재로딩은 도구마다 다름](/Users/wooojin/woojin/memory/global-guide-reload-differs-by-tool.md) — 개인 메모리로 옮김
 
 개인 메모리(maplog 무관)는 `~/woojin/memory/`에 있음 — 신규 개인 메모리도 거기에 쓴다:
 - [우진님 말투 선호](/Users/wooojin/woojin/memory/woojin-speech-style-preference.md) — 존댓말 일관, 쉬운 어휘, 짧은 문장

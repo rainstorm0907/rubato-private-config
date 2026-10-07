@@ -1,10 +1,13 @@
 ---
-description: 비행운(Maplog) 화면 시안·레퍼런스 작업에서 실제로 통한 도구 경로(2026-09-29): Dribbble 수집, 이미지 생성, HTML 시안 렌더, 네이버 지도 제약
+description: Tool paths and retrieval rules that actually worked for Maplog ("비행운") screen mocks and reference work — reference boards, image generation, HTML mock rendering, and Naver Map constraints.
 ---
-# 비행운 시안 작업 도구 (2026-09-29 확인)
+# Maplog mock and reference work (confirmed 2026-09-29)
 
-- 레퍼런스: App Store 스크린샷(iTunes Search API)은 사용자가 "부족하다"고 봤다. Dribbble 검색 결과는 `abrowse`로 `li.shot-thumbnail` img src를 뽑아 CDN(`cdn.dribbble.com/userupload/...?resize=800x600`)에서 받는 방식이 됐다. Pinterest는 로그인 벽. Aside `exec` 긴 조사는 가짜 이미지 주소를 돌려줘서 버렸다.
-- 이미지 생성: 세션의 `generate_image` 도구는 400("unknown image parameter stream")으로 실패했고, `gti --provider private-codex --model gpt-5.5 --prompt ... --output ...`가 됐다. 구름 소재는 검은 배경으로 만들고 밝기→알파로 바꿔 투명 PNG로 썼다.
-- 시안: HTML/CSS를 Chrome headless(`--force-device-scale-factor=2 --window-size=402,874 --screenshot`)로 렌더하고 PIL로 비교판을 붙였다. 예: `/Users/wooojin/Downloads/maplog-qa/2026-09-29-card-style/v2/gen*.py`. 배경으로 쓰는 앱 캡처에 옛 카드·디버그 칩이 박혀 있지 않은지 먼저 본다.
-- 네이버 지도: 지도 캡처를 앱에 이미지로 넣는 건 약관(결과 저장·가공·배포 금지)에 걸린다. 앱 안 그림은 손으로 못 움직이는 실제 지도 + 오버레이로. 지하철 노선은 SDK 층 끄기로 안 사라지고 스타일 편집기(사용자 계정)가 필요하다.
-- 화면 디자인 원칙은 [[decisions/maplog-screen-design-by-purpose.md]]와 저장소 `record/PRODUCT.md` 화면 규칙.
+- **References are not limited to apps and maps.** Woojin's correction: "앱으로 국한한것도 모자라 지도를 더 신경쓴거같은데 그러지 말아줘", "그 외 대상 안짚어도 너의 그 규칙들이 적용이 되는 화면도 봐도 돼. 어플 아니어도". Also look at video, motion graphics, documentary titles, and print that solve the same problem.
+- **Retrieval path:** Receiving app screenshots for real use via App Store search (iTunes Search API) worked (30 apps' worth, `sheet-*.jpg` by card-style branch). Image URLs the browser research returned were often fake, so they were discarded — "Aside가 준 이미지 주소는 가짜가 많아서 버렸어. 대신 App Store 검색으로 앱 약 30개의 실제 스크린샷을 받았어." Dribbble was fetched directly from the CDN URL on `li.shot-thumbnail` (`cdn.dribbble.com/userupload/...?resize=800x600`), and Pinterest was a login wall. The personal `abrowse` overlay was removed on 2026-09-29, so collection uses the official `browser-cli` and `aside` ([[reference/projects/rubato-browser-routing.md]]).
+- **Filtering what to show is part of the investigator's job.** If references are just dumped, Woojin sends them back with "전형적인 폴라로이드잖아 너도 알지않아? 이게 과연 조사로 필요한 정보였어?". The deliverable is picking by why it is good (does the photo behind show, does each page cast a shadow).
+- **Image generation:** The session's `generate_image` tool failed with 400 ("unknown image parameter stream"), and `gti --provider private-codex --model gpt-5.5 --prompt ... --output ...` worked. Cloud material was made on a black background, then brightness→alpha, and used as a transparent PNG.
+- **Mocks:** Render HTML/CSS with Chrome headless (`--force-device-scale-factor=2 --window-size=402,874 --screenshot`) and stitch a comparison board with PIL (example: `/Users/wooojin/Downloads/maplog-qa/2026-09-29-card-style/v2/`). First check that app captures used as backgrounds do not have old cards or debug chips baked in.
+- **Deliverables as one bundle:** Do not send a shower of links each round; bundle them into one page (`index.html`) and give a single link. Woojin: "아니 이렇게 우수수 보내지도 말고 참고자료도 필요 없어. 앞으로 보기 좋게 모아줘".
+- **Naver Map:** Putting a map capture into the app as an image violates the terms (saving, processing, and distributing results forbidden). Drawings inside the app are a real map the hand cannot move, plus an overlay. Subway lines do not disappear by turning off an SDK layer; a style editor (user account) is required.
+- Screen design principles are in [[decisions/maplog-screen-design-by-purpose.md]] and the screen rules of the repository `record/PRODUCT.md`.

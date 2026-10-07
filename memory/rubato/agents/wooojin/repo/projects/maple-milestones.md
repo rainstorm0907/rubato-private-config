@@ -1,16 +1,16 @@
 ---
-description: 레공레의 주요 보스 격파와 챌린저 달성 실전 기록.
+description: Live records of "레공레" (a character) clearing major bosses and reaching Challenger.
 ---
-## 2026-08-31 챌린저 달성
+## 2026-08-31 Challenger reached
 
-- 상태: 사용자 확정·스크린샷 검증됨.
-- 우진: "으아 레공레 이지카링도 잡았고 하드 메이린 14초 남기고 깼음!!! ... 챌린저 드디어 했따..."
-- 레공레가 이지 카링과 하드 메이린을 솔로 격파했다.
-- 하드 메이린은 제한시간 20분 중 14초를 남긴 극최소컷 클리어다.
-- 챌린저스 포인트 109,000점으로 챌린저 티어 달성을 확인했다.
-- 2026-08-31 01:19:57 Maplescouter `preset=00000`, 보스시간 20분, 데스티니/유챔 off 실측:
-  - 하드 메이린 110.5%
-  - 이지 카링 136.7%
-  - 보스380 일반 54,932 / 헥사 47,086
-  - 전투력 107,859,700
-- 과거 프로젝트가 현실적인 성공 목표로 잡았던 하드 메이린 110%가 실제 110.5%, 14초 잔여 클리어로 검증됐다.
+- Status: user confirmed and screenshot-verified.
+- Woojin: "으아 레공레 이지카링도 잡았고 하드 메이린 14초 남기고 깼음!!! ... 챌린저 드디어 했따..."
+- "레공레" solo-cleared Easy Karing and Hard "메이린" (a boss).
+- Hard "메이린" is an extreme minimum-cut clear, with 14 seconds left of the 20-minute time limit.
+- Reaching Challenger tier was confirmed at 109,000 Challengers points.
+- 2026-08-31 01:19:57 Maplescouter `preset=00000`, boss time 20 minutes, "데스티니"/"유챔" off, measured:
+  - Hard "메이린" 110.5%
+  - Easy Karing 136.7%
+  - boss 380 normal 54,932 / HEXA 47,086
+  - combat power 107,859,700
+- The Hard "메이린" 110% that a past project had set as a realistic success target was verified by an actual 110.5% clear with 14 seconds remaining.

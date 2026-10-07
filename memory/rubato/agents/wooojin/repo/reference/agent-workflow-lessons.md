@@ -1,31 +1,31 @@
 ---
-description: 에이전트 워크플로우 범용 교훈 — toyrocket v2 실패(2026-08-28)에서 추출. 브리프 작성·검증 설계·워커 운용 전에 참조.
+description: General lessons for agent workflows — extracted from the toyrocket v2 failure (2026-08-28). Refer to this before writing a brief, designing verification, or running workers.
 ---
-# 에이전트 워크플로우 범용 교훈
+# General lessons for agent workflows
 
-출처: toyrocket v2 인간 플레이 판정 FAIL 회고 (2026-08-28, openaigame 해커톤).
-상태: 사용자 확정 — "앞으로 범용으로 써야할 필수 교훈인거같아. 이거 나중에 어떻게 세팅 + 내 습관 만들지 고민해보자".
-현재 적용 범위(v0.4-r2 문안, 실제 적용은 설치 기록 참조): 아래는 당시 실패와 원문을 보존한 사례다. "유일한 센서", "자주 참여", "인간이 표준 순서를 소화" 같은 당시 처방을 모든 작업의 실행 규칙으로 다시 적용하지 않는다. 담당은 자료에서 구상·제작 방법을 찾아 준비하고, 실제 결과를 보며 허용된 보완을 이어간다. 사용자에게만 있는 경험은 함께 판단하되 기본 준비와 검사는 떠넘기지 않는다. 현재 동작은 `system/working-rules.md`, `dispatching`, `frontend-ux-router`가 맡는다. 기존 보호 조건과 의미 있는 검사는 유지한다. 이 사례가 별도 감독자·주기적 감사·고정 제작 순서를 요구하지는 않는다.
+Source: toyrocket v2 human-play verdict FAIL retrospective (2026-08-28, openaigame hackathon).
+Status: user confirmed — "앞으로 범용으로 써야할 필수 교훈인거같아. 이거 나중에 어떻게 세팅 + 내 습관 만들지 고민해보자".
+Current scope of application (v0.4-r2 wording; for what is actually applied, see the install record): what follows is a case that preserves the failure at the time and the original wording. Do not reapply the prescriptions of that time, such as "유일한 센서", "자주 참여", and "인간이 표준 순서를 소화", as execution rules for every task. The owner finds conception and production methods in the materials and prepares them, then continues the allowed follow-through while looking at the actual result. Experience only the user has is judged together, but basic preparation and checks are not handed off. Current behavior is owned by `system/working-rules.md`, `dispatching`, and `frontend-ux-router`. Existing protection conditions and meaningful checks stay. This case does not require a separate supervisor, a periodic audit, or a fixed production order.
 
-사용자가 기록을 요청한 문구 (원문 유지):
+Wording the user asked to record (original kept):
 
-1. **"막힐 때마다 자기가 확실히 잘하는 일로 도망친"** — 에이전트는 막히면 문서 정리, 검증기 제작, 인프라처럼 자기가 확실히 잘하는 일로 흘러간다. 산출물이 늘어나는 것과 제품이 나아지는 것을 구분하고, 리드가 이 중력을 막아야 한다.
-2. **"대리 지표를 에이전트가 스스로 골랐다"** — 측정 불가능한 품질(느낌·가독성·조작감)의 대리 지표는 인간 판정의 파생물이어야 한다. 인간이 체감하고 말한 뒤에 지표를 만든다. 순서가 거꾸로면 지표는 자기 인증이 된다.
-3. **"핵심 품질 신호가 에이전트한테 없는 채널이면 경고"** — 제품의 핵심 품질이 실시간 체감처럼 에이전트가 감지할 수 없는 채널로 들어오면, 인간은 최종 승인자가 아니라 유일한 센서다. 센서를 마지막에 한 번 쓰지 말고 루프 안에 자주 넣는다.
-4. **"개발의 표준 순서 — 뭘 먼저 만드나"** — 새 장르·도메인에 들어가면 "이 분야 사람들은 뭘 먼저 만드나"부터 조사한다(consult 등). 인간이 표준 순서를 소화한 뒤 브리프를 쓴다. (게임: greybox → 플레이테스트 → 아트.)
-5. **"에이전트는 재료의 품질을 올려주지, 재료 투입 순서를 바꿔주진 않는다"** — 순서가 틀린 채로 유능하면 틀린 것을 더 빨리, 더 많이 만든다. 프레임과 순서는 인간+리드의 책임이다.
-6. **"같은 표면을 두 번 튜닝했는데도 아니면 계층을 의심한다 — 있었는데 적용 안 됨"** — [[system/working-rules.md]]에 이미 있던 규칙이 v2에서 적용되지 않았다(커스텀 캔버스 엔진 대신 검증된 엔진+맵 에디터를 썼어야 함). 규칙은 존재만으로 작동하지 않는다. 계층 선택 시점(착수 시 스택 결정)에 명시적으로 점검한다.
-   - 2026-09-07 보강 (온전 성공과 대조): 토이로켓엔 물리 동결·카메라 계약·HUD C·"검사 PASS ≠ 보기 좋다"가 전부 문서에 있었고 전부 어겨졌다. 코드로 강제된 `stage1-world.json` 하나만 살았다. 규칙이 작동한 조건은 규칙의 질이 아니라 ① 사용자가 화면을 본 빈도(온전 매일 / 토이 14일 중 6일, 나머지 34세션은 워커 브리프 1턴), ② 잠긴 것이 검사였는가, ③ 브리프가 동결 목록을 날랐는가. 어기는 기제는 셋: 워커 컨텍스트에 문서가 없음 / 과제와 규칙이 충돌하면 과제가 이김 / 산문은 아무도 안 걸림. 대응은 Skill(dispatching)의 frozen items·return column, Skill(frontend-ux-router) 규칙 10~14.
+1. **"막힐 때마다 자기가 확실히 잘하는 일로 도망친"** — When stuck, an agent drifts into work it is reliably good at, such as organizing documents, building a validator, and infrastructure. Distinguish output growing from the product getting better, and the lead has to stop this gravity.
+2. **"대리 지표를 에이전트가 스스로 골랐다"** — A proxy metric for unmeasurable quality (feel, readability, control feel) must be derived from a human verdict. Make the metric after a human has felt it and said so. If the order is reversed, the metric becomes self-certification.
+3. **"핵심 품질 신호가 에이전트한테 없는 채널이면 경고"** — If the product's core quality arrives through a channel the agent cannot sense, such as real-time feel, the human is not the final approver but the only sensor. Do not use the sensor once at the end; put it in the loop often.
+4. **"개발의 표준 순서 — 뭘 먼저 만드나"** — When entering a new genre or domain, investigate first "이 분야 사람들은 뭘 먼저 만드나" (consult and so on). The human writes the brief after digesting the standard order. (Games: greybox → playtest → art.)
+5. **"에이전트는 재료의 품질을 올려주지, 재료 투입 순서를 바꿔주진 않는다"** — Competence with the wrong order makes the wrong thing faster and in greater quantity. The frame and the order are the human's and the lead's responsibility.
+6. **"같은 표면을 두 번 튜닝했는데도 아니면 계층을 의심한다 — 있었는데 적용 안 됨"** — A rule already in [[system/working-rules.md]] was not applied in v2 (a proven engine plus a map editor should have been used instead of a custom canvas engine). A rule does not work merely by existing. Check it explicitly at the moment of choosing the layer (deciding the stack at start).
+   - 2026-09-07 addition (contrasted with 온전's success): On toyrocket, the physics freeze, the camera contract, HUD C, and "검사 PASS ≠ 보기 좋다" were all in the documents and all were broken. Only `stage1-world.json`, which was enforced in code, survived. The condition under which a rule worked was not the quality of the rule but ① how often the user looked at the screen (온전 every day / toy 6 of 14 days, the other 34 sessions were one turn of a worker brief), ② whether what was locked was a check, ③ whether the brief carried the freeze list. Three mechanisms break rules: the document is not in the worker's context / when the task and the rule conflict, the task wins / prose is caught by nobody. The response is Skill(dispatching)'s frozen items and return column, and Skill(frontend-ux-router) rules 10~14.
 
-## 관련 미결 구조 문제
+## Related open structural problems
 
-- 워커는 구조적으로 좁은 시야를 갖는다("좁은 시야로 비판받기" 문제). 좁음 자체는 설계이며 잘못이 아니다. 버그는 좁은 PASS가 번역 없이 제품 PASS로 승격될 때 생긴다. 해결안은 제안됨 상태로 논의 중 (프레임 감사 역할 분리, 워커 브리프에 전제-의심 보고 의무 부여, 리드의 판정 번역 의무).
+- A worker structurally has a narrow view (the "좁은 시야로 비판받기" problem). The narrowness itself is the design and is not a fault. The bug appears when a narrow PASS is promoted to a product PASS without translation. A solution has been proposed and is under discussion (separating a frame-audit role, obliging the worker brief to report doubted premises, obliging the lead to translate the verdict).
 
-## 긴 위임이 런타임에서 끊길 때 (리드 교훈, 사용자 확정 아님)
+## When a long delegation breaks in the runtime (a lead lesson, not user confirmed)
 
-출처: Maplog Recap 모음 앱 이식 2026-09-25~26. 같은 경로(`anthropic/claude-opus-5-5-sub`)의 담당이 타임아웃·연결 오류로 여섯 번 넘게 종료했고, 되살린(AgentSend revive) 세션이 'stale ctx' 런타임 오류로 곧바로 죽은 일이 두 번 있었다.
+Source: Maplog Recap collection app port, 2026-09-25~26. The owner on the same route (`anthropic/claude-opus-5-5-sub`) ended more than six times on timeout and connection errors, and a revived (AgentSend revive) session died immediately twice on a 'stale ctx' runtime error.
 
-- 되살리기가 런타임 오류로 죽으면 같은 세션을 계속 되살리지 말고 인수 자료와 함께 새 세션을 띄운다. 같은 경로에서 반복되면 모델·경로 선택은 사용자 몫이므로 원인과 후보를 묻고 바꾼다(우진: "Opus sub 말고 일반으로 해줘", 9/26).
-- 긴 위임 브리프에는 "단계 하나 끝낼 때마다 진행 기록 한 줄"을 넣는다. 한 담당이 75분 동안 기록 없이 다섯 파일을 고치다 끊겨, 다음 담당이 무엇이 끝났는지 모르는 채 인수해야 했다. 끊기면 먼저 그 시점 파일 사본을 떠 둔다.
-- 끊긴 담당이 빌드까지 마쳐 두었으면 새 세션 대신 리드가 설치·확인만 직접 해서 인수 비용을 줄인다.
-- 사용자의 짧은 선택("2번", "3,4,8")을 담당에게 넘기기 전에 이해한 내용을 한 줄로 되묻는다. "월은 2번"을 달 칸마다 알약으로 오해해 한 판을 버렸다(사용자 의도는 달 줄 밑 가이드 한 줄).
+- If a revive dies on a runtime error, do not keep reviving the same session; start a new session with the handoff material. If it repeats on the same route, model and route choice is the user's, so ask for the cause and the candidates and change it (Woojin: "Opus sub 말고 일반으로 해줘", 9/26).
+- Put "단계 하나 끝낼 때마다 진행 기록 한 줄" in a long delegation brief. One owner edited five files for 75 minutes with no record and then broke, so the next owner had to take over without knowing what was finished. When it breaks, first take a copy of the files at that moment.
+- If the broken owner had already finished the build, the lead does only the install and the check directly, instead of a new session, to cut the handoff cost.
+- Before passing the user's short choice ("2번", "3,4,8") to the owner, ask back in one line what was understood. "월은 2번" was misread as a pill in every month cell, and one version was thrown away (the user's intent was one guide line under the month row).

@@ -1,3 +1,47 @@
+# Task Group: Rubato engine update recovery and desktop runtime failure diagnosis
+scope: `/Users/wooojin/dev/Rubato` 업데이트·재빌드 뒤 Rubato가 시작하지 않거나, 메시지는 들어가지만 세션 응답이 멈출 때 패키지 closure·개인 오버레이 보존·GUI/엔진/socket 상태를 분리해 진단하고 복구·종료 검증하는 기준이다.
+applies_to: cwd=/Users/wooojin/dev/Rubato (runtime diagnosis also recorded from /Users/wooojin); reuse_rule=현재 macOS Rubato 설치와 `~/.rubato-pi` 런타임에는 직접 재사용한다. 프로세스 PID, `maxfiles`, 설치 엔진 상태, GUI/bridge 상태는 시점 의존적이므로 실제 로그·process/socket을 다시 확인하고, 개인 설정·세션·확장은 변경 금지 경계로 둔다.
+
+## Task 1: Repair missing packaged `request-images.mjs` while preserving the personal overlay, success
+
+### rollout_summary_files
+
+- rollout_summaries/2026-09-24T13-54-22-bq7A-rubato_engine_missing_request_images_fix.md (cwd=/Users/wooojin/App/maplog, rollout_path=/Users/wooojin/.codex/sessions/2026/09/24/rollout-2026-09-24T22-54-22-01a0d3b2-2599-7122-8d6c-c4c0b2124586.jsonl, updated_at=2026-09-24T14:00:42+00:00, thread_id=01a0d3b2-2599-7122-8d6c-c4c0b2124586, repair executed in /Users/wooojin/dev/Rubato; package closure, preservation, and GUI verified)
+
+### keywords
+
+- Rubato, request-images.mjs, ERR_MODULE_NOT_FOUND, context-notes, contextNoteSources, patches.mjs, build-active-engine, stock-engine, personal_manifest=identical, rubato restart, t3-bridge, catalogue ok 22, codesign
+
+## Task 2: Diagnose post-update frozen session and completely shut down duplicate GUI/engine processes, success
+
+### rollout_summary_files
+
+- rollout_summaries/2026-09-21T17-50-57-Kmrn-rubato_update_session_freeze_duplicate_gui_socket_emfile.md (cwd=/Users/wooojin, rollout_path=/Users/wooojin/.codex/sessions/2026/09/22/rollout-2026-09-22T02-50-57-01a0c517-a93a-7712-9358-9473c8960fb9.jsonl, updated_at=2026-09-21T17:56:21+00:00, thread_id=01a0c517-a93a-7712-9358-9473c8960fb9, duplicate GUI, socket disconnect, and orphan engine shutdown verified)
+
+### keywords
+
+- Rubato, pi-server, Electron, duplicate-GUI, pi.sock, connection.json, EMFILE: too many open files, watch, pending byte limit, start-electron, Lock file is already being held, pgrep -lf, macOS
+
+## User preferences
+
+- when updating Rubato, the user asked “최신 업뎃대로 맞추면서 개인 오버레이는 냅두고” -> treat personal settings, extensions, overlays, and sessions as off-limits; prove preservation with pre/post manifests and the actual GUI, not a successful rebuild alone. [Task 1]
+- when the cause was explained, the user asked “둘다 종료해줘” -> after explicit approval, terminate the GUI, launcher, and any orphan engine, then prove no related process/window remains. [Task 2]
+- a restart is not sufficient evidence for this user: confirm the real Rubato window still shows the existing project, sessions, and model list. [Task 1]
+
+## Reusable knowledge
+
+- `ERR_MODULE_NOT_FOUND` from `context-notes/controller.mjs` for `request-images.mjs` can mean source and GUI bundle are current while installed `~/.rubato-pi/stock-engine` is incomplete. Inspect `harness/pi-runtime/features/context-notes/patches.mjs` package lists and test a core installed import; this incident needed only `"request-images.mjs"` added to `contextNoteSources`. [Task 1]
+- After the focused context-notes tests, run `node harness/scripts/build-active-engine.mjs --force`; verify the installed file and `controller.mjs` import, then use `rubato restart`, bridge `connected`/`catalogue ok 22`, `codesign --verify --deep --strict /Applications/Rubato.app`, and the accessibility UI as separate checks. `rubato restart` can leave the GUI closed, so explicitly open it if needed. [Task 1]
+- Preserve `~/.zshrc`, `~/.rubato/agent`, `~/.rubato-pi/agent`, `~/.rubato/t3-home/userdata/settings.json`, and relevant extensions before rebuilding. CLI and GUI/Pi profiles are separate; `harness/scripts/install-extensions.sh` preserves existing extensions unless `--force` is used. The verified 19-file result was `personal_manifest=identical`. [Task 1]
+- For a post-update freeze, first inspect duplicate Electron instances, `/Users/wooojin/.rubato-pi/agent/server/pi.sock` versus `.tty`, `connection.json`, `pi-server.log`, `t3-bridge.log`, and `rubato-gui-install.log`. Here two GUIs shared the profile while no GUI was attached to `pi.sock`; logs also showed `Unix connection exceeded its pending byte limit`, `EMFILE: too many open files, watch`, build `Terminated: 15`, and a `maxfiles` soft limit of 256. Session JSONL remains under `/Users/wooojin/.rubato-pi/agent/sessions`. [Task 2]
+
+## Failures and how to do differently
+
+- Symptom: source fingerprint/current GUI bundle looks valid but the CLI fails before help with a missing module. Cause: the installed feature package omitted a source file. Fix: check feature/package closure and a real installed import rather than trusting repository freshness; keep the minimal package-list fix and note that the resulting dirty worktree can block a later `rubato update` until committed or otherwise preserved. [Task 1]
+- Symptom: `rubato restart` returns success but no GUI is visible. Cause: engine restart and desktop window state are independent. Fix: verify process, bridge connection/catalogue, and actual accessibility UI; reopen `/Applications/Rubato.app` when necessary. [Task 1]
+- Symptom: `osascript` quit returns success but Rubato processes survive. Cause: it did not remove both GUI instances or the orphaned `pi-server`. Fix: use a simple process check after shutdown, including `pgrep -lf 'start-electron|Rubato.app/Contents/MacOS/Electron|apps/server/dist/bin.mjs|pi-server/src/cli.mjs|pi-rpc'`; terminate remaining owned PIDs and require `no matching processes`. [Task 2]
+- Symptom: update-time session freeze accompanies `EMFILE`/pending-byte-limit and a disconnected `pi.sock`. Cause: duplicate GUI and failed build left a malformed runtime state; avoid opening multiple windows during recovery, clear existing processes first, then start one GUI and verify a new session response. [Task 2]
+
 # Task Group: Rubato desktop GUI installation and T3 stale-queue recovery PR
 scope: `/Users/wooojin/dev/Rubato`에서 기존 CLI 개인 설정을 보존하며 T3 GUI를 설치·실제 UI로 검증하고, stranded queued message를 복구하는 PR의 검증/머지 판단을 할 때 쓴다. 설치 성공·권한상 mergeable·머지 권장은 서로 다른 판정이다.
 applies_to: cwd=/Users/wooojin/dev/Rubato (secondary=/Users/wooojin/dev/Rubato-pr-t3-queue); reuse_rule=현재 T3 integration 경로와 PR #12 사례에만 직접 재사용한다. source pin, GUI model default, CI 상태, session state는 후속 작업에서 다시 확인하며, 실행 중 세션을 끊을 변경은 사용자 승인 없이 하지 않는다.

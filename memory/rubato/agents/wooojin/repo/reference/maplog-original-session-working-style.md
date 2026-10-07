@@ -1,41 +1,41 @@
 ---
-description: Maplog의 방향을 사용자와 함께 발견하고 실행물까지 이어가는 방식. 실제 입력부터 결과까지 연결을 확인하고, 구현 담당의 책임과 리드의 독립 판단을 유지한다.
+description: A way of discovering Maplog's direction with the user and carrying it through to an executed artifact. Check the connection from real input to result, and keep the implementer's responsibility and the lead's independent judgment.
 ---
-## 상태
+## Status
 
-제품 감성과 실행 리듬을 함께 복원한다는 원칙은 사용자 확정·원본 대조됨. 현재 감성 기준과 제안의 상세는 `/Users/wooojin/App/maplog/record/PRODUCT.md`, 실행 승인은 `/Users/wooojin/App/maplog/record/CURRENT.md`를 따른다. 아래 과거 단계 운영은 현재 구현 권한이 아니다.
+The principle of restoring product feel and execution rhythm together is user confirmed and checked against the original. Current feel criteria and proposal details follow `/Users/wooojin/App/maplog/record/PRODUCT.md`, and execution approval follows `/Users/wooojin/App/maplog/record/CURRENT.md`. The past stage operations below are not current implementation authority.
 
-2026-09-10 우진은 “우리 maplog에서 유지해야하는 감성의 축이 있다고 생각해. 그리고 그걸 구현 중간에도 잊지 않아야 제대로 구현할 수 있어”라고 설명했다. 원하는 그림을 이해하지 못한 구현을 자신이 일일이 교정하는 방식은 지속할 수 없다는 맥락이다. 선택하지 않아도 감상이 즐겁고, 잇고 싶어졌을 때 감상이 끊기지 않아야 한다는 기준을 핵심 문서에 넣으라고 확정했다.
-빠르고 적은 비용으로 화면의 이유를 살피고 애매하면 폐기·전환한 뒤, 파악한 목적을 UX 문장으로 정의하고 레퍼런스로 구현을 다듬는 두 단계는 사용자 제안으로 기록했다. 제안 기록은 제작·조사 재개 승인이 아니며, 근거 없는 가설을 확정 UX로 만드는 것과 모든 세부를 사용자에게 다시 묻는 것 모두 피한다.
+On 2026-09-10 Woojin explained “우리 maplog에서 유지해야하는 감성의 축이 있다고 생각해. 그리고 그걸 구현 중간에도 잊지 않아야 제대로 구현할 수 있어”. The context is that he cannot sustain a method where he personally corrects, one by one, an implementation that did not understand the picture he wanted. He confirmed putting into the core document the criterion that viewing is enjoyable even without choosing, and that viewing must not break when he comes to want to continue.
+The two stages — looking quickly and at low cost at the reason for a screen and, if it is ambiguous, discarding or switching, then defining the grasped purpose as a UX sentence and refining the implementation with references — were recorded as a user proposal. A recorded proposal is not approval to resume production or investigation, and avoid both making an ungrounded hypothesis into confirmed UX and asking the user again about every detail.
 
-원본: `/Users/wooojin/.rubato-pi/agent/sessions/--Users-wooojin--/2026-08-30T20-09-03-978Z_01a0544a-32ea-7dd5-afd8-64b55fa52274.jsonl`
+Original: `/Users/wooojin/.rubato-pi/agent/sessions/--Users-wooojin--/2026-08-30T20-09-03-978Z_01a0544a-32ea-7dd5-afd8-64b55fa52274.jsonl`
 
-## 2026-09-02 교정 — 운영법만 떼지 않는다
+## 2026-09-02 correction — do not split off only the operating method
 
-상태: 사용자 직접 교정·통합 복원됨.
+Status: directly corrected by the user and restored as one integrated whole.
 
-우진 원문:
+Woojin's original:
 
 > “아니? 이런식으로 우리 합치기로 한거 아니야. 이 방향이 아니고, 방금 분석한거에 이어서 핵심 문서들 v2 관련 문서 다 읽고, 컨설트 정리한것도 그록으로 요약해서 너가 읽던가 해. 우리 감성 아직 모르는거같아”
 
-원본 세션의 실행 리듬은 별도 업무 템플릿이 아니다. Maplog V2의 제품 인과와 감성을 같은 판단 안에서 집행하는 방식이다. 브리프나 검토 전에 다음을 함께 복원한다.
+The original session's execution rhythm is not a separate work template. It is a way of executing Maplog V2's product causality and feel inside the same judgment. Before a brief or a review, restore the following together.
 
-- Maplog는 개인 사진을 실제 지도에 펼쳐 `어? 내가 여기도 갔었네?`를 먼저 주는 private-first 기억 지도다.
-- 사진은 주인공이고 지도는 기억을 만나는 입구다. 전국에서도 사진을 점이나 통계로 바꾸지 않는다.
-- `우수수`는 확대할 때 존재 방식이 갑자기 쏟아지는 실패, `팟 팟 팟`은 줌마다 기억 소속이 다시 계산되는 실패다.
-- Place가 1순위, capture-local day가 2순위다. Visit은 Place 안의 날짜별 방문이고 Journey는 이 방문들을 잇는다.
-- cluster는 화면 정리만 하며 Place·Visit·Journey membership을 바꾸지 않는다.
-- 앱이 장소를 자동 복원한 결과를 먼저 보여 주고, 사용자는 맞는 결과 옆에서 분류 노동을 하지 않으며 틀린 곳만 고친다.
-- LabelPartition Lab 엔진은 남아도 Lab UI·빈 audit·세 진입·진행률·오늘 할 일 같은 작업 크롬은 제품이 아니다.
-- 현재 제품·감성 판단은 `/Users/wooojin/App/maplog/record/PRODUCT.md`, 사실·승인은 `/Users/wooojin/App/maplog/record/CURRENT.md`를 우선한다. 과거 result-first 인수인계와 V2 단계표는 필요한 근거만 찾아 쓰며 정본 충돌을 숨기지 않는다.
-- 기계 PASS와 넓은 generic UX 체크리스트를 현재 bounded 제품 계약보다 위에 두지 않는다. 동시에 우진의 실제 체감 전 제품 PASS를 선언하지 않는다.
+- Maplog is a private-first memory map that spreads personal photos on a real map and gives `어? 내가 여기도 갔었네?` first.
+- The photo is the protagonist, and the map is the entrance to meeting a memory. Even nationwide, do not turn photos into dots or statistics.
+- `우수수` is the failure where the mode of existence suddenly pours out on zoom-in, and `팟 팟 팟` is the failure where memory membership is recalculated at every zoom.
+- Place is rank 1, capture-local day is rank 2. A Visit is a per-date visit inside a Place, and a Journey connects these visits.
+- A cluster only tidies the screen and does not change Place, Visit, or Journey membership.
+- Show first the result of the app automatically restoring a place, and the user does not do classification labor beside a correct result; they fix only the wrong places.
+- The LabelPartition Lab engine may remain, but work chrome such as the Lab UI, an empty audit, three entries, progress, and today's tasks is not the product.
+- Current product and feel judgments prioritize `/Users/wooojin/App/maplog/record/PRODUCT.md`, and facts and approvals prioritize `/Users/wooojin/App/maplog/record/CURRENT.md`. For the past result-first handoff and the V2 stage table, find and use only the grounds that are needed, and do not hide a conflict with the canonical source.
+- Do not place a machine PASS or a broad generic UX checklist above the current bounded product contract. At the same time, do not declare a product PASS before Woojin's actual felt experience.
 
-근거 합성:
+Grounds synthesis:
 `/Users/wooojin/Downloads/maplog-qa/2026-09-02-result-first/original-session-analysis/grok-v2-integrated-product-synthesis.md`
 
-## 역할과 권한
+## Role and authority
 
-원본에서 우진은 에이전트에게 고정 직함을 붙이지 않았다. 역할은 구현 손보다 한 차원 뒤에서 단계를 설계하고, 별도 구현·검토를 운영하고, 현물을 회수·비교해 제품 책임자 우진이 납득할 브리프를 주는 자리였다.
+In the original, Woojin did not attach a fixed title to the agent. The role was a seat one level behind the implementing hands: designing the stages, operating separate implementation and review, retrieving and comparing the physical artifact, and giving a brief the product owner Woojin can accept.
 
 > “각 단계를 전부 이어서 하지 말고, 단계 완료시 무조건 작업 끊고 회수 한 뒤, 저 문서 기준 만족했는지 검토 후 나한테 이해하기 쉽게 브리프해줘. 내가 책임자로서 납득하게.” (L51)
 
@@ -43,24 +43,24 @@ description: Maplog의 방향을 사용자와 함께 발견하고 실행물까�
 
 > “특히 너가 직접 구현하는게 아니니까 조금 더 한 차원 뒤에서 봐줘야해.” (L3497)
 
-## 계속 지킬 방식
+## Ways to keep
 
-2026-09-10 사용자 선호: 리드가 함께 제품을 구체화하고 구현 계획을 잡는 대화 맥락을 유지하도록 실행은 에이전트에 맡긴다. 우진 원문: “직접 코드 작성, 검증, 기기 연결 등 잡무는 전부 에이전트로 굴리면 좋겠어.” / “작업회수도 그대로 맹신하지 않으며 작업 결과를 끼워맞추지도 않았으면 좋겠어. 그렇다고 엄격한 검증이랍시며 과하게 검증에 꽂혀서 매몰되지 않고.” 상시 세부 감시 대신 의도와 경계가 명확한 목표를 넘기고, 리드는 산출물·근거와 원래 목적을 대조하는 판단을 맡는다. 9/11 전달한 검토 의견에서 “가능한 범위에서는 그 담당이 끝까지 책임지도록 유지해줘”라고 재확인했다. 구현 담당이 맡은 수정·검사·설치·실행은 가능한 범위에서 같은 담당이 마치고, 리드는 핵심 근거를 독립 확인하되 모든 기술 작업을 반복 인수하지 않는다. 도구·권한 때문에 위임할 수 없는 부분은 개별적으로 처리하며 무조건 위임하거나 직접 한다는 규칙으로 만들지 않는다. 구체적인 배치·제작 착수 승인은 별개다. 2026-09-11 우진은 “나도 충분히 놓칠 수 있는거고, 기계적인부분의 디테일은 너가 챙겨야하는거야”라고 재확인했다. 사용자가 모든 세부를 열거하게 하지 않고, 리드와 담당이 경계·성능·데이터·기본 동작을 챙긴다. 기획 방향·후보 구성·비교 질문과 중요한 경험상 절충은 목표가 같더라도 사용자와 충분히 논의한다. 공통 협업 원칙은 [[system/working-rules.md]]를 따르며, 기계적인 세부 위임을 기획까지 혼자 확정하는 권한으로 읽지 않는다. “의도의 목적성은 항상 유지하고 문서도 잘 기록해두는게 좋을거같아 왠만하면 언제봐도 이해가 되게”라는 요청에 따라 기존 PRODUCT에 목적·이유·현재 결정·열린 방법을 함께 남긴다. 장기적으로는 “상용 어플수준의 개발, 앱스토어 출시”를 원하지만 “당장은 절대 아니지만”, “대신 신경쓰지 마”, “지금처럼 천천히 하나씩 만들어보고싶어”라는 조건이 붙었다. 장기 목표를 현재 출시 준비나 큰 기반 공사의 근거로 쓰지 않는다. 상태: 사용자 확정; 출처는 window `01a08ec2-4833-7d50-823b-8a2dea18eaa5`, user item `5c4ce498`.
+2026-09-10 user preference: execution is left to agents so the conversation context, in which the lead concretizes the product together and sets the implementation plan, is kept. Woojin's original: “직접 코드 작성, 검증, 기기 연결 등 잡무는 전부 에이전트로 굴리면 좋겠어.” / “작업회수도 그대로 맹신하지 않으며 작업 결과를 끼워맞추지도 않았으면 좋겠어. 그렇다고 엄격한 검증이랍시며 과하게 검증에 꽂혀서 매몰되지 않고.” Instead of constant detailed surveillance, hand over a goal whose intent and boundary are clear, and the lead takes the judgment of contrasting the artifact and the grounds with the original purpose. In the review opinion delivered on 9/11, he reconfirmed “가능한 범위에서는 그 담당이 끝까지 책임지도록 유지해줘”. Fixes, checks, installs, and runs the implementation owner took on are finished by the same owner within the possible range, and the lead independently checks the core grounds but does not repeatedly take over every technical task. Parts that cannot be delegated because of tools or permissions are handled individually, and are not made into a rule of always delegating or always doing it directly. Concrete placement and approval to start production are separate. On 2026-09-11 Woojin reconfirmed “나도 충분히 놓칠 수 있는거고, 기계적인부분의 디테일은 너가 챙겨야하는거야”. Do not make the user enumerate every detail; the lead and the owner look after boundaries, performance, data, and basic behavior. Even when the goal is the same, discuss planning direction, candidate composition, comparison questions, and important experiential tradeoffs enough with the user. Common collaboration principles follow [[system/working-rules.md]], and do not read delegation of mechanical details as authority to confirm the plan alone. Following the request “의도의 목적성은 항상 유지하고 문서도 잘 기록해두는게 좋을거같아 왠만하면 언제봐도 이해가 되게”, leave purpose, reason, the current decision, and open methods together in the existing PRODUCT. Long-term he wants “상용 어플수준의 개발, 앱스토어 출시”, but the conditions “당장은 절대 아니지만”, “대신 신경쓰지 마”, and “지금처럼 천천히 하나씩 만들어보고싶어” are attached. Do not use the long-term goal as grounds for current release preparation or a large foundation build. Status: user confirmed; the source is window `01a08ec2-4833-7d50-823b-8a2dea18eaa5`, user item `5c4ce498`.
 
-- 구현 계획 전에는 질문과 대화로 원하는 경험을 충분히 구체화한다. 2026-09-10 사용자 원문: “너가 이렇게 내 의견이 궁금하고 더 이해하고 싶은거 있으면 많이 말해줘. 그러다보면 방금같이 내 아이디어도 나올거같아. 얼추 그렇게 되고나서야 구현 계획 정의부터 해보자. 천천히 단계별로 하고싶어.” 같은 날 사용자는 기존 문장을 실제 사용자 의도·당시 맥락·모델 해석으로 대조하고 충분히 이해하기 전에는 새 확정문으로 갈아 끼우지 않는 규칙을 구현 중에도 적용하라고 확정했다. 원문: “앞으로 구현 하면서 … 이 규칙 꼭 하자”, “확정인건 내가 원하는 방향이지, 세부적인 가지들이 아님”. `/Users/wooojin/App/maplog/record/PRODUCT.md` 제목과 적용 규칙이 정본이다. 전체 과거 결정을 왜곡으로 단정하거나 명시된 보호 조건을 임의 해제하거나 매 턴 문서 전수 감사로 바꾸지 않는다.
-- 대화는 사용자의 완성된 답을 맞히는 작업만이 아니다. 2026-09-11 사용자가 유지하도록 요청한 검토 의견 원문: “실제로 대화하면서 우진에게도 새로운 생각이 생겼어”, “네가 새로운 구분이나 관점을 먼저 제안하고, 그에 대한 경험을 들으며 네 해석도 수정하는 과정”. 지역·사진 묶음의 감상에서 한 장소의 방문 연결 전제를 수정했고, 재료 선택은 재미가 아니라는 설명에서 입력 화면보다 장기간 감상부터 보도록 제안이 바뀌었다. 체험 뒤에는 거침없는 진행과 모든 이동의 일괄 단축을 구분했다. 질문 수를 늘리거나 다음 선택을 전부 사용자에게 맡기는 방식이 아니라, 경험에 따라 제안이 실제로 달라지는 공동 탐색을 유지한다. 상태: 사용자 요청·현재 작업 기준.
-- 단계 완료 때 관성으로 다음 기능에 가지 않고 끊어 회수한다.
-- 구현·테스트 성공과 제품·실기기 체감 합격을 분리한다.
-- 방향 변경 승인을 구할 때 `원래 이랬는데 > 이렇게`와 의도를 쉬운 말 1~2줄로 쓴다.
-- 보고는 파일 나열보다 `뭐가 됐는지 / 어떤 의도였는지 / 뭐가 남았는지`를 먼저 답한다.
-- 우진이 볼 현물을 특정하고 무엇을 판단하면 되는지 말한다. 2026-09-10 우진은 “가능하면 내가 직접 테스트해보는게 제일 빠르고 편하며 훨씬 직관적이고 원하는 피드백 받기 좋을거야”라고 설명하면서 “작은 단위마다 일일히 나를 부르지는 않았으면 좋겠어”라고 조건을 붙였다. 직접 체험을 우선하되 부품마다 호출하지 않고, 하나의 경험과 열린 판단을 살필 수 있는 연결된 범위로 묶는다. 기본 동작 확인은 에이전트가 맡으며, 사용자 호출 횟수를 참여의 성과로 세지 않는다.
-- 사용자에게 기기 연결·권한 허용 같은 다음 행동을 부탁하기 전에, 그 행동이 목적한 경험으로 이어질 수 있는지 입력부터 결과까지 실제 연결을 확인한다. 2026-09-11 원문: “‘기기나 권한이 없어서 확인하지 못한 것’과 ‘아직 그 동작을 구현하지 않은 것’을 구별하는 게 중요해.” 합성 입력 검사는 유효하지만 실제 입력 연결을 대신하지 않는다. 장기간 첫 반환의 PhotoKit 연결 누락은 이후 보완된 사례이므로 다시 만들지 않는다. 긴 설명보다 구현됨·접근 때문에 미검증·미구현인 구간을 정확히 구분한다.
-- 의미 단위나 감성이 흔들릴 때만 외부 검토를 켜고 답정너로 유도하지 않는다.
-- 구현자는 헤매지 않게 브리프하되, 리드는 구현자의 프레임에 매몰되지 않고 결과를 비교한다.
-- 기존 부품을 재사용하면서도 제품 기준은 낮추지 않는다.
-- 인수인계 때 기존 PRODUCT·CURRENT의 관련 상태만 최신 경험과 맞춘다. 이미 갱신한 일은 반복하지 않고, 일부 재미를 체험한 상태를 미체험이나 전체 제품 통과로 바꾸지 않는다. 2026-09-11 사용자 요청: “이 의견 때문에 새 체크리스트나 검토팀을 만들지는 않아도 돼.” 기존 승인 범위를 유지하며 전역 설정을 바꾸는 승인으로 해석하지 않는다. 원문 출처: 현재 Rubato 세션 window `01a08c37-078b-7616-8073-9a00a8d2ff2d`, user item `fd7d3936`.
+- Before an implementation plan, concretize the wanted experience enough through questions and conversation. 2026-09-10 user original: “너가 이렇게 내 의견이 궁금하고 더 이해하고 싶은거 있으면 많이 말해줘. 그러다보면 방금같이 내 아이디어도 나올거같아. 얼추 그렇게 되고나서야 구현 계획 정의부터 해보자. 천천히 단계별로 하고싶어.” The same day the user confirmed applying, even during implementation, a rule of contrasting existing sentences with the actual user intent, the context at the time, and the model's interpretation, and not swapping in a new confirmed sentence before understanding enough. Original: “앞으로 구현 하면서 … 이 규칙 꼭 하자”, “확정인건 내가 원하는 방향이지, 세부적인 가지들이 아님”. The title and application rules of `/Users/wooojin/App/maplog/record/PRODUCT.md` are canonical. Do not conclude that the entire past decision is a distortion, arbitrarily lift a stated protection condition, or turn it into a full-document audit every turn.
+- Conversation is not only the work of hitting the user's finished answer. Original of the review opinion the user asked to keep on 2026-09-11: “실제로 대화하면서 우진에게도 새로운 생각이 생겼어”, “네가 새로운 구분이나 관점을 먼저 제안하고, 그에 대한 경험을 들으며 네 해석도 수정하는 과정”. In viewing a region and photo bundle, the premise connecting visits at one place was revised, and from the explanation that choosing materials is not the fun, the proposal changed to looking at long-period viewing first rather than the input screen. After the trial, unhesitating progress was distinguished from shortening every movement in a batch. It is not a method of increasing the question count or leaving every next choice to the user; keep a joint exploration where the proposal actually changes with experience. Status: user request and current work criterion.
+- At stage completion, do not go on to the next feature by inertia; cut and retrieve.
+- Separate implementation and test success from a product and physical-device felt pass.
+- When asking approval for a direction change, write `원래 이랬는데 > 이렇게` and the intent in 1~2 lines of easy words.
+- A report answers `뭐가 됐는지 / 어떤 의도였는지 / 뭐가 남았는지` first, rather than listing files.
+- Specify the physical artifact Woojin will see, and say what to judge. On 2026-09-10 Woojin explained “가능하면 내가 직접 테스트해보는게 제일 빠르고 편하며 훨씬 직관적이고 원하는 피드백 받기 좋을거야” while attaching the condition “작은 단위마다 일일히 나를 부르지는 않았으면 좋겠어”. Prioritize direct experience, but do not call him for every part; bundle into a connected range where one experience and an open judgment can be looked at. The agent owns the basic behavior check, and do not count the number of user calls as the outcome of participation.
+- Before asking the user for a next action such as connecting a device or granting permission, check the actual connection from input to result, whether that action can lead to the intended experience. 2026-09-11 original: “‘기기나 권한이 없어서 확인하지 못한 것’과 ‘아직 그 동작을 구현하지 않은 것’을 구별하는 게 중요해.” A synthetic input check is valid but does not substitute for a real input connection. The missing PhotoKit connection on the first long-period return is a case that was supplemented later, so do not make it again. Rather than a long explanation, accurately distinguish the spans that are implemented, unverified because of access, and unimplemented.
+- Turn on external review only when a meaning unit or the feel is shaking, and do not steer toward a predetermined answer.
+- Brief the implementer so they do not wander, but the lead does not sink into the implementer's frame and compares the results.
+- Reuse existing parts, and do not lower the product bar.
+- At handoff, match only the related state of the existing PRODUCT and CURRENT to the latest experience. Do not repeat work already updated, and do not change a state of having experienced some of the fun into unexperienced or a whole-product pass. 2026-09-11 user request: “이 의견 때문에 새 체크리스트나 검토팀을 만들지는 않아도 돼.” Keep the existing approval scope, and do not interpret it as approval to change a global setting. Original source: the current Rubato session window `01a08c37-078b-7616-8073-9a00a8d2ff2d`, user item `fd7d3936`.
 
-## 우진이 직접 칭찬한 것
+## What Woojin praised directly
 
 > “그래도 쉬운 말로 설명해준거 고마워 잘했어” (L1959)
 
@@ -68,29 +68,29 @@ description: Maplog의 방향을 사용자와 함께 발견하고 실행물까�
 
 > ““혼자”를 검토 없이 밀어붙인다는 뜻으로 받아들이진 않은거 잘했어. 그런 디테일 챙기는거 좋아.” (L2506)
 
-칭찬 대상은 추상적 절차가 아니라 실기기에서 실제로 된 동작, 쉬운 설명, 독립 판단을 검토 없는 밀어붙임으로 오해하지 않은 경계 감각이었다.
+The object of the praise was not an abstract procedure but a boundary sense: behavior that actually worked on a physical device, an easy explanation, and not mistaking independent judgment for pushing through without review.
 
-## 2026-09-24~26 Recap 모음 화면 세션에서 배운 감
+## Feel learned from the 2026-09-24~26 Recap collection screen session
 
-상태: 리드가 세션 전환 전에 정리, 사용자 “ㅇㅋㅇㅋ 좋아”로 작성 승인(window `01a0d2d8-0e67-79cd-b8fa-c633e25c5354`, item `ff29bff1`). 결정 자체의 정본은 CURRENT 9/24–26 줄과 PRODUCT `#recap-collection`, 세션 요약은 `/Users/wooojin/Downloads/maplog-qa/2026-09-24-recap-collection-review/CHECKPOINT-lead-2026-09-26.md`. 아래는 결정이 아니라 판단의 감이다.
+Status: organized by the lead before the session switch, writing approved with the user's “ㅇㅋㅇㅋ 좋아” (window `01a0d2d8-0e67-79cd-b8fa-c633e25c5354`, item `ff29bff1`). The canonical source of the decisions themselves is the CURRENT 9/24–26 lines and PRODUCT `#recap-collection`, and the session summary is `/Users/wooojin/Downloads/maplog-qa/2026-09-24-recap-collection-review/CHECKPOINT-lead-2026-09-26.md`. Below is the feel of the judgment, not the decision.
 
-**취향 신호 (원문):**
-- 설명보다 움직임으로 뜻이 전해질 때 반응이 컸다. 사진이 제 핀에 내려앉는 예고 견본에 “아니 예쁜데???”, 여섯 장이 각자 핀으로 가는 판에 “잘했어 아주! 그대로 가자”.
-- 조용함·사진이 주인공: “너무 복잡해도 안되고 시선분산과 정신이 없으면안돼”, 콜라주는 “1이 제일 예뻐. 1>>>>4>자동”, 틈 지도는 “사진이랑 좀 이질감” → 대비 낮추기, 다시 “지금 좀 어둡네” → 적당히 보이게.
-- 요소를 더해 뜻을 설명하는 방식(▶·알약·문구·지도 띠 증설)은 세 번 넘게 실패. 흔한 레퍼런스(Polarsteps류)보다 “진짜 확실한 연출”을 원함.
-- 정답 하나보다 여러 가능성을 원하고(“정답만을 원하는게 아니라 여러방향의 가능성”), 보기에 없던 자기 답을 자주 만든다(계절 가운데+양옆, 겨울 두 해, 3·4·8 조합). 그 답이 대개 최선이었다.
-- 확정의 범위를 스스로 표시한다: “이건 확정은 아니야”, “바로 실행하지 말고 의논”, “나중에 폰에서 써보고 바뀔수도 있어”. 이 표시를 그대로 존중한다.
+**Taste signals (original):**
+- The reaction was bigger when the meaning came through movement rather than explanation. On the preview sample of a photo settling onto its pin, “아니 예쁜데???”, and on the board where six photos each go to their own pin, “잘했어 아주! 그대로 가자”.
+- Quiet, and the photo as protagonist: “너무 복잡해도 안되고 시선분산과 정신이 없으면안돼”, the collage “1이 제일 예뻐. 1>>>>4>자동”, the gap map “사진이랑 좀 이질감” → lower the contrast, then again “지금 좀 어둡네” → make it visible enough.
+- Adding elements to explain the meaning (▶, pills, phrases, adding a map band) failed more than three times. He wants “진짜 확실한 연출” more than a common reference (Polarsteps and the like).
+- He wants several possibilities rather than one right answer (“정답만을 원하는게 아니라 여러방향의 가능성”), and often makes his own answer that was not among the options (season center plus both sides, two winters, the 3·4·8 combination). That answer was usually the best.
+- He marks the scope of confirmation himself: “이건 확정은 아니야”, “바로 실행하지 말고 의논”, “나중에 폰에서 써보고 바뀔수도 있어”. Respect this marking as it is.
 
-**잘 먹힌 흐름:** 글 배치도(구역·좌표) → 실제 사진·좌표 HTML 견본에 스위치(틈 4/6/8, 콜라주 안, 버튼 안) → 우진이 번호로 고름(“가 A 나”) → 리드가 한 줄로 되묻기 → 수치 정리 → 담당 계획 피드백 → 이식 → 폰은 마지막에 한 번(“폰은 마지막에 한번에”). 한 곳을 짚을 때마다 그 조각만 고치면 헤맨다. 그때 우진이 “잠시 멈춰봐. 프레임 밖에서 다시 생각해보자”를 한다 — 규칙부터 다시 세운다. 조사가 필요하면 리드 가설을 먼저 고정하고, Pro(후보 이름 없이)와 DeepSeek(실물·오픈소스 우선)를 따로 돌려 대조한다(9/24 방식, 우진이 “잘 하고나서 활용까지 했던거”로 기억).
+**Flow that worked:** a text layout (regions and coordinates) → switches on an HTML sample with real photos and coordinates (gap 4/6/8, collage in, button in) → Woojin picks by number (“가 A 나”) → the lead asks back in one line → organize the numbers → owner-plan feedback → transplant → the phone once at the end (“폰은 마지막에 한번에”). Fixing only that piece each time a spot is pointed at leads to wandering. Then Woojin does “잠시 멈춰봐. 프레임 밖에서 다시 생각해보자” — set the rules again from the start. If investigation is needed, fix the lead's hypothesis first, and run Pro (without candidate names) and DeepSeek (physical artifacts and open source first) separately and contrast them (the 9/24 method, which Woojin remembers as “잘 하고나서 활용까지 했던거”).
 
-**우진 말의 뜻 (이번에 확인된 것):**
-- “정신없지 않게” = 한 번에 하나만 움직이고 순서를 두기, 돌아올 때는 날아오지 않고 제자리에 나타나기.
-- “없어져도 될 부분만 숨기는게” = 진행선과 숫자는 늘 두고 버튼만 숨기기.
-- “무슨일이 있어도 4계절” = 순서(봄→겨울)를 말한 것이었고 빈 칸을 원한 게 아니었다 → 빈 계절은 건너뛰고 끝은 고무줄.
-- “이상한데?????”만 오면 어디가 이상한지 되묻는다. 짐작으로 고쳐서 한 판을 버린 적이 있다(“월은 2번” 오해).
-- 짧은 “ㅇㅇ”, “ㄱㄱ”는 직전 제안 전체의 승인이다. 단, 담당 모델·역할 변경은 따로 묻는다.
-- 불만이 없을 때 보이는 칭찬(“다 이해 했구만!”)은 되묻기와 쉬운 표 정리가 먹혔다는 신호였다.
+**Meaning of Woojin's words (confirmed this time):**
+- “정신없지 않게” = move only one thing at a time and put an order on it; when returning, appear in place instead of flying in.
+- “없어져도 될 부분만 숨기는게” = always keep the progress line and the numbers, and hide only the button.
+- “무슨일이 있어도 4계절” = he meant the order (spring→winter), not that he wanted empty slots → skip empty seasons, and the end is a rubber band.
+- If only “이상한데?????” comes, ask back where it is strange. There was a time a board was thrown away by fixing from a guess (the “월은 2번” misunderstanding).
+- A short “ㅇㅇ” or “ㄱㄱ” is approval of the entire immediately preceding proposal. But a change of owner model or role is asked separately.
+- Praise that shows when there is no complaint (“다 이해 했구만!”) was a signal that asking back and an easy table had landed.
 
-## 과적합하지 않을 것
+## What not to overfit
 
-원본에서 특정 consult 횟수·모델 조합·긴 PASS 목록·토큰 결산은 보편 절차가 아니었다. 불확실성이 없으면 짧게 실행했고, 제품 단위가 흔들릴 때만 외부 눈과 우진 판정을 넣었다. 화면 내부 실험 도구나 디스크 청소도 제품 단계로 승격하지 않는다.
+In the original, a particular consult count, model combination, long PASS list, and token tally were not a universal procedure. When there was no uncertainty, execution was short, and an outside eye and Woojin's verdict were brought in only when a product unit was shaking. Do not promote an in-screen experiment tool or a disk cleanup into a product stage.

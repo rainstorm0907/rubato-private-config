@@ -1,13 +1,13 @@
 ---
-description: Maplog 메인 감상은 익숙한 지역에 쌓인 사진의 만족감과 뜻밖의 여행 지역 발견에서 시작한다. 단일 장소·방문 연결을 필수 동기로 강요하지 않으며 교정은 보조 행동이다.
+description: Maplog main browse starts from the satisfaction of photos piled up in a familiar area and from discovering an unexpected trip area. Do not force a single place or visit-linking as a required motive, and correction is a secondary action.
 ---
-## 상태
+## Status
 
-메인 감상 우선 원칙과 지역을 둘러보는 경험은 사용자 직접 설명·확정. 구체적인 감상 화면·구현은 승인 전이다. 현재 승인 정본은 `/Users/wooojin/App/maplog/record/CURRENT.md`다. 아래 패널 크기·교정 배치는 2026-09-02 해당 화면 판정의 조건을 보존하며 새 화면 구성을 자동 확정하지 않는다.
+The main-browse-first principle and the experience of looking around an area are directly explained and confirmed by the user. The concrete viewing screen and implementation are before approval. The current approved canonical source is `/Users/wooojin/App/maplog/record/CURRENT.md`. The panel size and correction placement below preserve the conditions of that screen's verdict on 2026-09-02 and do not automatically confirm a new screen composition.
 
-## 우진 원문
+## Woojin's original
 
-2026-09-10, 리드가 한 장소에서 시작해 방문을 잇는 경험을 물었을 때. 익숙한 지역의 밀집 사진에서 느끼는 만족감은 과거부터 완성돼 있던 선호를 복원한 것이 아니라 대화 중 새로 떠올린 생각이다. 사용자 후속 원문: “익숙한 지역 관해선 방금 더 떠올랐던거야.” 지역·묶음 감상의 이전 기록과 이 새 발견을 구분한다.
+2026-09-10, when the lead asked about an experience that starts at one place and links visits. The satisfaction felt from densely packed photos in a familiar area is not a restoration of a preference that had been complete from the past; it is a thought newly surfaced during the conversation. User follow-up original: “익숙한 지역 관해선 방금 더 떠올랐던거야.” Distinguish prior records of area and group viewing from this new discovery.
 
 > “보통 내가 가는 지역에 먼저 자연스럽게 눈이 가잖아. 그럼 많이 다니는 지역엔 당연히 빽빽히 쌓여있는 사진을 보며 왠지모를 만족감? 느끼는거같고, 여행갔었던 막 외곽쪽에도 사진 있는거 보면 신기하고 아 내가 저런데도 갔었지 해서 그쪽으로 확대해보고 그런거같아.”
 
@@ -15,7 +15,7 @@ description: Maplog 메인 감상은 익숙한 지역에 쌓인 사진의 만족
 
 > “방문을 잇는다? 이게 아까 내가 말한 왜 이런게 필요한지 인거같아.”
 
-2026-09-02, result-first panel-cap 화면 판정:
+2026-09-02, result-first panel-cap screen verdict:
 
 > “첫 화면이 흰 앨범에 지도가 밀린 게 아니라, 지도에 두 장소의 사진 기억이 있고 아래 Place 카드로 자연스럽게 이어지는 느낌 은 어느정도 괜찮아. 대신 지금 앨범이 화면 세로 높이의 60% 정도라면 40%까진 줄여줘.”
 
@@ -23,17 +23,19 @@ description: Maplog 메인 감상은 익숙한 지역에 쌓인 사진의 만족
 
 > “그리고 앞으로 코드에 사용되는 단어를 사용하는것보다 최대한 개발자-기획자-유저 나는 이 세가지를 하고있기 때문에 각 역할에서 이해되는 한국어로 얘기해줘. 물론 강제로 끼워맞추라는건 아니야. 그 과정에서 중복 단어로 오해가 생기거나 그러진 않았으면 좋겠어”
 
-## 적용 계약
+## Applied contract
 
-- 메인 감상은 지도에서 익숙한 지역에 사진이 쌓인 모습과 뜻밖의 지역에 남은 사진을 발견하는 데서도 가치가 생긴다. 단일 장소를 먼저 고른다고 전제하지 않고 지역·사진 묶음을 둘러보는 경험을 보존한다. 구체적인 묶음 UI·장소 소속 정책을 새로 확정한 것은 아니다.
-- 방문 연결은 메인 감상의 필수 목적이 아니라 필요성을 설명해야 하는 후보로 다시 본다. Recap에 대한 기존 호감은 유지하되 이를 Recap 밖 연결 동기로 확대하지 않는다. 여정 기능 전체 폐기 결정도 아니다. 장소를 열거나 사진을 봤다는 이유로 선택·제작 흐름을 강요하지 않는다.
-- 교정 작업을 주인공으로 만들지 않는다.
-- 앨범/상세 패널은 화면 세로 높이의 최대 40%를 목표로 한다.
-- `서울광장과 합치기` 같은 큰 텍스트 행동은 메인 앨범에서 제거한다.
-- 합치기 도메인 기능은 폐기하지 않는다. 나중에 작은 보조 진입으로 열 수 있게 유지하되 위치·모양은 별도 제품 판정 전 임의로 정하지 않는다.
-- 사용자 브리프는 코드 식별자 중심이 아니라 개발자·기획자·사용자 세 역할이 같은 뜻으로 이해할 수 있는 한국어를 쓴다. 억지 번역이나 중복 용어로 새 오해를 만들지 않는다.
+- Main browse also gets its value from seeing photos piled up in a familiar area on the map and from discovering photos left in an unexpected area. Do not assume a single place is chosen first, and preserve the experience of looking around an area and a photo group. This does not newly confirm a concrete group UI or a place-membership policy.
+- Treat visit-linking not as a required purpose of main browse but again as a candidate whose necessity must be explained. Keep the existing liking for Recap, but do not expand it into a linking motive outside Recap. This is also not a decision to discard the Journey feature as a whole. Do not force a selection and creation flow just because a place was opened or a photo was viewed.
+- Do not make correction work the protagonist.
+- The album/detail panel targets at most 40% of the screen's vertical height.
+- Remove large text actions such as `서울광장과 합치기` from the main album.
+- Do not discard the merge domain feature. Keep it so it can later be opened through a small secondary entry, but do not arbitrarily decide its position or shape before a separate product verdict.
+- User briefs use Korean that the three roles — developer, planner, and user — can understand as the same meaning, not code-identifier-centered wording. Do not create a new misunderstanding through a forced translation or a duplicated term.
 
-## 확인된 이전 근거
+## Confirmed prior evidence
 
-- `/Users/wooojin/App/maplog/record/v2/FOLLOWUPS.md`의 2026-09-01 실기기 정정: “넓게 클러스터 되어있을때도 사진 누르면 보고싶은데, 그럼 동네묶음 단위로 사진을 볼 수 있게 해주던가 하자.” 넓게 자동 합쳐 보고 싶은 사진을 숨기라는 뜻은 아니며, 같은 문맥에서 “지금 보고싶은게 그냥 다 합쳐져버려”라고 반대했다.
-- `/Users/wooojin/App/maplog/record/DEFERRED.md` D-25의 2026-08-31 실기기 발화: “어? 내가 여기도 갔었네? 하고 사진 보려는데 보기가 힘드네”. 익숙 지역 우선 시선·밀집 누적 만족의 구체적인 설명은 위 9/10 원문을 사용한다.
+Old progress documents (`record/v2/`, `record/DEFERRED.md`, and others) were deleted in the repository cleanup, and past progress remains as a summary in `record/RETRO.md`. The original utterances below are in the git history, and the criterion in force now is the map gallery section of `record/PRODUCT.md`.
+
+- 2026-09-01 physical-device correction: “넓게 클러스터 되어있을때도 사진 누르면 보고싶은데, 그럼 동네묶음 단위로 사진을 볼 수 있게 해주던가 하자.” It does not mean hide the photos one wants to see by auto-merging them widely, and in the same context he objected “지금 보고싶은게 그냥 다 합쳐져버려”.
+- 2026-08-31 physical-device utterance (D-25): “어? 내가 여기도 갔었네? 하고 사진 보려는데 보기가 힘드네”. For the concrete account of the familiar-area-first gaze and the satisfaction of dense accumulation, use the 9/10 original above.

@@ -1,21 +1,21 @@
 approval_policy = "never"
-model = "gpt-5.6-sol"
+model = "gpt-6-luna"
 personality = "friendly"
 plan_mode_reasoning_effort = "max"
 sandbox_mode = "danger-full-access"
 
 approvals_reviewer = "user"
-model_reasoning_effort = "medium"
+model_reasoning_effort = "high"
 
 notify = ["/Users/wooojin/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient", "turn-ended"]
-model_catalog_json = "/Users/wooojin/.codex/opencodex-catalog.json"
 service_tier = "default"
 
 # >>> rubato-codex managed bootstrap >>>
 model_instructions_file = "/Users/wooojin/.codex/rubato-codex/model-instructions.md"
-# Auto-injected by opencodex
+model_catalog_json = "/Users/wooojin/.codex/opencodex-catalog.json"
+# Auto-injected by opencodex (undo: ocx restore)
 openai_base_url = "http://127.0.0.1:10100/v1"
-# Auto-injected by opencodex
+# Auto-injected by opencodex (undo: ocx restore)
 experimental_realtime_ws_base_url = "http://127.0.0.1:10100/v1"
 
 [agents.taskforce_owner]
@@ -167,6 +167,9 @@ enabled = true
 enabled = true
 
 [plugins."rubato-codex@rubato"]
+enabled = true
+
+[plugins."code-review@openai-bundled"]
 enabled = true
 
 [projects."/Users/wooojin/Documents/Codex/2026-04-27/codex-mac"]
@@ -406,14 +409,14 @@ NODE_REPL_NODE_MODULE_DIRS = "/Applications/ChatGPT.app/Contents/Resources/cua_n
 NODE_REPL_NODE_PATH = "/Applications/ChatGPT.app/Contents/Resources/cua_node/bin/node"
 NODE_REPL_TRUSTED_CODE_PATHS = "/Users/wooojin/.codex:/Applications/ChatGPT.app/Contents/Resources/cua_node/lib/node_modules"
 CODEX_HOME = "/Users/wooojin/.codex"
-BROWSER_USE_AVAILABLE_BACKENDS = "chrome,iab"
+BROWSER_USE_AVAILABLE_BACKENDS = "chrome,iab,mcpapps"
 BROWSER_USE_TINYSKY_ENABLED = "1"
 NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = ""
 NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = ""
 NODE_REPL_INSTRUCTIONS_USE_CASE_COMPUTER_USE = ""
 BROWSER_USE_CODEX_APP_BUILD_FLAVOR = "prod"
-BROWSER_USE_CODEX_APP_VERSION = "26.924.22138"
-NODE_REPL_TRUSTED_SERVICES = '{"browser":"/Users/wooojin/.codex/plugins/cache/openai-bundled/browser/26.924.22138/scripts/browser-service.mjs","sky":"@oai/sky/service"}'
+BROWSER_USE_CODEX_APP_VERSION = "26.930.61225"
+NODE_REPL_TRUSTED_SERVICES = '{"browser":"/Users/wooojin/.codex/plugins/cache/openai-bundled/browser/26.930.61225/scripts/browser-service.mjs","sky":"@oai/sky/service"}'
 SKY_CUA_SERVICE_PATH = "/Users/wooojin/.codex/computer-use/Codex Computer Use.app"
 CODEX_CLI_PATH = "/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS/codex"
 

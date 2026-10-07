@@ -1,101 +1,24 @@
 ---
-description: Maplog V2의 지도 표현·재사용·실기기 판정 근거. 현행 리드 실행 방식은 maplog-execution-lead-contract와 프로젝트 CURRENT·PRODUCT를 따른다.
+description: What still binds Maplog map expression, and which old stage locks are not permission to stop or start work.
 ---
-## 적용 범위
 
-현재의 리드·구현·검증 역할과 자율 진행 경계는 [[reference/maplog-execution-lead-contract.md]] 한 곳을 따른다. 승인된 결과 안의 기계적 후속은 자율 진행하며 명시된 단계 잠금·사용자 판정 경계는 보존한다.
+## Conclusion
 
-아래는 V2에서 얻은 제품·기술 판단의 근거다. 날짜별 승인·Consult 순서·미완료 표현은 당시 범위이며 지금의 실행 대기열이 아니다. 현재 제품 의미와 열린 작업은 `/Users/wooojin/App/maplog/record/PRODUCT.md`와 `/Users/wooojin/App/maplog/record/CURRENT.md`를 먼저 대조한다. 장기 App Store 지향을 당장 출시 준비를 시작할 권한으로 쓰지 않는다.
+- Product meaning, 1.0 scope, and open judgments live in `/Users/wooojin/App/maplog/record/PRODUCT.md`. Facts and who does what live in `record/CURRENT.md`. The work method lives in `AGENTS.md`. This file does not lock a stage and does not authorize starting work.
+- Design structure, performance, UI, copy, empty states, permission, error, and delay for real App Store users, not for the current phone's photo count. That count is a repeatable regression fixture, not a budget or a ceiling.
+- At nationwide scale, every located photo stays at its own coordinate. Do not filter or sample the distribution away. A cluster only tidies pins that actually touch on screen. It is not a regional summary and it does not change Place or Visit membership.
+- The thing the user sees, even far out, is a real photo, not a field of tiny dots. How a pin says "many photos" is the current pin contract in PRODUCT, not a number badge.
 
-## App Store 출시 규모 계약 — 사용자 확정, 2026-09-01
+## Rationale
 
-우진: “이것 외에도 제품 구조는 App Store 규모를 기준으로 설계라고 가정해서 앞으로 구석구석 해야돼. UI/Ux , 멘트 같은것까지. 혹은 mock으로 대체되어있는 후보라던지.”
+- Chose App Store scale as the design assumption. Woojin: “이것 외에도 제품 구조는 App Store 규모를 기준으로 설계라고 가정해서 앞으로 구석구석 해야돼. UI/Ux , 멘트 같은것까지. 혹은 mock으로 대체되어있는 후보라던지.”
+- Chose preserving exact locations over a readable thumbnail of every photo at once. The approved direction was `모든 허용 사진의 실제 좌표상 공간적 존재와 접근성 보존`, not `모든 썸네일 동시 가독성`. Woojin: “전국 단위로 봤을때 합쳐진게 아니라 정확한 위치에 여러개 필터없이 다 보여지면 좋겠어.”
+- Rejected: a native cluster that poured markers out on zoom-in (“우수수”) and merged and split at a low frame rate. Also rejected: hiding markers so a far view looks sparse and a zoom suddenly reveals them. Cause was fixed-size markers covering the same screen pixel, not real grouping.
+- Rejected: a nationwide view of only 3–5pt dots. Woojin: “멀리서 볼때 사진이 안보이면 뭘 보고 무슨 사진인줄알고 어케눌러?? 그리고 우리 감성 무너지는거 아냐”
+- Rejected as a current stop: “do not start release preparation”, the Consult-before-any-code gate, and the Stage 3 lock. On 2026-10-01 Woojin authorized finishing 1.0 (“일단 그렇게 1.0 마무리 해야할거같아”). Scope and what waits until after 1.0 are in PRODUCT, not here.
+- Rejected as the default pin language: `+n` as the hidden-photo count. Later pin verdicts dropped number badges. Do not revive them from this file.
+- Reuse a verified implementation narrowly when a whole old file is coupled to a retired domain. Do not invent a shared framework first, and do not replace verified native behavior with a stand-in. Woojin: “v2 좋지만, 재사용할건 하고 효율적으로 개발하되 그 문서의 기준은 엄격하게 달성할수 있도록하자”
 
-- `2,834장`은 현재 iPhone에서 반복할 수 있는 실제 회귀 fixture일 뿐 제품 성능 예산이나 상한이 아니다.
-- Maplog의 데이터 구조·성능·공간 색인뿐 아니라 UI/UX, 문구, 빈 상태, 권한·오류·지연, 다양한 콘텐츠, 지원 기기 하한까지 App Store 실제 사용자를 기준으로 설계하고 완료를 판정한다.
-- mock·fixture·임시 후보는 production 동작을 증명하지 않는다. 실제 source로 대체할 경계·시점과 막고 있는 완료 조건을 남긴다.
-- 이후 지도·Journey·사진 감상에서 실제로 다시 쓰는 경계는 재사용 가능하게 나누되, 범용 프레임워크를 미리 만드는 과설계는 하지 않는다.
+## Symptom
 
-## 지도 밀집 방향과 Consult 게이트 — 사용자 확정, 2026-09-01
-
-우진: “전국 단위로 봤을때 합쳐진게 아니라 정확한 위치에 여러개 필터없이 다 보여지면 좋겠어.”
-
-- 전국 축척에서도 모든 위치 사진이 각자의 정확한 위치에 있다는 분포를 필터·샘플링 없이 드러낸다.
-- cluster는 지역 요약이 아니라 실제로 맞붙는 핀만 처리하도록 훨씬 좁게 정의한다.
-- 넓은 축척의 사진이나 충돌 묶음을 눌러도 사진을 감상할 수 있어야 하며, 필요하면 동네 단위 사진 묶음으로 진입한다.
-- 현재 native cluster는 확대 시 “우수수”와 낮은 프레임의 합침·분리를 남겨 제품 판정을 통과하지 못했다.
-- 첫 Consult는 원래 GPT-5.6 Sol Pro 대화에서 제품·지도 표현 방향만 묻고 회수 뒤 중단한다. 우진 승인 뒤 같은 대화의 두 번째 Consult에서 구현 구조·App Store 규모별 성능 목표·재사용 경계·시작 수치를 묻는다. 두 번째 답변과 최종 승인 전에는 구현하지 않는다.
-
-### 첫 방향 승인 — 사용자 확정, 2026-09-01
-
-우진: “알겠어 그럼 2차 가보자”
-
-- `모든 썸네일 동시 가독성`이 아니라 `모든 허용 사진의 실제 좌표상 공간적 존재와 접근성 보존`으로 첫 Consult 방향을 승인했다.
-- 같은 GPT-5.6 Sol Pro 대화에 구현 구조·App Store 규모별 성능 목표·재사용 경계·시작 수치를 두 번째로 묻는다.
-- 두 번째 답을 회수해 로컬 SDK·코드와 비교하고 우진에게 브리프하기 전에는 코드 변경이나 Stage 3을 시작하지 않는다.
-
-## Stage 2 종결 — 2026-08-31
-
-상태: **사용자 확정 · 구현됨 · 검증됨**
-
-우진의 실기기 제품 판정:
-
-> “다 OK 인데, '마음에 드는 사진핀을 눌렀을 때 사진을 보는 느낌이 충분한지' 이거는 추후 UI 단계 에서 애니메이션 수정(아래에서 올라오는 현재 상태 수정) 및 디자인 입혀야할거같아. 좀 더 light 하게 볼 수 있으면 좋겠고, 여러장 겹쳤을 경우를 아직 감안 안한거같아. 나중에 5장 이상이 겹칠경우에도 시인성이 좋아야됨.”
-
-- Stage 2의 사진 우선 상세, 같은 지도 add/remove/order/zero/cancel 왕복은 사용자 합격이다.
-- 아래에서 올라오는 상세를 더 가볍게 만드는 애니메이션·디자인과 5장 이상 겹친 사진의 시인성은 Stage 2 실패가 아니라 후속 UI 단계의 구속 조건이다.
-- Stage 2 종결 뒤 Stage 3으로 자동 진행하지 않는다. 다음 단계는 우진의 명시적 승인 뒤 연다.
-
-## Stage 2 종결 뒤 지도 밀집 문제 — 2026-08-31
-
-상태: **사용자 확정 문제 · 원인 검증됨 · 해결 방향 제안됨 · 구현 승인 대기**
-
-우진의 실기기 관측:
-
-> “사진이 멀리서 볼때 적게보이다가 갑자기 확대하니 우수수. 심지어는 엄청 멀리있었는데도 합쳐보이던 문제 발견했어”
-
-- V2는 2,833개 사진 marker를 고정 크기로 모두 그린다. `isHideCollidedSymbols`는 사진 marker가 아니라 지도 심벌을 숨기며 `isHideCollidedMarkers`는 켜지지 않았다.
-- 먼 축척에서 서로 다른 좌표가 같은 화면 픽셀에 투영돼 marker가 무질서하게 덮이고, 확대해 화면 거리가 벌어질 때 가려졌던 marker가 한꺼번에 드러나는 것이 원인이다. 실제 grouping이나 cluster가 아니다.
-- Stage 2 기능 합격은 유지하지만 Stage 3보다 지도 시인성 단계를 우선하는 것이 제안 상태다.
-- 첫 구현 계층은 임의 숨김·샘플링·z-order 조정보다 NMapsMap native `NMCClusterer`/`NMCBuilder`를 검증한다. 화면 거리 cluster와 높은 zoom의 같은 장소 5장 이상 stack을 구분한다.
-
-## 지도 밀집 시인성 단계 승인 — 2026-08-31
-
-상태: **사용자 확정 · 구현 시작**
-
-우진:
-
-> “그럼 그렇게 가보자 실기기도 연결되어있어”
-
-- Stage 3은 잠근 채 native cluster/stack 지도 시인성 단계만 연다.
-- Grok xhigh 구현 → 강제 회수 → 별도 Grok negative review → 리드 기준 대조 → 합격 시 연결된 iPhone 14 설치·연속 zoom 실측 순서를 지킨다.
-- 실제 2,833장 전국→수도권→도시→동네→도로 연속 zoom에서 갑작스러운 marker 폭증이 없어야 한다.
-- cluster는 대표 사진과 실제 숨은 장수를 보여 주고, 높은 축척의 5장 이상도 대표·장수·여는 행동이 읽혀야 한다.
-- Stage 2의 pin tap·상세·add/remove/order/zero/cancel과 같은 지도·카메라 계약을 보존한다.
-
-## 전국 축척의 사진 우선 표현 교정 — 2026-09-01
-
-상태: **사용자 확정 · 수정 구현안 승인 대기**
-
-우진:
-
-> “멀리서 볼때 사진이 안보이면 뭘 보고 무슨 사진인줄알고 어케눌러?? 그리고 우리 감성 무너지는거 아냐”
-
-- 3~5pt 단색 좌표점만 보이는 화면을 Maplog의 최종 지도 표현으로 쓰지 않는다.
-- 위치 누락을 막는 raster/presence layer가 필요하더라도 이는 성능·완전성을 위한 보조층이고, 사용자가 보는 주인공은 실제 사진이어야 한다.
-- 전국 축척에서도 무엇을 눌러 어떤 사진을 볼지 실제 thumbnail로 이해할 수 있어야 한다.
-- 실제로 화면에서 맞닿는 사진만 좁게 접고, 대표 사진과 `+n`을 누르면 확대를 강요하지 않고 즉시 해당 사진들을 감상하게 한다.
-- 구체적인 photo-first LOD와 thumbnail tile/marker 역할 분리는 사용자 승인 전 확정하지 않는다.
-
-## 검증된 코드 재사용 원칙
-
-- 상태: **사용자 확정·지속 적용**
-- 날짜: 2026-08-31
-- 우진 원문: “v2 좋지만, 재사용할건 하고 효율적으로 개발하되 그 문서의 기준은 엄격하게 달성할수 있도록하자”
-- V2 경계는 레거시 제품 결합을 차단하기 위한 것이지 검증된 구현을 다시 발명하기 위한 것이 아니다.
-- 기존 파일 전체가 옛 domain에 결합돼 있으면 순수하고 검증된 부품만 좁게 포팅하고 출처·변경점을 남긴다. 공용 계층을 미리 설계하거나 검증된 시각·native 동작을 임시 대체물로 바꾸지 않는다.
-- 재사용 효율과 Consult 계약이 충돌하면 둘 중 하나를 희생해 통과시키지 않고, 올바른 추출 경계를 먼저 찾는다.
-
-## 아직 확정되지 않은 제안
-
-- 기존 저장소 안의 별도 `/v2` 루트와 새 앱 project/target에서 검증된 코드만 선별 이식하는 구조는 리드 권고안이며, 우진의 최종 선택 전에는 구현 확정으로 취급하지 않는다.
+사진이 멀리서 볼때 적게보이다가 갑자기 확대하니 우수수. 심지어는 엄청 멀리있었는데도 합쳐보이던 문제 발견했어

@@ -1,40 +1,40 @@
 ---
-description: 우진 맥에서 Moonlight가 1초마다 끊긴 원인과 검증된 AWDL/LLW 임시 해결법.
+description: The cause of Moonlight cutting out every 1 second on Woojin's Mac, and the verified temporary AWDL/LLW fix.
 ---
-## 2026-08-29 Moonlight 1초 주기 끊김
+## 2026-08-29 Moonlight cutting out on a 1-second cycle
 
-**상태: 사용자 체감·계측 검증됨.**
+**Status: verified by what the user felt and by measurement.**
 
-우진의 macOS 26.5.2 맥에서 Moonlight가 약 1초마다 툭 끊겼다. 유튜브 등 버퍼형 서비스는 정상이었다. Windows Sunshine 호스트 처리와 맥 디코딩·렌더링은 각각 약 2~4ms로 정상이었다.
+On Woojin's macOS 26.5.2 Mac, Moonlight cut out about every 1 second. Buffered services such as YouTube were normal. Windows Sunshine host processing, and Mac decoding and rendering, were each about 2~4ms, which was normal.
 
-### 원인 판정
+### Cause verdict
 
-Apple peer-to-peer 무선 경로가 일반 Wi-Fi와 물리 무선칩을 공유하며 만든 주기적 채널 점유가 원인이었다. 처음에는 `awdl0`와 `llw0`를 함께 내렸다. 이후 macOS가 `awdl0`를 자동으로 다시 올렸지만 `llw0`는 내려간 채였고, 지연과 끊김이 계속 사라져 있었다. 따라서 해결을 유지한 핵심 상태는 `llw0` 비활성화이며 `awdl0 down`은 필수가 아니다. 다만 `llw0`를 다시 올려 재발시키는 역방향 시험은 하지 않았으므로 LLW 단독 원인보다는 LLW가 관여한 Apple P2P 무선 경로로 표현한다.
+The cause was periodic channel occupancy that Apple's peer-to-peer wireless path created by sharing the physical wireless chip with ordinary Wi-Fi. At first `awdl0` and `llw0` were brought down together. After that macOS automatically brought `awdl0` back up, but `llw0` stayed down, and the latency and the drops had stayed gone. So the core state that kept the fix is `llw0` disabled, and `awdl0 down` is not required. The reverse test of bringing `llw0` back up to make it recur was not done, so it is described as an Apple P2P wireless path that LLW was involved in, rather than as LLW being the sole cause.
 
-끄기 직전 커널 로그는 AWDL이 3.062초 중 1,040ms(약 34%) 활성 상태였다고 기록했다. 같은 시각 `sharingd`가 `awdl0` 역할을 조회했고 AirPlay sink capability, `rapportd`, Sidecar·Continuity Camera 관련 상주 서비스도 확인됐다. 이는 macOS가 AirDrop·Handoff·AirPlay·Continuity를 위해 인터페이스를 자동으로 활성화한다는 근거다. 다만 오늘 어떤 서비스가 최초로 문제 상태를 촉발했는지는 특정하지 못했다.
+The kernel log just before turning it off recorded that AWDL was active for 1,040ms of 3.062 seconds (about 34%). At the same time `sharingd` queried the `awdl0` role, and resident services related to AirPlay sink capability, `rapportd`, and Sidecar·Continuity Camera were also confirmed. This is the ground for macOS automatically activating the interface for AirDrop·Handoff·AirPlay·Continuity. Which service first triggered the problem state today was not identified.
 
-- 조치 전 맥→공유기: 중앙 약 4ms, p95 72~92ms, 최대 96~177ms, 300회 중 50ms 초과 27~53회
-- 맥 자체 핑: 최대 0.7ms 미만
-- 2.4GHz와 5GHz 모두 재현
-- Moonlight 비트레이트·FPS 감소로 평균 프레임 드롭은 줄어도 1초 주기 끊김은 유지
-- `awdl0`/`llw0` 비활성화 직후 맥→공유기 300회: 중앙 2.936ms, p95 3.474ms, 최대 6.012ms, 50ms 초과 0회
-- `awdl0` 자동 재활성·`llw0` 비활성 상태 재측정: 중앙 2.961ms, p95 4.456ms, 최대 6.872ms, 50ms 초과 0회
-- 우진 확인: "헐 미친 고쳐졌어. 이게 뭔데?????????"
+- Before the measure, Mac→router: median about 4ms, p95 72~92ms, max 96~177ms, 27~53 of 300 over 50ms
+- Ping on the Mac itself: max under 0.7ms
+- Reproduced on both 2.4GHz and 5GHz
+- Lowering the Moonlight bitrate and FPS reduced the average frame drop, but the 1-second-cycle drop remained
+- Mac→router, 300 times, right after disabling `awdl0`/`llw0`: median 2.936ms, p95 3.474ms, max 6.012ms, 0 over 50ms
+- Remeasured with `awdl0` auto-reactivated and `llw0` inactive: median 2.961ms, p95 4.456ms, max 6.872ms, 0 over 50ms
+- Woojin confirmed: "헐 미친 고쳐졌어. 이게 뭔데?????????"
 
-### 검증된 임시 해결법
+### Verified temporary fix
 
 ```bash
 sudo ifconfig awdl0 down
 sudo ifconfig llw0 down
 ```
 
-일반 Wi-Fi와 인터넷은 유지되지만 AirDrop, Handoff, Sidecar, Universal Control 등 Continuity 기능이 중단될 수 있다. 재부팅, 잠자기/깨우기, Wi-Fi 토글 또는 Continuity 요청 뒤 macOS가 인터페이스를 다시 올릴 수 있다. 그때 같은 명령을 다시 실행한다.
+Ordinary Wi-Fi and the internet stay up, but Continuity features such as AirDrop, Handoff, Sidecar, and Universal Control can stop. After a reboot, sleep/wake, a Wi-Fi toggle, or a Continuity request, macOS can bring the interface back up. Run the same commands again then.
 
-원복:
+Restore:
 
 ```bash
 sudo ifconfig awdl0 up
 sudo ifconfig llw0 up
 ```
 
-참고: https://gyorgy.sh/blog/macos-awdl-network-jitter
+Reference: https://gyorgy.sh/blog/macos-awdl-network-jitter

@@ -1,26 +1,23 @@
 ---
-description: 2026-08-31 Maplog이 별도 여정 진입·범위 선택을 없애고 사진핀 하나에서 시작하는 seed-first 흐름으로 전환한 사용자 결정.
+description: Maplog dropped the separate journey entry. Recap starts from a period, and a photo pin is a gallery, not a Recap seed.
 ---
-# Maplog seed-first 전환
+# Maplog seed-first switch
 
-연결: [[reference/projects/maplog-journey-flow-scope.md]]
+Link: [[reference/projects/maplog-journey-flow-scope.md]]
 
-## 사용자 결정
+## User decision
 
-- 상태: **Recap 입구 부분은 2026-09-23 사용자 결정으로 대체됨.** 우진: “리캡 기간으로 시작하자. 이제 사진핀은 그냥 갤러리로서 역할하고, 저 이상한 오렌지색 버튼들 빼줘.” Recap은 메인 지도의 작은 동그라미 버튼으로 여는 기간 Recap 탭에서 시작한다. 현재 정본은 `/Users/wooojin/App/maplog/record/PRODUCT.md#app-shape-2026-09-23`. 아래는 당시 기록.
-- 당시 상태: 사용자 확정·계획 반영·Swift 구현 전
-- 날짜: 2026-08-31
-- 맥락: 직전 Consult 종합에서 `사진핀 열기 → 이 장면부터 이어보기 → 첫 장면이 선택된 지도 → 사용자 선택 → Recap 미리보기 → 필요한 것만 편집·저장`을 다음 제품 가설로 추천한 뒤, 기존 계획을 이 흐름으로 바꿀지 정하는 자리.
-- 우진 원문: “그럼 기존 계획을 담은 문서 전면개편해줘.”
+- Recap starts from a period, on the Recap tab. A photo pin is a gallery, not a Recap seed. Woojin: “리캡 기간으로 시작하자. 이제 사진핀은 그냥 갤러리로서 역할하고, 저 이상한 오렌지색 버튼들 빼줘.” The small circle that first opened that tab was replaced by the `지도 | Recap` tab bar. Canonical source: `/Users/wooojin/App/maplog/record/PRODUCT.md#app-shape-2026-09-23`.
+- Rejected as the current entry: opening one photo pin as the first-scene seed, and the separate journey-entry drawer with `전체/기간/지역/추천`.
+- Date: 2026-08-31
+- Context: the seat for deciding whether to change the existing plan to this flow, after the immediately preceding Consult synthesis recommended `사진핀 열기 → 이 장면부터 이어보기 → 첫 장면이 선택된 지도 → 사용자 선택 → Recap 미리보기 → 필요한 것만 편집·저장` as the next product hypothesis.
+- Woojin's original: “그럼 기존 계획을 담은 문서 전면개편해줘.”
 
-## 확정된 변화
+## What still holds from that day
 
-- 별도 여정 진입 drawer와 `전체/기간/지역/추천` 범위 선택 화면을 제거한다.
-- 사용자가 연 사진핀 하나가 첫 장면 seed가 된다.
-- 관련 장면은 자동 선택·범위 확정 없이 보조한다.
-- Recap 결과를 먼저 보고 필요한 것만 편집해 이름 있는 여정으로 저장한다.
-- 지도는 발견·제작, 저장 결과는 안정적인 재방문 목적지를 맡는다.
+- The separate journey-entry drawer and the `전체/기간/지역/추천` range screen stay gone.
+- Rejected as the current flow: a photo pin as the Recap seed, related-scene assist, and saving a named journey from that seed. Recap is a period on its own tab. The map is a gallery.
 
-## 아직 열려 있는 것
+## Rejected as still open
 
-정확한 CTA 문구, 사용자 화면에서 `여정`이라는 명칭을 쓸지, 후보 강조 방식과 confidence, Recap motion, 저장 결과의 navigation 위치, Swift feature·store 구조는 후속 Consult와 native 실기기 검증 뒤 정한다.
+CTA copy, the on-screen name, Recap motion, and where Recap sits were decided later. Do not treat this 2026-08-31 list as open. Current answers are in PRODUCT. Saved Journey itself is outside 1.0.
