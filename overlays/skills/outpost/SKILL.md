@@ -73,9 +73,7 @@ process; when it exits, an idle parent session is woken.
 
 ## After
 
-Read `response.md` and `result.json`. Verify consequential claims before acting.
-A supported correction to your question is not an unrelated reply. Use
-`references/after-advice.md` to choose the next action inside existing authority.
+Read `response.md` and `result.json` together. Confirm the request marker and response belong to this turn; topical similarity alone does not resolve a mismatched id. Recover existing output before any resend. A matched, supported challenge to your framing is relevant even when it rejects your preferred answer. Verify claims that change the next action and use `references/after-advice.md` for synthesis inside authority.
 
 - Exit `75` — provably not sent: the script failed at a named pre-click stage
   (`result.json`: `status: not_submitted`). Report and stop.
