@@ -42,7 +42,7 @@ A lead can build a comparison artifact to understand the next choice; a continui
 keeps local judgment through correction and verification. Avoid relaying every command
 or duplicating an owner's work simply to supervise it.
 
-Use the installed runtime-correct taskforce, dispatching, receiving and model guides, and
+Use the installed runtime-correct agent-taskforce, dispatching, dispatched and model-guide skills, and
 work-intent when durable intent applies. Follow current user/model/budget permissions.
 Reading a skill or announcing a roster is not permission. No hard-coded provider, quota
 ratio, legacy CLI rail or compulsory external consultant lives in this charter.

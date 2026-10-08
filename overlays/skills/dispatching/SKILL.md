@@ -1,6 +1,6 @@
 ---
 name: dispatching
-description: "Handing work to another session, or sending the next task to an existing one: decide continue-versus-fresh, separate binding from hints, carry scale and return contract, handle blocks and short returns. Read before every Agent spawn or AgentSend."
+description: "Handing work to another session, or sending the next task to an existing one: decide continue-versus-fresh, separate binding from hints, carry scale and return contract, handle blocks and short returns. Read before every Agent spawn or AgentSend; before a second session toward the same goal, read agent-taskforce too."
 ---
 
 # Dispatching
@@ -9,9 +9,9 @@ Run this when you are about to hand work to another session (a teammate, a subag
 
 ## Is a separate session worth it
 
-Name what the separate session contributes and what stays with you. Weigh that against briefing, duplicate reading, result integration, waiting and shared-resource contention, not token volume alone; a cheaper model being available is not a saving by itself. Coupled judgment and implementation can stay in one strong session, and a bounded helper still reasons inside its assignment.
+Name what the separate session contributes and what stays with you. Weigh that against briefing, duplicate reading, result integration, waiting and shared-resource contention, not token volume alone; a cheaper model being available is not a saving by itself. Coupled judgment and implementation can stay in one strong session, and a subagent still reasons inside its assignment.
 
-A focused subagent, or an owner delegating inside its accepted boundary, needs no team ceremony. A root lead weighing continuing owners, independent outcomes or a team reads Skill(agent-taskforce) first; that read may choose no team.
+A focused subagent, or an owner delegating inside its accepted boundary, needs no team ceremony. A root lead about to send a second session toward the same goal, or holding work that splits into outcomes that can move on their own, reads Skill(agent-taskforce) first.
 
 ## What binds, and what is a lead
 
@@ -37,12 +37,14 @@ A quality concern you invented yourself is not a constraint. State it as somethi
 
 Keep read scope apart from write scope. "Look at these files" is a lead; "do not write these files" is a fence. Do not mix them in one list.
 
+When the worker must work in a different root than its session folder (a worktree, a scratch copy), name that root by absolute path and have it write by absolute path: file tools resolve relative paths against the worker's session folder, which is usually your checkout (2026-10-06: a replay worker meant for `/tmp/<worktree>` overwrote and then deleted a file in the parent repository).
+
 Two boundary cases, drawn from a real incident:
 
 - Invented constraint → observable: "Do not widen the cache invalidation" forbade the only fix. "Widen it if you must; measure the repaint delta and report it" keeps the same performance concern and lets the worker move.
 - Lead vs fence: "`transcript_blocks.zig` is probably where entries are assembled; verify" is a lead the worker may overrule. "`runtime.zig` is held by another session today; do not write it" is a fence, and stays one even if the worker disagrees.
 
-Some assignments carry one more line. For technical integration, name the accountable owner and the shared write surface. For independent verification, send authoritative artifacts, acceptance criteria and actual state, with the user's latest decisions folded in: a new explicit requirement, corrected fact, stop or authority change in recent feedback belongs there from the start. Hold back the producer's own account, a reviewer's proposed remedy and any desired verdict until the verifier has set its own checks. If a verifier does not receive a suitable role contract, give it that role in a few lines (judge the actual artifact against the current intent and criteria, set checks before reading the builder's account, return reproducible defects with evidence), or point to the contract when its runtime can read that path. For discovery ahead of a decision, state discovery-only authority, read scope, permitted disposable checks and the scale. Carry directly relevant prior failures with their conditions as source references, not as technique bans or a demand to reread the whole history.
+Some assignments carry one more line. For technical integration, name the accountable owner and the shared write surface. For independent verification, send authoritative artifacts, acceptance criteria and actual state, not the producer's reasoning or desired verdict. For discovery ahead of a decision, state discovery-only authority, read scope, permitted disposable checks and the scale. Carry directly relevant prior failures with their conditions as source references, not as technique bans or a demand to reread the whole history.
 
 ## Carry the intent reference
 
