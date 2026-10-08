@@ -5,15 +5,15 @@ Use these templates only when they reduce repetition. Do not paste all of them i
 ## Current-State Anchor
 
 ```md
-현재 목표:
-성공 기준:
-절대 지킬 것:
-이미 결정한 것:
-현재 상태:
-검증 상태:
-다음 행동:
-남은 질문:
-하지 말 것:
+Current goal:
+Success criteria:
+Must keep:
+Already decided:
+Current state:
+Verification state:
+Next action:
+Open questions:
+Do not:
 ```
 
 ## Working Brief
@@ -32,12 +32,12 @@ Route:
 ## Research Brief
 
 ```md
-목표:
-작업 범위:
-소스 우선순위:
-하지 말 것:
-필요한 근거:
-보고 형식:
+Goal:
+Scope:
+Source priority:
+Do not:
+Evidence needed:
+Report format:
 ```
 
 Source handling:
@@ -49,13 +49,13 @@ Source handling:
 ## Review Brief
 
 ```md
-목표:
-리뷰 대상:
-변경 범위:
-중점:
-하지 말 것:
-필요한 근거:
-보고 형식:
+Goal:
+Review target:
+Change scope:
+Focus:
+Do not:
+Evidence needed:
+Report format:
 ```
 
 Default report:
@@ -75,27 +75,27 @@ VERIFY:
 ## Handoff Prompt
 
 ```md
-현재 목표:
-성공 기준:
-현재 repo/branch:
-반드시 읽을 파일:
-이미 결정한 것:
-최근 변경:
-검증 결과:
-다음 행동:
-함정:
-하지 말 것:
+Current goal:
+Success criteria:
+Current repo/branch:
+Files to read:
+Already decided:
+Recent changes:
+Verification results:
+Next action:
+Pitfalls:
+Do not:
 ```
 
 ## Session-Analysis Report
 
 ```md
-분석 범위:
-사용한 로그:
-반복 패턴:
-자주 필요한 스킬:
-자동화 후보:
-지침/스킬로 만들 것:
-지침에 넣지 말 것:
-남은 확인:
+Analysis scope:
+Logs used:
+Recurring patterns:
+Frequently needed skills:
+Automation candidates:
+Turn into guidance/skills:
+Keep out of guidance:
+Remaining checks:
 ```

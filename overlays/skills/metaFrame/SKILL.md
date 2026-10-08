@@ -1,17 +1,17 @@
 ---
 name: metaframe
-description: "관찰이 현재 설명과 어긋나거나 국소 수정이 서로를 깨뜨릴 때, 접근을 유지할지 바꿀지 판단한다. 새 과제마다 발산하거나 권한을 넓히는 절차가 아니다."
-argument-hint: "[현재 작업이나 다시 볼 질문]"
+description: "When observations contradict the current explanation or local fixes keep breaking each other, decide whether to keep or change the approach. Not a procedure for diverging on every new task or for widening authority."
+argument-hint: "[current work or the question to reconsider]"
 ---
 
-# 현재 접근을 유지할지 다시 판단한다
+# Decide again whether to keep the current approach
 
-현재 요청·실물·설명되지 않는 관찰을 함께 놓는다. 이 스킬의 결과는 새로운 이름이나 더 긴 반성이 아니라 다음 행동의 변화, 또는 기존 접근을 유지할 이유다. 인자가 없으면 현재 작업을 본다.
+Put the current request, the actual artifact and the unexplained observations side by side. The result of this skill is a change in the next action, or the reason to keep the current approach, not a new name or a longer reflection. Without an argument, look at the current work.
 
-같은 화면을 고칠 때마다 다른 필요한 내용이 사라진다면 배치 방식이 두 요구를 함께 담을 수 있는지 본다. 반대로 전제는 맞고 렌더링만 실패했다면 구현을 고친다. 자료가 빠졌다면 그 자료를, 자료는 있는데 결론이 이어지지 않는다면 해석을 고친다. 이 구분은 점검표나 의무 순서가 아니다.
+If each fix to the same screen makes other needed content disappear, check whether the layout can hold both requirements. If the premise is right and only the rendering failed, fix the implementation. If material is missing, get that material; if the material is there but the conclusion does not follow, fix the interpretation. These distinctions are not a checklist or a required order.
 
-사용자만 아는 경험이 선택을 가르면 짧은 질문이나 비교 장면을 준비한다. 현장에서 확인할 수 있으면 코드·기록·실제 동작을 본다. 같은 문맥이 반례를 계속 무시하고 독립 관찰이 결정을 바꿀 수 있으면 허용된 도움을 구한다. 요구와 확인할 사실은 주되 선호 결론으로 질문을 유도하지 않는다. 자료가 충분하면 추가 검토 없이 결정한다.
+When an experience only the user knows decides the choice, prepare a short question or a comparison scene. When it can be checked on site, look at the code, records and actual behavior. When the same context keeps ignoring counterexamples and an independent observation could change the decision, ask for the help that is permitted. Give the requirements and the facts to check, but do not lead the question toward a preferred conclusion. When the material is enough, decide without further review.
 
-방법은 담당이 바꾸되 목표·중요한 약속·명시적인 제한은 그 권한에 맞게 다룬다. 단순히 사용자가 의문을 냈다는 이유로 권고를 뒤집거나, 잘 끝난 작업에 문제를 만들어내지 않는다. 제작을 맡았다면 선택한 보완으로 돌아가고, 논의를 맡았다면 새로운 구별과 권고로 답한다.
+The owner changes methods, but handles goals, material commitments and explicit limits according to their authority. Do not reverse a recommendation merely because the user raised a doubt, and do not invent problems in work that finished well. If you were assigned production, return with the chosen fix; if you were assigned discussion, answer with a new distinction and recommendation.
 
-제품 대상·가치 자체의 대조가 필요할 때는 `product-reframing`, 투자·동결 변경은 `product-framing`이 맡는다. 발화 해석이 실제 갈림이면 `../codex-discusser/references/co-thinking.md`의 관련 절만 읽고 현재 담당은 유지한다. 독립 문맥 운용은 `references/FRESH_CONTEXT.md`, 과거 사례는 `references/CALIBRATION.md`를 필요할 때만 참고한다.
+When the product's audience or value itself needs comparing, use `product-reframing`; for investment and freeze changes, `product-framing`. When interpreting what the user said is the real fork, read only the relevant section of `../codex-discusser/references/co-thinking.md` and keep the current owner. For running an independent context see `references/FRESH_CONTEXT.md`, and for past cases `references/CALIBRATION.md`, only when needed.

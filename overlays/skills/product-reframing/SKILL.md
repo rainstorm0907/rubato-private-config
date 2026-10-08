@@ -1,35 +1,35 @@
 ---
 name: product-reframing
-description: "구현을 다듬어도 사용자 가치가 설명되지 않거나 후보가 같은 전제에 묶일 때, 다른 제품 구상을 실제 근거와 대조한다. 작은 코드 오류마다 제품을 다시 정의하지 않는다."
+description: "When polishing the implementation still does not explain the user value, or candidates are tied to the same premise, compare a different product concept against real evidence. Do not redefine the product for every small code defect."
 ---
 
-# 제품 구상이 달라져야 하는지 확인한다
+# Check whether the product concept has to change
 
-원래 사용자 장면, 현재 대안과 구상, 설명되지 않는 관찰을 함께 본다. 서비스가 돌아가는데 결과를 쓸 이유가 없다면 대상·역할·시점을 다시 볼 수 있다. 이유는 충분한데 한 기능이 실패한다면 구현을 고친다. 아직 문제를 찾는 대화는 `codex-discusser`, 국소 해석은 `metaframe`, 실제 투자와 동결 변경은 `product-framing`이 맡는다.
+Look at the original user scene, the current alternative and concept, and the observations the concept does not explain, together. If the service works but there is no reason to use its result, the audience, role or timing can be reconsidered. If the reason is sound and one feature fails, fix the implementation. A conversation still looking for the problem belongs to `codex-discusser`, a local reinterpretation to `metaframe`, and actual investment and changes to a freeze to `product-framing`.
 
-## 다른 전제가 실제 행동을 바꾸는가
+## Does a different premise change what people actually do?
 
-이름이나 기능 수가 아니라 사용자가 결과를 받은 뒤 무엇이 달라지는지로 구상을 비교한다. 진단 결과를 더 자세히 보여주는 대신 다음 행동을 가능하게 하는 연결이 필요할 수 있고, 그 일 자체를 없애는 편이 나을 수도 있다. 이 예를 모든 제품의 정답으로 삼지 않는다. 삭제·역할 변경·대상 변경·새 경험·현재 방향 유지 중 실제 자료에 맞는 쪽을 고른다.
+Compare concepts by what changes after the user receives the result, not by name or feature count. Instead of showing a diagnosis in more detail, a link that enables the next action may be what is needed, or removing that job altogether may be better. Do not treat this example as the answer for every product. Choose whichever fits the actual evidence: removal, a role change, an audience change, a new experience, or keeping the current direction.
 
-불리한 관찰도 기존 구상에 예외 한 줄로 흡수하지 말고 그 전제를 바꿀 힘이 있는지 본다. 자료가 없으면 필요한 차이를 조사하고, 자료는 있는데 해석이 약하면 더 많은 조사를 반복하지 않는다. 발화의 적용 조건이 판단을 가를 때만 `../codex-discusser/references/co-thinking.md`의 해당 절을 읽는다.
+Do not absorb an unfavorable observation into the existing concept as a one-line exception; check whether it has the force to change the premise. If evidence is missing, investigate the difference you need; if the evidence exists but the interpretation is weak, do not keep repeating research. Read the relevant section of `../codex-discusser/references/co-thinking.md` only when the conditions under which something the user said applies would decide the judgment.
 
-## 필요한 다른 시각과 실제 재료를 얻는다
+## Get the other perspective and the real material you need
 
-매몰 신호는 주담당이 발견하되, 매몰된 제품 구상을 다시 검토하는 일은 그 구상을 함께 다듬지 않은 독립된 새 문맥에 맡긴다.
-주담당은 자료를 모으고 결과를 종합한다. 같은 세션의 역할 전환을 독립 검토로 세지 않는다.
-원래 요청·권위 있는 사실·경계·설명되지 않는 관찰을 주고 선호하는 해결책은 숨긴다.
-다른 모델이나 여러 세션의 수는 실제로 얻을 정보와 허용된 비용에 맞춘다.
-독립 접근이 불가능하면 그 사실을 말하고, 자기 검토를 독립 검토로 보고하지 않는다.
+The primary owner spots the signs of being stuck, but re-examining the stuck product concept goes to an independent fresh context that did not help shape that concept.
+The primary owner gathers the material and synthesizes the results. A role switch inside the same session does not count as independent review.
+Give the original request, authoritative facts, boundaries and the unexplained observations, and withhold the preferred solution.
+Match the number of other models or sessions to the information you will actually gain and the cost that is allowed.
+If independent access is impossible, say so, and do not report a self-review as independent review.
 
-외부 행동·시장·제도·서비스가 가르는 질문은 외부 자료를, 기존 코드·조직의 실제 흐름이 가르는 질문은
-접근 가능한 내부 자료를 확인한다. 사용자의 사적 자료를 무단으로 다른 제공자에게 넘기지 않는다.
-현재 모델 배치와 도구 권한은 기존 담당을 따른다. 이 스킬이 특정 모델이나 새로운 팀을 강제하지 않는다.
+For questions decided by outside behavior, markets, institutions or services, check outside sources; for questions decided by the actual flow of existing code or an organization,
+check the internal material you can access. Do not hand the user's private material to another provider without permission.
+Current model assignment and tool permissions follow the existing owner. This skill does not force a particular model or a new team.
 
-원래 가설에 맞는 자료만 모으지 않는다. 다른 설명이 맞다면 무엇을 보게 될지도 살피고,
-불리한 증거·접근 불가·서로 다른 해석을 지우지 않는다. 자료가 있다고 구상 전체가 검증된 것은 아니다.
+Do not collect only material that fits the original hypothesis. Also look at what you would see if another explanation were right,
+and do not erase unfavorable evidence, inaccessible sources or differing interpretations. Having material does not mean the whole concept is validated.
 
-## 추천은 다시 실행할 수 있을 만큼 구체적이어야 한다
+## A recommendation must be concrete enough to act on again
 
-바뀌는 전제, 달라질 사용자 행동, 실제 근거, 남은 불확실성과 다음에 확인할 장면을 연결해서 권고한다. 후보 수나 다수결로 선택하지 않는다. 기존 구상이 더 낫다면 유지 이유를 말한다.
+Recommend by connecting the premise that changes, the user behavior that will change, the actual evidence, the remaining uncertainty and the scene to check next. Do not choose by candidate count or majority vote. If the existing concept is better, say why it stays.
 
-다른 방향을 택하려면 차이를 사용자에게 보이고 `product-framing`의 승인·동결 재개 조건을 따른다. 자문을 받았다는 사실로 실행 권한이 생기지는 않는다. 새 자료 없는 동일 질문의 반복은 멈추고, 계속 구상만 바꾸며 제작 판단을 피하고 있지는 않은지 본다.
+To take a different direction, show the user the difference and follow `product-framing`'s approval and freeze-reopen conditions. Receiving advice does not grant permission to execute. Stop repeating the same question without new material, and check whether constantly changing the concept is a way of avoiding a build decision.

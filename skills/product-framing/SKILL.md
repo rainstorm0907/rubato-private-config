@@ -1,123 +1,123 @@
 ---
 name: product-framing
-description: "제품·해커톤·공모전의 다음 투자나 구현 범위를 결정할 때 사용자·대안·가치·실험·승인을 정한다. 제품 착수·가치 표류·동결 변경을 맡는다. 단순한 열린 대화와 일상 선택을 제품 점검표로 만들지 않는다. 그 대화는 codex-discusser가 맡는다."
+description: "Decide the next investment or build scope for a product, hackathon or contest entry: user, current alternative, value, experiment and approval. Owns product kickoff, value drift and changes to a frozen frame. Does not turn open discussion or everyday choices into a product checklist; that conversation belongs to codex-discusser."
 metadata:
   experiment: co-thinking-v0.3
 ---
 
-# 제품의 다음 투자와 승인 범위를 정한다
+# Decide the product's next investment and approval scope
 
-누가 어떤 순간에 무엇을 하고 있으며, 무엇이 달라져야 하고, 다음에는 어디까지 알아보거나 만들지 함께 정한다.
-점검표는 제품의 성공을 인증하지 않는다. 다음 학습 투자나 지정한 구현 범위를 승인할 판단 자료다.
-현재 계획을 증명하기 위해 결과를 끼워 맞추지 않는다.
+Work out together who is doing what at which moment, what should change, and how far the next step will investigate or build.
+The checklist does not certify that the product will succeed. It is the material for approving the next learning investment or a defined build scope.
+Do not bend results to prove the current plan.
 
-이 스킬은 제품에 실제로 다음 시간·자원·외부 약속을 걸려는 때 사용한다.
-아직 질문과 경험을 살피는 일반 대화만 필요하다면 `codex-discusser`가 맡는다.
-제품 작업이라고 항상 모든 필드를 처음부터 다시 작성하지 않는다. 기존 활성 문서와 실제 변화부터 본다.
+Use this skill when the product is about to commit real time, resources or outside promises to its next step.
+If the conversation is still exploring questions and experiences, `codex-discusser` owns it.
+Product work does not mean rewriting every field from scratch each time. Start from the active documents and what actually changed.
 
-## 제품 판단을 돕되 승인 권한은 유지한다
+## Help with product judgment while keeping approval authority where it is
 
-사용자 원안과 담당의 후보를 구별해 보존하고, 현재 사람이 어떤 순간에 무엇을 달리 할 수 있는지로 비교한다. 빈 입력칸이 채워졌다는 것은 동작의 변화다. 이미 써 둔 내용에서 새 판단을 설명할 수 있게 됐다면 그것이 사용 가치의 후보가 된다. 둘을 같은 증명으로 쓰지 않는다.
+Keep the user's original idea and the owner's candidates distinct, and compare them by what a real person can do differently at a given moment. An empty input field getting filled is a change in behavior. Being able to explain a new judgment from what was already written is a candidate for use value. Do not count one as proof of the other.
 
-모델은 확인 가능한 사실을 조사하고 모순을 짚으며 이유 있는 추천을 한다. 사용자는 개인 경험·가치·중요한 약속을 결정한다. 사용자가 납득했다고 외부 사실이 증명되는 것도, 모델이 썼다고 근거 있는 사실이 E0가 되는 것도 아니다. 제안 출처·증거 등급·채택·실행 허가를 구별한다.
+The model investigates checkable facts, points out contradictions and makes reasoned recommendations. The user decides personal experience, values and material commitments. The user being convinced does not prove an outside fact, and the model writing something does not make it E0 evidence. Keep the source of a proposal, its evidence grade, its adoption and permission to execute separate.
 
-다른 후보가 이름만 다르고 같은 전제에 묶이면 `metaframe`, 제품 구상 자체를 다시 조사해야 하면 `product-reframing`을 사용한다. 유지와 아무것도 하지 않는 선택도 비교할 수 있다. 발화 해석이 실제 결정을 가를 때만 `../codex-discusser/references/co-thinking.md`의 관련 부분을 읽고 주담당은 바꾸지 않는다.
+When other candidates differ only in name and share the same premise, use `metaframe`; when the product concept itself needs fresh research, use `product-reframing`. Keeping the current direction and doing nothing are also comparable options. Read the relevant part of `../codex-discusser/references/co-thinking.md` only when interpreting what the user said actually decides the outcome, and do not change the primary owner.
 
-새 반론은 사실과 대조하고, 새 근거 없는 같은 반론은 반복하지 않는다. 남는 이견은 현재 채택과 구별해 둔다. 아래의 승인·보호 조건을 대화를 끝내기 위해 면제하지 않는다.
+Check a new objection against the facts; do not repeat the same objection without new evidence. Record remaining disagreement separately from what is currently adopted. Do not waive the approval and protection conditions below just to close the conversation.
 
-## 다음 투자 범위를 정한다
+## Decide the scope of the next investment
 
-먼저 적용되는 위험과 약속을 본다. 기간이나 사용자가 '실험'이라 부르는 이름만으로 낮추지 않는다.
+Look first at which risks and commitments apply. Do not downgrade because of the timeline or because the user calls it an "experiment."
 
-| 단계 | 기본 조건 | 허용할 결과 |
+| Tier | Default condition | Allowed outcome |
 |---|---|---|
-| PROBE | 외부 손실과 실제 개인정보·결제·운영 약속 없이 폐기 가능한 내부 실험 | PASS-PROBE는 그 실험만 허용해 |
-| STANDARD | 외부 평가, 병렬 제작, 상당한 제작 투자 등 | PASS-BUILD는 정의된 제작 범위를 허용해 |
-| COMMITMENT | 실제 개인정보·민감정보·유료 고객·피해 가능한 자동 결정·계약·지속 운영 등 중 하나라도 포함 | 위험별 승인과 실전 부록을 갖춰야 해 |
+| PROBE | Disposable internal experiment with no outside loss and no real personal data, payments or operating commitments | PASS-PROBE allows only that experiment |
+| STANDARD | Outside evaluation, parallel building, substantial build investment, etc. | PASS-BUILD allows the defined build scope |
+| COMMITMENT | Includes any of: real personal or sensitive data, paying customers, automated decisions that can cause harm, contracts, ongoing operation | Requires per-risk approval and the production appendix |
 
-정확한 적용 조건과 문서 상태 전이는 `references/02-tiers-and-verdicts.md`를 따른다.
-고위험 조건을 낮은 항목과 평균내지 않는다. 제품 공개나 실행 승인을 실험 승인으로 우회하지 않는다.
+Exact applicability conditions and document state transitions follow `references/02-tiers-and-verdicts.md`.
+Do not average a high-risk condition with low-risk items. Do not route product release or execution approval through an experiment approval.
 
-## 탐색해서 기준을 만드는 실험과, 정한 주장을 확인하는 실험을 구별한다
+## Distinguish experiments that discover criteria from experiments that confirm a stated claim
 
-실험 종류는 기존 점검표 §6의 `experiment_kind`로 `validation` 또는 `discovery`를 적는다.
-새로운 승인 단계나 문서 상태를 만드는 것이 아니다.
+Record the experiment kind as `validation` or `discovery` in the existing checklist §6 field `experiment_kind`.
+This does not create a new approval tier or document state.
 
-`validation`은 판단할 주장과 경쟁 설명, 사전 PASS·FAIL 기준을 정한다.
-결과를 본 뒤 기준을 바꿔 그 회차를 성공으로 다시 쓰지 않는다.
+`validation` fixes the claim under judgment, competing explanations and PASS/FAIL criteria in advance.
+Do not change the criteria after seeing results to rewrite that cycle as a success.
 
-`discovery`는 직접 경험해야 중요한 판단 기준을 알 수 있을 때 사용한다.
-누가 어느 장면을 경험할지, 어떤 차이를 비교할지, 어디까지 만들고 무엇을 관찰할지,
-건드리지 않을 것과 중단·시간·비용 조건을 사전에 적는다. 안전·데이터·범위 조건은 여전히 고정한다.
-아직 모르는 제품 성공 기준은 '아직 형성 중'으로 표시하고 숫자로 꾸며내지 않는다.
-회차 결과는 관찰과 새로 드러난 차이, 다음 결정으로 적는다. 탐색을 끝냈다는 사실을 제품 성공으로 부르지 않는다.
-이후 성과를 주장하려면 별도 확인 회차에서 기준을 사전에 세우고 시험한다.
+`discovery` is for when the important judgment criteria only become known by experiencing something directly.
+Write down in advance who will experience which scene, which difference will be compared, how much will be built and what will be observed,
+what will not be touched, and the stop, time and cost conditions. Safety, data and scope conditions stay fixed.
+Mark product success criteria that are not yet known as "still forming"; do not invent numbers for them.
+Record a cycle's result as observations, newly visible differences and the next decision. Do not call finishing an exploration a product success.
+To claim an outcome later, set criteria in advance in a separate confirmation cycle and test them.
 
-두 종류 모두 만들거나 관찰할 수 있는지 확인한다. 사용자 가치의 불확실성과 기술적 수행 가능성,
-감각을 관찰할 수 없는 문제를 구분하고 도구·접근을 고른다. `references/03-cheap-tests.md`를 참고한다.
-COMMITMENT의 보호 조건이나 STANDARD의 공개 주장과 독립 검토를 `discovery`로 면제할 수 없다.
+For both kinds, check that the thing can actually be built or observed. Distinguish uncertainty about user value, technical feasibility,
+and problems where the feel cannot be observed, and pick tools and approach accordingly. See `references/03-cheap-tests.md`.
+`discovery` cannot waive COMMITMENT protections or STANDARD's public claims and independent review.
 
-## 점검표를 작성하고 판단한다
+## Write the checklist and judge it
 
-실제 투자 판단 문서는 `templates/gate.md`, 필드의 목적은 `references/01-gate-fields.md`를 사용한다.
-제품의 사용자와 장면, 현재 대안, 원하는 변화, 선택을 바꾸는 불확실성, 범위를 연결한다.
-모르는 필드는 정직하게 남긴다. 모델이 필요한 자료를 조사하고 작성할 수 있으며,
-사용자는 모든 칸을 직접 다시 작성하는 대신 자신의 판단과 중요한 약속을 확인한다.
+For an actual investment decision use `templates/gate.md`; for the purpose of each field use `references/01-gate-fields.md`.
+Connect the product's user and scene, the current alternative, the desired change, the uncertainty that would change the choice, and the scope.
+Leave unknown fields honestly unknown. The model may research and write what is needed;
+the user confirms their own judgment and material commitments instead of rewriting every field.
 
-PROBE는 §1·2·3·6·7과 해당 실험 종류의 조건을 확인한다. 형식이 아니라 다음 내용이 있는지가 중요하다.
+PROBE checks §1, 2, 3, 6, 7 and the conditions for its experiment kind. What matters is that the following content exists, not the format.
 
-- 구체적인 사람과 장면, 현재 대안 또는 실제로 관찰할 현재 행동이 있다.
-- 원하는 변화가 코드나 화면 개수로만 표현되지 않는다.
-- 확인 실험이면 주장·경쟁 설명·사전 기준이, 탐색 실험이면 탐색 질문·비교 장면·관찰 방법이 있다.
-- 작업과 데이터의 경계, 중단·시간·비용 조건, 사용자 승인이 있다.
+- A concrete person and scene, and a current alternative or a current behavior that will actually be observed.
+- The desired change is not expressed only as code or a number of screens.
+- For a confirmation experiment: claim, competing explanation and criteria set in advance. For a discovery experiment: the exploration question, the scenes compared and the observation method.
+- Boundaries for the work and data, stop/time/cost conditions, and user approval.
 
-사용자·현재 행동 자체도 아직 찾는 중이면 먼저 대화·관찰로 돌아간다. 그 상태를 실패한 사람이나
-나쁜 아이디어로 판정하지 않고, 제작 승인 문서가 아직 필요하지 않음을 설명한다.
+If the user or the current behavior itself is still being found, go back to conversation and observation first. Do not judge that state as
+a failed person or a bad idea; explain that a build approval document is not needed yet.
 
-STANDARD는 전체 필드와 적용 주장에 대한 증거, 독립 검토를 유지한다.
-구체적인 사용자와 순간이 없거나, 문제를 해법의 부재로만 쓰거나, 현재 대안과 원하는 변화가 없거나,
-주최사 의존을 이름만 붙이거나, 관련 문서가 모순되거나, 위험과 관찰 방법이 없으면 제작 승인을 내지 않는다.
-COMMITMENT는 추가로 §9의 위험별 승인과 운영·실패·롤백 등 필수 사항을 갖춘다.
-상세 조건은 `references/02-tiers-and-verdicts.md`가 정본이다.
+STANDARD keeps every field, evidence for the claims that apply, and independent review.
+Do not grant build approval when there is no concrete user and moment, the problem is written only as the absence of a solution,
+there is no current alternative or desired change, organizer dependence is named without substance, related documents contradict each other, or risks and observation methods are missing.
+COMMITMENT additionally needs the per-risk approvals in §9 and the required operation, failure and rollback items.
+`references/02-tiers-and-verdicts.md` is canonical for the detailed conditions.
 
-## 독립 검토와 결정
+## Independent review and decision
 
-사용자와 주고받는 대화는 주담당이 한다. 독립성이 가치인 검토나 실제로 나눌 만한 조사를 위임한다.
-STANDARD 이상은 작성에 참여하지 않은 독립 레드팀과 독립 블라인드 리뷰를 유지한다.
-사용할 수 없으면 기존 규칙대로 사용자 예외 승인 사유를 남기거나 보류한다. 조력자의 역할 전환만으로
-독립 검토라고 하지 않는다. 검토 의견은 증거이지 사용자 전략 판단과 승인 권한의 대체물이 아니다.
+The primary owner holds the conversation with the user. Delegate reviews whose value is independence, and research that can genuinely be split off.
+STANDARD and above keep an independent red team and an independent blind review by people who did not take part in writing.
+If those are unavailable, record the user's exception approval and reason as the existing rules require, or hold. A helper switching roles
+does not count as independent review. Review findings are evidence, not a substitute for the user's strategic judgment and approval authority.
 
-검토자에게 원안·현재 문서·인용된 자료·실행 제약·실험 종류를 전달한다.
-탐색 실험을 제품 성공 검증으로 오해하지 않게 한다. 반대로 탐색이라는 이름으로 미비한 보호 조건을 숨기지 않는다.
-지적별 수용·기각과 이유를 기존 §8에 남긴다. 점수를 평균내어 보호 조건을 통과시키지 않는다.
+Give reviewers the original idea, the current document, the cited material, execution constraints and the experiment kind.
+Make sure a discovery experiment is not mistaken for product success validation. Conversely, do not hide missing protections under the name of discovery.
+Record acceptance or rejection of each finding with its reason in the existing §8. Do not average scores to pass a protection condition.
 
-## 승인 후 구현하고, 새 경험이 나오면 재판단한다
+## Build after approval, and re-judge when new experience arrives
 
-사용자의 승인 전에는 상태를 바꾸는 제작을 시작하지 않는다.
-별도로 이미 승인한 가역적 준비 작업은 그 범위에서 가능하다.
-PASS-PROBE는 정한 실험과 상한에만 적용하고, PASS-BUILD와 FRAME_LOCK은 해당 제작 범위에 적용한다.
+Do not start state-changing build work before the user approves.
+Reversible preparation that was separately approved may proceed within that scope.
+PASS-PROBE applies only to the defined experiment and its limits; PASS-BUILD and FRAME_LOCK apply to their build scope.
 
-실제 문서는 `docs/frame/<frame_id>.md`, 제공된 원안은 `docs/frame/raw-brief-<frame_id>.md`에 둔다.
-이미 원안이 보존된 권위 있는 파일이 있으면 원문을 왜곡하지 않는 참조를 사용한다.
-PROBE의 간단한 경로와 `FRAME_LOCK` 생략 조건은 기존 계약을 따른다.
+Put the actual document at `docs/frame/<frame_id>.md` and the provided original idea at `docs/frame/raw-brief-<frame_id>.md`.
+If an authoritative file already preserves the original idea, reference it without distorting the original text.
+The short PROBE path and the conditions for skipping `FRAME_LOCK` follow the existing contract.
 
-구현 작업자는 사용자에게 다시 제품을 정의시키지 않는다. `dispatching`이 확정 조건과 잠정적 방법을 구분해 전달한다.
-화면과 조작감은 담당의 실제 실행 검증과 사용자 판단 규칙을 따른다.
+Implementers do not make the user define the product again. `dispatching` passes fixed conditions and provisional methods separately.
+Screens and interaction feel follow the owner's actual-run verification and the user-judgment rules.
 
-가변 요소 안의 학습은 §6의 회차를 갱신한다. 이전 결과는 `prior_cycle_ref`로 찾아갈 수 있게 남기고,
-새 기준은 앞으로의 판단에 쓰며 지난 실패를 통과로 바꾸지 않는다.
-불변 조건을 바꿔야 하면 `templates/reopen-request.md`로 사용자 결정을 받는다.
-작업자의 판단이나 '사용자가 좋아할 것'이라는 추측으로 동결을 해제하지 않는다.
-정확한 전이는 `references/04-lock-and-reopen.md`를 따른다.
+Learning inside variable elements updates the §6 cycle. Keep earlier results reachable through `prior_cycle_ref`;
+new criteria apply to future judgments and do not turn a past failure into a pass.
+When an invariant has to change, get the user's decision with `templates/reopen-request.md`.
+Do not lift a freeze on a worker's judgment or on a guess that "the user will like it."
+Exact transitions follow `references/04-lock-and-reopen.md`.
 
-## 자료를 필요한 만큼 읽는다
+## Read material only as far as needed
 
-- 항목의 이유와 작성 예시는 `references/01-gate-fields.md`에 있다.
-- 단계·판정·증거 등급·출력 계약은 `references/02-tiers-and-verdicts.md`에 있다.
-- 만들기 전 확인과 실험 종류별 조건은 `references/03-cheap-tests.md`에 있다.
-- 동결·새 회차·동결 변경은 `references/04-lock-and-reopen.md`에 있다.
-- 설계 배경은 `references/05-why-this-shape.md`에 있다. 과거 회고가 현재 승인 규칙을 대신하지 않는다.
+- Reasons and examples for each field: `references/01-gate-fields.md`.
+- Tiers, verdicts, evidence grades and output contract: `references/02-tiers-and-verdicts.md`.
+- Pre-build checks and conditions per experiment kind: `references/03-cheap-tests.md`.
+- Freezing, new cycles and changes to a freeze: `references/04-lock-and-reopen.md`.
+- Design background: `references/05-why-this-shape.md`. Past retrospectives do not replace the current approval rules.
 
-판정과 중요한 원문은 내부 작업 기록에서 추적할 수 있게 한다.
-사용자에게는 선택할 내용과 이유, 현재 승인된 범위만 필요한 만큼 말한다.
-정해진 내부 역할 이름·증거 등급·점검표 양식을 일상 대화처럼 낭독하지 않는다.
+Keep verdicts and important original text traceable in internal work records.
+Tell the user only as much as they need: what to choose, why, and what is currently approved.
+Do not recite internal role names, evidence grades or the checklist format as if they were everyday conversation.

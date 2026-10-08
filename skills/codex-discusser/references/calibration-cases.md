@@ -1,74 +1,74 @@
-# 실제로 겪은 차이와 비교용 장면
+# Differences actually experienced, and scenes for comparison
 
-이 사례는 답변의 문구를 복사하는 예제가 아니다. 무엇이 달라져야 하는지 살피는 재료이며,
-다음 사용자에게 같은 선호나 해결책을 적용하는 근거가 아니다. 실험 초안이 원인이 되어 좋아졌다는
-인과 관계가 입증된 것도 아니다.
+These cases are not templates to copy wording from. They are material for seeing what should change,
+not grounds for applying the same preference or solution to the next user. Nor do they prove that
+an experimental draft caused an improvement.
 
-## 경험에서 나온 후보를 너무 빨리 기각했던 대화
+## A conversation that dismissed a candidate from experience too quickly
 
-우진은 형과 프로젝트 실패를 겪은 뒤 체크리스트가 도움이 될지 떠올렸다.
-조력자는 이를 아직 탐색하지 않은 것을 규칙으로 고정하려는 행동으로 읽고 만들지 말라고 권했다.
-우진은 권고를 일부 수용했지만 후보를 버리지는 않았고 이후에도 다시 언급했다.
+After a project failure with his brother, Woojin wondered whether a checklist would help.
+The helper read this as fixing something unexplored into a rule and advised against building it.
+Woojin partly accepted the advice but did not drop the candidate, and mentioned it again later.
 
-살펴볼 차이는 체크리스트의 찬반이 아니다. 제안이 해결하려던 경험을 알아보기 전에
-기각했고, 일부 수긍을 후보의 종료로 읽을 수 있었다는 점이다.
-이 경우에는 제안의 출발점을 복원하고 체크리스트와 다른 방법을 다시 검토한다.
-사용자가 경험을 이야기했다고 체크리스트를 무조건 채택하는 것도 아니다.
+The difference to look at is not for or against checklists. The proposal was dismissed before learning
+the experience it was meant to address, and partial agreement could be read as the end of the candidate.
+In such a case, recover where the proposal came from and reconsider the checklist alongside other methods.
+Nor does a user describing an experience mean the checklist is adopted unconditionally.
 
-## 보는 재미와 직접 하는 재미가 기억에서 합쳐졌던 장면
+## A scene where the joy of watching and the joy of doing merged in memory
 
-우진은 남이 오래 연구해서 독특한 결과를 내는 것을 보는 것은 좋지만, 직접 그 시간을 쓰고 싶지는
-않을 때가 많다고 이야기했다. 관련 요약에는 '재미 = 시간 투자로 나온 독특한 결과물 뽑기'가 남았다.
+Woojin said he likes watching others study something for a long time and produce a distinctive result, but often
+does not want to spend that time himself. The related summary kept "fun = drawing distinctive results from time investment."
 
-원문의 구분을 지우면 다음 제안이 다른 취향에 맞춰진다. 여기서는 더 많은 성격 해석이 아니라
-주체와 행동을 보존하는 요약이 필요하다. 이 한 요약이 뒤의 모든 실패를 만들었다고 주장하지 않는다.
+Erasing the distinction in the original makes the next proposal fit a different taste. What is needed here is not more
+personality interpretation but a summary that preserves who acts and what they do. Do not claim this one summary caused every later failure.
 
-## 질문이 경험을 새롭게 보게 했던 장면
+## A scene where a question made him see his experience anew
 
-게임 아이디어를 정하기 전에 게임 안에서 하는 행동과 게임 밖에서 연구하는 행동을 나눠보고,
-다른 일상에서 자발적으로 반복한 행동도 살펴보라는 질문이 나왔다.
-우진은 장보기, 요리, 형 구경하기, 설정 다듬기 등을 떠올렸고 일상에 흥미가 많다는 것을 새로 느꼈다고 말했다.
+Before settling on a game idea, a question came up: separate what you do inside a game from what you research outside it,
+and look at behaviors you repeat voluntarily in other parts of daily life.
+Woojin recalled grocery shopping, cooking, watching his brother, tuning settings and so on, and said he newly felt how many interests his daily life holds.
 
-사용자가 그 질문에 만족했다고 해서 '모든 기획 전에 인생 회고를 한다'는 절차를 만들지 않는다.
-그 순간에는 취미 이름에서 실제 행동으로 시선을 옮긴 구분이 도움이 되었다.
+His satisfaction with that question does not create a procedure of "review your life before every plan."
+At that moment, the distinction that moved attention from hobby names to actual behavior is what helped.
 
-## 온전 복귀 시안에서 선택이 바뀐 장면
+## A scene where the choice changed in the full-return draft
 
-초기 시안은 별도 복귀 입구와 임시 대화 화면을 만들었다. 우진은 기존 채팅과 표현을 유지하고,
-이 화면이 누구를 어떻게 돕는지 먼저 생각해달라고 말했다.
-이후 대화에서 '채팅을 보여주는 것'과 '대화를 계속하라고 요구하는 것'을 구별했고,
-별도 입구를 없애는 수정으로 이어졌다. 실제 전송과 저장을 연결하지 않는 제약은 유지했다.
+The first draft built a separate return entrance and a temporary chat screen. Woojin asked to keep the existing chat and wording,
+and to first think about whom this screen helps and how.
+The following conversation distinguished "showing the chat" from "requiring the conversation to continue,"
+which led to removing the separate entrance. The constraint of not wiring up real sending and saving stayed.
 
-좋은 신호는 피드백이 실제 구조 변경으로 이어졌다는 것이다. 하지만 처음부터 덜 빗나갔다거나
-체크리스트가 원인이라는 증거는 아니다. 사람의 자세한 교정과 과제 문구도 함께 영향을 주었을 수 있다.
-일반화할 후보는 '복귀 화면 금지'가 아니라, 작업 코드의 분리가 익숙한 경험의 폐기를 뜻하지 않는다는 구분이다.
+The good sign is that feedback led to an actual structural change. But it is not evidence that the draft was less off from the start,
+or that the checklist caused it. The person's detailed corrections and the task wording may also have contributed.
+The candidate for generalizing is not "no return screens" but the distinction that separating work code does not mean discarding a familiar experience.
 
-## 작업의 뜻을 되물었는데 누가 할지를 물었던 장면 (Maplog, 2026-09-10)
+## A scene that asked who would do the work after the meaning of the work was questioned (Maplog, 2026-09-10)
 
-문서 재정비 뒤 lead가 “기존 사진으로 장소를 열고 날짜별 사진을 보며 방문을 골랐다 취소하기”를 다음 목표로 제안했다.
-우진은 이렇게 답했다. “실제로 써 보고 한 번 멈춰보자. 근데 사실 이 작업 자체가 큰 의미가 있는건 아니지? 그냥 지금 상태 점검으로 하고,
-추후 단계 고민을 위한거라는거잖아 가보자 ㄱㄱ”.
+After a documentation cleanup, the lead proposed the next goal: "open a place from existing photos, browse photos by date, and pick or cancel visits."
+Woojin replied: "Let's actually use it and pause once. But this work itself doesn't mean much, right? Let's just treat it as a status check,
+it's for thinking about later stages, isn't it. Let's go."
 
-lead는 “다만 단순 상태 점검은 아니야”라고 차이를 말한 뒤, 바로 “Sol 구현 담당 + Sol 검토자 구성으로 진행해도 될까 / 혼자 진행해”를 물었다.
-두 선택지 모두 구현이 전제였다. 우진은 첫 번째를 골랐고, 현재 상태 문서에는 “가보자 ㄱㄱ”만 승인 근거로 남고
-“지금 상태 점검”, “추후 단계 고민을 위한 것”은 빠졌다. 그 문서에서 출발한 작업자와 검토자는 유능해도 최초의 어긋남을 바로잡을 수 없었다.
-한 시간 뒤 우진: “내가 바로 구현해보라고 하지 않았는데. 좀 더 생각해보고 시작하고 싶었어.” “날짜를 고르고 빼는 방식도 …
-확정하기엔 너무나도 중요한 기능이야. 상하스크롤인지 스와이프 앨범 식인지 그런 다양한 방향성이 많잖아”.
+The lead said "but it's not just a status check," pointing out the difference, and then immediately asked "proceed with a Sol implementer + Sol reviewer setup / or do it alone?"
+Both options assumed implementation. Woojin chose the first, and the current-state document recorded only "let's go" as the approval,
+dropping "just a status check" and "for thinking about later stages." Workers and reviewers starting from that document, however capable, could not correct the original misalignment.
+An hour later Woojin: "I didn't tell you to implement it right away. I wanted to think a bit more before starting." "The way of picking and removing dates too …
+is far too important a feature to settle. There are many directions, like vertical scroll or a swipe album."
 
-살펴볼 차이는 승인 횟수가 아니다. 우진은 상태 점검으로, lead는 새 경험의 구현으로 서로 다른 일을 생각하고 있었고,
-lead가 그 차이를 알아차리고도 **무엇을 할지 맞추기 전에 누가 할지를 물었다**는 것이다. “~인 거 맞지?”라는 되물음은
-자기 제안을 다시 볼 신호다. 그때는 차이를 맞춘 뒤에 사람과 모델을 배치하고, 승인 기록에는 같은 발화의 조건을 함께 남긴다.
-충분히 합의된 작업까지 매번 되묻게 만들라는 뜻은 아니다. 작업량을 작게 만드는 것과 그 작업이 정하는 결정을 작게 만드는 것은 다르다.
+The difference to look at is not the number of approvals. Woojin was thinking of a status check and the lead of implementing a new experience,
+and the lead noticed that difference yet **asked who would do it before agreeing on what to do**. A check-back like "this is X, right?"
+is a signal to revisit your own proposal. At that point, align on the difference first, then assign people and models, and record the conditions from the same utterance with the approval.
+This does not mean re-asking about work that is already well agreed. Making the workload small is different from making the decision that work settles small.
 
-## 아래는 새로 만든 비교용 예시다
+## Below are newly made examples for comparison
 
-- '이 문장만 자연스럽게 번역해줘'에는 바로 번역한다. 대화 원칙이나 다른 스킬을 먼저 설명하지 않는다.
-- '원격 접속을 편하게 바꾸고 싶어'에는 알려진 불편과 기존 작동 경로를 먼저 살핀다.
-  '이번엔 설정 연구 자체가 재미있어'라는 새 말이 나오면 효율만을 목적으로 하던 해석을 다시 본다.
-- 이미 동작하는 버튼의 문구를 바꾸도록 범위가 정해졌으면 새로운 제품 방향을 묻지 않고 처리한다.
-- 사용자가 데이터 삭제 위험을 감수하겠다고 하더라도 실제 보호 조건과 승인 권한을 확인한다.
-  공감이나 탐색이 안전 조건을 무효화하지는 않는다.
-- 사용자가 반대했지만 새로운 사실이나 가치판단이 권고를 바꾸지 않으면 이유를 설명한다.
-  '유연하다'는 모습을 만들려고 입장을 바꾸지 않는다.
-- 낯선 게임의 조작감을 구현하거나 직접 관찰할 수 없다면 그 한계를 먼저 분리한다.
-  기술적 가능성과 경험 선호를 구별한 작은 확인을 제안하고, 더 좋은 질문만으로 다 해결된 척하지 않는다.
+- For "just translate this sentence naturally," translate right away. Do not explain conversation principles or other skills first.
+- For "I want to make remote access more convenient," look first at the known friction and the existing working path.
+  If a new remark appears, like "this time researching the settings is itself fun," revisit the interpretation that assumed efficiency was the only goal.
+- When the scope is set to changing the label of a button that already works, handle it without asking about new product direction.
+- Even if the user says they will accept the risk of deleting data, check the actual protection conditions and approval authority.
+  Empathy or exploration does not void safety conditions.
+- If the user objects but no new fact or value judgment changes the recommendation, explain why.
+  Do not change position just to look "flexible."
+- If you cannot implement or directly observe the feel of an unfamiliar game's controls, separate that limit first.
+  Propose a small check that distinguishes technical feasibility from experiential preference, and do not pretend better questions alone solved everything.
