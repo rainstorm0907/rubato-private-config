@@ -1,72 +1,72 @@
-# 실험판에서 이 배경 문서를 읽는 방법
+# How to read this background document in the experimental version
 
-아래는 이 스킬의 이전 설계 이유를 보존한 배경 자료다. 실제 운용은 현재 SKILL.md와 01~04 참고 문서 및 양식을 따른다.
-현재 실험판은 자유 대화의 순서를 고정하지 않고, 제안 출처·증거·채택을 구분하며,
-기준을 형성하는 discovery와 기준을 확인하는 validation을 나눈다.
-예전 설명에 고정된 대화 단계나 모든 실험의 사전 제품 PASS 요구가 나오면 현재 규칙을 다시 확인한다.
+Below is background material preserving the earlier design reasoning of this skill. Actual operation follows the current SKILL.md and the 01–04 reference documents and forms.
+The current experimental version does not fix the order of free conversation, distinguishes proposal source·evidence·adoption,
+and splits discovery, which forms criteria, from validation, which confirms criteria.
+If an old explanation shows a fixed conversation stage or a prior product PASS requirement for every experiment, recheck the current rules.
 
 ---
 
-# 이 구조가 왜 이 모양인가 — 방법론 지도
+# Why this structure looks this way — a methodology map
 
-원 조사 보고서 전문(작성자 보관 원자료): 로컬에 있다면 `~/.claude/roo-channel/.consult/product-framing/response.md` (출처·근거 수준 [A]~[D] 표기 포함).
+Full text of the original research report (author-kept raw material): if it is local, at `~/.claude/roo-channel/.consult/product-framing/response.md` (including source·evidence levels marked [A]–[D]).
 
-## 방법론들은 대체재가 아니라 층이 다르다
+## The methodologies are not substitutes but different layers
 
-이 순서로 배치하면 충돌이 크게 줄어든다. 이 스킬의 점검표 필드는 이 층들을 하나로 압축한 것이다.
+Arranging them in this order greatly reduces conflicts. This skill's checklist fields compress these layers into one.
 
-1. **JTBD / Design Thinking POV** — 누가 어떤 상황에서 무엇을 이루려는가 → 필드 1 (사용자와 순간)
-2. **현재 대안 조사** (Lean Canvas의 Existing Alternatives) — 지금 뭘로 때우고 있는가 → 필드 2
-3. **Value Proposition Canvas** — 어떤 pain/gain을 어떤 가치로 바꾸는가 → 필드 3
-4. **April Dunford식 Positioning** — 왜 다른 대안이 아니라 이것인가 → 필드 4
-5. **Logic Model / Theory of Change** — 기능이 어떤 행동·결과 변화로 이어지는가 → 필드 3·4의 인과 사슬
-6. **Cagan 4대 리스크 / Lean Startup** — 가장 위험한 가정은 무엇이고 무엇으로 시험하나 → 필드 6
-7. **PR-FAQ / 단계별 투자 심사** — 다음 투자를 승인할 것인가 → 운용 단계와 판정
-8. **PRD** — 승인된 프레임 안에서 무엇을 구현하나 → 이 점검표의 **하류** 산출물
+1. **JTBD / Design Thinking POV** — who, in what situation, is trying to achieve what → field 1 (user and moment)
+2. **Current-alternative research** (Lean Canvas's Existing Alternatives) — what are they making do with now → field 2
+3. **Value Proposition Canvas** — which pain/gain is turned into which value → field 3
+4. **April Dunford-style Positioning** — why this and not another alternative → field 4
+5. **Logic Model / Theory of Change** — how a feature leads to a behavior·result change → the causal chain in fields 3·4
+6. **Cagan 4 risks / Lean Startup** — what the most dangerous assumption is and how to test it → field 6
+7. **PR-FAQ / staged investment review** — should the next investment be approved → operating tier and verdict
+8. **PRD** — what to implement within the approved frame → a **downstream** artifact of this checklist
 
-가장 실증 근거가 강한 것은 특정 캔버스가 아니라 그 밑의 공통 행동이다: **명시적 가설, 사전 예측, 행동 관찰, 비교 실험, 단계적 투자.** 캔버스·POV·PR-FAQ는 사고를 외부화할 뿐 문장의 진위를 검증하지 않는다 — 그래서 이 스킬은 문서 완성도와 증거 등급(E0–E4)을 분리한다.
+What has the strongest empirical grounding is not a particular canvas but the common behavior underneath: **explicit hypotheses, prior predictions, behavior observation, comparative experiments, staged investment.** Canvas·POV·PR-FAQ only externalize thinking and do not validate the truth of a sentence — so this skill separates document completeness from evidence grade (E0–E4).
 
-## 무거운 원형을 언제 쓰나
+## When to use the heavy archetypes
 
-| 원형 | 원형이 값을 하는 조건 |
+| archetype | condition under which the archetype pays off |
 |---|---|
-| Full PR-FAQ | 외부 출시, 다부서 협업, 고객지원·법무·브랜드 영향 큼 |
-| Business Model Canvas 전체 | 실제 수익모델·획득 채널·파트너·비용 구조를 함께 결정해야 함 |
-| 포지셔닝 워크숍 | 여러 세그먼트·경쟁 대안이 있고 영업·마케팅 메시지가 중요함 |
-| Customer Discovery 전 과정 | 유료 서비스, 반복 사업, 시장 선택이 중요함 |
-| 단계별 투자 심사 전체 | 단계별 비용 증가가 크고 의사결정자가 여럿 |
-| 상세 PRD | 프레임이 동결됐고 여러 구현자가 병렬 작업하며 재작업 비용이 큼 |
+| Full PR-FAQ | external launch, multi-department collaboration, large customer-support·legal·brand impact |
+| Full Business Model Canvas | must decide the real revenue model·acquisition channel·partners·cost structure together |
+| Positioning workshop | multiple segments·competing alternatives and sales·marketing messaging matter |
+| The full Customer Discovery process | paid service, recurring business, market selection matter |
+| The full staged investment review | large cost increase per stage and multiple decision-makers |
+| Detailed PRD | the frame is frozen, multiple implementers work in parallel and rework cost is high |
 
-며칠짜리 해커톤에 BMC 아홉 칸을 억지로 채우면 모르는 것을 사실처럼 문서화하게 된다. 반대로 폐기 가능한 한 시간짜리 실험에 장문 PR-FAQ를 요구하면 점검표 비용이 실패 비용보다 커진다.
+Forcing the nine BMC boxes for a several-day hackathon makes you document what you do not know as if it were fact. Conversely, demanding a long PR-FAQ for a disposable one-hour experiment makes the checklist cost exceed the failure cost.
 
-## 구현에 들어가면 가치가 흐려지는 이유 (이름 있는 현상들)
+## Why value blurs once you enter implementation (named phenomena)
 
-- **Implemental mindset**: 결정 후 주의가 실행·장애물 돌파로 좁아진다. "왜 이 선택인가"를 의심하는 능력과 "어떻게 완성할까"에 집중하는 능력은 같은 순간에 최대화되지 않는다
-- **Design fixation**: 초기 구현·예시·아키텍처가 이후 사고 범위를 제한한다
-- **IKEA effect**: 직접 만든 결과물을 객관적 품질보다 높게 평가한다
-- **매몰비용에 따른 투자 지속**: 투입한 뒤에는 실패 신호가 있어도 계속 투자한다
-- **Goal displacement**: 늦게 확인되는 사용자 아웃컴 대신, 즉시 확인되는 기능 완성·데모 작동이 실질 목표가 된다
+- **Implemental mindset**: after a decision, attention narrows to execution·breaking through obstacles. The ability to question "why this choice" and the ability to focus on "how to finish it" are not maximized at the same moment
+- **Design fixation**: the early implementation·example·architecture limits the later scope of thinking
+- **IKEA effect**: you rate what you made yourself higher than its objective quality
+- **Continuing investment due to sunk cost**: after investing, you keep investing even when there are failure signals
+- **Goal displacement**: instead of the user outcome confirmed later, the immediately confirmed feature completion·working demo becomes the real goal
 
-전부 의지가 아니라 구조의 문제다. 그래서 처방도 역할·시간 분리, 사전 기준, 동결, 블라인드 리뷰 같은 **프로토콜**이다.
+All are problems of structure, not will. So the prescriptions are also **protocols** like separating role·time, prior criteria, freeze and blind review.
 
-## 안티패턴 체크리스트
+## Anti-pattern checklist
 
 ```text
-[ ] 문제 문장에 제품·AI·플랫폼 이름이 들어가 있지 않은가
-[ ] "모두", "편리", "혁신", "효율화"가 구체적 설명을 대신하지 않는가
-[ ] 조사 없이 만든 가짜 페르소나를 사실처럼 쓰지 않았는가
-[ ] 최근 실제 행동이나 흔적이 있는가
-[ ] "아무것도 하지 않기"도 대안으로 고려했는가
-[ ] 아웃컴과 산출물을 구분했는가
-[ ] 차별 기능이 어떤 아웃컴으로 이어지는지 설명했는가
-[ ] 믿을 근거가 있는가
-[ ] 주최사 이름만 붙이지 않았는가 (트리거→처리→인계→아웃컴 사슬)
-[ ] 가설과 증거를 구분했는가
-[ ] 결과를 보기 전에 PASS/FAIL을 적었는가
-[ ] MVP가 "작은 제품"이 아니라 "최소 학습 실험"인가
-[ ] active 프레임이 하나만 존재하는가 (기획서·발표자료·구현 지시서가 같은 사용자를 전제하는가)
-[ ] 구현 에이전트가 프레임을 조용히 바꿀 수 없는가
-[ ] 반증 신호가 나왔는데 sunk cost 때문에 붙들고 있지 않은가
-[ ] 폐기 가능한 실험에 과도한 문서를 요구하지 않는가
-[ ] 칭찬("좋네요", "있으면 쓸 듯")을 행동 증거로 세지 않았는가
+[ ] Does the problem statement contain a product·AI·platform name
+[ ] Do "everyone", "convenient", "innovative", "efficiency" replace a concrete explanation
+[ ] Did you not use a fake persona made without research as if it were fact
+[ ] Is there recent real behavior or a trace
+[ ] Was "doing nothing" considered as an alternative too
+[ ] Did you distinguish outcome from output
+[ ] Did you explain which outcome the differentiating feature leads to
+[ ] Is there credible evidence
+[ ] Did you not attach only the organizer's name (trigger→processing→handoff→outcome chain)
+[ ] Did you distinguish hypothesis from evidence
+[ ] Did you write PASS/FAIL before seeing the result
+[ ] Is the MVP not a "small product" but a "minimum learning experiment"
+[ ] Does only one active frame exist (do the plan·presentation·implementation spec assume the same user)
+[ ] Can the implementation agent not silently change the frame
+[ ] Are you not holding on due to sunk cost when a refutation signal appeared
+[ ] Are you not demanding excessive documentation for a disposable experiment
+[ ] Did you not count praise ("nice", "I'd use it if it existed") as behavior evidence
 ```

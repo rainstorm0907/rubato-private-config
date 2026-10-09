@@ -1,79 +1,79 @@
-# 만들기 전의 싼 검증
+# Cheap validation before building
 
-고정된 순서보다 **가장 위험한 가정 × 가장 싼 구별력 있는 실험**을 고르는 것이 우선이다. 아래는 대체로 싼 것부터의 사다리다.
+Choosing **the most dangerous assumption × the cheapest discriminating experiment** takes priority over a fixed order. Below is a ladder roughly from cheapest.
 
-핵심 질문은 빌드 여부가 아니라 이것이다:
+The core question is not whether to build but this:
 
-> 이 확인 실험은 어떤 설명을 구별하는가? 또는 이 탐색 실험은 어떤 실제 경험에서 아직 모르는 판단 기준을 찾는가?
-> 관찰한 결과는 다음 선택을 바꿀 수 있는가?
+> Which explanation does this confirmation experiment distinguish? Or, in which real experience does this exploration experiment find judgment criteria not yet known?
+> Can the observed result change the next choice?
 
-`validation`은 주장과 경쟁 설명, 사전 PASS·FAIL을 정한다.
-`discovery`는 특정 경험을 비교하고 기준을 찾는 회차로, 탐색 질문·장면·관찰 방법·안전과 중단 조건을 정한다.
-두 종류 모두 예산과 허용 범위를 사전에 정하며, 탐색 완료를 제품 성공으로 보고하지 않는다.
+`validation` sets the claim, the competing explanation and prior PASS·FAIL.
+`discovery` is a cycle that compares a specific experience and finds criteria, setting the exploration question·scene·observation method·safety and stop conditions.
+Both kinds set the budget and allowed range in advance, and exploration completion is not reported as product success.
 
-## 1. 현재 행동 흔적 확인
+## 1. Check current behavior traces
 
-실제 업무 흐름, 검색 기록·문서·스프레드시트, 문의·지원 티켓, 경쟁 서비스 리뷰, 최근 실패 사례, 아무것도 하지 않는 이유.
+Real work flows, search history·documents·spreadsheets, inquiries·support tickets, competing-service reviews, recent failure cases, the reason for doing nothing.
 
-"이런 제품이 있으면 쓸 것 같다"보다 **"지난번에 실제로 어떻게 해결했는가"**를 우선한다.
+Prioritize **"how did you actually solve it last time"** over "I'd probably use it if a product like this existed".
 
-## 2. 과거 행동 인터뷰
+## 2. Past-behavior interview
 
-아이디어 평가를 부탁하지 말고 최근의 구체적 사건을 복원한다: 마지막으로 이 문제가 발생한 때 / 무엇을 먼저 했는가 / 누구에게 물었는가 / 어떤 도구를 썼는가 / 언제 포기했는가 / 시간·비용·위험이 실제로 발생했는가.
+Do not ask for an evaluation of the idea; reconstruct a recent concrete event: when the problem last occurred / what you did first / whom you asked / which tool you used / when you gave up / whether time·cost·risk actually occurred.
 
-가상 상황에 대한 "쓸 것 같아요"는 맥락과 가정에 크게 휘둘린다. 과거 행동이 미래 진술보다 강하다.
+A "I'd probably use it" about a hypothetical situation is heavily swayed by context and assumptions. Past behavior is stronger than a statement about the future.
 
-## 3. 메시지·오퍼 테스트
+## 3. Message·offer test
 
-구체적 가치 문구 + 구체적 세그먼트 + 명확한 CTA + 행동(예약, 데이터 제공, 파일 업로드, 상담 신청).
+A concrete value statement + a concrete segment + a clear CTA + action (booking, providing data, file upload, requesting a consultation).
 
-클릭만으로 구매의사를 증명했다고 주장하면 안 되지만, **어떤 메시지가 전혀 반응을 못 얻는지**는 싸게 거를 수 있다.
+You must not claim that clicks alone prove purchase intent, but you can cheaply filter out **which message gets no response at all**.
 
-## 4. 컨시어지 / Wizard of Oz
+## 4. Concierge / Wizard of Oz
 
-시스템 뒤에서 사람이 처리하되 사용자는 완성된 흐름처럼 경험하게 한다. 실제 입력, 신뢰, 수정 지점, 기존 업무 흐름으로 넘기는 방식을 확인할 때 유용하다.
+A person handles it behind the system while the user experiences it as a finished flow. Useful for checking real input, trust, correction points, and how it hands off to the existing work flow.
 
-단, 기만·개인정보·자동결정이 걸린 경우 실험 범위와 사람 개입을 적절히 고지한다.
+However, where deception·personal data·automated decisions are involved, disclose the experiment scope and human involvement appropriately.
 
-## 5. 얇은 코드 프로토타입
+## 5. Thin code prototype
 
-다음 조건이면 코드가 가장 싼 실험이다:
-- 실제 지연 시간이나 API 가능성이 핵심 위험
-- 사용감을 경험하지 않고는 선택지를 구분할 수 없음
-- 기술적 연동 자체가 가치 메커니즘
-- 프로토타입을 버릴 수 있음
-- 확인 실험이면 사전 성공·실패 기준이 있고, 탐색 실험이면 비교할 경험·관찰 방법·중단 조건이 있음
+Code is the cheapest experiment when:
+- Real latency or API feasibility is the core risk
+- The options cannot be distinguished without experiencing the feel
+- The technical integration itself is the value mechanism
+- The prototype can be discarded
+- For a confirmation experiment there are prior success·failure criteria, and for an exploration experiment there are the experience to compare·observation method·stop conditions
 
-## 6. 커밋먼트 테스트
+## 6. Commitment test
 
-말보다 비용 있는 행동: 실제 데이터 제공, 일정 예약, 파일 이전, 담당자 연결, 파일럿 승인, LOI, 선결제, 반복 사용. 단 할인·환불·호기심 구매가 섞일 수 있으므로 같은 가설 안에서 증거를 비교한다.
+Costly action over words: providing real data, booking a schedule, migrating files, connecting a contact, approving a pilot, an LOI, prepayment, repeated use. But discounts·refunds·curiosity purchases may be mixed in, so compare the evidence within the same hypothesis.
 
-## 7. 실제 파일럿과 아웃컴 측정
+## 7. Real pilot and outcome measurement
 
-제품 아이디어를 가설로 취급하고 평가 기준을 사전에 정한다. 클릭·사용량 같은 단기 지표가 장기 아웃컴과 어긋날 수 있다.
+Treat the product idea as a hypothesis and set the evaluation criteria in advance. Short-term metrics like clicks·usage can diverge from the long-term outcome.
 
 ---
 
-# "일단 만들어본다"가 합리적인 조건
+# Conditions where "let's just build it" is reasonable
 
-AI로 구현이 싸졌어도, 싸진 건 **데모·UI·일회성 프로토타입의 한계비용**이지 정확성 검증·통합·운영·신뢰의 총비용이 아니다. 그리고 **무엇을 만들지 잘못 고른 비용은 AI가 빨라질수록 더 빨리 누적된다.**
+Even though AI made implementation cheap, what got cheap is **the marginal cost of a demo·UI·one-off prototype**, not the total cost of correctness validation·integration·operations·trust. And **the cost of choosing what to build wrongly accumulates faster as AI gets faster.**
 
-구현 우선이 합리적이려면 전부 충족:
+Implementation-first is reasonable only when all hold:
 
-1. 프로토타입이 다른 조사보다 더 싸고 빠른 구별 실험이다
-2. 어떤 설명을 확인하거나 어떤 실제 경험에서 판단 기준을 찾을지 적혀 있다
-3. 사용·비사용 결과가 의사결정을 바꾼다
-4. 외부 피해 없이 폐기 가능하다
-5. 확인 실험의 성공·실패 기준 또는 탐색 실험의 관찰 방법을 코드 전에 적고, 두 경우 모두 중단·보호 조건을 정했다
-6. 프로토타입을 제품의 시작으로 자동 간주하지 않는다
+1. The prototype is a cheaper and faster discriminating experiment than other research
+2. It states which explanation it confirms or in which real experience it finds judgment criteria
+3. The use·non-use results change the decision
+4. It can be discarded without external harm
+5. It writes the confirmation experiment's success·failure criteria or the exploration experiment's observation method before the code, and in both cases sets stop·protection conditions
+6. It does not automatically treat the prototype as the start of the product
 
-합리적이지 않은 신호:
-- 수요를 묻고 있는데 데모가 잘 작동하는지만 확인한다
-- 사용자·트리거·현재 대안을 정의하기 싫어서 코딩한다
-- 한 프로토타입을 여러 상충하는 문제 서사에 붙일 수 있다
-- 주최사 연결과 구매자 가치가 여전히 말뿐이다
-- 실제 데이터·결제·안전·법적 약속을 먼저 건다
+Signals it is not reasonable:
+- You are asking about demand but only check whether the demo works well
+- You code because you do not want to define the user·trigger·current alternative
+- One prototype can be attached to several conflicting problem narratives
+- The organizer link and buyer value are still only words
+- You first commit real data·payment·safety·legal promises
 
-# 문제 우선 vs 프로토타입 우선
+# Problem-first vs prototype-first
 
-"문제를 완전히 이해한 후에만 만들어라"도 지나치다. **사용 경험**의 불확실성은 만져볼 수 있는 프로토타입이 가장 싼 조사 수단일 수 있다. 반면 **수요·구매·현재 우회 수단**의 불확실성은 잘 돌아가는 프로토타입만으로 거의 해소되지 않는다. 불확실성의 종류에 따라 도구를 고른다.
+"Build only after fully understanding the problem" is excessive too. For uncertainty in the **usage experience**, a tangible prototype may be the cheapest research tool. On the other hand, uncertainty in **demand·purchase·current workaround** is hardly resolved by a well-working prototype alone. Choose the tool by the kind of uncertainty.

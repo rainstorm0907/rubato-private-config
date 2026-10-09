@@ -1,102 +1,102 @@
-# 운용 단계, 판정 상태, 증거 등급
+# Operating tiers, verdict states, evidence grades
 
-## 운용 단계 상세
+## Operating tiers in detail
 
-무게는 프로젝트 기간이 아니라 **되돌릴 수 없음, 외부 약속, 사용자 피해, 데이터·법무·브랜드 노출, 운영 지속성**으로 정한다.
+Weight is decided not by project duration but by **irreversibility, external commitments, user harm, data·legal·brand exposure, operational continuity**.
 
-### 연습(PROBE)
+### Practice (PROBE)
 
-적용 조건 (전부 충족):
-- 결과물을 버려도 외부 손실이 거의 없음
-- 사용자 데이터·결제·브랜드·법무 위험 없음
-- 목적이 제품 출시가 아니라 정한 주장을 확인하거나, 정한 장면을 경험해 판단 기준을 찾는 것
-- 코드도 실험 장치로 폐기 가능
+Applicability conditions (all must hold):
+- Disposing of the output causes almost no external loss
+- No user-data·payment·brand·legal risk
+- The purpose is not shipping the product but confirming a fixed claim, or finding judgment criteria by experiencing a fixed scene
+- The code is disposable as an experiment device too
 
-필수 필드: 사용자와 순간 / 현재 대안 / 원하는 변화 / 선택을 바꿀 불확실성 / 실험 / 스코프와 시간·자원 상한 / 사용자 승인.
-`experiment_kind: validation`은 사전 PASS·FAIL과 경쟁 가설이 필요하다.
-`experiment_kind: discovery`는 탐색 질문, 비교할 장면, 관찰·기록 방법, 건드리지 않을 것과 중단 조건이 필요하다.
-아직 형성하지 못한 제품 성공 기준은 그렇게 표시한다. 탐색 승인과 완료는 제품 성공 판정이 아니다.
+Required fields: user and moment / current alternative / desired change / the uncertainty that would change the choice / experiment / scope and time·resource caps / user approval.
+`experiment_kind: validation` needs prior PASS·FAIL and a competing hypothesis.
+`experiment_kind: discovery` needs the exploration question, the scenes to compare, the observation·recording method, what will not be touched, and the stop conditions.
+Product success criteria not yet formed are marked as such. Exploration approval and completion are not a product success verdict.
 
-통과 = **실험 승인(PASS-PROBE)**. 폐기 가능한 실험만 허용하며 전체 제품 착수 허가는 아니다.
+Pass = **experiment approval (PASS-PROBE)**. Only the disposable experiment is allowed, and it is not approval to start the whole product.
 
-### 무대(STANDARD)
+### Stage (STANDARD)
 
-적용 조건 (하나 이상):
-- 해커톤·공모전처럼 외부 평가를 받음
-- 여러 AI 구현 워커가 병렬로 움직임
-- 며칠 이상 투자하거나 데모 완성도가 중요함
-- 주최사 서비스·데이터 연결이 평가 대상임
+Applicability conditions (one or more):
+- Receives external evaluation, like a hackathon·contest
+- Multiple AI implementation workers move in parallel
+- Invests several days or more, or demo completeness matters
+- An organizer service·data link is subject to evaluation
 
-필수: 8개 필드 전체(§5 도입 경로 필수, 주최사 연결 사슬은 해당 없으면 `N/A + 이유`) + 근거 등급 + 프레임 동결 + **독립 레드팀 1회와 블라인드 리뷰 1회**.
+Required: all 8 fields (§5 adoption path required, and the organizer link chain `N/A + reason` if not applicable) + evidence grades + frame freeze + **one independent red team and one blind review**.
 
-독립 검토자(레드팀·블라인드 리뷰 모두)는 초안 작성에 참여하지 않은 새 세션이다. 사용할 수 없으면 사용자 예외 승인을 점검표 §8에 남기거나 보류한다. 같은 세션의 자체 레드팀은 무대 요건을 충족하지 못한다.
+The independent reviewers (both red team and blind review) are new sessions that took no part in writing the draft. If they are unavailable, record the user's exception approval in checklist §8 or hold. A self-red-team in the same session does not meet the STANDARD requirement.
 
-통과 = **구현 승인(PASS-BUILD)**. 정의된 스코프의 데모·제품 구현을 허용한다.
+Pass = **build approval (PASS-BUILD)**. Allows the demo·product implementation of the defined scope.
 
-### 실전(COMMITMENT)
+### Live (COMMITMENT)
 
-다음 중 **하나라도** 있으면 이 단계로 올린다. 고위험 조건 하나를 낮은 조건들로 평균 내어 낮추지 않는다.
+Raise to this tier if **any one** of the following is present. Do not average one high-risk condition with lower conditions to bring it down.
 
-- 유료 고객
-- 실제 개인정보·민감 데이터
-- 자동 의사결정이나 사용자 피해 가능성
-- 계약·파트너·법무 책임, 또는 공식 대외 약속으로 고객 신뢰에 실질 피해가 가능한 브랜드 책임(통상적인 해커톤 심사·데모 공개는 무대)
-- 배포 후 지속 운영 책임
-- 되돌리기 비싼 아키텍처나 외부 약속
+- Paying customers
+- Real personal·sensitive data
+- Automated decisions or the possibility of user harm
+- Contract·partner·legal responsibility, or brand responsibility where an official external commitment could cause real harm to customer trust (an ordinary hackathon judging·demo release is STANDARD)
+- Ongoing operation responsibility after launch
+- An expensive-to-reverse architecture or external commitment
 
-추가 필수: 축약 PR-FAQ / 4대 리스크별 담당자와 증거 / 운영·실패·롤백 계획 / 구매자·사용자·승인자 분리 / 증거 기반 사업성 검토. 전부 점검표의 **실전 부록(§9)**에 기록한다.
+Additional required: a condensed PR-FAQ / an owner and evidence for each of the 4 risks / an operations·failure·rollback plan / separation of buyer·user·approver / an evidence-based business viability review. All are recorded in the checklist's **live appendix (§9)**.
 
-실전의 통과도 구현 승인이지만, 부록 전 항목과 **리스크별 승인자의 서명**이 있어야 발행한다. 미완 항목은 사람 판단 필요(NEEDS-HUMAN, 승인자 지정) 또는 보류(HOLD)다.
+Passing COMMITMENT is also build approval, but it is issued only when every appendix item and the **signature of the approver per risk** are present. Incomplete items are human decision required (NEEDS-HUMAN, approver designated) or hold (HOLD).
 
-## 판정(gate_verdict)과 문서 상태(status)는 별개다
+## The verdict (gate_verdict) and the document state (status) are separate
 
-`gate_verdict`는 이번 판정의 결과, `status`는 프레임 문서의 수명 상태다. 아래 문자열이 정본이며 JSON을 포함해 어디서나 그대로 쓴다.
+`gate_verdict` is the result of this verdict, `status` is the lifecycle state of the frame document. The strings below are canonical and are used verbatim everywhere, including in JSON.
 
 **gate_verdict:**
 
-| 판정 토큰 | 의미 |
+| verdict token | meaning |
 |---|---|
-| **PASS-PROBE** | 실험 승인 — 폐기 가능한 실험만 허용 |
-| **PASS-BUILD** | 구현 승인 — 정의된 스코프의 데모·제품 구현 허용 |
-| **HOLD** | 보류 — 구조는 있으나 증거나 의존성이 부족 |
-| **KILL** | 드롭 — 핵심 가정이 반증됐거나 비교 가치가 없음 |
-| **NEEDS-HUMAN** | 사람 판단 필요 — AI가 책임질 수 없는 판단의 승인자를 지정 |
+| **PASS-PROBE** | experiment approval — only the disposable experiment is allowed |
+| **PASS-BUILD** | build approval — allows the demo·product implementation of the defined scope |
+| **HOLD** | hold — the structure exists but the evidence or dependencies are lacking |
+| **KILL** | drop — a core assumption was refuted or there is no comparative value |
+| **NEEDS-HUMAN** | human decision required — designates an approver for a judgment AI cannot own |
 
-동결한 프레임을 다시 여는 것은 판정이 아니라 **별도 동결 해제 결정**이다. 요청 제출은 중간 상태(REOPEN_REQUESTED)로의 전이만 일으킬 수 있고, LOCKED에서 벗어나거나 복귀하는 **종결 전이는 `templates/reopen-request.md`의 결정 기록(APPROVED/REJECTED + approved_by·approved_at)만이** 일으킬 수 있다.
+Reopening a frozen frame is not a verdict but a **separate freeze-release decision**. Submitting a request can only cause a transition to the intermediate state (REOPEN_REQUESTED), and **only the decision record in `templates/reopen-request.md` (APPROVED/REJECTED + approved_by·approved_at) can cause a terminal transition** that leaves or returns to LOCKED.
 
-**status 전이 (이 표 밖의 전이는 없다):**
+**status transitions (there are no transitions outside this table):**
 
-| 전이 | 조건 |
+| transition | condition |
 |---|---|
-| DRAFT → LOCKED | gate_verdict가 PASS-PROBE 또는 PASS-BUILD이고, 사용자 승인 기록(approved_by, verdict_at)이 있을 때만 |
-| DRAFT 유지 | HOLD, NEEDS-HUMAN — 부족한 것이 해소될 때까지 |
+| DRAFT → LOCKED | only when gate_verdict is PASS-PROBE or PASS-BUILD and there is a user approval record (approved_by, verdict_at) |
+| DRAFT kept | HOLD, NEEDS-HUMAN — until what is lacking is resolved |
 | DRAFT → RETIRED | KILL |
-| LOCKED → REOPEN_REQUESTED | `REOPEN_REQUEST` 제출 즉시. 불변식에 의존하는 새 구현은 중단하고, 진행 중인 가변 요소 작업은 마무리 가능 |
-| REOPEN_REQUESTED → SUPERSEDED (+ 새 버전 DRAFT) | 동결 해제 결정 기록이 APPROVED (approved_by·approved_at 필수). **이전 프레임이 SUPERSEDED가 되는 유일한 시점** |
-| REOPEN_REQUESTED → LOCKED | 동결 해제 결정 기록이 REJECTED — 기존 gate_verdict와 동결이 그대로 복원 |
-| REOPEN_REQUESTED → RETIRED | 동결 해제 결정이 APPROVED이되 대체 프레임 없이 접기로 한 때(핵심 가정 반증 등) — approved_by·approved_at 필수 |
-| LOCKED, EXPIRES_AT 경과 | 의무 리뷰로 재판정하기 전까지 동결 만료, 새 위임 중단 |
+| LOCKED → REOPEN_REQUESTED | immediately upon submitting `REOPEN_REQUEST`. New implementation that depends on the invariants stops, and in-progress work on variable elements may be finished |
+| REOPEN_REQUESTED → SUPERSEDED (+ new version DRAFT) | the freeze-release decision record is APPROVED (approved_by·approved_at required). **The only moment the previous frame becomes SUPERSEDED** |
+| REOPEN_REQUESTED → LOCKED | the freeze-release decision record is REJECTED — the existing gate_verdict and freeze are restored as they were |
+| REOPEN_REQUESTED → RETIRED | the freeze-release decision is APPROVED but it is decided to fold without a replacement frame (e.g. a core assumption refuted) — approved_by·approved_at required |
+| LOCKED, EXPIRES_AT elapsed | the freeze expires and new delegation stops until re-judged by a mandatory review |
 
-저장소당 status가 LOCKED인 프레임은 **하나만** 존재한다. 새 버전의 동결은 이전 프레임이 SUPERSEDED 상태일 때만 발행한다.
+**Only one** frame with status LOCKED exists per repository. A new version's freeze is issued only when the previous frame is in SUPERSEDED status.
 
-## 증거 등급 E0–E4
+## Evidence grades E0–E4
 
-절대 점수가 아니다. 각 핵심 주장에 **어떤 종류의 근거**가 있는지 표시하는 용도이고, **주장 단위로 붙인다** — "E2가 있다"가 아니라 "어떤 주장에, 어떤 역할의 사람이, 어떤 맥락에서 준 E2인가"를 본다. 사용자의 칭찬(E2)으로 구매자의 지불 의사 주장을 채우면 안 되고, 리서치 에이전트가 웹에서 수집한 경쟁 서비스·리뷰 자료는 E1이지 E2가 아니다.
+It is not an absolute score. It marks **what kind of evidence** each core claim has, and **it is attached per claim** — not "there is E2" but "on which claim, a person in which role gave E2, in which context". You must not fill a buyer's willingness-to-pay claim with the user's praise (E2), and competing-service·review material a research agent collected on the web is E1, not E2.
 
-- **E0 — 추정**: 팀의 추정만 있음
-- **E1 — 정황**: 문서, 시장자료, 리뷰, 지원티켓, 공개 로그 등 간접 흔적
-- **E2 — 관찰**: 최근 과거 행동 인터뷰, 직접 업무 흐름 관찰
-- **E3 — 커밋먼트**: 데이터 제공, 일정 예약, 파일럿/LOI, 결제 등 비용 있는 행동
-- **E4 — 실사용 성과**: 실제 반복 사용·결제·업무 결과 변화
+- **E0 — estimate**: only the team's estimate
+- **E1 — circumstantial**: indirect traces like documents, market data, reviews, support tickets, public logs
+- **E2 — observation**: recent past-behavior interviews, direct work-flow observation
+- **E3 — commitment**: costly action like providing data, booking a schedule, a pilot/LOI, payment
+- **E4 — in-use performance**: real repeated use·payment·change in work results
 
-증거가 약하다고 무조건 실패는 아니다:
-- **연습**: E0 가설뿐이어도 유효한 확인 실험 또는 범위가 정해진 탐색 실험과 사용자 승인이 있으면 PASS-PROBE가 가능하다.
-  출처가 모델이라는 이유만으로 E0인 것도, 사용자가 채택했다는 이유만으로 등급이 올라가는 것도 아니다.
-  discovery 결과만으로 STANDARD·COMMITMENT의 외부 주장이나 위험 승인을 대신할 수 없다.
-- **무대**: 적용되는 핵심 주장에 최소 E1 이상 + 독립 블라인드 리뷰
-- **실전**: 가치에 관해 E2 이상 또는 E3, 주요 사업성 장애 해소
+Weak evidence is not automatically a failure:
+- **Practice (PROBE)**: even with only E0 hypotheses, PASS-PROBE is possible if there is a valid confirmation experiment or a scoped exploration experiment and user approval.
+  Just because the source is the model does not make it E0, and just because the user adopted it does not raise the grade.
+  Discovery results alone cannot substitute for STANDARD·COMMITMENT's external claims or risk approval.
+- **Stage (STANDARD)**: at least E1 or above on the applicable core claims + independent blind review
+- **Live (COMMITMENT)**: E2 or above or E3 regarding value, and the main business-viability obstacles resolved
 
-## AI 판정 출력 형식
+## AI verdict output format
 
 ```json
 {
@@ -106,21 +106,21 @@
     {
       "field": "actor_and_moment",
       "status": "FILLED | PARTIAL | MISSING | CONTRADICTORY",
-      "evidence_quote": "작성문에서 그대로 인용",
-      "reason": "판정 이유",
+      "evidence_quote": "quoted verbatim from the document",
+      "reason": "reason for the verdict",
       "human_review_required": false
     }
   ],
   "cross_field_conflicts": [],
   "unsupported_claims": [],
   "reopen_triggers_detected": [],
-  "allowed_next_commitment": "다음 단계에서 허용되는 최대 범위. 보류여도 스캐폴딩까지 허용처럼 명시 가능"
+  "allowed_next_commitment": "The maximum scope allowed in the next stage. Even under hold, may state up to scaffolding as allowed"
 }
 ```
 
-운용 규칙:
-- 문서에 없는 내용을 추론해 "채워짐"으로 처리하지 않는다
-- 모든 판정에 원문 인용을 붙인다
-- 사실성은 CLAIMED / EVIDENCED / CONTRADICTED로만 분류한다 (VERIFIED 없음)
-- 숫자 점수 평균으로 통과시키지 않는다. 결격 사유는 해당 여부로 검사하고, 전략 판단은 사람이 서명한다
-- `allowed_next_commitment`는 판정과 별개로 다음 행동의 상한을 적는 자리다. 보류 판정에서도 프로젝트 뼈대·타입·합성 데이터 준비처럼 되돌리기 쉬운 스캐폴딩까지 허용할 수 있으며, 아웃컴·완료 조건·사용자 경험에 종속되는 구현은 동결 뒤로 둔다
+Operating rules:
+- Do not infer content not in the document and treat it as "filled"
+- Attach a quote from the source text to every verdict
+- Classify factuality only as CLAIMED / EVIDENCED / CONTRADICTED (no VERIFIED)
+- Do not pass by averaging numeric scores. Check disqualifying reasons by whether they apply, and the human signs the strategic judgment
+- `allowed_next_commitment` is the place to write the ceiling on the next action, separate from the verdict. Even under a hold verdict, it may allow reversible scaffolding like project skeleton·types·synthetic data prep, and implementation that depends on the outcome·completion conditions·user experience is left behind the freeze

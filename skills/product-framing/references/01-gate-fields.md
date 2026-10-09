@@ -1,119 +1,119 @@
-# 점검표 필드별 작성 규칙
+# Rules for writing each checklist field
 
-8개 필드 — 번호는 templates/gate.md와 모든 문서에서 동일하다. 각 필드는 "없을 때 발생하는 실패"를 막기 위해 존재한다 — 칸을 채우는 것이 목적이 아니다.
+Eight fields — the numbers are the same in templates/gate.md and in every document. Each field exists to prevent "the failure that occurs when it is missing" — filling in a box is not the purpose.
 
-## 점검표 메타데이터 (필드 번호 밖 — 머리말)
+## Checklist metadata (outside the field numbers — the header)
 
-frame_id, 버전, 상태(DRAFT / LOCKED / REOPEN_REQUESTED / SUPERSEDED / RETIRED), 운용 단계, 결정권자, 유효기간, gate_verdict, verdict_at, approved_by. 문자열과 전이 규칙의 정본은 `references/02-tiers-and-verdicts.md`.
+frame_id, version, status (DRAFT / LOCKED / REOPEN_REQUESTED / SUPERSEDED / RETIRED), operating tier, decision-maker, validity period, gate_verdict, verdict_at, approved_by. The canonical source for the strings and the transition rules is `references/02-tiers-and-verdicts.md`.
 
-없으면: 여러 에이전트가 서로 다른 프레임을 정본으로 쓰고, 변경이 조용히 섞인다.
+If missing: multiple agents treat different frames as canonical, and changes get mixed in silently.
 
-## 1. 사용자와 순간
+## 1. User and moment
 
-적을 것: 사용자, 구매자/결정자, 심사자/주최사, 구체적 트리거, 최근 실제 사례, 근거 등급.
+Write: the user, the buyer/decision-maker, the evaluator/organizer, the specific trigger, a recent real example, the evidence grade.
 
-- "일반 사용자", "기업", "필요할 때" 금지. **사람/역할 + 상황 + 사건**을 적는다
-- 사용자와 구매자·심사자가 다르면 반드시 분리한다. 특히 B2B는 사용자·관리자·예산권자·법무가 다른 사람이다
-- "없애는 순간"에만 갇히지 않는다 — 재미·성취·신뢰처럼 새로 만드는 이득도 진전이다
-- 무대 이상은 **문제 압력**도 적는다: 발생 빈도·주기, 발생 시 손실, 지금인 이유, 최초 도달 사용자군, 확인 가능한 규모 지표. 이 블록은 실재하지만 투자 가치가 다른 문제를 구별한다
+- "General users", "companies", "when needed" are forbidden. Write a **person/role + situation + event**
+- If the user and the buyer·evaluator differ, always separate them. Especially in B2B, the user, administrator, budget holder and legal are different people
+- Do not get stuck only on the "moment of removal" — newly created gains like fun, achievement or trust are progress too
+- STANDARD and above also write **problem pressure**: frequency·cycle of occurrence, loss when it occurs, why now, the first user group reached, verifiable scale metrics. This block distinguishes problems that are real but differ in investment value
 
-없으면: "모두를 위한 플랫폼"이 되고 기능 우선순위가 충돌한다. 문제 압력이 없으면 실재하지만 투자 가치 없는 문제가 통과한다.
+If missing: it becomes a "platform for everyone" and feature priorities collide. Without problem pressure, a problem that is real but has no investment value passes.
 
-## 2. 현재 대안
+## 2. Current alternative
 
-적을 것: 현재 실제 행동, 사용 중인 도구·수작업·경쟁제품, **아무것도 하지 않는 경우와 그 이유**, 현재 대안의 비용·실패.
+Write: the current real behavior, the tools·manual work·competing products in use, **the case of doing nothing and its reason**, the current alternative's cost·failure.
 
-- 경쟁제품만 적지 않는다. 엑셀, 카카오톡, 선임에게 질문, 포기가 실제 경쟁자일 수 있다
-- 현 상태가 유지되는 장점도 적는다 — 사람들이 안 갈아타는 데는 이유가 있다
-- **위험한 우회는 강한 수요 증거다.** 현재 대안에 외부 결제, 비밀번호·계정 공유, 스크래핑·매크로, 그림자 엑셀, 정책 위반 같은 위험 감수가 보이면 표명 의향보다 강한 근거(E1 이상)로 적는다. `관찰된 우회 = 정당한 목적 + 위험한 수단 + 제품에 빠진 제약 처리`로 분해하고, 프레임은 수단을 편하게 만드는 것이 아니라 목적을 권한·한도·감사가 붙은 일급 기능으로 흡수한다
-- 무대 이상은 **전환 조건**도 적는다: 갈아탈 트리거, 안 갈아타는 이유, 전환 비용(절차·금전·신뢰·관계), 그 부담을 누가 지는가. 제품 가치가 전환 비용보다 커야 사람이 움직인다 — "아웃컴이 더 좋다"만으로 선택을 예측하면 안 된다. AI 제품은 "정확해도 못 믿는" 신뢰 비용과 이중 입력 비용이 특히 자주 붙는다
+- Do not write only competing products. Excel, KakaoTalk, asking a senior, giving up may be the real competitors
+- Write the advantages of keeping the status quo too — there is a reason people do not switch
+- **A risky workaround is strong demand evidence.** If the current alternative shows risk-taking like external payment, password·account sharing, scraping·macros, shadow Excel or policy violations, write it as evidence stronger than stated intent (E1 or above). Decompose it as `observed workaround = legitimate purpose + risky means + constraint handling missing from the product`, and the frame absorbs the purpose as a first-class feature with permissions·limits·audit, rather than making the means convenient
+- STANDARD and above also write the **switching conditions**: the trigger to switch, the reason not to switch, the switching cost (procedure·money·trust·relationship), and who bears that burden. Product value must exceed the switching cost for people to move — you cannot predict a choice from "the outcome is better" alone. AI products especially often carry a trust cost of "accurate but not believed" and a double-entry cost
 
-없으면: 존재하지 않는 공백시장을 상상하고, 비교 기준 없이 "편리하다"고 주장하게 된다. 전환 비용이 없으면 "더 나은데 아무도 안 갈아타는" 제품이 통과한다.
+If missing: you imagine a nonexistent empty market and claim "it's convenient" without a comparison baseline. Without switching costs, a product that is "better but no one switches" passes.
 
-## 작성 주체, 근거, 채택을 구별한다
+## Distinguish writer, evidence and adoption
 
-사용자가 말한 경험, 확인한 외부 사실, 모델이 제안한 해법은 서로 구별한다.
-모델이 작성했다는 이유만으로 실제 자료에 근거한 주장을 E0로 내리지 않는다.
-제안 출처 토큰은 작성과 채택을 나타내며, 증거 등급은 주장과 자료에 맞춰 별도로 붙인다.
-사용자의 관심이나 일부 수긍을 최종 채택·실행 승인으로 확대하지 않는다.
+Distinguish the experience the user described, the external facts that were confirmed and the solution the model proposed.
+Do not lower a claim grounded in real material to E0 just because the model wrote it.
+Proposal-source tokens indicate writing and adoption; the evidence grade is attached separately to fit the claim and the material.
+Do not expand the user's interest or partial agreement into final adoption·execution approval.
 
-## 3. 달라지는 것
+## 3. What changes
 
-적을 것: 사용자가 얻을 진전과 아웃컴, 관측할 변화, 기준선 또는 대리지표, 성공 기준, 피해·안전 기준.
-`discovery`에서는 아직 모르는 제품 성공 기준을 형성 중이라고 적고, 확인할 경험과 관찰 방법을 §6에 연결한다.
-안전·입력 보존·데이터·범위 조건은 여전히 사전에 정한다. 외부 성과를 주장할 때에는 탐색 관찰만으로 성공을 선언하지 않는다.
+Write: the progress and outcome the user gains, the change to be observed, the baseline or proxy metric, the success criteria, the harm·safety criteria.
+In `discovery`, write that the product success criteria not yet known are still forming, and connect the experience to be confirmed and the observation method to §6.
+Safety, input preservation, data and scope conditions are still set in advance. When claiming external performance, do not declare success from exploration observations alone.
 
-- 기능 수, 화면 수, "AI 정확도"로 끝내지 않는다
-- 사용자의 행동·시간·오류·비용·위험·성공률 중 **실제로 달라지는 것**을 적는다
+- Do not stop at the number of features, the number of screens or "AI accuracy"
+- Write **what actually changes** among the user's behavior·time·errors·cost·risk·success rate
 
-없으면: 기능 완성·데모 작동을 가치로 착각한다.
+If missing: you mistake feature completion·a working demo for value.
 
-## 4. 왜 이게 나은가
+## 4. Why this is better
 
-"왜 나은가"를 둘로 쪼갠다:
+Split "why it is better" into two:
 
-- **차별 메커니즘**: 우리가 무엇을 다르게 하기 때문에
-- **발생 가치**: 그래서 사용자의 행동·결과가 어떻게 달라지는가
+- **Differentiation mechanism**: because we do something differently
+- **Value created**: and so how the user's behavior·results change
 
-적을 것: 실제 비교 대상, 우리만의 메커니즘, 인과 사슬(메커니즘 → 행동 변화 → 아웃컴), 믿을 근거.
+Write: the real comparison target, our own mechanism, the causal chain (mechanism → behavior change → outcome), the credible evidence.
 
-- "더 빠름", "편리함", "혁신적", "원스톱" 단독 사용 금지. 비교 대상·조건·메커니즘·아웃컴이 모두 있어야 한다
+- Using "faster", "convenient", "innovative", "one-stop" alone is forbidden. The comparison target·conditions·mechanism·outcome must all be present
 
-없으면: "AI라서 빠르다" 같은 검증 불가능한 문구만 남는다.
+If missing: only unverifiable phrases like "fast because it's AI" remain.
 
-## 5. 도입 경로·생태계 연결
+## 5. Adoption path·ecosystem link
 
-두 부분으로 나뉜다. **도입 경로는 무대 이상 필수**: 최초 사용자가 제품을 어디서 만나는지, 누가 사용 시작을 결정하는지, 누가 배포·온보딩하는지, 기존 업무 흐름 어디에 꽂히는지, 그 경로에 실제 접근 가능하다는 근거. 구현이 싸질수록 병목은 만드는 것이 아니라 **도달하는 것**이다 — 좋은 제품도 만날 방법이 없으면 죽는다.
+It splits into two parts. **The adoption path is required for STANDARD and above**: where the first user meets the product, who decides to start using it, who deploys·onboards, where it plugs into the existing work flow, and the evidence that this path is actually reachable. The cheaper implementation gets, the bottleneck is not building but **reaching** — a good product dies if there is no way to meet it.
 
-**주최사 의존만 조건부다**: 주최사·필수 파트너 의존이 없는 프로젝트는 그 부분만 `N/A + 이유`로 끝낸다 — 가상의 연결을 지어내지 않는다. 도입 경로까지 N/A가 되면 안 된다. 주최사가 해당하는 경우, 이름만 붙이면 미작성으로 판정한다. 사슬 전체가 있어야 한다:
+**Only organizer dependence is conditional**: for a project with no dependence on an organizer or required partner, end only that part with `N/A + reason` — do not invent a fictional link. The adoption path must not become N/A too. Where an organizer applies, attaching only the name is judged as unwritten. The whole chain must be present:
 
 ```text
-[사용자 트리거 발생]
-→ [주최사의 어떤 기존 데이터·서비스·API]를 사용해
-→ [제품이 어떤 판단·변환·조치]를 수행하고
-→ [어느 기존 화면·업무·서비스]로 결과를 넘겨 (인계)
-→ [사용자 아웃컴]을 만들며
-→ [주최사의 사업·운영·브랜드 목표]도 달라진다
+[user trigger occurs]
+→ using [some existing data·service·API of the organizer]
+→ [the product performs some judgment·transformation·action]
+→ hands the result to [which existing screen·work·service] (handoff)
+→ creating [the user outcome]
+→ and [the organizer's business·operations·brand goals] also change
 ```
 
-어느 화살표가 빠져도 "이름만 붙였다"는 평가를 받는다. 주최사 자산이 없어도 같은 제품이라면 그 관계를 정직하게 밝힌다.
+If any arrow is missing, it is judged as "attached only the name". If the same product works without the organizer's assets, state that relationship honestly.
 
-참고 — 심사 배점은 대회마다 다르지만, 문제·가치 설명은 여러 항목을 관통한다: 무엇을 해결하는지 불명확하면 Impact가, 주최사 연결이 피상적이면 Relevance가, 차별화가 불명확하면 Originality가, 아웃컴이 불명확하면 Presentation이 같이 약해진다.
+Note — judging weights differ per contest, but the problem·value description cuts across several items: if what it solves is unclear, Impact weakens; if the organizer link is superficial, Relevance; if differentiation is unclear, Originality; if the outcome is unclear, Presentation weakens too.
 
-## 6. 가장 위험한 가정과 실험 계약
+## 6. The most dangerous assumption and the experiment contract
 
-적을 것: `experiment_kind`(validation 또는 discovery), 현재 가장 중요한 불확실성, 그것을 먼저 살필 이유,
-기존 상태와 비교할 경험, 관찰 방법, 기한·중단 조건, 결과가 바꿀 다음 선택이다.
+Write: `experiment_kind` (validation or discovery), the currently most important uncertainty, why to examine it first,
+the experience to compare against the existing state, the observation method, the deadline·stop conditions, and the next choice the result will change.
 
-- `validation`이면 핵심 주장과 같은 관측을 설명할 경쟁 가설을 적고, PASS·FAIL 기준을 결과 전에 고정한다.
-  높은 사용률은 호의·무료·새로움 때문일 수 있으므로 관측을 원하는 이유로만 해석하지 않는다.
-- `discovery`이면 아직 제품 기준을 모르는 이유, 어떤 장면과 차이를 경험할지, 무엇을 남길지와 멈출 조건을 정한다.
-  새로운 기준을 찾는 것이 목적이며 가짜 PASS·FAIL을 만들어 넣지 않는다. 두 완성된 해법이 반드시 있어야 하지는 않지만,
-  현재 상태 또는 구별할 실제 경험이 있어야 한다.
-- 두 종류 모두 안전·쓰기·데이터 경계와 예산, 사용자 승인 조건은 고정한다. 만들거나 관찰할 수 없는 상태는 별도로 알린다.
-- 탐색 후 관찰·새로 드러난 차이·다음 선택을 기록한다. 새 기준을 과거 회차에 소급해 성공으로 바꾸지 않는다.
-  제품 성과를 주장하려면 기준을 정한 별도 확인 회차가 필요하다.
-- 이 필드는 **실험 계약**이다 — 프레임과 달리 실험 회차마다 갱신되는 것이 정상이다
-- 위험한 우회를 공식 기능으로 흡수하는 프레임이면 "공식 경로가 우회를 대체하는가, 함께 쓰이며 오히려 증폭하는가"를 가장 위험한 가정 후보에 올리고, 실험·출시 후 측정에 대체/병행/신규 악용을 구분해 넣는다
-- 실험 뒤 결과 기록(`observed_result`·`decision_taken`)을 채운다. 사전 약속과 실제 실행을 구분하고, 회차를 올릴 때 이전 기록은 `prior_cycle_ref`로 남긴다
+- For `validation`, write a competing hypothesis that would explain the same observation as the core claim, and fix the PASS·FAIL criteria before the result.
+  A high usage rate may be due to favor·free access·novelty, so do not interpret the observation only as the reason you want.
+- For `discovery`, decide the reason you do not yet know the product criteria, which scene and difference you will experience, what to leave behind, and the stop conditions.
+  The purpose is to find new criteria, and you do not insert fake PASS·FAIL. Two complete solutions are not strictly required, but
+  there must be a current state or a real experience to distinguish.
+- For both kinds, fix the safety·write·data boundaries and budget, and the user approval conditions. State separately any state that cannot be built or observed.
+- After exploration, record observations, newly revealed differences and the next choice. Do not retroactively change new criteria on past cycles into a success.
+  To claim product performance, you need a separate confirmation cycle with criteria set.
+- This field is an **experiment contract** — unlike the frame, it is normal for it to be updated every experiment cycle
+- For a frame that absorbs a risky workaround as an official feature, put "does the official path replace the workaround, or is it used alongside and actually amplified" among the most dangerous assumption candidates, and include distinguishing replacement/parallel/new abuse in the experiment and post-launch measurement
+- After the experiment, fill in the result record (`observed_result`·`decision_taken`). Distinguish prior commitment from actual execution, and when raising the cycle, keep earlier records via `prior_cycle_ref`
 
-없으면: 코딩이 자동 기본값이 되고, 결과가 나온 뒤 성공 기준을 바꾸게 된다.
+If missing: coding becomes the automatic default, and you change the success criteria after the result comes in.
 
-## 7. 스코프와 약속
+## 7. Scope and commitments
 
-적을 것: 이번 단계에서 만들 것 / 만들지 않을 것 / 폐기 가능한 부분 / 외부에 약속하는 것 / 최대 시간·비용·데이터 노출 / 롤백 방법.
+Write: what will be built in this stage / what will not be built / the disposable part / what is promised externally / the maximum time·cost·data exposure / the rollback method.
 
-없으면: 구현 범위가 슬금슬금 는다.
+If missing: the implementation scope creeps up.
 
-## 8. 프레임 선택과 리뷰 기록
+## 8. Frame selection and review record
 
-적을 것: 선택한 프레임과 이유, 검토했다 탈락시킨 프레임과 이유, 동결할 불변식(정본은 frame-lock 템플릿의 6개 목록), 열어둘 가변 요소, 동결 해제 신호, 리뷰 기록(검토자·독립성·지적·처리).
+Write: the chosen frame and the reason, the frames reviewed and rejected and the reason, the invariants to freeze (canonical source is the 6-item list in the frame-lock template), the variable elements to keep open, the freeze-release signals, the review record (reviewer·independence·findings·disposition).
 
-없으면: 잘못된 프레임을 너무 늦게 갈아엎고, 블라인드 리뷰가 실제로 있었는지 아무도 증명 못 한다.
+If missing: you overturn a wrong frame too late, and no one can prove a blind review actually happened.
 
 ---
 
-# 좋은 예 (가상 예시 — 수치는 예시일 뿐)
+# Good example (fictional example — the numbers are examples only)
 
 ```markdown
 frame_id: host-cs-delay-compensation
@@ -121,61 +121,61 @@ version: 2
 status: LOCKED
 tier: STANDARD
 
-사용자: 주최사 쇼핑앱 야간 고객센터의 신규 상담원
-구매자/결정자: 고객센터 운영 책임자
-트리거: 실시간 채팅 중 사용자가 복수 배송사 주문의 지연보상 대상 여부를 질문한다 (seed)
+user: a new agent at the organizer's shopping-app night customer center
+buyer/decision-maker: the customer center operations lead
+trigger: during a live chat, the user asks whether an order with multiple carriers qualifies for delay compensation (seed)
 
-문제 압력:
-야간 문의 중 지연보상 관련이 주당 약 120건 [E1: CS 티켓 태그 집계].
-오답 시 잘못된 보상 지급 또는 재문의가 발생. 최초 도달 사용자군은 야간조 신규 상담원 8명.
-지금인 이유: 4분기 물류 성수기를 앞두고 야간 신규 채용이 늘어 오답·에스컬레이션이 증가 중.
+problem pressure:
+delay-compensation-related night inquiries run about 120 per week [E1: CS ticket tag tally].
+A wrong answer causes a wrong compensation payment or a re-inquiry. The first user group reached is 8 new night-shift agents.
+Why now: ahead of the Q4 logistics peak season, night new hires are increasing and wrong answers·escalations are rising.
 
-현재 대안:
-상담원이 정책 위키 세 곳을 검색한 뒤 예외 여부를 선임에게 묻는다.
-최근 관찰한 네 건 중 세 건에서 답변 초안 작성에 3분 이상 걸렸다. [E2: 업무 흐름 관찰 기록]
+current alternative:
+The agent searches three policy wikis, then asks a senior whether an exception applies.
+In three of the four recently observed cases, writing the answer draft took more than 3 minutes. [E2: work-flow observation record]
 
-전환 조건:
-갈아탈 트리거: 채팅 SLA 경고가 뜨는 순간 초안 버튼을 누른다 — 기존 위키 검색과 병행 시작. (AI제안→수정)
-초안이 기존 상담 응답창 안에 뜨므로 이중 입력 없음. 갈아타지 않는 이유는
-AI 초안 불신 — 아래 가장 위험한 가정의 실험이 이를 직접 겨냥한다. 전환 부담(검토 시간)은 상담원 본인.
+switching conditions:
+switch trigger: at the moment the chat SLA warning appears, they press the draft button — starting in parallel with the existing wiki search. (AI proposal→edited)
+The draft appears inside the existing support reply box, so no double entry. The reason not to switch is
+distrust of the AI draft — the experiment under the most dangerous assumption below targets this directly. The switching burden (review time) is the agent's own.
 
-사용자 아웃컴: 근거가 인용된 답변 초안을 60초 안에 얻는다
-성공 기준: 테스트 시나리오 5건 중 4건 이상을 감독자가 수정 없이 승인, 초안 시간 60초 이하
+user outcome: obtain an answer draft with cited sources within 60 seconds
+success criteria: a supervisor approves 4 or more of 5 test scenarios without edits, and draft time is 60 seconds or less
 
-비교 대상: 기존 위키 검색, 선임 문의, 범용 사내 RAG
-고유 메커니즘: 주문·배송사·정책 버전·예외 상태를 CRM 맥락으로 함께 받아
-적용 조항을 선택하고 출처와 함께 초안을 만든다
-인과 사슬: CRM context 결합 → 문서와 주문 정보를 수동 대조하지 않음 → 답변 시간과 잘못된 보상 안내 감소
+comparison target: the existing wiki search, asking a senior, a general internal RAG
+own mechanism: receive order·carrier·policy version·exception state together as CRM context,
+select the applicable clause, and build the draft with its sources
+causal chain: combining CRM context → not manually cross-checking documents against order information → reduced answer time and wrong compensation guidance
 
-도입 경로:
-기존 상담 콘솔에 삽입되므로 별도 발견 경로 불요. 배포·온보딩은 고객센터 운영 책임자가 결정
-[E2: 책임자가 파일럿 조건을 직접 제시함].
+adoption path:
+Since it is inserted into the existing support console, no separate discovery path is needed. Deployment·onboarding is decided by the customer center operations lead
+[E2: the lead proposed the pilot conditions directly].
 
-주최사 연결 사슬: 보상 문의 채팅 시작 → 주최사 CRM Order API가 주문·배송상태 전달
-→ 정책 판정·근거 검색 → 기존 상담 응답창에 초안 삽입 → 처리 사유코드 저장
-→ 상담원 SLA와 정책 준수 개선
+organizer link chain: delay-compensation inquiry chat starts → the organizer's CRM Order API passes the order·shipping status
+→ policy judgment·evidence search → the draft is inserted into the existing support reply box → the handling reason code is saved
+→ agent SLA and policy compliance improve
 
 learning_cycle: 1
-가장 위험한 가정: VALUE — 감독자가 AI 초안을 정확해도 신뢰하지 않을 수 있다
-경쟁 가설: 승인율이 높아도 "실험이라서 관대했다"일 수 있다 → 구별: 실제 발송 허용 여부까지 확인
-실험: 실제형 시나리오 5개를 Wizard of Oz 방식으로 초안 제공
-PASS: 4건 이상 무수정 승인 + 감독자가 파일럿 허용
-FAIL: 신뢰 문제로 3건 이상 수동 재작성 또는 파일럿 거부
+most dangerous assumption: VALUE — even if the AI draft is accurate, the supervisor may not trust it
+competing hypothesis: even a high approval rate could be "they were lenient because it was an experiment" → distinguish: check up to whether actually sending was allowed
+experiment: provide drafts for 5 realistic scenarios in a Wizard of Oz manner
+PASS: 4 or more approved without edits + the supervisor allows the pilot
+FAIL: 3 or more manually rewritten due to a trust problem, or the pilot is refused
 
-스코프: 배송지연 보상 정책 하나만. 자동 발송 안 함. 범용 챗봇 안 만듦
-동결 해제: 실제 문의의 주요 트리거가 배송지연이 아님(트리거 불변식 붕괴) / 필수 CRM 필드 접근 불가(주최사 연결 사슬 붕괴)
-(승인 기준 미달은 동결 해제가 아니다 — §6에 결과를 기록하고 다음 실험 회차로 간다)
+scope: only one policy, delivery-delay compensation. No automatic sending. Not building a general chatbot
+freeze release: the main trigger of real inquiries is not delivery delay (trigger invariant collapses) / required CRM fields are inaccessible (organizer link chain collapses)
+(falling short of the approval criteria is not a freeze release — record the result in §6 and go to the next experiment cycle)
 ```
 
-# 나쁜 예
+# Bad example
 
 ```markdown
-사용자: 모든 고객센터 직원
-문제: 반복 업무가 많고 AI 플랫폼이 없다
-현재 대안: 수작업
-가치: AI로 더 빠르고 정확하고 편리하게 처리한다
-차별점: 원스톱 플랫폼이며 주최사 API를 활용한다
-검증: MVP를 만들어 사용자 반응을 본다
+user: all customer center staff
+problem: there is a lot of repetitive work and no AI platform
+current alternative: manual work
+value: AI processes it faster, more accurately and more conveniently
+differentiator: a one-stop platform that uses the organizer's API
+validation: build an MVP and see the user response
 ```
 
-불통과 이유: 사용자·트리거 없음 / 문제를 솔루션 부재로 씀 / 현재 대안이 구체적이지 않음 / 관측 가능한 아웃컴 없음 / 비교 대상·메커니즘·믿을 근거 없음 / 주최사 API의 입력·처리·인계 없음 / 가장 위험한 가정과 사전 PASS/FAIL 없음 / 스코프 없음.
+Failure reasons: no user·trigger / problem written as the absence of a solution / current alternative not concrete / no observable outcome / no comparison target·mechanism·credible evidence / no input·processing·handoff for the organizer API / no most dangerous assumption and prior PASS/FAIL / no scope.

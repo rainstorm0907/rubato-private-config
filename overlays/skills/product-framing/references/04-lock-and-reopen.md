@@ -1,90 +1,90 @@
-# 프레임 동결, 표류 방지, 동결 해제
+# Frame freeze, drift prevention, freeze release
 
-## 무엇을 동결하고 무엇을 여는가
+## What to freeze and what to open
 
-동결하는 것은 제품의 진실이 아니라 **다음 실험 동안 유지할 프레임**이다.
+What gets frozen is not the truth of the product but **the frame to hold during the next experiment**.
 
-- **동결 (불변식)**: 사용자, 트리거, 현재 대안, 약속한 아웃컴, 비교 가치, 도입 경로·생태계 연결 사슬 — **정본은 `templates/frame-lock.md`의 6개 목록**
-- **가장 위험한 가정은 동결하지 않는다** — frame-lock 템플릿의 EXPERIMENT_CONTRACT에서 실험 회차로 관리한다. 실험 통과 후 다음 가정으로 넘어가는 것은 정상 학습이지 동결 해제가 아니다
-- **개방 (가변 요소)**: UI, 기능 조합, 기술 구현, 프로토타입 형태
-- **다시 여는 조건**: 불변 조건과 충돌하는 새 관찰이 있거나, 결정권자가 바꾸려는 목표·가치·범위를 명시했을 때. 어느 경우든 기존 승인 전이를 따른다.
+- **Freeze (invariants)**: user, trigger, current alternative, committed outcome, comparative value, adoption path·ecosystem link chain — **the canonical source is the 6-item list in `templates/frame-lock.md`**
+- **The most dangerous assumption is not frozen** — it is managed by experiment cycle in the frame-lock template's EXPERIMENT_CONTRACT. Moving to the next assumption after the experiment passes is normal learning, not a freeze release
+- **Open (variable elements)**: UI, feature combination, technical implementation, prototype form
+- **Conditions to reopen**: when there is a new observation that conflicts with an invariant condition, or when the decision-maker states a goal·value·scope they want to change. In either case, follow the existing approval transitions.
 
-## 프레임 동결 조건
+## Frame freeze conditions
 
-1. 결정 질문이 명시돼 있다 — "어떤 사용자를 위한 제품인가?"가 아니라 "A 프레임과 B 프레임 중 어느 것을 다음 실험에 채택할 것인가?"
-2. 실제로 중요한 다른 구상이 같은 기준으로 비교됐다. 후보 수를 채우지 않으며 기존 방향 유지와 미실행도 비교할 수 있다.
-3. 선택한 프레임이 **해당 운용 단계에 적용되는** 결격 사유를 모두 피한다 (연습은 SKILL.md의 축소판 목록)
-4. 남은 불확실성을 실험으로 표현할 수 있다
-5. 추가 브레인스토밍보다 다음 실험이 더 구별력 있는 정보를 준다
-6. 결정권자가 프레임 버전을 승인한다
+1. The decision question is stated — not "what kind of user is this product for?" but "which of frame A and frame B do we adopt for the next experiment?"
+2. Actually important alternatives were compared on the same criteria. You do not fill a candidate count, and keeping the current direction and not executing are also comparable options.
+3. The chosen frame avoids all disqualifying reasons **applicable to that operating tier** (for PROBE, the abridged list in SKILL.md)
+4. The remaining uncertainty can be expressed as an experiment
+5. The next experiment gives more discriminating information than further brainstorming
+6. The decision-maker approves the frame version
 
-동결은 `templates/frame-lock.md` 형식으로 발행한다. 단 **연습은 발행을 생략할 수 있다** — 점검표의 실험 계약(§6)과 상한(§7)이 동결 역할을 한다 (정본: frame-lock 템플릿 상단 규칙).
+The freeze is issued in the `templates/frame-lock.md` format. But **PROBE may skip issuing it** — the checklist's experiment contract (§6) and caps (§7) serve as the freeze (canonical: the rule at the top of the frame-lock template).
 
-## 구현 중 운용 규칙
+## Operating rules during implementation
 
-동결 전에는 프로젝트 뼈대, 타입, 합성 데이터 준비처럼 되돌리기 쉬운 스캐폴딩을 허용한다. 아웃컴·완료 조건·사용자 경험에 종속되는 구현은 동결 뒤에 시작한다.
+Before the freeze, reversible scaffolding like a project skeleton, types and synthetic data prep is allowed. Implementation that depends on the outcome·completion conditions·user experience starts after the freeze.
 
-1. **가치 판단과 구현 판단의 시간·역할을 분리한다.** 같은 사람이 하더라도 탐색 프롬프트와 구현 프롬프트를 나누고, 구현 워커는 프레임 문서를 수정하지 못한다. 불변식 변경 요청에는 `FRAME_CONFLICT`를 반환한다.
-2. **확인 실험의 성공 기준은 코드 전에 적고 결과 뒤에 바꾸지 않는다.** 탐색 실험은 §6에 탐색 질문·비교 장면·관찰 방법·중단 및 보호 조건을 먼저 적는다. 새로 얻은 제품 기준은 다음 회차에 쓰고 지난 결과를 성공으로 다시 적지 않는다.
-3. **모든 구현 작업에 아웃컴 연결을 붙인다:**
+1. **Separate the time·role of value judgment and implementation judgment.** Even for the same person, split the exploration prompt and the implementation prompt, and the implementation worker cannot modify the frame document. To an invariant change request, return `FRAME_CONFLICT`.
+2. **Write the confirmation experiment's success criteria before the code and do not change them after the result.** For an exploration experiment, first write the exploration question·comparison scenes·observation method·stop and protection conditions in §6. Use newly obtained product criteria in the next cycle and do not rewrite past results as a success.
+3. **Attach an outcome link to every implementation task:**
    ```text
-   작업:
+   task:
    frame_id:
    supported_hypothesis_or_discovery_question:
    user_outcome_link:
    acceptance_test_or_observation_plan:
    ```
-4. **진행률이 아니라 새 증거가 생길 때 재판정한다.** "기능이 80% 완성됐으니 계속"이 아니라 "가치 가설에 새 근거가 생겼는가"로 본다.
-5. **외부 블라인드 검토자를 둔다.** 구현 과정을 모르는 사람(또는 새 세션)이 문서·데모만 보고 사용자, 문제, 대안, 차별점, 주최사 연결을 복원하게 한다.
-6. **프로토타입은 폐기 가능하다고 선언한다.** 실험 코드가 제품 코드의 씨앗으로 자동 승격되지 않게 한다.
+4. **Re-judge when new evidence appears, not by progress.** Look at "has new ground for the value hypothesis appeared", not "the feature is 80% done, so continue".
+5. **Put an external blind reviewer in place.** Someone (or a new session) who does not know the implementation process reconstructs the user, problem, alternative, differentiator and organizer link from the document·demo alone.
+6. **Declare the prototype disposable.** Do not let experiment code automatically promote into the seed of product code.
 
-## 동결 해제 신호 — 이때만 다시 연다
+## Freeze-release signals — reopen only then
 
-실험 실패 자체는 동결 해제가 아니다. 점검표 §6에 결과를 기록하고 다음 실험 회차에서 가정을 교체하거나 실험을 재설계하거나 드롭한다. 동결 해제는 **새 관찰이 불변식 6개 중 하나와 충돌하거나, 결정권자가 그 조건을 바꾸려는 이유를 명시했을 때** 요청한다. 단순한 호감이나 에이전트의 추측은 변경 승인으로 보지 않는다. 관찰에 근거한 예시는 다음과 같다:
+An experiment failure itself is not a freeze release. Record the result in checklist §6 and, in the next experiment cycle, replace the assumption, redesign the experiment or drop it. Request a freeze release **when a new observation conflicts with one of the 6 invariants, or when the decision-maker states a reason to change that condition**. Mere fondness or an agent's guess is not treated as approval to change. Observation-based examples are:
 
-- 실제 행동 관찰이 핵심 문제·workaround 가설을 반복해서 부정한다
-- 사용성·기술은 되는데 사용·구매 의향이 없다
-- 주최사 API·서비스가 필요한 트리거 정보를 제공하지 못한다
-- 더 강한 대안이 발견돼 차별점이 사라졌다
-- 법무·데이터·운영 제약으로 핵심 메커니즘이 성립하지 않는다
-- 사용자·구매자·심사자가 서로 다른 아웃컴을 요구한다
-- 팀원과 에이전트가 같은 제품을 서로 다른 사용자·문제로 설명한다
-- 아웃컴을 관측할 방법 자체가 없다
+- Actual behavior observation repeatedly refutes the core problem·workaround hypothesis
+- Usability·technology works but there is no intent to use·purchase
+- The organizer API·service cannot provide the trigger information needed
+- A stronger alternative is found and the differentiator disappears
+- The core mechanism does not hold due to legal·data·operations constraints
+- The user·buyer·evaluator demand different outcomes
+- Team members and agents explain the same product as different users·problems
+- There is no way at all to observe the outcome
 
-## 동결 해제 사유가 아닌 것
+## What is not a reason for freeze release
 
-- 구현이 예상보다 귀찮다
-- 새 UI 아이디어가 더 멋져 보인다
-- 에이전트가 다른 기술을 추천한다
-- 발표 직전에 새로운 서사를 붙이면 더 인상적일 것 같다
+- The implementation is more annoying than expected
+- A new UI idea looks cooler
+- An agent recommends a different technology
+- A new narrative added right before the presentation would seem more impressive
 
-단, 구현 난도가 핵심 메커니즘이나 실현 가능성 자체를 무너뜨리면 정당한 동결 해제 사유다.
-결정권자는 경험을 통해 또는 자신의 가치판단에 따라 목표를 바꾸자고 요청할 수 있다.
-어느 불변 조건과 외부 약속에 영향을 주는지 기록하고 기존 결정 기록으로 승인 또는 기각한다.
-새 목표는 관측된 시장 사실로 위장하지 않으며, 계약·개인정보·안전 책임을 동의만으로 면제하지 않는다.
+However, if the implementation difficulty collapses the core mechanism or the feasibility itself, that is a legitimate reason for freeze release.
+The decision-maker may request a change of goal through experience or by their own value judgment.
+Record which invariant condition and external commitment it affects, and approve or reject it with the existing decision record.
+A new goal is not disguised as an observed market fact, and contract·personal-data·safety responsibility is not waived by consent alone.
 
-동결 해제 요청은 `templates/reopen-request.md` 형식으로 만든다. 제출~승인 사이의 상태 규칙(REOPEN_REQUESTED 동안 새 구현 착수 중단, 승인 시 SUPERSEDED, 기각 시 LOCKED 복귀)도 그 템플릿과 `references/02-tiers-and-verdicts.md`의 전이표를 따른다.
+The freeze-release request is made in the `templates/reopen-request.md` format. The state rules between submission and approval (stop starting new implementation during REOPEN_REQUESTED, SUPERSEDED on approval, return to LOCKED on rejection) also follow that template and the transition table in `references/02-tiers-and-verdicts.md`.
 
-## 이 워크플로우 자체의 성과 측정
+## Measuring the performance of this workflow itself
 
-"문서를 더 많이 작성했다"로 측정하면 다시 목표 전치가 일어난다.
+If you measure by "wrote more documents", goal displacement happens again.
 
-**최우선 측정 — 블라인드 프레임 전달** (첫 실전부터): 시작 전 원안 원문을 `raw-brief-<frame_id>.md`로 동결한다. 작성 대화를 못 본 새 세션에게 원안 원문과 동결된 점검표를 각각 주고 사용자·트리거 / 현재 대안 / 아웃컴 / 나은 이유 / 도입 경로 / 다음 검증을 복원시킨다. 항목별 MATCH / PARTIAL / MISSING / INVENTED를 비교해 점검표 쪽의 MATCH는 늘고 INVENTED는 줄어야 한다. 같은 방식으로 30초 피치도 점검한다.
+**Top-priority measurement — blind frame relay** (from the first COMMITMENT): before starting, freeze the original text of the raw brief as `raw-brief-<frame_id>.md`. Give a new session that did not see the writing conversation the original raw brief and the frozen checklist separately, and have it reconstruct the user·trigger / current alternative / outcome / reason it is better / adoption path / next validation. Compare MATCH / PARTIAL / MISSING / INVENTED per item, and the checklist side's MATCH should rise and INVENTED fall. Check the 30-second pitch the same way.
 
-그 외 지표:
+Other metrics:
 
-- **프레임 명료성**: 블라인드 검토자가 사용자·트리거, 현재 대안, 아웃컴, 차별 이유, 주최사 연결을 정확히 복원하는가
-- **프레임 표류**: 구현 시작 후 불변식 6개가 버전 증가 없이 바뀐 횟수. 가장 위험한 가정은 정상적으로 교체되므로 제외한다
-- **학습 전 낭비**: 첫 외부 증거·반증 전에 투입된 구현 시간
-- **증거 지연 시간**: 프레임 동결부터 첫 결정에 영향을 준 증거까지의 시간
-- **연결 없는 작업**: 어떤 아웃컴·가설에도 연결되지 않는 구현 작업의 비율
-- **점검표 부담**: 전체 대비 점검표 작성·검토 시간. 가역성 높은 프로젝트에서 계속 커지면 운용 단계가 과중하다
+- **Frame clarity**: does the blind reviewer accurately reconstruct the user·trigger, current alternative, outcome, reason for differentiation, organizer link
+- **Frame drift**: the number of times the 6 invariants changed after implementation began without a version increase. The most dangerous assumption is excluded because it is normally replaced
+- **Waste before learning**: implementation time invested before the first external evidence·refutation
+- **Evidence latency**: the time from frame freeze to the evidence that influenced the first decision
+- **Unlinked work**: the fraction of implementation work not linked to any outcome·hypothesis
+- **Checklist burden**: checklist writing·review time relative to the whole. If it keeps growing on a highly reversible project, the operating tier is too heavy
 
-## 이 워크플로우를 수정해야 하는 신호
+## Signals that this workflow should be changed
 
-- 문서는 통과하는데 블라인드 검토자가 가치를 설명하지 못한다
-- 점검표 작성 뒤에도 구현 시작 직후 프레임이 반복 변경된다
-- 증거 없는 문구가 매번 자동 통과한다
-- 좋은 실험보다 문서 형식 맞추기에 시간이 더 든다
-- 모든 프로젝트가 같은 운용 단계로 분류된다
-- 점검표 때문에 유효한 초저비용 실험까지 막힌다 / 반대로 실제 고객·데이터 프로젝트가 연습으로 통과한다
+- The document passes but the blind reviewer cannot explain the value
+- Even after writing the checklist, the frame keeps changing right after implementation starts
+- Phrases without evidence automatically pass every time
+- Matching the document format takes more time than a good experiment
+- Every project is classified into the same operating tier
+- The checklist blocks even a valid ultra-low-cost experiment / conversely, a real customer·data project passes as PROBE
