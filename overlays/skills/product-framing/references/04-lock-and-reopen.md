@@ -13,7 +13,7 @@ What gets frozen is not the truth of the product but **the frame to hold during 
 
 1. The decision question is stated — not "what kind of user is this product for?" but "which of frame A and frame B do we adopt for the next experiment?"
 2. Actually important alternatives were compared on the same criteria. You do not fill a candidate count, and keeping the current direction and not executing are also comparable options.
-3. The chosen frame avoids all disqualifying reasons **applicable to that operating tier** (for PROBE, the abridged list in SKILL.md)
+3. The chosen frame avoids all disqualifying reasons **applicable to that operating tier** (the PROBE and STANDARD lists are in SKILL.md under "Write the checklist and judge it")
 4. The remaining uncertainty can be expressed as an experiment
 5. The next experiment gives more discriminating information than further brainstorming
 6. The decision-maker approves the frame version

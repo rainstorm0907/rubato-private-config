@@ -56,9 +56,11 @@ A page that sets up the problem (idea definition, current state) puts researched
 
 When placing our screen over a background capture, do not cut letters or cells in half. A modal either covers an element whole or gets out of the way entirely. Make the background continue like one browser screen (if needed, extend the background band to both sides), and change zoom only by the amount requested ("좀 더" is not double). Before handing over an agent render, compare it against items the user pointed out before and then send it. Status: user confirmed. 2026-10-04, on page 3 of the 고용24 hackathon, Woojin: "캡처 화면 훨씬 작게 줄여서 잘려보이는거 없이 보이고 그 위에 얹으라니까?", "화면 두개 합쳐서 자연스럽게", and then, on a version where the modal again cut the title and menu in half, "아 진짜 개빡치게 하네 왜 그래".
 
-## Words over symbols and a legend
+## Table cells: words, and × only for "none"
 
-Write the meaning of a table cell as short words ("남아 있지 않음") instead of ✓, –, and a legend. Do not put the same content twice, in a card and in a table column; merge it into one and write it large. Status: user confirmed. 2026-10-04, on page 2 of 고용24 hackathon option B, seeing the legend "✓ 있음 – 없음", Woojin: "그리고 뭐야 이건...", and of the record card, "좀 더 직관적이게 해줘. 그리고 좀 작다?".
+Write a cell as short words. The one symbol allowed is × for "none", used the same way in every column; no ✓, ○, △, or legend. Name the same thing with the same words in every cell and page. Do not put the same content twice, in a card and in a table column; merge it into one and write it large. Status: user confirmed. 2026-10-04, seeing the legend "✓ 있음 – 없음", Woojin: "그리고 뭐야 이건...", "좀 더 직관적이게 해줘. 그리고 좀 작다?". 2026-10-09, 커튼콜 competitor table: "없는건 열마다 다르게 하지 말고 X로 하고", then "X는 냅두고 O랑 세모 없애", and on two names for one input: "어디는 저장소 커밋이라 그러고 어디는 수정 기록이라고 하고".
+
+A comparison table describes each alternative as fully as it really works. Rejected: understating competitors so our column wins, or adding a filler row only to show we lose somewhere. Woojin 2026-10-09: "서비스들 너무 과소평가 한거 아니야?"
 
 ## Ratio
 

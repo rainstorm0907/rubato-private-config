@@ -19,7 +19,7 @@ The reviewer must receive ONLY:
 2. screenshots of the rendered initial view at target and narrow viewports, or a live route/URL;
 3. optionally, the post-primary-action screenshot when feedback is being judged.
 
-The reviewer must NOT receive: the task brief, the path card, design rationale, internal terminology, the diff, or answers to their questions. If the reviewer asks "what is this supposed to be?", that is a FAIL finding, not a question to answer.
+The reviewer must NOT receive: the task brief, the builder's framing of the task, design rationale, internal terminology, the diff, or answers to their questions. If the reviewer asks "what is this supposed to be?", that is a FAIL finding, not a question to answer.
 
 ## Reviewer prompt (dispatch verbatim)
 

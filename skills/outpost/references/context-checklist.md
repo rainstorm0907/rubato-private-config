@@ -6,11 +6,11 @@ Use this checklist before sending a packet to an external consultant. One rule g
 
 The exact question (or, for a work outpost, the deliverable) and the secret/personal-data scan are always required. The rest applies whenever relevant to the question:
 
-- Originating task and retrievable user evidence, current state, accepted constraints and criteria; distinguish the sender's interpretation.
+- Original task, current session state, and acceptance criteria.
 - Repo path, branch, status, recent diff, and relevant changed files.
 - Code snippets with paths and line numbers; avoid “see file” references.
 - Errors/logs exactly as emitted, including command names and environment.
-- Attempts and observed outcomes, distinguishing measured failure from a proposed explanation.
+- Attempts already made and why they did not solve the problem.
 - User constraints, repo instructions, compatibility requirements, and non-goals.
 
 ## Debugging packets
@@ -27,14 +27,9 @@ The exact question (or, for a work outpost, the deliverable) and the secret/pers
 - Current architecture and component responsibilities.
 - Data flow/control flow across modules or services.
 - Known constraints: performance, scaling, security, deployability, rollback, backward compatibility.
-- Viable reuse/replacement candidates and contrary evidence, including existing references omitted from the sender's shortlist when they could change the decision.
-- Whether the approach is still open or only a selected component is being checked; name the authority for actual fixed choices.
+- Alternatives considered, including why they are unattractive.
+- Decision criteria and what a good answer should optimize for.
 - Interfaces or contracts that cannot change.
-
-For an open approach decision, let the consultant choose discriminating questions
-and sources inside the original outcome and budget. Named methods are candidates,
-not a required search order. Retaining the current approach is valid. A deliberately
-narrow check need not expand; its answer does not establish overall design coverage.
 
 ## Library/API packets
 
@@ -71,7 +66,7 @@ narrow check need not expand; its answer does not establish overall design cover
 ## Red flags before sharing
 
 - The packet says “the repo does X” but provides no code evidence.
-- The task is too vague to judge, or its question assumes the disputed cause/method without labeling that assumption.
+- The main question is vague, such as “what should I do?”
 - The packet omits the failing error text.
 - The packet includes huge unrelated dumps but misses the key interface or test.
 - The packet asks for current behavior of a library but omits its version.
