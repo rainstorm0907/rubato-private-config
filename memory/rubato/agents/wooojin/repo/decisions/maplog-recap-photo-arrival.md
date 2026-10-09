@@ -1,15 +1,17 @@
 ---
-description: Maplog Recap photo arrival. Why A, which continues directly from the pin, was preferred, and how to avoid mixing up comparison names.
+description: Maplog Recap photo arrival continues from the real pin. Do not recover that choice from the letters A and B; an earlier comparison used them the other way around.
 ---
+
 ## Conclusion
 
-Recap photo arrival takes, as the follow-up criterion, a relationship that continues smoothly from the pin at the actual capture location into a large photo. The status is a confirmed user preference in the latest one-photo and two-photo comparison. Do not widen it into full input verification or approval to resume follow-up implementation.
+- Recap photo arrival is the real pin at the capture location growing into the large viewing photo. The reason is that connection and the smoothness, not a flashy effect. The candidate that appears at the viewing spot felt no different from what already existed.
+- Do not recover the choice from the letter A or B. In the comparison that settled this, A is R1 ‘핀에서 직접 이어짐’ and B is R2 ‘감상 자리에서 받음’. An earlier comparison used the letters the other way around.
+- Exit, frame starting point, and what must not be redesigned are `/Users/wooojin/App/maplog/record/PRODUCT.md#recap-photo-motion-comparison`. This file does not reopen that connection, and it is not the frame-ratio contract.
 
 ## Rationale
 
-- The reason for the choice is not the flashy effect itself, but the feeling that the real pin and the large photo connect, and the smoothness. The other candidate, which appears near the viewing spot, felt to the user no different from the existing one.
-- In this comparison, A is R1 ‘핀에서 직접 이어짐’ and B is R2 ‘감상 자리에서 받음’. In the earlier comparison A was a quiet arrival and B was pin movement, so do not recover the choice from the letter alone.
-- The canonical source is `/Users/wooojin/App/maplog/record/PRODUCT.md#recap-photo-motion-comparison`; actual implementation, remaining scope, and approval follow `/Users/wooojin/App/maplog/record/CURRENT.md`. Frame, ratio, exit, speed, and every pin condition are not finally confirmed.
+- Chose the pin continuation over an arrival that starts at the viewing spot.
+- Rejected: reading “not finally confirmed” as covering the arrival relationship itself. Exact frame ratio, corner, and shadow values, if still open, are the judgment named in PRODUCT, not a reason to redesign the liked connection.
 
 ## Symptom
 

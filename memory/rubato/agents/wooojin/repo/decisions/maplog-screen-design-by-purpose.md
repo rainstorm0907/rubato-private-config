@@ -1,12 +1,19 @@
 ---
-description: Maplog ("비행운") screen-design mock principles. Pick decoration to fit each screen's need and function, and keep comparison proposals on the same conditions, such as background blur (user confirmed 2026-09-29).
+description: Maplog screen design fits each screen's job, and comparison proposals keep unrelated conditions the same. Mock winners are not the shipped cards; those live in PRODUCT.
 ---
-# Maplog screen design: fit each screen's need, and keep comparison conditions the same
 
-User confirmed (2026-09-29, card-style mock discussion).
+## Conclusion
 
-- Do not copy one style identically onto every screen. Pick elements to fit what that screen does.
-  Example: the first guide card is a first impression, so a feel element such as a sky photo fits, but the beta-feedback guide card is a card that tells you the method, so it does not need a photo. If one is added, it should be a picture that helps the function (button position and the like).
-- Put decoration and photos in empty space. Do not put them overlapping the title or body, or as a band covering the top edge of the card (feedback that a rounded photo band on the card looked like "대머리").
-- When comparing several proposals, change only the comparison target (the card surface), and match the background treatment behind (blur and how dark) so all are the same.
-- Taste record: glass, light bloom, and gradient buttons with stacked effects were seen as "AI slop". The postcard/stamp proposal was said to be not pretty. He liked the hand-drawn border plus margin (C) most, and liked the proposal (C′) that sticks one piece of a real sky photo onto it.
+- Do not copy one style onto every screen. Pick elements for what that screen does. Decoration and photos go in empty space, not over the title or body, and not as a band on the card's top edge.
+- When comparing proposals, change only the comparison target and match the unrelated conditions (how much of the screen it takes, brightness, density — blur and dim are examples, not a freeze of one number).
+- Shipped card surfaces are in `/Users/wooojin/App/maplog/record/PRODUCT.md`. Do not restore a mock winner onto them.
+
+## Rationale
+
+- Chose fitting the element to the job. A card that only tells a method does not need a photo; if a picture is added, it should help the action (where to tap).
+- Rejected: glass, light bloom, and gradient buttons stacked together (“AI slop”), and a postcard/stamp proposal. A rounded photo band on the card read as “대머리”.
+- Rejected as the current first-run card: the 2026-09-29 mock winners, hand-drawn border plus margin (C) and a real sky photo stuck on (C′), and a sky photo as the first guide's feel element. The shipped first guide is the A″ card with a real map and sample pins. The beta-feedback card shows the button to tap, not a photo.
+
+## Symptom
+
+“피드백 주탁에는 사진 없어도 되지않아?? 좀 화면별로 필요와 기능에 맞춰 디자인 해줘 앞으로 기억해”

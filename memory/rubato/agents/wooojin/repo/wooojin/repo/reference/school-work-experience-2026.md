@@ -1,9 +1,6 @@
 ---
 description: The 2026-09 school youth work-experience project application — the decision to write it so as not to stand out, and why.
 ---
----
-description: The 2026-09 school youth work-experience project application — the decision to write it so as not to stand out, and why.
----
 # School youth work-experience project application (2026-09-11)
 
 A school program he is applying to together with friends. Woojin's line: "적당히만 이력서 쓰고싶어 ... 친구들이랑 너무 눈에 띄게 차이나고싶진않아".

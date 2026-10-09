@@ -1,9 +1,6 @@
 ---
 description: Woojin's Codex CLI actual-record home. CodexBar must look here.
 ---
----
-description: Woojin's Codex CLI actual-record home. CodexBar must look here.
----
 # Codex CLI actual-record home
 
 Status: user confirmed · verified. 2026-09-13, Woojin gave the path directly.

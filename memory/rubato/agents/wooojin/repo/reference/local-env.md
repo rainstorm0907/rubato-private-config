@@ -3,6 +3,10 @@ description: CLI and tool settings specific to this Mac, and known traps.
 ---
 Development-environment facts specific to this Mac. Moved from `~/.codex/memories`. They can recur with a tool update, so they need rechecking.
 
+## Disk measurement
+
+- Apparent size is not space used. `~/Library/Containers/com.docker.docker/Data/vms/0/data/Docker.raw` is sparse: Finder and `ls` show about 228G while allocated size is about 1.2G. Measure with `du` before treating a huge file as the thing filling the disk.
+
 ## Home directory layout
 
 - The portfolio folder canon is `~/포트폴리오` (a Korean name — English searches for `portfolio`/`resume` do not hit it). Put result reports in per-contest and per-project subfolders (Cofathon-2026, openaigame-2026). Do not create a new `~/portfolio`.

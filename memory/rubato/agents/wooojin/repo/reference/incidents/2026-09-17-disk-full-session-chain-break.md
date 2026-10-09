@@ -1,12 +1,7 @@
 ---
 description: 2026-09-17 disk at 100% → Rubato session "Disk I/O error" → cause, recovery procedure, and recurrence prevention of the three-layer incident up to the record chain breaking.
 ---
----
-description: 2026-09-17 disk at 100% → Rubato session "Disk I/O error" → cause, recovery procedure, and recurrence prevention of the three-layer incident up to the record chain breaking.
----
-# When the disk fills, the session record chain breaks (2026-09-17)
-
-Status: cause confirmed · recovery in progress. Maplog lead session `01a0a908-083f-708f-b820-7437cf1b6e39` (app thread `a62e4f8a-cfbe-4c03-8c10-de13734280d3`, gpt-6-astra xhigh).
+# When the disk fills, the session record chain breaks
 
 ## Symptom and misdiagnosis
 
@@ -38,7 +33,3 @@ with open(p,'r+b') as f:
 
 **After fixing the file, always restart the app/pi-server.** The server caches the session tree in memory, so fixing only the file keeps producing the same error. This time the order was reversed (restart → file edit) and one attempt spun for nothing.
 
-## Preventing recurrence (Open)
-
-- Fix the QA script to delete `full.mov` after the verdict. If not, 9.7GB is 30 rounds, so the disk bottoms out again in a day and a half.
-- Remaining cleanup candidates: past session videos in `maplog-qa` (09-14 2.7G, 09-16-evidence-loop 2.0G, 09-16-reactive 1.5G), and old session and log DBs in `.codex`.

@@ -1,5 +1,5 @@
 ---
-description: 우진과 일할 때 지켜야 하는 지속 규칙 — 결정 기록, 구현 품질 기준, 소통·인수인계 방식.
+description: Standing rules for working with Woojin — how decisions are recorded, what quality bar implementation has to meet, and how to hand work over. Model allocation is the model-guide, not a frozen Grok default.
 ---
 `~/.codex/memories`를 옮겨온 지속 규칙. rubato 프롬프트에 이미 있는 항목(되돌리기 어려운 행동 승인, dirty 워크트리, 결론 먼저, 사실/추정 분리, 쓰기 범위, 교차오염 금지, 예산 등)은 중복이라 뺐다.
 
@@ -61,9 +61,9 @@ description: 우진과 일할 때 지켜야 하는 지속 규칙 — 결정 기�
 - 목표·중요한 가치판단·명시적 제약·비용·전달 범위가 달라지면 관련 차이와 추천을 묻는다. 사용자가 아직 말하지 않은 취향을 확정하지 않되, 허용된 설계 선택까지 미정이라는 이유로 모두 돌려주지 않는다. 담당의 방법과 비교 조건은 사용자 요구와 구별하며, 실제 결과를 보고 스스로 바꿀 수 있다.
 - 이미 범위를 열어준 작업은 다시 묻지 않는다 — maple 프로젝트의 브라우저 실측이 그 예다.
 - 우진이 작업을 멈추라고 했거나 멈춘 상태를 확인했으면, persistent goal의 자동 `Continue working`을 새 재개 승인으로 해석하지 않는다. 우진이 직접 다시 시작하라고 할 때까지 에이전트·감시·코드 수정을 재개하지 않는다. 상태: 사용자 확정. 2026-09-03, Stage 2.5 장시간 자동 작업을 중단한 직후 우진: "아니 멈춘다매"
-- Sol 에이전트는 기본 `medium`, Opus 에이전트는 기본 `high`로 사용한다. 두 모델을 실제 작업에 함께 써보며 각자 강한 역할에 맞춰 배치한다. 상태: 사용자 확정. 2026-09-02, 에이전트 운용 기준을 정하며 우진: "앞으로 sol 사용할거면 medium으로 하고 , 오푸스는 high, 로 사용해. 앞으로 둘다 사용해보면서 각자 잘하는 역할에 맞춰서 사용하면 돼."
-- **작업(구현) 에이전트 기본은 Grok high** (effort `high`). 상태: 사용자 확정. 2026-09-05 소명 전환 시트 작업 중 Sol이 읽기만 하다 죽고 Opus가 느린 걸 보고 우진: "앞으론 작업 에이전트 grok 으로 돌려 rubato grok high로". Opus·Sol은 검토·판단 역할로.
-- 현재 카탈로그 모델 ID(2026-09-23 기준): Grok은 `xai/grok-4.7` 또는 `cursor/grok-4.7`, Opus는 `anthropic/claude-opus-5-5`(effort `high`), Sol은 `openai-codex/gpt-5.6-sol`. 정확한 목록은 `harness/skills/model-guide/SKILL.md`가 정본이다. 당시 우진이 지정한 ID는 `anthropic/claude-opus-5`·`cursor/cursor-grok-4.6`였고(2026-09-04: "Opus는 anthropic/claude-opus-5에 high, Grok은 cursor/cursor-grok-4.6로 띄우면 돼"), 이후 공식 카탈로그가 Grok 4.7(9/22)·Opus 5.5(9/23)로 자리를 대체했다. 배치 원칙은 그대로, ID만 현재 것을 쓴다.
+- Default model allocation is `/Users/wooojin/dev/Rubato/harness/skills/model-guide/SKILL.md`, not a line in this file. Subagents are DeepSeek (ultrafast) or Opus. Owners are Opus or DeepSeek (ultrafast). The verifier is Astra at `xhigh`, then Opus. Exact ids come from the Agent catalog. Omit effort unless the user set it; a role label is not a reason to override. An explicit choice in the current request, or in that project's own document, comes first.
+- Keep these explicit effort settings when those models are chosen: Sol `medium`, Opus `high`. Woojin: "앞으로 sol 사용할거면 medium으로 하고 , 오푸스는 high, 로 사용해. 앞으로 둘다 사용해보면서 각자 잘하는 역할에 맞춰서 사용하면 돼."
+- Rejected: Grok high as the default implementation agent. Woojin: "앞으론 작업 에이전트 grok 으로 돌려 rubato grok high로". The product rule no longer lists Grok in the default allocation. Rejected: copying catalog ids into this file (`cursor/cursor-grok-4.6`, then `xai/grok-4.7` / `anthropic/claude-opus-5-5`). Woojin: "Opus는 anthropic/claude-opus-5에 high, Grok은 cursor/cursor-grok-4.6로 띄우면 돼".
 
 ## 메모리 상태가 불완전할 때
 

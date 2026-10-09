@@ -1,11 +1,19 @@
 ---
-description: Visual design criteria for plans, proposals, and presentation materials. The lead does not design from scratch and uses award winners and templates, and forbids the slide look typical of AI.
+description: Visual design criteria for plans and proposals. Do not design from scratch. Staging follows a verified deck from a known product company, not award winners alone, and forbids the slide look typical of AI.
 ---
 # Design of submitted documents
 
 ## The lead does not design from scratch
 
-Use or adapt award winners and templates such as Miricanvas and Canva. Investigate the design standard first, and fit our content on top of that. Status: user confirmed. 2026-10-02, after seeing the first draft of the 고용24 hackathon 「커튼콜」 plan (pages 1 and 4 drawn directly in HTML, and a set of screens), Woojin: "시안 디자인은 무조건 갈아엎을거야", "수상작들이랑, 미리캔버스나 캔바같은 템플릿을 이용해서 사용 or 응용해도 좋아. 대신 너가 바닥부터 하는건 못 맡기겠어", "디자인 부터 조사랑 '정석'이 뭔지 다시 처음부터 천천히 해보자".
+Do not design from scratch. Investigate the standard first, and fit our content on top of that. Award winners and templates such as Miricanvas and Canva are a start, not the ceiling for staging. Woojin: "시안 디자인은 무조건 갈아엎을거야", "수상작들이랑, 미리캔버스나 캔바같은 템플릿을 이용해서 사용 or 응용해도 좋아. 대신 너가 바닥부터 하는건 못 맡기겠어", "디자인 부터 조사랑 '정석'이 뭔지 다시 처음부터 천천히 해보자".
+
+For how a page is staged, a verified deck from a known product company (Toss, Kakao, and that class of proposal) outranks hackathon award winners. Woojin: "근데 수상작보다도 토스,카카오 같은거 기준으로 봐주면 안돼? 유명한 신뢰도있는 기획서같은거". Bringing a file over does not make it verified. A deck used as the standard must be obtainable from an official path (IR page, official business site, official press release, DART), and the issuer and date inside the file must match that company. A blog, a slide-share site, a template site, or a student rework is not the standard. Woojin: "대신 가져온다고 해서 검증된 슬라이드인지는 봐야해". For 「커튼콜」, the accepted staging standard and which older picture rule it replaces are in `/Users/wooojin/포트폴리오/고용24-AI해커톤-2026/기획/표현.md` and `기획/규칙.md`. Do not copy that page design here.
+
+One device per page. Mixing every good device does not make a good page. Woojin: "좋은거 다 섞는다고 좋은게 아니야". Measure element ratios from the reference (type-size ratio, gaps, column widths, vertical place) instead of eyeballing them.
+
+A direction that looks right is not folded only because it breaks a written rule. Bring it and adjust with Woojin. Woojin: "꼭 조심해야될건 규칙대로 하다가 너의 창의성을 잃거나 옳은 방향인거같다고 너가 생각했는데 규칙위반이라고 접진 말아줘. 나랑 조정하면서 가면돼." An older picture rule may be replaced for that plan when the researched standard conflicts. Woojin: "기존 규칙 대체해도 돼".
+
+Rejected: treating a thumbnail pass over award winners as staging research. Woojin: "아니 연출 알아본거 맞아?"
 
 ## Shapes not to use ("전형적인 클로드 ppt 스타일")
 
@@ -25,16 +33,16 @@ First set one question the judge will answer on each page, and draw so the large
 
 ## Proposal work order (keep it)
 
-1. Confirm one core sentence with the user.
-2. Confirm page titles and order. For each page, decide together which question of the reader it answers, and which judging item it is. See whether reading only the titles in sequence makes a story.
-3. For each page, set one protagonist figure and the evidence card that supports it.
-3-1. For each page, separately investigate the standard form of that page type (problem evidence, service screen, structure diagram, data, deliverable, competitive comparison, expected effect, schedule, operation), and decide the table shape, capture position, body position, and emphasis method with evidence. Investigating only a template's visual rules does not stand in for the form by page type. Status: user confirmed. 2026-10-03, when page 7 of 커튼콜 was drawn as a comparison table on review comments alone, Woojin: "너 경쟁사 비교 매트릭스 '정석' 모르는거같아.. 좀 찾아봐", "핵심을 내가 매번 안말해도 너가 조사로 알 수 있다면 좋겠다", "앞으로 모든 쪽마다 이런 철저한 정석 조사 진행하고 해. 최대한 근거 기반으로 표 연출", "표가 아니어도 캡처 사진 위치나 본문 위치 등. 이런거 땜에 템플릿 조사했었는데 부족했었나보네".
-4. Write short text to fit that title and figure. Remove unneeded explanation and leave only the necessary kind phrasing.
-5. Hear and compare outside opinions (GPT, review agents) with only the minimum intent included.
-6. Agree first, page by page, on a text layout diagram.
-7. Draw.
+Do not start a later stage while an earlier one is unsteady. Woojin: "앞으로 이 순서좀 지켰으면 좋겠어.. 작업의 흐름이란게 있잖아. 당연히 지켜야할 수순 절차. 이번엔 그걸 못지켜서 두번이나 실패했어", "이 제목도 제대로 명확히 안 정하니까 좀 헤매고 맘에 안들었던거 아닐까??? 사진 뭐 들어갈지도 애매해졌었고".
 
-If an earlier step is unsteady, do not start a later step. Status: user confirmed. 2026-10-03, in the 커튼콜 plan, the body was edited and figures were drawn before the title was confirmed, and after failing twice Woojin: "앞으로 이 순서좀 지켰으면 좋겠어.. 작업의 흐름이란게 있잖아. 당연히 지켜야할 수순 절차. 이번엔 그걸 못지켜서 두번이나 실패했어", "이 제목도 제대로 명확히 안 정하니까 좀 헤매고 맘에 안들었던거 아닐까??? 사진 뭐 들어갈지도 애매해졌었고".
+1. Choose the topic.
+2. Concretize until the submission sentences can be true. Titles and audience wait until this and the slide plan are done, then they are locked all at once, not one by one. Woojin: "2쪽 제목은 나중에 해커톤 주제 선정 > 구체화 > 슬라이드 계획 순서 단계별 천천히 밟아가며 세분화/구체화 하고나서 한번에 정하자. 제목 하나씩 정하다가 A안때 난리난적 있어서. 대상도 마찬가지. "
+3. Lock what the slides must carry: the intent, and the sentences and direction that have to be there. Reading only the titles in sequence should make a story. For each page, name which question of the reader it answers, and which judging item it is.
+4. Staging is a separate stage: how each page is expressed, from a verified standard, not from merely having the sentences. One protagonist figure and the evidence that supports it. Separately investigate the standard form of that page type (problem evidence, service screen, structure diagram, data, deliverable, competitive comparison, expected effect, schedule, operation), and decide the table shape, capture position, body position, and emphasis method with evidence. Investigating only a template's visual rules does not stand in for the form by page type. Woojin: "너 경쟁사 비교 매트릭스 '정석' 모르는거같아.. 좀 찾아봐", "핵심을 내가 매번 안말해도 너가 조사로 알 수 있다면 좋겠다", "앞으로 모든 쪽마다 이런 철저한 정석 조사 진행하고 해. 최대한 근거 기반으로 표 연출", "표가 아니어도 캡처 사진 위치나 본문 위치 등. 이런거 땜에 템플릿 조사했었는데 부족했었나보네".
+5. Production is a completely separate stage. Having the sentences is not permission to draw. Woojin: "ㅇㅇ 좋아. 그리고 그 단계 다음으론 그래서 슬라이드 10장에 들어갈 우리 의도와 핵심. 꼭 담아야하는거 문장이나 방향도 짚고, 그게 확정이 되면 실제 슬라이드에는 어떤 연출과 어떤 기획과 어떤 표현을 사용하고, '정석' 슬라이드 제작을 하는 방법부터 하고, 제작에 대한 구체화는 또 완전히 별개로 이루어져야돼. 그냥 문장이 있다고 제작할 수 있는건 전혀 아니야. 내가 짚은것만이 전부는 아니니까 그때 이 물음에 대한 판단은 이어서 해주길 바래."
+6. Outside opinions get only the minimum intent: that it is a proposal of about 10 pages, and that practitioners, judges, and the intended audience must be able to follow it. Do not attach the team's failure story. If the advice answers a feature spec instead of the proposal flow, stop and send a fresh session. What Woojin pointed at is not the whole of what to judge; the lead keeps looking.
+
+Rejected: deciding titles one by one before the plan is concrete. Rejected: editing the body and drawing figures before the title is confirmed. Rejected: treating a finished sentence as enough to produce the slide.
 
 Page structure starts by matching the table of contents the contest submission form requires (for example, the per-item detail in the Google Form "기획서 작성 시 유의사항"). Do not read only one line of judging criteria and interpret the page's role from that. Status: user confirmed. 2026-10-03, in 커튼콜, "추진 체계" was misread as operation after the contest and page 10 was drawn as a pilot operation, then Woojin: "다시 해커톤 본문 pdf 정독해봐. 우리가 그 범위로 기획하는게 맞아??" "고용서비스 정책 목표와의 부합성", which was in the form's table of contents, was missing.
 
